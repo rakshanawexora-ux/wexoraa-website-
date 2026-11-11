@@ -10,11 +10,22 @@ import {
 } from "lucide-react";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 const areas = [
-  { title: "Build", text: "From ambition to experience.", icon: Layers3 },
-  { title: "Operate", text: "Connect the way work happens.", icon: Workflow },
   {
-    title: "Grow",
-    text: "Give your next move direction.",
+    title: "Design",
+    id: "build",
+    text: "Websites, apps and a brand people remember.",
+    icon: Layers3,
+  },
+  {
+    title: "Systems",
+    id: "operate",
+    text: "Keep your customers, team and tasks connected.",
+    icon: Workflow,
+  },
+  {
+    title: "Marketing",
+    id: "grow",
+    text: "Help more customers find your business.",
     icon: ChartNoAxesCombined,
   },
 ];
@@ -82,7 +93,7 @@ export default function StudioScene() {
           <p>{areas[index].text}</p>
         </div>
         <Link
-          href={`/solutions/${areas[index].title.toLowerCase()}`}
+          href={`/solutions/${areas[index].id}`}
           aria-label={`Explore ${areas[index].title} solutions`}
         >
           <ArrowUpRight size={22} />

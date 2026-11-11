@@ -2,6 +2,7 @@ import StructuredData from "@/components/structured-data";
 import { pageMetadata, serviceSchema } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { solutions } from "@/content/site";
 import { services } from "@/content/catalog";
 import { EnquiryCTA } from "@/components/enquiry-popup";
 import { PageShell } from "@/components/page-shell";
@@ -33,7 +34,7 @@ export default async function Page({
   if (!s) notFound();
   return (
     <PageShell
-      eyebrow={`${s.group.toUpperCase()} / ${s.title.toUpperCase()}`}
+      eyebrow={`${solutions.find((area) => area.id === s.group)?.shortTitle.toUpperCase()} / ${s.title.toUpperCase()}`}
       title={s.title}
       intro={s.intro}
     >
@@ -42,7 +43,7 @@ export default async function Page({
         <div>
           <p className="eyebrow">THE CHALLENGE</p>
           <h2>{s.problem}</h2>
-          <h3>Our approach</h3>
+          <h3>How we help</h3>
           <p>{s.approach}</p>
         </div>
         <aside className="deliverable-card">
@@ -53,8 +54,8 @@ export default async function Page({
             ))}
           </ul>
           <p>
-            Scope, responsibilities, timeline and costs are agreed in your
-            proposal. No one-size-fits-all package.
+            We agree on the work, timeline and cost with you before we start.
+            You will know what is included.
           </p>
           <EnquiryCTA
             interest={s.title}
@@ -71,7 +72,7 @@ export default async function Page({
           <summary>{s.question}</summary>
           <p>{s.answer}</p>
         </details>
-        <Link className="text-link" href={`/solutions/${s.group}`}>
+        <Link className="button text-link" href={`/solutions/${s.group}`}>
           Explore connected {s.group} solutions ↗
         </Link>
       </section>

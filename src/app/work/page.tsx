@@ -12,8 +12,8 @@ export default function Page() {
   return (
     <PageShell
       eyebrow="THINKING, MADE TANGIBLE"
-      title="A look at the possibilities."
-      intro="Original studio concepts showing creative and technical thinking. These are illustrative explorations, not commissioned client work or verified case studies."
+      title="See a few ideas in action."
+      intro="These are studio-made examples of our design ideas. They are concepts, not paid client projects or customer results."
     >
       <section className="section work-grid">
         {projects.map((p) => (

@@ -44,7 +44,7 @@ export default async function Contact({
               </p>
             </div>
             <ContactLinks />
-            <Link className="text-link" href="/business-assessment">
+            <Link className="button text-link" href="/business-assessment">
               Not sure where to start? Try 12 questions ↗
             </Link>
           </div>

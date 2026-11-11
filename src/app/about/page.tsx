@@ -9,14 +9,14 @@ export default function Page() {
   return (
     <PageShell
       eyebrow="WEXORAA INFOTECH / COIMBATORE"
-      title="Different disciplines. One shared direction."
-      intro="Wexoraa is an integrated technology, creative and business growth partner. We connect what your business shows the world with the systems that run behind it."
+      title="One team for your website, software and marketing."
+      intro="We help businesses in Coimbatore and beyond look good online, manage everyday work and reach more customers. You can work with one team for design, development and digital marketing."
     >
       <section className="section detail-grid">
         <h2>
-          Less coordination.
+          Fewer people to chase.
           <br />
-          More shared context.
+          One team that understands your business.
         </h2>
         <div>
           <p>
@@ -25,13 +25,13 @@ export default function Page() {
             handoff.
           </p>
           <p>
-            Our partnership model brings those conversations together. We start
-            with the business problem, then connect strategy, design,
-            engineering and growth around it.
+            We keep those conversations in one place. Tell us what you want to
+            improve, and we will help you choose the design, software or
+            marketing work that makes sense.
           </p>
           <p>
-            Based around the needs of businesses in Coimbatore and Tamil Nadu,
-            with the care and clarity expected of a modern technology partner.
+            We work with businesses in Coimbatore and Tamil Nadu, and can work
+            with your team remotely too.
           </p>
         </div>
       </section>
@@ -46,8 +46,8 @@ export default function Page() {
             "We define deliverables, responsibilities and expectations so the next step is easier to understand.",
           ],
           [
-            "Build for continuity",
-            "We consider maintenance, integrations and future priorities alongside the first release.",
+            "Support you after launch",
+            "We plan for updates, support and the next things your business may need.",
           ],
         ].map(([t, d]) => (
           <article className="catalog-card" key={t}>

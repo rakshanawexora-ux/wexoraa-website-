@@ -33,17 +33,18 @@ export default function MotionShowcase() {
       <div className="showcase-heading">
         <div>
           <p className="eyebrow">
-            <span /> MOTION WITH A PURPOSE
+            <span /> ONE TEAM FOR YOUR NEXT STEP
           </p>
           <h2 id="showcase-heading">
-            Not static thinking.
+            Good ideas deserve
             <br />
-            <span>Forward motion.</span>
+            <span>a team that brings them to life.</span>
           </h2>
         </div>
         <p>
-          Strategy, design and engineering.
-          <br />A moving picture of how it comes together.
+          Design your brand. Build your website. Make work easier.
+          <br />
+          See how it all connects.
         </p>
       </div>
       <div className="showcase-film">
@@ -83,11 +84,11 @@ export default function MotionShowcase() {
       )}
       <div className="film-description">
         <p>
-          An original motion graphic, not client footage. Three disciplines, one
-          connected direction.
+          A short studio animation showing how design, business systems and
+          marketing work together.
         </p>
-        <Link className="text-link" href="/solutions">
-          Explore the approach <ArrowUpRight size={17} />
+        <Link className="button text-link" href="/solutions">
+          See how we can help <ArrowUpRight size={17} />
         </Link>
       </div>
     </section>

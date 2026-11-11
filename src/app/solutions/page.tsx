@@ -10,9 +10,9 @@ export const metadata = pageMetadata(
 export default function Page() {
   return (
     <PageShell
-      eyebrow="BUILD. OPERATE. GROW."
-      title="One partner. Three connected possibilities."
-      intro="Start with what your business needs today. Connect the rest as your priorities evolve."
+      eyebrow="DESIGN. SIMPLIFY. REACH MORE PEOPLE."
+      title="Find the help your business needs."
+      intro="Choose a starting point: design and development, business software, or digital marketing. We can help you bring them together when you need more."
     >
       <section className="section catalog-grid">
         {solutions.map((s) => (

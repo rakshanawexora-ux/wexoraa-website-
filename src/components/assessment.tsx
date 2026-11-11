@@ -107,6 +107,18 @@ export default function Survey({
       <div className="assessment-shell">
         {!complete ? (
           <>
+            <div className="survey-conversation">
+              <span className="survey-avatar" aria-hidden="true">
+                W
+              </span>
+              <p>
+                {index === 0
+                  ? "Hi! Let’s get to know your business."
+                  : index < 10
+                    ? "Let’s look at what’s working for you."
+                    : "You’re nearly there. What matters most to you?"}
+              </p>
+            </div>
             <div className="assessment-progress">
               <span>QUESTION {index + 1} OF 12</span>
               <span>
@@ -173,7 +185,10 @@ export default function Survey({
               ))}
             </div>
             <p className="field-notice" role="status">
-              {notice}
+              {notice ||
+                (selected.length
+                  ? "Got it. You can change your answer before continuing."
+                  : "Choose the answer that feels closest to your business.")}
             </p>
             <div className="assessment-controls">
               <button
@@ -193,9 +208,7 @@ export default function Survey({
                   } else move(index + 1);
                 }}
               >
-                {index === 11
-                  ? "See my digital-strength score"
-                  : "Next question"}
+                {index === 11 ? "Show my growth score" : "Continue"}
                 <ArrowRight size={17} />
               </button>
             </div>
@@ -210,12 +223,10 @@ export default function Survey({
         ) : (
           <div className="assessment-results">
             <span className="result-chip">
-              <Check size={14} /> YOUR DIGITAL-STRENGTH SNAPSHOT
+              <Check size={14} /> YOUR BUSINESS GROWTH-READINESS SCORE
             </span>
             <h3 ref={title} tabIndex={-1}>
-              Your score. Your opportunities.
-              <br />
-              Your next move.
+              Here’s how your digital setup is doing.
             </h3>
             <div className="score-overview">
               <div
@@ -224,7 +235,7 @@ export default function Survey({
                 aria-label={
                   result.score === null
                     ? "Insufficient known responses to calculate a score"
-                    : `Digital-strength score ${result.score} out of 100`
+                    : `Business growth-readiness score ${result.score} out of 100`
                 }
                 style={{
                   background: `conic-gradient(var(--primary) ${(result.score ?? 0) * 3.6}deg, var(--outline-variant) 0deg)`,
@@ -320,10 +331,10 @@ export default function Survey({
             </div>
             {enquire && (
               <div id="survey-enquiry" className="survey-enquiry">
-                <h4>Turn the snapshot into a conversation.</h4>
+                <h4>Want a hand with the next step?</h4>
                 <p>
-                  Tell us where to reach you. Your answers and server-calculated
-                  score will be included.
+                  Leave your details and we can talk through your result. Your
+                  answers and score will be included in your enquiry.
                 </p>
                 <EnquiryForm
                   configured={configured}
@@ -341,7 +352,7 @@ export default function Survey({
               Nothing has been sent to Wexoraa unless you submit the enquiry and
               the email provider accepts it.
             </p>
-            <Link className="text-link" href="/services">
+            <Link className="button text-link" href="/services">
               Explore relevant services <ArrowUpRight size={16} />
             </Link>
           </div>

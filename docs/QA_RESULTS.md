@@ -60,3 +60,9 @@ Final result: all 8 targeted navigation/route/responsive accessibility tests pas
 Production build and lint/TypeScript checks pass. Full existing suite: **30 passed (58.0s)**. Following visual refinements to the hero entrance and dark inner-page graphic, targeted pointer/reduced-motion, new orbit offscreen-pause/discovery and seven inner-page accessibility checks: **9 passed (11.6s)**. Checks include keyboard/touch-friendly actual links and enquiry dialog access under reduced motion; no scroll locking or global motion controller was introduced.
 
 Visual artifacts: `/workspace/artifacts/wexoraa-cinematic-desktop.png`, `wexoraa-cinematic-mobile.png`, `wexoraa-cinematic-services.png`; interaction recording: `/workspace/artifacts/wexoraa-cinematic-preview.webm`. The MP4 supplied by the user is an inspection reference, not a production asset.
+
+## Plain-language service and growth-survey refinement
+
+Final verification: **32 tests passed (57.5s)**, production build, lint, TypeScript and whitespace checks pass. The new service-guidance test verifies hero → retained motion film → survey DOM order, all three descriptive service tabs, each illustration loading, the four relevant service URLs per group, and keyboard focus from the growth-score invitation. Existing scoring, unknown-answer, resume, optional enquiry, provider/retry, SEO, route, motion, responsive and axe checks remain passing. Early review found long mobile tab labels causing overflow and a light film CTA label on green; the mobile tabs now stack and CTA text uses readable charcoal.
+
+Final artifacts: `/workspace/artifacts/clear-header-1440.png`, `clear-services-1440.png`, `clear-services-390.png`, `growth-survey-1440.png`, `growth-survey-390.png`, `white-footer-1440.png`, `white-footer-390.png`. The original motion MP4/poster and supplied logo were not modified.

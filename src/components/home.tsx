@@ -138,7 +138,7 @@ export function Header() {
                 hidden={!servicesOpen}
               >
                 <div className="services-dropdown-heading">
-                  <span>CONNECTED CAPABILITIES</span>
+                  <span>WHAT CAN WE HELP YOU WITH?</span>
                   <Link
                     href="/services"
                     onClick={() => {
@@ -152,7 +152,12 @@ export function Header() {
                 <div className="services-dropdown-grid">
                   {["build", "operate", "grow"].map((group) => (
                     <section key={group} aria-label={`${group} services`}>
-                      <h2>{group}</h2>
+                      <h2>
+                        {
+                          solutions.find((area) => area.id === group)
+                            ?.shortTitle
+                        }
+                      </h2>
                       {services
                         .filter((service) => service.group === group)
                         .map((service) => (
@@ -256,24 +261,29 @@ function ProblemFinder({ configured = false }: { configured?: boolean }) {
   return (
     <section className="problem section" id="challenge">
       <Reveal className="problem-intro">
-        <Label>FIND YOUR BUSINESS PROBLEM</Label>
+        <Label>LET’S CHECK YOUR BUSINESS</Label>
         <h2>
-          12 questions.
+          How ready is your business
           <br />
-          <span>Your digital-strength score.</span>
+          <span>for its next stage of growth?</span>
         </h2>
         <p>
-          Understand what is working, where the gaps are and what to improve
-          next. A practical survey built around your business.
+          Let’s find out together. Answer 12 simple questions about your
+          website, marketing and day-to-day work. See what’s going well and
+          where a few changes could help.
         </p>
         <div className="survey-benefits">
-          <span>✓ No email needed to see results</span>
-          <span>✓ Score + four-category breakdown</span>
-          <span>✓ Clear reasons and next steps</span>
+          <span>✓ Get your business growth-readiness score</span>
+          <span>✓ See what to work on first</span>
+          <span>✓ No email or signup needed</span>
         </div>
-        <Link className="text-link" href="/business-assessment">
-          Open the full assessment ↗
-        </Link>
+        <a className="button survey-start" href="#home-survey-question">
+          Check my growth score <Arrow />
+        </a>
+        <p className="survey-explainer">
+          A practical check of your digital setup, not a sales forecast. Your
+          result is based on the answers you share.
+        </p>
       </Reveal>
       <Survey configured={configured} embedded />
     </section>
@@ -285,17 +295,17 @@ function Solutions() {
     <section className="solutions section" id="solutions">
       <Reveal className="section-heading">
         <div>
-          <Label>ONE PARTNER. MORE POSSIBILITIES.</Label>
+          <Label>HOW WE CAN HELP</Label>
           <h2>
-            From what if.
+            A better website? Less admin?
             <br />
-            To what’s next.
+            More customers?
           </h2>
         </div>
         <p>
-          Creative thinking and technical depth.
+          Choose what you need help with.
           <br />
-          Built around what your business needs.
+          We’ll take you through the next steps.
         </p>
       </Reveal>
       <div className="solutions-layout">
@@ -341,7 +351,16 @@ function Solutions() {
               }}
             >
               <span>0{i + 1}</span>
-              <strong>{s.title}</strong>
+              <strong>
+                {s.title}
+                <small>
+                  {s.id === "build"
+                    ? "Branding · UI/UX · Websites · Mobile apps"
+                    : s.id === "operate"
+                      ? "CRM · ERP · Integrations · Automation"
+                      : "SEO · Ads · Social media · Video"}
+                </small>
+              </strong>
               <Arrow />
             </button>
           ))}
@@ -352,6 +371,16 @@ function Solutions() {
           tabIndex={0}
           aria-labelledby={`tab-${solutions[active].id}`}
         >
+          <div className="solution-service-image">
+            <Image
+              src={solutions[active].image}
+              alt={solutions[active].imageAlt}
+              width={800}
+              height={450}
+              loading="eager"
+              sizes="(max-width:900px) 100vw, 50vw"
+            />
+          </div>
           <span className="solution-icon">
             {active === 0 ? (
               <Layers3 />
@@ -376,9 +405,9 @@ function Solutions() {
           </div>
           <Link
             href={`/solutions/${solutions[active].id}`}
-            className="text-link"
+            className="button text-link"
           >
-            Explore the possibilities <Arrow />
+            See these services <Arrow />
           </Link>
         </div>
       </div>
@@ -390,11 +419,11 @@ function Work() {
     <section className="work section" id="work">
       <Reveal className="section-heading">
         <div>
-          <Label>THINKING, MADE TANGIBLE</Label>
+          <Label>A FEW DESIGN IDEAS</Label>
           <h2>
-            Made to stand out.
+            See what your next
             <br />
-            Built to work.
+            project could look like.
           </h2>
         </div>
         <span className="work-note">
@@ -517,16 +546,16 @@ function Process() {
 function Capabilities() {
   return (
     <section className="engineering section" id="capabilities">
-      <Label>BEAUTY IN THE FRONT. SUBSTANCE BEHIND IT.</Label>
+      <Label>TOOLS THAT HELP YOUR BUSINESS</Label>
       <div className="engineering-heading">
         <h2>
-          Good looks.
+          Built for your customers.
           <br />
-          <span>Serious engineering.</span>
+          <span>Useful for your team.</span>
         </h2>
         <p>
-          Under every great experience is a system that works. We connect the
-          visible and the invisible.
+          Your website should bring people in. Your software should make work
+          easier. We help you get both right.
         </p>
       </div>
       <div className="engineering-grid">
@@ -544,7 +573,7 @@ function Capabilities() {
           [
             "03",
             "AI & automation",
-            "Thoughtful integrations that reduce repetitive tasks and simplify how work gets done.",
+            "Connect your tools and automate repetitive tasks so your team has more time for customers.",
           ],
         ].map(([n, t, p]) => (
           <Reveal key={n} className="engineering-card">
@@ -553,8 +582,11 @@ function Capabilities() {
             </span>
             <h3>{t}</h3>
             <p>{p}</p>
-            <Link href="/contact?interest=engineering" className="text-link">
-              Let’s explore <Arrow />
+            <Link
+              href="/contact?interest=engineering"
+              className="button text-link"
+            >
+              Talk to us <Arrow />
             </Link>
           </Reveal>
         ))}
@@ -565,16 +597,16 @@ function Capabilities() {
 function Partnership() {
   return (
     <section className="partnership section" id="partnership">
-      <Label>BUILD. OPERATE. GROW.</Label>
+      <Label>HERE TO HELP, FROM START TO FINISH</Label>
       <h2>
-        Not another vendor.
+        Start with one project.
         <br />
-        <span>Your next partner.</span>
+        <span>Get support as you grow.</span>
       </h2>
       <div className="partnership-bottom">
         <p>
-          Start with a focused project. Stay for connected thinking, considered
-          execution and a team that understands the bigger picture.
+          Tell us what you need today. We’ll help you choose a sensible first
+          step, explain the work clearly and support you after launch.
         </p>
         <div>
           <span>01 / PROJECTS</span>
@@ -583,10 +615,10 @@ function Partnership() {
         </div>
         <Link
           href="/contact"
-          className="circle-link"
+          className="button"
           aria-label="Discuss a partnership"
         >
-          <ArrowUpRight size={32} />
+          Let’s talk <ArrowUpRight size={18} />
         </Link>
       </div>
     </section>
@@ -619,24 +651,28 @@ export function Footer() {
   return (
     <footer className="footer footer-final footer-modern">
       <div className="footer-invite">
-        <p className="eyebrow">
-          <span /> YOUR NEXT CHAPTER
-        </p>
-        <EnquiryCTA interest="Project enquiry" className="footer-invite-link">
-          Got a good
-          <br />
-          challenge?
-          <span>
-            <ArrowUpRight size={52} />
-          </span>
+        <div>
+          <p className="eyebrow">
+            <span /> LET’S TALK
+          </p>
+          <h2>Got a good challenge?</h2>
+          <p>
+            Tell us what you’d like to improve. We’ll help you work out where to
+            start.
+          </p>
+        </div>
+        <EnquiryCTA
+          interest="Project enquiry"
+          className="button footer-invite-link"
+        >
+          Tell us about your project <Arrow />
         </EnquiryCTA>
-        <p>Bring the ambition. Let’s find the right direction.</p>
       </div>
       <div className="footer-panel">
         <div className="footer-panel-top">
-          <span>ONE PARTNER. CONNECTED POSSIBILITIES.</span>
+          <span>DESIGN, SOFTWARE & MARKETING. ONE TEAM.</span>
           <span>
-            BUILD <i /> OPERATE <i /> GROW
+            DESIGN <i /> SIMPLIFY <i /> GROW
           </span>
         </div>
         <div className="footer-main">
@@ -655,9 +691,9 @@ export function Footer() {
               />
             </Link>
             <p>
-              Design, technology and growth.
+              Websites, apps, business software
               <br />
-              Connected around your business.
+              and marketing that work for you.
             </p>
             <span className="footer-place">COIMBATORE, TAMIL NADU · INDIA</span>
           </div>
@@ -676,7 +712,7 @@ export function Footer() {
             ))}
           </nav>
           <nav aria-label="Footer services">
-            <h3>Capabilities</h3>
+            <h3>Our services</h3>
             {services
               .filter((service) =>
                 [
@@ -703,7 +739,9 @@ export function Footer() {
             >
               Discuss your project <Arrow />
             </EnquiryCTA>
-            <Link href="/business-assessment">Find your business problem</Link>
+            <Link href="/business-assessment">
+              Check your business growth score
+            </Link>
             <Link href="/contact">Contact Wexoraa</Link>
             <ContactLinks />
           </nav>
@@ -724,16 +762,9 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
       <Header />
       <main id="main">
         <CinematicHero />
-        <div className="marquee" aria-hidden="true">
-          <div>
-            STRATEGY <span>✳</span> DESIGN <span>✳</span> TECHNOLOGY{" "}
-            <span>✳</span> GROWTH <span>✳</span> STRATEGY <span>✳</span> DESIGN{" "}
-            <span>✳</span> TECHNOLOGY <span>✳</span> GROWTH <span>✳</span>
-          </div>
-        </div>
+        <MotionShowcase />
         <ProblemFinder configured={emailReady} />
         <Solutions />
-        <MotionShowcase />
         <Work />
         <Capabilities />
         <Process />

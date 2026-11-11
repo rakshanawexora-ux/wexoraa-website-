@@ -92,11 +92,11 @@ export default function CinematicHero() {
           </span>
         </h1>
         <p>
-          We shape brands, build digital experiences and connect business
-          systems. One studio. Your next big move.
+          We help you build a better website, simplify daily work and reach more
+          customers. One team, here to help.
         </p>
         <EnquiryCTA
-          className="cinematic-enquiry"
+          className="button cinematic-enquiry"
           interest="Let’s build something together"
         >
           Let’s build something <ArrowUpRight size={19} />
@@ -133,7 +133,7 @@ export default function CinematicHero() {
             01 / FIND THE GAP <ArrowUpRight size={17} />
           </span>
           <h2>Your next move.</h2>
-          <p>12 questions. Your digital-strength score.</p>
+          <p>12 questions. Your business growth score.</p>
         </Link>
         <Link href="/services" className="cinematic-card">
           <span>
@@ -147,7 +147,7 @@ export default function CinematicHero() {
         <Link href="#challenge">
           SCROLL TO FIND YOUR STARTING POINT <ArrowDown size={15} />
         </Link>
-        <span>BUILD / OPERATE / GROW</span>
+        <span>DESIGN / SOFTWARE / MARKETING</span>
       </div>
     </section>
   );

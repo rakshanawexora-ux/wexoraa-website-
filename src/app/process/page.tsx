@@ -10,8 +10,8 @@ export default function Page() {
   return (
     <PageShell
       eyebrow="CLARITY AT EVERY STEP"
-      title="A considered process. A shared next step."
-      intro="The detail changes with each engagement. The principle stays the same: understand the problem, make decisions together and keep the work visible."
+      title="You’ll know what happens next."
+      intro="We listen first, agree on a clear plan and keep you involved as the work takes shape. Here is how a typical project works."
     >
       <section className="section process-page-list">
         {processSteps.map(([name, title, description], i) => (

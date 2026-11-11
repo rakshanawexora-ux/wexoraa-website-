@@ -19,8 +19,10 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 
 - Exact supplied logo SVG, unchanged proportions/colors; no approximation.
 - Primary #86C232; supporting #61892F; secondary #222629; neutrals #474B4F / #6B6E70. Keep official SVG unchanged. Use dark readable on-primary text.
-- Recording-led cinematic dark home hero, header and inner-page entrances; light neutral reading/survey surfaces; charcoal technical/film/footer sections.
+- Keep the recording-led cinematic dark hero and inner-page entrances. Shared header and entire footer are white (latest user preference); use light reading/survey surfaces and the retained dark motion-film section.
 - Space Grotesk headings and DM Sans body, self-hosted with OFL notices. No Inter substitution.
+- Primary actions share a green rectangular button, 8px radius, 48px minimum height and a clear label; secondary actions keep the same shape with an outline. Icon-only compact header controls remain 44px.
+- Human language comes before slogans: explain the task, benefit and next step. Design includes branding/UI/UX/websites/stores/apps; business systems includes CRM/ERP/integrations/automation; digital marketing includes SEO/paid ads/social/video/conversion improvements.
 - Base reading/input text 16px where practical; smaller metadata remains supporting information, not the sole source of meaning. Balanced headings and natural reflow; no forced nonbreaking words.
 
 ## Interaction contract
@@ -30,11 +32,15 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 - Pointer tilt is bounded and omitted for coarse pointers/reduced motion. Essential actions also work by click/tap/keyboard.
 - Section entry uses translation, not faded body copy. State correctness does not wait for an animation end.
 - No global motion controller (user request). Respect browser reduced-motion preferences.
-- Header services disclosure contains all 12 direct service URLs, grouped Build/Operate/Grow. Keep the Services overview link separate, with a 44px disclosure button, keyboard access and Escape/focus restoration.
-- Preserve the expressive green “Got a good challenge?” CTA above the rounded charcoal footer; CTA opens the existing enquiry dialog.
+- Header services disclosure contains all 12 direct service URLs, visibly grouped Design & development / Business systems / Digital marketing. Build/operate/grow remain stable route IDs, not unexplained visitor-facing labels. Keep the Services overview link separate, with a 44px disclosure button, keyboard access and Escape/focus restoration.
+- Use a fully white footer with a clear invitation heading, one standard enquiry CTA and clearly separated navigation columns.
 - Explicit film play/pause; no autoplay, no audio, no external embed.
 - No locked scroll, cursor removal, fake urgency, invented client proof or email-gated assessment results.
 
 ## Verification
 
 Validate text contrast with axe plus screenshots, keyboard focus, 360/375/390px phones, tablet/desktop and landscape. Native web targets meet their semantic requirements; primary touch controls aim for at least 44px. Preserve the existing survey, email-retry and route tests. Automated results are not a complete WCAG certification or real-user study.
+
+## Homepage flow and service guidance
+
+Cinematic hero → retained original motion film → conversational 12-question growth-readiness survey → explained service categories with original related illustrations → examples/process/support. The growth-readiness score is the existing transparent digital-capability rubric, not a forecast of sales or revenue. Keep the no-signup result and methodology available.

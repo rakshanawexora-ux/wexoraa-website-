@@ -30,9 +30,7 @@ for (const width of [390, 1440]) {
     await expect(page).toHaveURL(new RegExp(`/services/${services[0].slug}$`));
     await expect(page.locator("#services-dropdown")).toBeHidden();
     await page.locator("footer").scrollIntoViewIfNeeded();
-    await expect(page.locator(".footer-invite-link")).toContainText(
-      "Got a good",
-    );
+    await expect(page.locator(".footer-invite h2")).toContainText("Got a good");
     await page.locator(".footer-invite-link").click();
     await expect(page.getByRole("dialog")).toBeVisible();
     await page.keyboard.press("Escape");

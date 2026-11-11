@@ -1,14 +1,14 @@
 export const services = [
   {
     slug: "brand-strategy-identity",
-    title: "Brand strategy & identity",
+    title: "Branding & graphic design",
     group: "build",
     intro:
-      "Make your business recognizable, consistent and easier to understand.",
+      "Give your business a clear look that customers recognise and remember.",
     problem:
       "Your business has evolved, but its identity and message have not kept up.",
     approach:
-      "We clarify your positioning, audience and brand story before developing a visual system that can work across real business touchpoints.",
+      "We talk about your business and customers, then design your logo, colours and everyday materials so everything feels like one brand.",
     deliverables: [
       "Brand discovery and positioning",
       "Visual identity and art direction",
@@ -21,13 +21,13 @@ export const services = [
   },
   {
     slug: "ui-ux-design",
-    title: "UI/UX & digital experiences",
+    title: "UI/UX design",
     group: "build",
-    intro: "Turn complex journeys into clear, useful digital experiences.",
+    intro: "Make your website or app easy for people to understand and use.",
     problem:
       "People struggle to find information, complete tasks or take the next step.",
     approach:
-      "We map important user journeys, test the information hierarchy and turn the agreed direction into responsive, accessible interface designs.",
+      "We plan the pages, screens and steps your customers need. You can review and try the design before development starts.",
     deliverables: [
       "Journey and information architecture",
       "Wireframes and interactive prototypes",
@@ -40,13 +40,14 @@ export const services = [
   },
   {
     slug: "websites-ecommerce",
-    title: "Websites & e-commerce",
+    title: "Websites & online stores",
     group: "build",
-    intro: "A better first impression. A clearer path to enquiry or purchase.",
+    intro:
+      "Give customers a website where they can find what they need, enquire or buy.",
     problem:
       "Your website looks dated, is difficult to maintain or does not explain your offer clearly.",
     approach:
-      "We connect business positioning, considered design and reliable engineering, with clear content, responsive performance and meaningful conversion paths.",
+      "We plan your pages, design for mobile and desktop, and build a fast, easy-to-manage website or online store.",
     deliverables: [
       "Content and conversion structure",
       "Responsive website or storefront",
@@ -62,11 +63,11 @@ export const services = [
     title: "Mobile apps & custom software",
     group: "build",
     intro:
-      "Build the digital product your workflow or customers actually need.",
+      "Create an app that helps your customers or makes your team’s work easier.",
     problem:
       "Off-the-shelf tools do not support the experience or process you want to deliver.",
     approach:
-      "We define the essential use cases, system boundaries and a realistic release scope before designing and engineering the product.",
+      "We start with what people need to do, agree on the most useful features, and build and test the app in clear stages.",
     deliverables: [
       "Product discovery and scope",
       "Application architecture and UX",
@@ -81,11 +82,12 @@ export const services = [
     slug: "crm-lead-management",
     title: "CRM & lead management",
     group: "operate",
-    intro: "Keep every enquiry, owner and next step in view.",
+    intro:
+      "Keep customer enquiries organised and make sure follow-ups do not get missed.",
     problem:
       "Leads arrive in different inboxes and follow-up depends on individual memory.",
     approach:
-      "We map the sales process and establish ownership, pipeline stages and useful automations before implementing or connecting a CRM.",
+      "We set up one place for customer details, enquiries and follow-up reminders, with a clear view of who is handling each lead.",
     deliverables: [
       "Sales-process and pipeline mapping",
       "CRM configuration or integration",
@@ -94,17 +96,18 @@ export const services = [
     ],
     question: "Can you connect our current tools?",
     answer:
-      "We assess their available APIs, data quality and permissions first. Integration feasibility and limitations are made clear in the scope.",
+      "We first check how your tools can connect and what data they can share. We explain what is possible before you commit.",
   },
   {
     slug: "erp-business-software",
     title: "ERP & business software",
     group: "operate",
-    intro: "A more connected view of the way your business runs.",
+    intro:
+      "Bring your orders, stock, accounts and team updates into a clearer system.",
     problem:
       "Teams rely on duplicate data, separate spreadsheets and manual handoffs.",
     approach:
-      "We study how operations work today and define the shared information, processes and permissions needed for a better system.",
+      "We look at how your team works today and build or connect the software you need, without trying to change everything at once.",
     deliverables: [
       "Workflow and requirement mapping",
       "ERP evaluation or custom modules",
@@ -113,17 +116,18 @@ export const services = [
     ],
     question: "Will every process need to change?",
     answer:
-      "No. We identify where standardization helps and where existing workflows should be preserved, with a phased implementation plan.",
+      "No. We keep what already works, improve the parts that cause problems and introduce changes in manageable steps.",
   },
   {
     slug: "system-integrations",
-    title: "System integrations",
+    title: "Software integrations",
     group: "operate",
-    intro: "Make your tools share information with purpose.",
+    intro:
+      "Let your software share information so your team does not have to copy it by hand.",
     problem:
       "The same information is copied across systems, creating delays and errors.",
     approach:
-      "We map data ownership, integration events and failure handling, then connect systems through supported APIs and clear operational rules.",
+      "We check which tools can connect, agree on what information they should share, and test that the connection works reliably.",
     deliverables: [
       "Integration and data-flow design",
       "API connections and synchronization",
@@ -138,11 +142,11 @@ export const services = [
     slug: "ai-workflow-automation",
     title: "AI & workflow automation",
     group: "operate",
-    intro: "Less repetitive work. More time for work that matters.",
+    intro: "Save time on repetitive tasks while keeping people in control.",
     problem:
       "People spend time transferring information, preparing routine documents or repeating avoidable tasks.",
     approach:
-      "We review the workflow first, assess the risks and decide whether straightforward automation or an AI-assisted process is appropriate.",
+      "We find tasks that can be safely automated, connect the right tools and keep a person involved where decisions need judgement.",
     deliverables: [
       "Automation opportunity review",
       "Workflow and integration implementation",
@@ -155,13 +159,14 @@ export const services = [
   },
   {
     slug: "seo-digital-strategy",
-    title: "SEO & digital strategy",
+    title: "SEO & online visibility",
     group: "grow",
-    intro: "Help the right people discover and understand your business.",
+    intro:
+      "Help people find your business when they search for what you offer.",
     problem:
       "You have a digital presence, but it is difficult for relevant customers to find you.",
     approach:
-      "We review audience intent, site structure, technical basics and content opportunities to define an actionable search and digital roadmap.",
+      "We review your website and search presence, improve useful pages and business listings, and track the enquiries that come from search.",
     deliverables: [
       "Search and digital-presence review",
       "Technical and on-page recommendations",
@@ -174,18 +179,19 @@ export const services = [
   },
   {
     slug: "performance-marketing",
-    title: "Performance marketing",
+    title: "Digital ads & social media",
     group: "grow",
-    intro: "Connect campaign activity to clear business objectives.",
+    intro:
+      "Reach customers through Google ads, social media and useful campaigns.",
     problem:
       "Advertising produces reports, but it is difficult to understand the quality of enquiries or what to improve.",
     approach:
-      "We align audience, offer, landing experience and measurement before planning and iterating paid campaigns.",
+      "We help you choose the audience, message and channels, create ads and social posts, and review the enquiries they bring in.",
     deliverables: [
-      "Campaign and audience planning",
-      "Creative and landing-page coordination",
-      "Tracking and enquiry-quality review",
-      "Reporting and optimization cycles",
+      "Google and social ad campaign planning",
+      "Social media planning, ad creative and landing pages",
+      "Enquiry tracking and campaign review",
+      "Clear reports and ongoing improvements",
     ],
     question: "Is media spend included?",
     answer:
@@ -193,13 +199,14 @@ export const services = [
   },
   {
     slug: "video-creative-production",
-    title: "Video & creative production",
+    title: "Video & social media content",
     group: "grow",
-    intro: "Tell your story with a clear creative purpose.",
+    intro:
+      "Show people what your business does with videos and social media content.",
     problem:
       "Your message is inconsistent or your content does not reflect the quality of the business.",
     approach:
-      "We establish the audience, message and intended channel, then create a practical concept, production scope and delivery plan.",
+      "We help you choose a clear message, plan the content and create videos or graphics suited to the places you want to share them.",
     deliverables: [
       "Creative direction and story planning",
       "Campaign or video concepts",
@@ -212,13 +219,14 @@ export const services = [
   },
   {
     slug: "conversion-optimization",
-    title: "Conversion optimization",
+    title: "Website conversion improvements",
     group: "grow",
-    intro: "Make it easier for interested visitors to take the next step.",
+    intro:
+      "Help more interested website visitors find what they need and get in touch.",
     problem:
       "People visit, but important journeys create hesitation or confusion.",
     approach:
-      "We review information clarity, user friction and measurement, then prioritize improvements and test hypotheses when reliable traffic data is available.",
+      "We check your pages, forms and checkout steps for confusing details, then make practical changes and review the results when enough data is available.",
     deliverables: [
       "Journey and conversion review",
       "Prioritized UX improvements",
@@ -244,9 +252,9 @@ export const projects = [
     outcome:
       "Concept only. No client engagement, live implementation or measured commercial outcome is claimed.",
     services: [
-      "Brand strategy & identity",
-      "UI/UX & digital experiences",
-      "Websites & e-commerce",
+      "Branding & graphic design",
+      "UI/UX design",
+      "Websites & online stores",
     ],
   },
   {
@@ -263,7 +271,7 @@ export const projects = [
       "Concept only. Feasibility, integrations and business outcomes would require discovery and real implementation.",
     services: [
       "CRM & lead management",
-      "System integrations",
+      "Software integrations",
       "AI & workflow automation",
     ],
   },

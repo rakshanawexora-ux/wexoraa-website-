@@ -68,11 +68,13 @@ export default function EnquiryForm({
         <Check />
         <h3>Thanks. Your enquiry is on its way.</h3>
         <p>
-          The email provider accepted your enquiry for delivery. This does not
-          guarantee inbox delivery. Wexoraa can use your details to follow up
-          about your requirement.
+          Your enquiry has been accepted. We can use the details you shared to
+          get back to you about your project.
         </p>
-        <Link className="text-link" href="/business-assessment/thank-you">
+        <Link
+          className="button text-link"
+          href="/business-assessment/thank-you"
+        >
           What happens next <ArrowUpRight size={18} />
         </Link>
       </div>
@@ -85,9 +87,8 @@ export default function EnquiryForm({
     >
       {!configured && (
         <div className="form-availability">
-          Online email sending is awaiting configuration. You can prepare your
-          enquiry below, but it cannot be delivered until sending is enabled.
-          Contact details are not saved in browser storage.
+          Online enquiries are not available yet. You can fill in your details,
+          but sending will be available once setup is complete.
         </div>
       )}
       <div className="form-grid">
@@ -176,7 +177,7 @@ export default function EnquiryForm({
         <input type="hidden" name="interest" value={interest} readOnly />
       )}
       <label>
-        Tell us a little about your goals
+        Tell us about your project
         <textarea
           name="message"
           required
@@ -223,7 +224,7 @@ export default function EnquiryForm({
             ? "Try sending again"
             : answers
               ? "Send my assessment & enquiry"
-              : "Send project enquiry"}
+              : "Send enquiry"}
         <ArrowUpRight size={17} />
       </button>
     </form>

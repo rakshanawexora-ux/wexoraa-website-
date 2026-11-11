@@ -30,8 +30,8 @@ export function PageShell({
               <EnquiryCTA interest={title} className="button">
                 Discuss your project <ArrowUpRight size={18} />
               </EnquiryCTA>
-              <Link className="text-link" href="/business-assessment">
-                Find your starting point <ArrowUpRight size={17} />
+              <Link className="button text-link" href="/business-assessment">
+                Check your growth score <ArrowUpRight size={17} />
               </Link>
             </div>
           </div>
@@ -40,19 +40,19 @@ export function PageShell({
         {children}
         <section className="page-final section">
           <p className="eyebrow">
-            <span /> LET’S MAKE THE NEXT STEP CLEAR
+            <span /> LET’S TALK ABOUT YOUR BUSINESS
           </p>
           <h2>
-            Bring the challenge.
+            Not sure where to start?
             <br />
-            We’ll connect the possibilities.
+            Let’s work it out together.
           </h2>
           <p>
-            A focused project or a bigger ambition. Start with a conversation
-            about what you want to change.
+            Tell us what is getting in the way, or what you would like to do
+            next. We will help you find a practical first step.
           </p>
           <EnquiryCTA interest={title} className="button">
-            Tell us what you have in mind <ArrowUpRight size={18} />
+            Tell us what you need <ArrowUpRight size={18} />
           </EnquiryCTA>
         </section>
       </main>

@@ -9,9 +9,9 @@ export const metadata = pageMetadata(
 export default function Page() {
   return (
     <PageShell
-      eyebrow="OUR CAPABILITIES"
-      title="The right skills. One shared direction."
-      intro="Choose a focused service or combine disciplines around a bigger business challenge."
+      eyebrow="OUR SERVICES"
+      title="What would you like help with?"
+      intro="Need a website, an app, business software or help with marketing? Find the right service below, or tell us what you are trying to improve."
     >
       <ServiceExplorer />
     </PageShell>

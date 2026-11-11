@@ -42,12 +42,14 @@ test("12-step survey on homepage, resume, score, revision and enquiry stays opti
     } else await survey.getByRole("radio").first().check();
     await survey
       .getByRole("button", {
-        name: i === 11 ? "See my digital-strength score" : "Next question",
+        name: i === 11 ? "Show my growth score" : "Continue",
       })
       .click();
   }
   await expect(
-    survey.getByRole("img", { name: "Digital-strength score 100 out of 100" }),
+    survey.getByRole("img", {
+      name: "Business growth-readiness score 100 out of 100",
+    }),
   ).toBeVisible();
   await expect(
     survey.getByText("Strong foundations", { exact: true }),
@@ -62,7 +64,7 @@ test("12-step survey on homepage, resume, score, revision and enquiry stays opti
     survey.getByRole("form", { name: "Discuss my assessment" }),
   ).toBeVisible();
   await expect(
-    survey.getByText("Online email sending is awaiting configuration.", {
+    survey.getByText("Online enquiries are not available yet.", {
       exact: false,
     }),
   ).toBeVisible();
@@ -86,7 +88,7 @@ test("unknowns do not produce a misleading score; mobile survey is accessible", 
     else await page.getByRole("radio").first().check();
     await page
       .getByRole("button", {
-        name: i === 11 ? "See my digital-strength score" : "Next question",
+        name: i === 11 ? "Show my growth score" : "Continue",
       })
       .click();
   }

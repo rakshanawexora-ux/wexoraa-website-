@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ArrowUpRight } from "lucide-react";
 import { EnquiryCTA } from "@/components/enquiry-popup";
+import { solutions } from "@/content/site";
 import { services } from "@/content/catalog";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function ServiceExplorer() {
@@ -22,7 +23,7 @@ export default function ServiceExplorer() {
       <div className="service-explorer-top">
         <div>
           <p className="eyebrow">
-            <span /> FIND THE RIGHT CAPABILITY
+            <span /> FIND A SERVICE
           </p>
           <h2>
             What are you
@@ -62,8 +63,8 @@ export default function ServiceExplorer() {
               onClick={() => setGroup(g)}
             >
               {g === "all"
-                ? "All capabilities"
-                : g.charAt(0).toUpperCase() + g.slice(1)}
+                ? "All services"
+                : solutions.find((area) => area.id === g)?.shortTitle}
               {group === g && <span aria-hidden="true">↗</span>}
             </button>
           ))}
@@ -92,7 +93,7 @@ export default function ServiceExplorer() {
                 href={`/services/${s.slug}`}
               >
                 <span>
-                  {s.group.toUpperCase()}
+                  {solutions.find((area) => area.id === s.group)?.shortTitle}
                   <ArrowUpRight size={17} />
                 </span>
                 <h3>{s.title}</h3>
@@ -128,7 +129,7 @@ export default function ServiceExplorer() {
           >
             Reset filters
           </button>
-          <Link className="text-link" href="/contact">
+          <Link className="button text-link" href="/contact">
             Describe your challenge <ArrowUpRight size={17} />
           </Link>
         </div>

@@ -49,7 +49,7 @@ export default async function Image() {
           />
         </div>
         <div style={{ fontSize: 18, color: "#86C232", letterSpacing: 3 }}>
-          BUILD. OPERATE. GROW.
+          DESIGN. SIMPLIFY. REACH MORE PEOPLE.
         </div>
       </div>
       <div

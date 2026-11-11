@@ -114,10 +114,10 @@ test("every published content route renders, unknown routes 404 and navigation u
     .click();
   await expect(page).toHaveURL(/\/services$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "The right skills.",
+    "What would you like help with?",
   );
   await page
-    .getByRole("link", { name: /Websites & e-commerce/ })
+    .getByRole("link", { name: /Websites & online stores/ })
     .first()
     .click();
   await expect(page).toHaveURL(/\/services\/websites-ecommerce$/);
@@ -133,7 +133,7 @@ test("contact form keeps values after failure and confirms only accepted request
     .fill("visitor@example.com");
   await page.getByLabel("Phone number", { exact: true }).fill("+919876543210");
   await page
-    .getByLabel("Tell us a little about your goals")
+    .getByLabel("Tell us about your project")
     .fill("We need a clearer mobile website and enquiry journey.");
   await page.getByRole("checkbox").check();
   await page.route("**/api/enquiry", (r) =>
@@ -142,7 +142,7 @@ test("contact form keeps values after failure and confirms only accepted request
       json: { error: "Temporary email service failure. Please retry." },
     }),
   );
-  await page.getByRole("button", { name: "Send project enquiry" }).click();
+  await page.getByRole("button", { name: "Send enquiry" }).click();
   await expect(page.getByRole("status")).toContainText(
     "Temporary email service failure",
   );
@@ -231,13 +231,13 @@ test("inner page graphic changes selection and service card reacts to pointer mo
   await page.goto("/services");
   await page
     .locator(".studio-scene")
-    .getByRole("button", { name: "Operate", exact: true })
+    .getByRole("button", { name: "Systems", exact: true })
     .click();
   await expect(page.locator(".scene-bottom")).toContainText(
-    "Connect the way work happens.",
+    "Keep your customers, team and tasks connected.",
   );
   await expect(
-    page.getByRole("link", { name: "Explore Operate solutions" }),
+    page.getByRole("link", { name: "Explore Systems solutions" }),
   ).toHaveAttribute("href", "/solutions/operate");
   const card = page.locator(".catalog-card").first();
   await card.scrollIntoViewIfNeeded();
@@ -273,7 +273,7 @@ test("service explorer filters, searches and recovers from no results", async ({
   await page.goto("/services");
   await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
   await page
-    .getByRole("button", { name: "Operate", exact: true })
+    .getByRole("button", { name: "Business systems", exact: true })
     .last()
     .click();
   await expect(page.locator(".service-results .catalog-card")).toHaveCount(4);
@@ -347,7 +347,7 @@ test("simple service enquiry popup is accessible and restores focus", async ({
     .locator("textarea")
     .fill("We need help improving our business website.");
   await dialog.getByRole("checkbox").check();
-  await dialog.getByRole("button", { name: "Send project enquiry" }).click();
+  await dialog.getByRole("button", { name: "Send enquiry" }).click();
   await expect(
     dialog.getByRole("heading", {
       name: "Thanks. Your enquiry is on its way.",

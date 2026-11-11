@@ -39,17 +39,17 @@ export default async function Page({
       <section className="section solution-explanation">
         <h2>
           {slug === "build"
-            ? "Make the experience match your ambition."
+            ? "Help customers understand and use your business online."
             : slug === "operate"
-              ? "Let your systems support your people."
-              : "Give your next move a clearer direction."}
+              ? "Make everyday work easier for your team."
+              : "Get found by people who need what you offer."}
         </h2>
         <p>
           {slug === "build"
-            ? "A website, application or identity should solve a clear problem. We align positioning, user needs and engineering decisions before creating the experience."
+            ? "We start with your customers and what they need to do. Then we design your brand, website or app so it is clear, easy to use and ready for your business."
             : slug === "operate"
-              ? "Disconnected information creates extra work. We look at the workflow, responsibilities and existing tools before recommending software or automation."
-              : "Growth needs a consistent message and a way to learn what works. We connect creative, channels and measurement around practical business priorities."}
+              ? "If your team keeps copying information between spreadsheets, inboxes and tools, we can help. We look at how you work and recommend software that saves those extra steps."
+              : "We help you choose where to show up, what to say and how to measure the response. That can include search, social media, ads, videos and changes to your website."}
         </p>
       </section>
       <section className="section catalog-grid">
