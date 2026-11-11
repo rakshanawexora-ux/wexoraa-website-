@@ -1,7 +1,8 @@
+import { siteOrigin } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 import { services, projects } from "@/content/catalog";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const origin = process.env.NEXT_PUBLIC_SITE_URL;
+  const origin = siteOrigin();
   if (!origin) return [];
   const paths = [
     "",

@@ -1,11 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import { PageShell } from "@/components/page-shell";
 import ServiceExplorer from "@/components/service-explorer";
-export const metadata = {
-  title: "Design, engineering and growth services — Wexoraa",
-  description:
-    "Explore Wexoraa services from branding and websites to CRM, ERP, AI automation, SEO and creative production.",
-  alternates: { canonical: "/services" },
-};
+export const metadata = pageMetadata(
+  "Design, engineering and growth services — Wexoraa",
+  "Explore Wexoraa services from branding and websites to CRM, ERP, AI automation, SEO and creative production.",
+  "/services",
+);
 export default function Page() {
   return (
     <PageShell

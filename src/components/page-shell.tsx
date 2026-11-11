@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Header, Footer } from "@/components/home";
+import { EnquiryCTA } from "@/components/enquiry-popup";
 import StudioScene from "@/components/studio-scene";
 export function PageShell({
   eyebrow,
@@ -26,9 +27,9 @@ export function PageShell({
             <h1>{title}</h1>
             <p>{intro}</p>
             <div className="page-hero-actions">
-              <Link className="button" href="/contact">
+              <EnquiryCTA interest={title} className="button">
                 Discuss your project <ArrowUpRight size={18} />
-              </Link>
+              </EnquiryCTA>
               <Link className="text-link" href="/business-assessment">
                 Find your starting point <ArrowUpRight size={17} />
               </Link>
@@ -50,9 +51,9 @@ export function PageShell({
             A focused project or a bigger ambition. Start with a conversation
             about what you want to change.
           </p>
-          <Link className="button" href="/contact">
+          <EnquiryCTA interest={title} className="button">
             Tell us what you have in mind <ArrowUpRight size={18} />
-          </Link>
+          </EnquiryCTA>
         </section>
       </main>
       <Footer />

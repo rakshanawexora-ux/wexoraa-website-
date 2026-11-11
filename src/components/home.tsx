@@ -25,7 +25,8 @@ import { solutions, processSteps } from "@/content/site";
 import { serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
 import MotionShowcase from "@/components/motion-showcase";
-import { MotionToggle } from "@/components/site-experience";
+import { EnquiryCTA } from "@/components/enquiry-popup";
+import { usePathname } from "next/navigation";
 import { useExperienceMotion as useReducedMotion } from "@/hooks/use-experience-motion";
 
 function Arrow() {
@@ -59,6 +60,7 @@ function Reveal({
   );
 }
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -94,19 +96,27 @@ export function Header() {
           ["Services", "/services"],
           ["Work", "/work"],
           ["About", "/about"],
+          ["Contact", "/contact"],
         ].map(([text, url]) => (
-          <Link key={url} href={url} onClick={() => setOpen(false)}>
+          <Link
+            key={url}
+            href={url}
+            data-active={pathname === url || pathname.startsWith(url + "/")}
+            aria-current={pathname === url ? "page" : undefined}
+            onClick={() => setOpen(false)}
+          >
             {text}
           </Link>
         ))}
-        <Link className="nav-contact" href="/contact">
-          Let’s talk{" "}
-          <span>
-            <Arrow />
-          </span>
-        </Link>
       </nav>
-      <MotionToggle />
+      <EnquiryCTA
+        interest="Project enquiry"
+        label="Start a project"
+        className="button header-project"
+      >
+        <span>Start a project</span>
+        <Arrow />
+      </EnquiryCTA>
       <button
         ref={ref}
         className="icon-button mobile-toggle"
@@ -772,27 +782,21 @@ export function ContactLinks() {
 }
 export function Footer() {
   return (
-    <footer className="footer footer-v2">
-      <div className="footer-invite">
-        <p className="eyebrow">
-          <span /> YOUR NEXT CHAPTER
-        </p>
-        <Link
-          href="/contact"
-          className="footer-invite-link"
-          data-cursor="Let’s talk"
-        >
-          Got a good
-          <br />
-          challenge?
-          <span>
-            <ArrowUpRight size={52} />
-          </span>
-        </Link>
-        <p>Bring the ambition. Let’s find the right direction.</p>
+    <footer className="footer footer-final">
+      <div className="footer-brief">
+        <div>
+          <p className="eyebrow">
+            <span /> YOUR NEXT MOVE
+          </p>
+          <h2>Have a project in mind?</h2>
+          <p>Let’s turn the right conversation into a clear next step.</p>
+        </div>
+        <EnquiryCTA interest="Project enquiry" className="button">
+          Tell us about it <Arrow />
+        </EnquiryCTA>
       </div>
-      <div className="footer-content">
-        <div className="footer-brand-column">
+      <div className="footer-main">
+        <div className="footer-brand">
           <Link
             href="/"
             className="footer-logo"
@@ -807,57 +811,42 @@ export function Footer() {
             />
           </Link>
           <p>
-            Creative thinking.
+            Design, technology and growth.
             <br />
-            Technical depth.
-            <br />
-            Connected possibilities.
+            Connected around your business.
           </p>
-          <ContactLinks />
+          <span className="footer-place">COIMBATORE, TAMIL NADU · INDIA</span>
         </div>
         <nav aria-label="Footer explore">
-          <span>EXPLORE</span>
+          <h3>Explore</h3>
           {[
             ["Solutions", "/solutions"],
             ["Services", "/services"],
-            ["Studio concepts", "/work"],
-            ["Our approach", "/process"],
+            ["Work", "/work"],
+            ["About", "/about"],
+            ["Our process", "/process"],
           ].map(([t, h]) => (
             <Link key={h} href={h}>
               {t}
-              <ArrowUpRight size={14} />
             </Link>
           ))}
         </nav>
         <nav aria-label="Footer connect">
-          <span>CONNECT</span>
-          {[
-            ["About Wexoraa", "/about"],
-            ["Find your business problem", "/business-assessment"],
-            ["Start a conversation", "/contact"],
-            ["Privacy", "/privacy"],
-          ].map(([t, h]) => (
-            <Link key={h} href={h}>
-              {t}
-              <ArrowUpRight size={14} />
-            </Link>
-          ))}
+          <h3>Let’s connect</h3>
+          <EnquiryCTA
+            interest="Project enquiry"
+            className="footer-enquiry-link"
+          >
+            Discuss your project <Arrow />
+          </EnquiryCTA>
+          <Link href="/business-assessment">Find your business problem</Link>
+          <Link href="/contact">Contact Wexoraa</Link>
+          <ContactLinks />
         </nav>
-        <div className="footer-orbit" aria-hidden="true">
-          <div />
-          <div />
-          <span>
-            BUILD.
-            <br />
-            OPERATE.
-            <br />
-            GROW.
-          </span>
-        </div>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Wexoraa Infotech</span>
-        <span>COIMBATORE, INDIA</span>
+        <Link href="/privacy">Privacy</Link>
         <Link href="/#top">Back to top ↑</Link>
       </div>
     </footer>

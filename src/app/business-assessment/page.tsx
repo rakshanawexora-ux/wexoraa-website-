@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Survey from "@/components/assessment";
 import { Header, Footer } from "@/components/home";
 import { emailConfigured } from "@/lib/enquiry";
-export const metadata: Metadata = {
-  title: "12-question digital-strength assessment — Wexoraa",
-  description:
-    "Understand your digital foundations with 12 questions, a transparent score and practical opportunities. No email required to view your results.",
-  alternates: { canonical: "/business-assessment" },
-};
+export const metadata = pageMetadata(
+  "12-question digital-strength assessment — Wexoraa",
+  "Understand your digital foundations with 12 questions, a transparent score and practical opportunities. No email required to view your results.",
+  "/business-assessment",
+);
 export default function Page() {
   return (
     <>

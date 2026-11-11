@@ -105,7 +105,7 @@ export async function POST(request: Request) {
   submissions.set(key, { state: "pending", until: now + 120000 });
   const rows: [string, string][] = [
     ["Name", data.name],
-    ["Company", data.company],
+    ["Company", data.company || "Not supplied"],
     ["Email", data.email],
     ["Phone", data.phone],
     ["Website", data.website || "Not supplied"],

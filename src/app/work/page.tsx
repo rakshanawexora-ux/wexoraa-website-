@@ -1,13 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
 import { PageShell } from "@/components/page-shell";
 import { projects } from "@/content/catalog";
-export const metadata = {
-  title: "Studio concepts and approach — Wexoraa",
-  description:
-    "Explore illustrative brand and connected-system concepts, with clear context and no fabricated client results.",
-  alternates: { canonical: "/work" },
-};
+export const metadata = pageMetadata(
+  "Studio concepts and approach — Wexoraa",
+  "Explore illustrative brand and connected-system concepts, with clear context and no fabricated client results.",
+  "/work",
+);
 export default function Page() {
   return (
     <PageShell

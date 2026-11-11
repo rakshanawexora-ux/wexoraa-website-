@@ -191,7 +191,7 @@ for (const route of [
     ).toEqual([]);
   });
 
-test("studio film plays, pauses and obeys the site motion control", async ({
+test("studio film plays, pauses and reacts to browser reduced motion", async ({
   page,
 }) => {
   await page.goto("/");
@@ -210,23 +210,13 @@ test("studio film plays, pauses and obeys the site motion control", async ({
   await expect(
     page.getByRole("button", { name: "Pause studio film" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await expect
     .poll(() =>
       video.evaluate((el) => el instanceof HTMLVideoElement && el.paused),
     )
     .toBe(true);
-  await expect(page.locator("html")).toHaveAttribute(
-    "data-motion-paused",
-    "true",
-  );
-  await page
-    .getByRole("button", { name: "Resume motion", exact: true })
-    .click();
-  await expect(page.locator("html")).toHaveAttribute(
-    "data-motion-paused",
-    "false",
-  );
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.getByRole("button", { name: "Play studio film" }).click();
   await page.getByRole("button", { name: "Pause studio film" }).click();
   await expect
@@ -265,8 +255,15 @@ test("inner page graphic changes selection and service card reacts to pointer mo
   await expect(
     page.getByRole("navigation", { name: "Footer explore" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
-  await expect(card).toHaveCSS("transform", "none");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect
+    .poll(() =>
+      card.evaluate(
+        (el) =>
+          new DOMMatrixReadOnly(getComputedStyle(el).transform).isIdentity,
+      ),
+    )
+    .toBe(true);
 });
 
 test("service explorer filters, searches and recovers from no results", async ({
@@ -301,50 +298,65 @@ test("service explorer filters, searches and recovers from no results", async ({
   ).toEqual([]);
 });
 
-test("skill review: header motion control never covers search and targets remain usable", async ({
+test("simple service enquiry popup is accessible and restores focus", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto("/services");
-  const toggle = page.getByRole("button", {
-    name: "Pause motion",
-    exact: true,
-  });
-  await expect(toggle).toBeVisible();
-  const target = await toggle.boundingBox();
-  expect(target!.width).toBeGreaterThanOrEqual(44);
-  expect(target!.height).toBeGreaterThanOrEqual(44);
-  const search = page.getByRole("searchbox", { name: "Search services" });
-  await search.scrollIntoViewIfNeeded();
-  await search.focus();
-  const box = await search.boundingBox();
-  const header = await page.locator(".header").boundingBox();
-  expect(box!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
-  await expect(search).toHaveCSS("font-size", "16px");
-  await search.fill("CRM");
-  const clear = await page
-    .getByRole("button", { name: "Clear service search" })
-    .boundingBox();
-  expect(clear!.width).toBeGreaterThanOrEqual(44);
-  expect(clear!.height).toBeGreaterThanOrEqual(44);
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  ).toBe(true);
-  await page.setViewportSize({ width: 844, height: 390 });
-  await page.goto("/services");
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  ).toBe(true);
-  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
-  await page
-    .getByRole("navigation", { name: "Main navigation" })
-    .getByRole("link", { name: "Solutions", exact: true })
-    .click();
   await expect(
-    page.getByRole("button", { name: "Resume motion", exact: true }),
+    page.getByRole("button", { name: "Pause motion", exact: true }),
+  ).toHaveCount(0);
+  const cta = page.locator(".service-card-actions a").first();
+  await cta.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator('input[name="name"]')).toBeFocused();
+  await expect(
+    dialog.locator(
+      'input[name="name"], input[name="email"], input[name="phone"]',
+    ),
+  ).toHaveCount(3);
+  const scan = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(
+    scan.violations.map((v) => ({
+      id: v.id,
+      nodes: v.nodes.map((n) => n.target),
+    })),
+  ).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(cta).toBeFocused();
+  await cta.click();
+  await page.route("**/api/enquiry", async (route) => {
+    const payload = route.request().postDataJSON();
+    expect(payload.company).toBe("");
+    expect(payload.interest).toBeTruthy();
+    expect(payload.consent).toBe(true);
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ accepted: true }),
+    });
+  });
+  await dialog.locator('input[name="name"]').fill("Test Person");
+  await dialog.locator('input[name="email"]').fill("person@example.com");
+  await dialog.locator('input[name="phone"]').fill("9876543210");
+  await dialog
+    .locator("textarea")
+    .fill("We need help improving our business website.");
+  await dialog.getByRole("checkbox").check();
+  await dialog.getByRole("button", { name: "Send project enquiry" }).click();
+  await expect(
+    dialog.getByRole("heading", {
+      name: "Thanks. Your enquiry is on its way.",
+    }),
   ).toBeVisible();
+  await page.keyboard.press("Escape");
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
 });

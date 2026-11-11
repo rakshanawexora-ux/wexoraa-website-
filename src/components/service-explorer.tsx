@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ArrowUpRight } from "lucide-react";
+import { EnquiryCTA } from "@/components/enquiry-popup";
 import { services } from "@/content/catalog";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function ServiceExplorer() {
@@ -98,6 +99,15 @@ export default function ServiceExplorer() {
                 <p>{s.intro}</p>
                 <strong>Explore the approach ↗</strong>
               </Link>
+              <div className="service-card-actions">
+                <EnquiryCTA
+                  interest={s.title}
+                  label={`Enquire about ${s.title}`}
+                  className="service-enquire"
+                >
+                  Enquire now <ArrowUpRight size={16} />
+                </EnquiryCTA>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>

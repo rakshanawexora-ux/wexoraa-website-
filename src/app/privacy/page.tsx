@@ -1,10 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import { Header, Footer } from "@/components/home";
-export const metadata = {
-  title: "Privacy and enquiry information — Wexoraa",
-  description:
-    "How this website handles assessment answers, contact enquiries and email processing.",
-  alternates: { canonical: "/privacy" },
-};
+export const metadata = pageMetadata(
+  "Privacy and enquiry information — Wexoraa",
+  "How this website handles assessment answers, contact enquiries and email processing.",
+  "/privacy",
+);
 export default function Privacy() {
   return (
     <>

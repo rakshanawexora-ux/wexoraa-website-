@@ -1,12 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Pause, Play } from "lucide-react";
-import {
-  useExperienceMotion,
-  setAmbientPaused,
-  useAmbientPaused,
-} from "@/hooks/use-experience-motion";
+import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function SiteExperience() {
   const path = usePathname();
   const reduced = useExperienceMotion();
@@ -106,19 +101,4 @@ export default function SiteExperience() {
     };
   }, [path, reduced]);
   return <div className="site-progress scroll-progress" aria-hidden="true" />;
-}
-export function MotionToggle() {
-  const paused = useAmbientPaused();
-  return (
-    <button
-      className="ambient-toggle"
-      aria-pressed={paused}
-      aria-label={paused ? "Resume motion" : "Pause motion"}
-      title={paused ? "Resume ambient motion" : "Pause ambient motion"}
-      onClick={() => setAmbientPaused(!paused)}
-    >
-      {paused ? <Play size={15} /> : <Pause size={15} />}
-      <span>{paused ? "Resume motion" : "Pause motion"}</span>
-    </button>
-  );
 }

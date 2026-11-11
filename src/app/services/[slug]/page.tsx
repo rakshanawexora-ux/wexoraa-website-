@@ -1,6 +1,9 @@
+import StructuredData from "@/components/structured-data";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services } from "@/content/catalog";
+import { EnquiryCTA } from "@/components/enquiry-popup";
 import { PageShell } from "@/components/page-shell";
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -12,11 +15,13 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const s = services.find((s) => s.slug === slug);
-  return {
-    title: s ? `${s.title} — Wexoraa` : "Service not found",
-    description: s?.intro,
-    alternates: { canonical: `/services/${slug}` },
-  };
+  return s
+    ? pageMetadata(
+        `${s.title} — Wexoraa Infotech`,
+        s.intro,
+        `/services/${slug}`,
+      )
+    : { title: "Page not found", robots: { index: false, follow: false } };
 }
 export default async function Page({
   params,
@@ -32,6 +37,7 @@ export default async function Page({
       title={s.title}
       intro={s.intro}
     >
+      <StructuredData data={serviceSchema(s.title, s.intro, s.slug)} />
       <section className="section detail-grid">
         <div>
           <p className="eyebrow">THE CHALLENGE</p>
@@ -50,12 +56,13 @@ export default async function Page({
             Scope, responsibilities, timeline and costs are agreed in your
             proposal. No one-size-fits-all package.
           </p>
-          <Link
+          <EnquiryCTA
+            interest={s.title}
             className="button"
-            href={`/contact?interest=${encodeURIComponent(s.title)}`}
+            label={`Enquire about ${s.title}`}
           >
             Discuss this service ↗
-          </Link>
+          </EnquiryCTA>
         </aside>
       </section>
       <section className="section service-faq">

@@ -1,22 +1,14 @@
 "use client";
 import { useSyncExternalStore } from "react";
-import { useReducedMotion } from "motion/react";
-function subscribe(callback: () => void) {
-  window.addEventListener("wexoraa:motion", callback);
-  return () => window.removeEventListener("wexoraa:motion", callback);
+const query = "(prefers-reduced-motion: reduce)";
+function subscribe(update: () => void) {
+  const media = window.matchMedia(query);
+  media.addEventListener("change", update);
+  return () => media.removeEventListener("change", update);
 }
-function getPaused() {
-  return document.documentElement.dataset.motionPaused === "true";
-}
-export function useAmbientPaused() {
-  return useSyncExternalStore(subscribe, getPaused, () => false);
+function snapshot() {
+  return window.matchMedia(query).matches;
 }
 export function useExperienceMotion() {
-  const paused = useAmbientPaused();
-  const reduced = useReducedMotion();
-  return !!reduced || paused;
-}
-export function setAmbientPaused(paused: boolean) {
-  document.documentElement.dataset.motionPaused = String(paused);
-  window.dispatchEvent(new Event("wexoraa:motion"));
+  return useSyncExternalStore(subscribe, snapshot, () => true);
 }

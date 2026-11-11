@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/page-shell";
@@ -12,11 +13,9 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const p = projects.find((p) => p.slug === slug);
-  return {
-    title: p ? `${p.title} Studio concept — Wexoraa` : "Concept not found",
-    description: p?.solution,
-    alternates: { canonical: `/work/${slug}` },
-  };
+  return p
+    ? pageMetadata(`${p.title} — Wexoraa Infotech`, p.solution, `/work/${slug}`)
+    : { title: "Page not found", robots: { index: false, follow: false } };
 }
 export default async function Page({
   params,

@@ -1,7 +1,11 @@
+import { pageMetadata, organizationSchema } from "@/lib/seo";
+import StructuredData from "@/components/structured-data";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SiteExperience from "@/components/site-experience";
+import { EnquiryProvider } from "@/components/enquiry-popup";
+import { emailConfigured } from "@/lib/enquiry";
 import { Cursor } from "@/components/home";
 const display = localFont({
   src: "../../public/fonts/space-grotesk.ttf",
@@ -15,22 +19,12 @@ const body = localFont({
   variable: "--font-body",
   display: "swap",
 });
-export const metadata: Metadata = {
-  title: "Wexoraa Infotech — Build. Operate. Grow.",
-  description:
-    "Strategy, design, engineering and growth, connected through one technology partner. Wexoraa Infotech serves growing businesses in Coimbatore and Tamil Nadu.",
-  ...(process.env.NEXT_PUBLIC_SITE_URL
-    ? {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
-        alternates: { canonical: "/" },
-      }
-    : {}),
-  openGraph: {
-    title: "Wexoraa Infotech — Build. Operate. Grow.",
-    description: "Connected thinking. Better business systems.",
-    type: "website",
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Wexoraa Infotech — Design, Technology & Growth in Coimbatore",
+  "Connected branding, websites, software, CRM, automation and digital growth for businesses in Coimbatore and Tamil Nadu.",
+  "/",
+);
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -40,9 +34,12 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <SiteExperience />
-        <Cursor />
-        {children}
+        <EnquiryProvider configured={emailConfigured()}>
+          <StructuredData data={organizationSchema()} />
+          <SiteExperience />
+          <Cursor />
+          {children}
+        </EnquiryProvider>
       </body>
     </html>
   );

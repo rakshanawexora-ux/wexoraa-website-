@@ -13,14 +13,6 @@ export default function MotionShowcase() {
       video.current?.pause();
     }
   }, [reduced]);
-  useEffect(() => {
-    const pause = () => {
-      if (document.documentElement.dataset.motionPaused === "true")
-        video.current?.pause();
-    };
-    window.addEventListener("wexoraa:motion", pause);
-    return () => window.removeEventListener("wexoraa:motion", pause);
-  }, []);
   async function toggle() {
     const el = video.current;
     if (!el) return;
@@ -54,7 +46,7 @@ export default function MotionShowcase() {
           <br />A moving picture of how it comes together.
         </p>
       </div>
-      <div className="showcase-film" data-parallax>
+      <div className="showcase-film">
         <video
           ref={video}
           className="brand-film"

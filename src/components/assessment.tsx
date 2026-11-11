@@ -227,7 +227,7 @@ export default function Survey({
                     : `Digital-strength score ${result.score} out of 100`
                 }
                 style={{
-                  background: `conic-gradient(var(--primary) ${(result.score ?? 0) * 3.6}deg, #e4ebdc 0deg)`,
+                  background: `conic-gradient(var(--primary) ${(result.score ?? 0) * 3.6}deg, var(--outline-variant) 0deg)`,
                 }}
               >
                 <div>

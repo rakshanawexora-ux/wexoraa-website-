@@ -3,7 +3,16 @@ import { questions } from "@/content/assessment";
 export const enquirySchema = z
   .object({
     name: z.string().trim().min(2).max(100),
-    company: z.string().trim().min(2).max(150),
+    company: z
+      .string()
+      .trim()
+      .max(150)
+      .optional()
+      .default("")
+      .refine(
+        (value) => value.length === 0 || value.length >= 2,
+        "Enter a company name or leave it blank.",
+      ),
     email: z.email().max(254),
     phone: z
       .string()

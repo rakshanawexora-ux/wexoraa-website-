@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { solutions } from "@/content/site";
@@ -13,13 +14,13 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const s = solutions.find((s) => s.id === slug);
-  return {
-    title: s
-      ? `${s.title} Connected solutions — Wexoraa`
-      : "Solution not found",
-    description: s?.description,
-    alternates: { canonical: `/solutions/${slug}` },
-  };
+  return s
+    ? pageMetadata(
+        `${s.title} — Wexoraa Infotech`,
+        s.description,
+        `/solutions/${slug}`,
+      )
+    : { title: "Page not found", robots: { index: false, follow: false } };
 }
 export default async function Page({
   params,

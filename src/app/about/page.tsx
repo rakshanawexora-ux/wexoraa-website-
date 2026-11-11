@@ -1,10 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import { PageShell } from "@/components/page-shell";
-export const metadata = {
-  title: "About Wexoraa Infotech — Connected technology partner",
-  description:
-    "An integrated technology, creative and business growth partner in Coimbatore and Tamil Nadu.",
-  alternates: { canonical: "/about" },
-};
+export const metadata = pageMetadata(
+  "About Wexoraa Infotech — Connected technology partner",
+  "An integrated technology, creative and business growth partner in Coimbatore and Tamil Nadu.",
+  "/about",
+);
 export default function Page() {
   return (
     <PageShell

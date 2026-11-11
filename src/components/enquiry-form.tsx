@@ -7,10 +7,12 @@ export default function EnquiryForm({
   answers,
   interest = "",
   configured = false,
+  compact = false,
 }: {
   answers?: Answers;
   interest?: string;
   configured?: boolean;
+  compact?: boolean;
 }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -78,15 +80,14 @@ export default function EnquiryForm({
   return (
     <form
       onSubmit={submit}
-      className="enquiry-form"
+      className={compact ? "enquiry-form compact-enquiry" : "enquiry-form"}
       aria-label={answers ? "Discuss my assessment" : "Project enquiry"}
     >
       {!configured && (
         <div className="form-availability">
           Online email sending is awaiting configuration. You can prepare your
           enquiry below, but it cannot be delivered until sending is enabled.
-          Your contact details stay in this page and are not saved in browser
-          storage.
+          Contact details are not saved in browser storage.
         </div>
       )}
       <div className="form-grid">
@@ -100,16 +101,19 @@ export default function EnquiryForm({
             maxLength={100}
           />
         </label>
-        <label>
-          Company name
-          <input
-            name="company"
-            autoComplete="organization"
-            required
-            minLength={2}
-            maxLength={150}
-          />
-        </label>
+        {!compact && (
+          <label>
+            Company name
+            <input
+              name="company"
+              autoComplete="organization"
+              required
+              minLength={2}
+              maxLength={150}
+            />
+          </label>
+        )}
+        {compact && <input type="hidden" name="company" value="" />}
         <label>
           Work email
           <input
@@ -131,35 +135,46 @@ export default function EnquiryForm({
             maxLength={30}
           />
         </label>
+        {!compact && (
+          <label>
+            Website <small>(optional)</small>
+            <input
+              name="website"
+              type="url"
+              autoComplete="url"
+              placeholder="https://"
+              maxLength={300}
+            />
+          </label>
+        )}
+        {compact && <input type="hidden" name="website" value="" />}
+        {!compact && (
+          <label>
+            Preferred contact
+            <select name="preferred" defaultValue="Email">
+              <option>Email</option>
+              <option>Phone</option>
+              <option>WhatsApp</option>
+            </select>
+          </label>
+        )}
+        {compact && <input type="hidden" name="preferred" value="Email" />}
+      </div>
+      {!compact && (
         <label>
-          Website <small>(optional)</small>
+          What would you like help with?
           <input
-            name="website"
-            type="url"
-            autoComplete="url"
-            placeholder="https://"
-            maxLength={300}
+            name="interest"
+            required
+            defaultValue={interest}
+            maxLength={120}
+            placeholder="A website, CRM, automation, marketing…"
           />
         </label>
-        <label>
-          Preferred contact
-          <select name="preferred" defaultValue="Email">
-            <option>Email</option>
-            <option>Phone</option>
-            <option>WhatsApp</option>
-          </select>
-        </label>
-      </div>
-      <label>
-        What would you like help with?
-        <input
-          name="interest"
-          required
-          defaultValue={interest}
-          maxLength={120}
-          placeholder="A website, CRM, automation, marketing…"
-        />
-      </label>
+      )}
+      {compact && (
+        <input type="hidden" name="interest" value={interest} readOnly />
+      )}
       <label>
         Tell us a little about your goals
         <textarea

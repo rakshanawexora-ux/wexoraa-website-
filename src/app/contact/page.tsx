@@ -1,13 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Header, Footer, ContactLinks } from "@/components/home";
 import EnquiryForm from "@/components/enquiry-form";
 import { emailConfigured } from "@/lib/enquiry";
-export const metadata = {
-  title: "Discuss your project — Wexoraa Infotech",
-  description:
-    "Tell Wexoraa about your website, software, automation or growth requirement. Start with a clear, focused conversation.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = pageMetadata(
+  "Discuss your project — Wexoraa Infotech",
+  "Tell Wexoraa about your website, software, automation or growth requirement. Start with a clear, focused conversation.",
+  "/contact",
+);
 export default async function Contact({
   searchParams,
 }: {

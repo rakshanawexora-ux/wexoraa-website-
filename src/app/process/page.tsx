@@ -1,11 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import { PageShell } from "@/components/page-shell";
 import { processSteps } from "@/content/site";
-export const metadata = {
-  title: "Our process — Wexoraa Infotech",
-  description:
-    "Discover, diagnose, design, engineer, launch and evolve with clarity at every step.",
-  alternates: { canonical: "/process" },
-};
+export const metadata = pageMetadata(
+  "Our process — Wexoraa Infotech",
+  "Discover, diagnose, design, engineer, launch and evolve with clarity at every step.",
+  "/process",
+);
 export default function Page() {
   return (
     <PageShell

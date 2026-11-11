@@ -8,7 +8,7 @@ This is the project-specific system synthesized after running the user-requested
 - **Style search**: `minimalism --domain style` matched `minimalism-and-swiss-style` (active). Adopt its clear grid, high-contrast sans-serif typography, whitespace and purposeful hover feedback. Preserve Material 3-inspired rounded controls instead of copying the generic zero-radius style variable.
 - **Narrative pattern**: the narrowed `creative design agency --design-system` search matched scroll-triggered storytelling. Adopt problem → capability → clear next action, complete DOM reading order and simplified reduced-motion behavior. Do not require visitors to complete a tour or animation before enquiring.
 - **Motion guidance**: `reduced motion parallax --domain ux` returned reduced motion, motion sensitivity and excessive-motion rules. Keep motion concentrated on one scene per viewport, bound parallax, preserve native scrolling and provide a pause control.
-- **Focus guidance**: `focus not obscured --domain ux` returned explicit WCAG 2.2 focus-obscuration rules. Keep the motion control inside the header, outside the search/form content plane; reserve sticky-header scroll offset.
+- **Focus guidance**: `focus not obscured --domain ux` returned explicit WCAG 2.2 focus-obscuration rules. Do not render a global motion controller (latest user request); reserve sticky-header scroll offset.
 - **Next.js stack**: the initial motion query had no database match; the permitted narrower retry `image optimization --stack nextjs` returned next/image, LCP priority and remote-image restrictions. Images remain self-hosted with reserved sizes; the video uses a local poster, manual playback and no third-party embed.
 
 ## Recommendations deliberately not adopted
@@ -18,7 +18,7 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 ## Brand and type
 
 - Exact supplied logo SVG, unchanged proportions/colors; no approximation.
-- Primary #83C040; secondary logo green #53B900; dark readable on-primary text.
+- Primary #86C232; supporting #61892F; secondary #222629; neutrals #474B4F / #6B6E70. Keep official SVG unchanged. Use dark readable on-primary text.
 - Predominantly light neutral canvas; selected charcoal technical/film/footer sections.
 - Space Grotesk headings and DM Sans body, self-hosted with OFL notices. No Inter substitution.
 - Base reading/input text 16px where practical; smaller metadata remains supporting information, not the sole source of meaning. Balanced headings and natural reflow; no forced nonbreaking words.

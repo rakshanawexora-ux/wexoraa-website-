@@ -7,4 +7,4 @@ Read ../MASTER.md first.
 - Filters are buttons with aria-pressed. Search has a persistent accessible label, 16px input text and an adequately sized clear action.
 - Keep the result count contextual; no forced focus move on filtering.
 - Responsive cards preserve one continuous route to detail pages. No-result state offers reset and contact.
-- Header motion controls must never overlap the search, selected filter or focused card.
+- No global motion controller. Keep focused search and service CTAs clear of the sticky header.

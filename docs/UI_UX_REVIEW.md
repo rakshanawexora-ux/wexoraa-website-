@@ -25,3 +25,9 @@ Make the site feel expressive and interactive while keeping service discovery, a
 Existing survey/form/API and route checks continue to pass. Automated responsive/axe checks cover 360, 390, 768, 1024 and 1440px on the homepage and representative inner pages. New functional checks cover actual local film playback/pause, the global motion control, brand-scene selection, card pointer response, filtering/search/reset and reduced-motion behavior. Desktop/mobile/footer screenshots and a live interaction recording support visual review.
 
 This is partial automated and expert evidence. No real-user study, full assistive-technology certification, performance benchmark or live Resend delivery claim is made.
+
+## Latest user-directed refinement
+
+The latest request overrides the previous motion-controller decision: no global controller is rendered. Browser reduced-motion preferences remain respected and the local film retains its own playback button. UI tokens now use #86C232, #61892F, #222629, #474B4F and #6B6E70, with white surfaces. Original SVG artwork is unchanged. Header navigation gains active states and a project enquiry CTA; the footer is a compact white invitation above charcoal navigation. Services now offer simple native-dialog enquiries (name, email, phone, requirement, consent) with service context and restored trigger focus.
+
+SEO metadata includes distinct page titles/descriptions, canonical/OG URLs and Organization/WebSite/Service JSON-LD when NEXT_PUBLIC_SITE_URL is configured, plus sitemap and robots. Without a real domain, previews remain noindex. Social image uses a static-weight derivative of the licensed Space Grotesk font and a PNG rendition of the unchanged logo for Satori compatibility.

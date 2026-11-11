@@ -1,12 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { solutions } from "@/content/site";
-export const metadata = {
-  title: "Connected business solutions — Wexoraa",
-  description:
-    "Build your brand and platforms, operate with connected systems and grow with considered marketing.",
-  alternates: { canonical: "/solutions" },
-};
+export const metadata = pageMetadata(
+  "Connected business solutions — Wexoraa",
+  "Build your brand and platforms, operate with connected systems and grow with considered marketing.",
+  "/solutions",
+);
 export default function Page() {
   return (
     <PageShell
