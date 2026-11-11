@@ -70,3 +70,9 @@ Final artifacts: `/workspace/artifacts/clear-header-1440.png`, `clear-services-1
 ## Client-logo marquee
 
 Added four unique supplied client marks as a cleaned transparent sprite; unavailable earlier inline marks are documented in `public/ASSETS.md`, not replaced with fabricated logos. Checks: **6 passed (42.6s)**, covering five homepage viewport/axe/image-loading cases and local pause/resume, accessible unique names, reduced-motion static grid and no horizontal overflow. Production build, lint, TypeScript and whitespace checks pass. Review captures: `/workspace/artifacts/client-marquee-1440.png` and `client-marquee-390.png`.
+
+## Homepage monochrome logos, fewer CTAs and readable hovers
+
+The full 34-case run passed 33 cases and exposed a transient footer-hover contrast issue in the remaining navigation check. Foreground/background colours now change together without colour interpolation; targeted rechecks passed **4/4 (11.3s)** for light/dark CTA hover contrast, desktop/mobile navigation/footer accessibility and marquee grayscale/colour reveal, hover/focus pause and reduced-motion behavior. The full run also checked normal homepage visibility at 360, 390, 768, 1024 and 1440px, survey, service groups, enquiry and inner-page routes. Small white project-photo captions get a darker image treatment (brightness .4) so even the brightest image areas remain dark enough for normal white text.
+
+Removed the visible Pause logos button and repeated homepage CTAs from the film, selected service panel, process, three capability cards, partnership block and footer contact duplicates. Header, hero, survey and final footer actions remain. Client logo colours are changed only by CSS display filters; underlying assets remain untouched. Preview captures: `/workspace/artifacts/monochrome-clients.png`, `colour-client-hover.png`, and `clean-home-mobile.png`.

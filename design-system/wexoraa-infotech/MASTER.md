@@ -44,3 +44,7 @@ Validate text contrast with axe plus screenshots, keyboard focus, 360/375/390px 
 ## Homepage flow and service guidance
 
 Cinematic hero → retained original motion film → conversational 12-question growth-readiness survey → explained service categories with original related illustrations → examples/process/support. The growth-readiness score is the existing transparent digital-capability rubric, not a forecast of sales or revenue. Keep the no-signup result and methodology available.
+
+## Current homepage interaction refinements
+
+Client marks default to monochrome and reveal their supplied colours on hover. No visible Pause logos control: the focusable client strip pauses on hover or keyboard focus and uses a static grid for reduced motion. Hover CTAs use #222629 with white text/icons; change both colours immediately, preserving only small transform feedback. Keep the homepage free of repeated generic enquiry CTAs in the film, process, capability cards and partnership sections. Header, hero, survey and final footer actions are the main entry points.

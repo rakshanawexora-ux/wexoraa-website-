@@ -1,7 +1,4 @@
-"use client";
-import { useState } from "react";
 import Image from "next/image";
-import { Pause, Play } from "lucide-react";
 const clients = [
   { name: "Intercity Riders", dark: true },
   { name: "Oneway Drop Taxi", dark: true },
@@ -9,13 +6,8 @@ const clients = [
   { name: "Vlasy Unisex Salon", dark: false },
 ];
 export default function ClientMarquee() {
-  const [paused, setPaused] = useState(false);
   return (
-    <section
-      className="client-marquee"
-      aria-labelledby="client-title"
-      data-paused={paused}
-    >
+    <section className="client-marquee" aria-labelledby="client-title">
       <div className="client-marquee-heading">
         <div>
           <p className="eyebrow">
@@ -23,18 +15,13 @@ export default function ClientMarquee() {
           </p>
           <h2 id="client-title">Businesses we’ve worked with.</h2>
         </div>
-        <button
-          type="button"
-          className="button button-outline"
-          onClick={() => setPaused(!paused)}
-          aria-pressed={paused}
-          aria-label={paused ? "Resume client logos" : "Pause client logos"}
-        >
-          {paused ? <Play size={16} /> : <Pause size={16} />}
-          <span>{paused ? "Resume logos" : "Pause logos"}</span>
-        </button>
       </div>
-      <div className="client-marquee-window">
+      <div
+        className="client-marquee-window"
+        tabIndex={0}
+        role="group"
+        aria-label="Client logos. Hover or focus here to pause scrolling."
+      >
         <div className="client-marquee-track">
           {[0, 1].map((group) => (
             <div

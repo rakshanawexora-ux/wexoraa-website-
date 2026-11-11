@@ -6823,3 +6823,64 @@ html:has(.enquiry-dialog[open]) {
     display: none;
   }
 }
+
+/* Quiet client marks; colour is revealed only on the hovered logo. */
+.client-logo-viewport .client-sprite {
+  filter: grayscale(1);
+  transition: filter 0.25s ease;
+}
+.client-logo-card:hover .client-sprite {
+  filter: grayscale(0);
+}
+.client-marquee-window:hover .client-marquee-track,
+.client-marquee-window:focus-within .client-marquee-track {
+  animation-play-state: paused;
+}
+.client-marquee-window:focus-visible {
+  outline: 2px solid var(--brand-charcoal);
+  outline-offset: -3px;
+}
+/* Consistent secondary-colour hover with readable text in every surface. */
+:is(.button, .text-link, .film-toggle, .service-enquire, .text-button):not(
+    :disabled
+  ):hover,
+.header > .header-project:hover,
+.footer-modern .footer-invite-link:hover,
+.cinematic-copy .cinematic-enquiry:hover,
+.page-hero .page-hero-actions > .button.text-link:hover {
+  background: var(--brand-charcoal);
+  color: white;
+  border-color: var(--brand-charcoal);
+}
+:is(.button, .text-link, .film-toggle, .service-enquire, .text-button):not(
+    :disabled
+  ):hover
+  svg,
+.cinematic-copy .cinematic-enquiry:hover svg {
+  color: currentColor;
+}
+.hero-cinematic .button:hover,
+.motion-showcase .film-toggle:hover,
+.page-hero .button:hover {
+  border-color: var(--muted-light);
+}
+.partnership-bottom {
+  grid-template-columns: 1.2fr 1fr;
+}
+@media (max-width: 640px) {
+  .partnership-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+/* Change foreground/background together; avoid unreadable intermediate colours. */
+:is(.button, .text-link, .film-toggle, .service-enquire, .text-button),
+.header > .header-project,
+.footer-modern .footer-invite-link,
+.cinematic-copy .cinematic-enquiry {
+  transition-property: transform;
+  transition-duration: 0.2s;
+}
+/* Preserve small white captions against the brightest parts of the project photo. */
+.product-image > img {
+  filter: brightness(0.4);
+}

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { Pause, Play, ArrowUpRight } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function MotionShowcase() {
   const video = useRef<HTMLVideoElement>(null);
@@ -87,9 +86,6 @@ export default function MotionShowcase() {
           A short studio animation showing how design, business systems and
           marketing work together.
         </p>
-        <Link className="button text-link" href="/solutions">
-          See how we can help <ArrowUpRight size={17} />
-        </Link>
       </div>
     </section>
   );

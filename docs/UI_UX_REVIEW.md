@@ -53,3 +53,11 @@ Primary CTA geometry is shared (green fill, 8px corners, 48px height, clear text
 Added a white client strip between the cinematic hero and motion film. Four accessible client images are displayed in original colours using a transparent sprite, with charcoal plates only for white-lettered taxi marks. Duplicate visual tracks are hidden from accessibility APIs. Motion pauses on hover and with a local pause/resume button, and becomes a static two-column layout under reduced-motion settings. The initial skill query `pause moving content --domain ux` was off-topic; the explicit retry `reduced motion --domain ux` returned applicable reduced-motion and motion-sensitivity guidance.
 
 Scope limitation: four of the user's eight unique marks were available to the image editor; four earlier inline marks were inaccessible as original files/reference inputs. No stand-in brands or invented logo artwork were added. Details and provenance are in `public/ASSETS.md`.
+
+## Homepage visibility and CTA cleanup
+
+Latest user request removes the visible marquee pause button. The strip is now a server-rendered component: default `grayscale(1)` and full colour only on the hovered logo card, with hover/focus pausing and reduced-motion static layout. The focusable viewport exposes a clear accessible description; duplicate logo tracks remain hidden from accessibility APIs. Logo files themselves were not altered.
+
+Removed repeated homepage CTA links from the film description, selected service panel, process introduction, three engineering cards, partnership section and duplicate footer contact entries. Retained header/hero enquiry, survey progression/invitation, contextual service discovery and the main footer enquiry. This preserves routes and the enquiry dialog while reducing repeated prompts.
+
+Primary action hovers use #222629 with white labels/icons. Dark backgrounds gain a visible button border. Background and text colours change together; only the small transform is transitioned. Visual review and a footer accessibility check found that interpolating from green to charcoal while changing text to white could temporarily lower contrast, so colour interpolation was removed rather than delaying the test. Skill query `color contrast hover --domain ux` returned applicable minimum contrast and contrast-readability guidance.

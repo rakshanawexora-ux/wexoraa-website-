@@ -16,7 +16,7 @@ for (const width of [360, 390, 768, 1024, 1440])
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    await page.getByRole("button", { name: "Pause client logos" }).click();
+    await page.locator(".client-marquee-window").focus();
     for (const img of await page.locator("img").all()) {
       await img.scrollIntoViewIfNeeded();
       await expect

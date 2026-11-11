@@ -404,12 +404,6 @@ function Solutions() {
               </Link>
             ))}
           </div>
-          <Link
-            href={`/solutions/${solutions[active].id}`}
-            className="button text-link"
-          >
-            See these services <Arrow />
-          </Link>
         </div>
       </div>
     </section>
@@ -513,9 +507,6 @@ function Process() {
           <br />
           Then we make a plan worth building.
         </p>
-        <Link href="/contact" className="button button-outline">
-          Meet your next partner <Arrow />
-        </Link>
       </div>
       <div className="process-list">
         {processSteps.map(([name, title, desc], i) => (
@@ -583,12 +574,6 @@ function Capabilities() {
             </span>
             <h3>{t}</h3>
             <p>{p}</p>
-            <Link
-              href="/contact?interest=engineering"
-              className="button text-link"
-            >
-              Talk to us <Arrow />
-            </Link>
           </Reveal>
         ))}
       </div>
@@ -614,13 +599,6 @@ function Partnership() {
           <span>02 / ONGOING SUPPORT</span>
           <span>03 / TECHNOLOGY PARTNERSHIP</span>
         </div>
-        <Link
-          href="/contact"
-          className="button"
-          aria-label="Discuss a partnership"
-        >
-          Let’s talk <ArrowUpRight size={18} />
-        </Link>
       </div>
     </section>
   );
@@ -734,17 +712,11 @@ export function Footer() {
           </nav>
           <nav aria-label="Footer connect">
             <h3>Let’s connect</h3>
-            <EnquiryCTA
-              interest="Project enquiry"
-              className="footer-enquiry-link"
-            >
-              Discuss your project <Arrow />
-            </EnquiryCTA>
+
             <Link href="/business-assessment">
               Check your business growth score
             </Link>
             <Link href="/contact">Contact Wexoraa</Link>
-            <ContactLinks />
           </nav>
         </div>
         <div className="footer-bottom">

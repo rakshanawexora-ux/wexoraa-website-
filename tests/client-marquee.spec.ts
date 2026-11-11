@@ -21,13 +21,23 @@ test("client marks stay readable with controllable motion and a static reduced-m
     await expect(section.getByRole("img", { name, exact: true })).toHaveCount(
       1,
     );
-  await section.getByRole("button", { name: "Pause client logos" }).click();
+  await expect(section.getByRole("button")).toHaveCount(0);
+  const window = section.locator(".client-marquee-window");
+  await window.focus();
   await expect(section.locator(".client-marquee-track")).toHaveCSS(
     "animation-play-state",
     "paused",
   );
-  await section.getByRole("button", { name: "Resume client logos" }).click();
+  const logo = section.getByRole("img", {
+    name: "Oneway Drop Taxi",
+    exact: true,
+  });
+  await expect(logo).toHaveCSS("filter", "grayscale(1)");
+  await logo.hover();
+  await expect(logo).toHaveCSS("filter", "grayscale(0)");
+  await window.evaluate((el) => el.blur());
   await page.mouse.move(2, 2);
+  await expect(logo).toHaveCSS("filter", "grayscale(1)");
   await expect(section.locator(".client-marquee-track")).toHaveCSS(
     "animation-play-state",
     "running",
