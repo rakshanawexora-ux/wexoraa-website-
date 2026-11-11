@@ -1,41 +1,25 @@
-# Redesign QA results
+# Current website QA evidence
 
-Validated in the current cloud environment using Node 24.22.1, npm 11.9.0, Next.js 16.4.6 and system Chromium.
+Validated against the local production build in the cloud environment with Node 24, Next.js 16.4.6 and system Chromium.
 
-## Build and static checks
+- Lint: passed without warnings.
+- Production build/type validation: passed. Build enumerates all static marketing pages, dynamic service/solution/concept routes and the enquiry API.
+- Playwright: **22 passed, 0 failed, 0 skipped** (31.2 seconds).
 
-- `npm run lint`: passed with no warnings.
-- `npm run typecheck`: passed.
-- `npm run build`: passed; homepage, browser-only assessment, contact and privacy routes prerendered.
-- `git diff --check`: clean for code/documentation. Original font-license text retains upstream formatting.
+## Coverage
 
-## Browser verification
+- All requested content URLs plus all 12 services and both concepts return 200; unknown service/solution slugs return 404.
+- Home survey completes all 12 questions, restores session answers, shows score/interpretation, offers explanation/revision and keeps contact capture optional.
+- Unknown answers do not fabricate a score; mobile survey results pass configured axe checks.
+- Score boundary/context tests cover 0, 67 and 100, denominator exclusions and incomplete data.
+- Home image loading, no document overflow and axe at 360, 390, 768, 1024 and 1440px.
+- Mobile axe/overflow for contact, a service, solution, concept, about, process and privacy.
+- Pointer movement changes hero transform. Reduced-motion disables the transform, cursor and progress effect.
+- Contact form keeps data on mocked failure and shows success only after mocked provider acceptance.
+- Imported real route handler with mocked fetch: consent/schema errors, body limit, cross-origin rejection, missing configuration, escaped complete emails, server score, repeatable provider payload, retry, duplicate acceptance and throttling.
 
-15 browser checks passed across the final suite and a targeted test correction:
+No actual Resend credential was used. The provider calls are mocked; live acceptance/inbox receipt remains untested. Axe is partial automated accessibility evidence, not full WCAG certification. No Lighthouse/Core Web Vitals benchmark or real-user usability test is claimed.
 
-- Solution tab content, arrow-key focus, process accordion, contact navigation and no page JavaScript errors.
-- Four challenge-specific business-problem finder paths: disabled-until-selected stage, recommendation, result focus, contact intent and restart.
-- Responsive overflow, image completion, mobile navigation/Escape/focus and axe scans at 360, 390, 768, 1024 and 1440px.
-- Fine-pointer contextual cursor, hero parallax and reduced-motion alternatives.
-- Touch context has no cursor overlay.
-- All 15 assessment questions, session answer restoration, selection-limit notice, ranked priorities, deterministic summary and revision.
-- Manual-process conditional branch recalculates progress to 14, skip works, mobile layout/axe and answer reset.
-- Uncertain-answer exclusivity and ignoring stored answers to an omitted systems question.
+Screenshots: `/workspace/artifacts/complete-site-<width>.png`. Score/inner-page previews are captured separately for review.
 
-The final full run passed 14 checks and exposed a mistaken loop in the added regression test (the test skipped and erased the answer it was meant to retain). The loop was corrected; the targeted regression then passed. Earlier failures in tab-metadata contrast were corrected in CSS. No axe rules or behavioral assertions were disabled.
-
-Axe scans have no violations under the configured WCAG A/AA rules for tested home and assessment states. This is not a complete WCAG conformance claim. Responsive desktop/mobile screenshots were visually reviewed; mobile footer wrapping and concept headline sizing were corrected afterward and rechecked through the responsive suite.
-
-## Assets and motion
-
-Both original generated artworks are self-hosted optimized WebP images (approximately 155KB and 192KB). Tests confirm all three homepage image elements complete with nonzero natural width. next/image reserves layout and provides responsive variants. Below-fold imagery remains lazy-loaded.
-
-Motion is implemented with Motion for React and CSS, not mocked. Reduced-motion disables cursor/parallax/continuous motion; touch retains native interaction. Full-page production screenshots are in `/workspace/artifacts/redesign-<width>.png`.
-
-## Not claimed
-
-No contact submission, Resend provider test, guaranteed inbox delivery, full service-page suite, real client evidence, deployment, Lighthouse/Core Web Vitals benchmark, real-user usability study or comprehensive assistive-technology audit. The assessment explicitly says that no information was submitted. No production-readiness claim is made.
-
-## Brand-led hero refinement
-
-Logo-green filled actions/highlights, official-SVG doodles, spring-smoothed layered parallax and scroll-progress indicator were added. Lint and production build passed. All 12 homepage browser tests passed, including axe/responsive checks at all five target widths, image completion and reduced-motion/touch behavior. The motion test additionally verifies a changed image transform after scrolling and preserved SVG source references.
+After the step-focus scroll refinement and an explicit honeypot rejection assertion, the production build/lint passed again and all 7 focused survey/enquiry tests passed (10.6 seconds). Homepage/inner-page tests were not repeated unnecessarily. Real provider delivery remains untested.

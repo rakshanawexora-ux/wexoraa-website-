@@ -17,14 +17,14 @@ import {
   Minus,
   Menu,
   X,
-  Check,
-  ChevronLeft,
   Layers3,
   Workflow,
   ChartNoAxesCombined,
   MoveUpRight,
 } from "lucide-react";
 import { solutions, processSteps } from "@/content/site";
+import { serviceFor } from "@/content/catalog";
+import Survey from "@/components/assessment";
 
 function Arrow() {
   return <ArrowUpRight size={19} aria-hidden="true" />;
@@ -88,9 +88,10 @@ export function Header() {
         className={`nav ${open ? "open" : ""}`}
       >
         {[
-          ["What we do", "/#solutions"],
-          ["Our approach", "/#process"],
-          ["Explore work", "/#work"],
+          ["Solutions", "/solutions"],
+          ["Services", "/services"],
+          ["Work", "/work"],
+          ["About", "/about"],
         ].map(([text, url]) => (
           <Link key={url} href={url} onClick={() => setOpen(false)}>
             {text}
@@ -252,6 +253,16 @@ function Hero() {
   const stickerRotate = useTransform(progress, [0, 1], [5, -8]);
   const captionY = useTransform(progress, [0, 1], [0, -24]);
   const pathLength = useTransform(progress, [0, 0.55], [0.35, 1]);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const px = useSpring(pointerX, { stiffness: 110, damping: 22 });
+  const py = useSpring(pointerY, { stiffness: 110, damping: 22 });
+  const rotateX = useTransform(py, [-1, 1], [4, -4]);
+  const rotateY = useTransform(px, [-1, 1], [-5, 5]);
+  const imageX = useTransform(px, [-1, 1], [-22, 22]);
+  const imageY = useTransform(() => y.get() + py.get() * -16);
+  const glowX = useTransform(px, [-1, 1], [-160, 160]);
+  const glowY = useTransform(py, [-1, 1], [-90, 90]);
   return (
     <section ref={ref} className="hero" id="top">
       <div className="hero-topline">
@@ -300,10 +311,29 @@ function Hero() {
           </Link>
         </div>
       </div>
-      <div className="hero-media" data-cursor="Explore">
+      <div
+        className="hero-media"
+        data-cursor="Explore"
+        onPointerMove={(e) => {
+          if (reduced || e.pointerType !== "mouse") return;
+          const r = e.currentTarget.getBoundingClientRect();
+          pointerX.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+          pointerY.set(((e.clientY - r.top) / r.height - 0.5) * 2);
+        }}
+        onPointerLeave={() => {
+          pointerX.set(0);
+          pointerY.set(0);
+        }}
+      >
         <motion.div
           className="hero-image-wrap"
-          style={{ y: reduced ? 0 : y, scale: reduced ? 1 : scale }}
+          style={{
+            y: reduced ? 0 : imageY,
+            x: reduced ? 0 : imageX,
+            rotateX: reduced ? 0 : rotateX,
+            rotateY: reduced ? 0 : rotateY,
+            scale: reduced ? 1 : scale,
+          }}
         >
           <Image
             src="/hero-art.webp"
@@ -314,6 +344,14 @@ function Hero() {
             className="hero-image"
           />
         </motion.div>
+        <motion.div
+          className="hero-pointer-light"
+          aria-hidden="true"
+          style={{ x: reduced ? 0 : glowX, y: reduced ? 0 : glowY }}
+        />
+        <span className="hero-pointer-hint" aria-hidden="true">
+          MOVE YOUR CURSOR · EXPLORE THE CONNECTION
+        </span>
         <div className="media-top">
           <span>CONNECTED BY DESIGN</span>
           <span>W / STUDIO EXPLORATION 001</span>
@@ -382,201 +420,30 @@ function Hero() {
   );
 }
 
-const challenges = [
-  {
-    id: "presence",
-    label: "Our digital presence isn’t doing us justice.",
-    tag: "BRAND & DIGITAL",
-    title: "Make your first impression work harder.",
-    desc: "Connect your brand, website and customer experience around a clear story and an easier next step.",
-    services: ["Brand identity", "UX & website design", "E-commerce"],
-    interest: "build",
-  },
-  {
-    id: "leads",
-    label: "We get enquiries. Following up is the problem.",
-    tag: "LEAD MANAGEMENT",
-    title: "Turn scattered enquiries into a connected pipeline.",
-    desc: "Map the journey from first contact to follow-up, then bring your team and customer information into one place.",
-    services: ["CRM setup", "Lead workflows", "System integrations"],
-    interest: "operate",
-  },
-  {
-    id: "operations",
-    label: "Too much of our day is manual work.",
-    tag: "OPERATIONS & AUTOMATION",
-    title: "Give your team more time for meaningful work.",
-    desc: "Find repetitive handoffs, disconnected systems and duplicate data entry. Build a workflow around how your team actually works.",
-    services: [
-      "Workflow automation",
-      "ERP & custom software",
-      "AI integrations",
-    ],
-    interest: "operate",
-  },
-  {
-    id: "growth",
-    label: "Our marketing needs a clearer direction.",
-    tag: "MARKETING & GROWTH",
-    title: "Connect what you create to what you want to achieve.",
-    desc: "Bring your message, channels and measurement together with a considered plan for reaching the right people.",
-    services: ["Digital strategy", "SEO & performance", "Creative & video"],
-    interest: "grow",
-  },
-];
-function ProblemFinder() {
-  const [selected, setSelected] = useState<number | null>(null);
-  const [stage, setStage] = useState("");
-  const [done, setDone] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const choice = selected === null ? null : challenges[selected];
+function ProblemFinder({ configured = false }: { configured?: boolean }) {
   return (
     <section className="problem section" id="challenge">
       <Reveal className="problem-intro">
-        <Label>LET’S START WITH YOU</Label>
+        <Label>FIND YOUR BUSINESS PROBLEM</Label>
         <h2>
-          Big ambition.
+          12 questions.
           <br />
-          <span>A few roadblocks?</span>
+          <span>Your digital-strength score.</span>
         </h2>
         <p>
-          You don’t need to know the solution.
-          <br />
-          Just tell us what’s getting in the way.
+          Understand what is working, where the gaps are and what to improve
+          next. A practical survey built around your business.
         </p>
-        <Link className="text-link" href="/business-assessment">
-          Take the full business assessment <Arrow />
-        </Link>
-        <div className="finder-count">
-          <span>{done ? "03" : choice ? "02" : "01"}</span>
-          <div>
-            <strong>
-              {done
-                ? "YOUR STARTING POINT"
-                : choice
-                  ? "A LITTLE MORE CONTEXT"
-                  : "FIND YOUR BUSINESS PROBLEM"}
-            </strong>
-            <small>A quick starting point, not a diagnostic score.</small>
-          </div>
+        <div className="survey-benefits">
+          <span>✓ No email needed to see results</span>
+          <span>✓ Score + four-category breakdown</span>
+          <span>✓ Clear reasons and next steps</span>
         </div>
+        <Link className="text-link" href="/business-assessment">
+          Open the full assessment ↗
+        </Link>
       </Reveal>
-      <div className="finder" ref={ref}>
-        {!done ? (
-          <>
-            <div className="finder-top">
-              <span>{choice ? "02 / 02" : "01 / 02"}</span>
-              <div className="progress-track">
-                <span style={{ width: choice ? "100%" : "50%" }} />
-              </div>
-            </div>
-            <h3>
-              {choice
-                ? "Where is your business right now?"
-                : "What sounds most like your business?"}
-            </h3>
-            <p className="finder-help">
-              Choose the closest fit. You can always go back.
-            </p>
-            {!choice ? (
-              <div className="problem-options">
-                {challenges.map((c, i) => (
-                  <button key={c.id} onClick={() => setSelected(i)}>
-                    <span>0{i + 1}</span>
-                    {c.label}
-                    <Arrow />
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <>
-                <div
-                  className="stage-options"
-                  role="group"
-                  aria-label="Business stage"
-                >
-                  {[
-                    "Starting something new",
-                    "Growing an existing business",
-                    "Modernizing an established business",
-                    "Not sure yet",
-                  ].map((s) => (
-                    <button
-                      key={s}
-                      aria-pressed={stage === s}
-                      onClick={() => setStage(s)}
-                    >
-                      {s}
-                      <span>
-                        {stage === s ? <Check size={16} /> : <Plus size={16} />}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                <div className="finder-actions">
-                  <button
-                    className="text-button"
-                    onClick={() => {
-                      setSelected(null);
-                      setStage("");
-                    }}
-                  >
-                    <ChevronLeft size={16} /> Back
-                  </button>
-                  <button
-                    className="button"
-                    disabled={!stage}
-                    onClick={() => {
-                      setDone(true);
-                      requestAnimationFrame(() =>
-                        document.getElementById("finder-result")?.focus(),
-                      );
-                    }}
-                  >
-                    Find my starting point <Arrow />
-                  </button>
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          choice && (
-            <div className="finder-result" id="finder-result" tabIndex={-1}>
-              <span className="result-chip">
-                <Check size={14} /> A DIRECTION TO EXPLORE
-              </span>
-              <p className="eyebrow">{choice.tag}</p>
-              <h3>{choice.title}</h3>
-              <p>{choice.desc}</p>
-              <div className="result-services">
-                {choice.services.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
-              </div>
-              <p className="result-context">
-                For: {stage}. Based on the challenge you selected; a
-                conversation will help confirm the right approach.
-              </p>
-              <Link
-                className="button"
-                href={`/contact?interest=${choice.interest}&challenge=${choice.id}`}
-              >
-                Let’s talk about this <Arrow />
-              </Link>
-              <button
-                className="text-button"
-                onClick={() => {
-                  setDone(false);
-                  setSelected(null);
-                  setStage("");
-                }}
-              >
-                Start again ↺
-              </button>
-            </div>
-          )
-        )}
-      </div>
+      <Survey configured={configured} embedded />
     </section>
   );
 }
@@ -666,14 +533,17 @@ function Solutions() {
           <p>{solutions[active].detail}</p>
           <div className="service-chips">
             {solutions[active].services.map((s) => (
-              <Link key={s} href={`/contact?interest=${solutions[active].id}`}>
+              <Link
+                key={s}
+                href={`/services/${serviceFor(s)?.slug || "websites-ecommerce"}`}
+              >
                 {s}
                 <Plus size={14} />
               </Link>
             ))}
           </div>
           <Link
-            href={`/contact?interest=${solutions[active].id}`}
+            href={`/solutions/${solutions[active].id}`}
             className="text-link"
           >
             Explore the possibilities <Arrow />
@@ -703,7 +573,7 @@ function Work() {
       </Reveal>
       <div className="work-grid">
         <Link
-          href="/contact?interest=brand-experience"
+          href="/work/considered-brand-experience"
           className="work-card"
           data-cursor="View"
         >
@@ -728,7 +598,7 @@ function Work() {
           </div>
         </Link>
         <Link
-          href="/contact?interest=digital-products"
+          href="/work/connected-business-concept"
           className="work-card secondary-project"
           data-cursor="Explore"
         >
@@ -956,13 +826,18 @@ export function Footer() {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Wexoraa Infotech</span>
         <span>COIMBATORE, INDIA</span>
+        <Link href="/services">Services</Link>
+        <Link href="/solutions">Solutions</Link>
+        <Link href="/process">Process</Link>
+        <Link href="/about">About</Link>
+        <Link href="/contact">Contact</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/#top">Back to top ↑</Link>
       </div>
     </footer>
   );
 }
-export default function Home() {
+export default function Home({ emailReady = false }: { emailReady?: boolean }) {
   return (
     <>
       <Cursor />
@@ -977,7 +852,7 @@ export default function Home() {
             <span>✳</span> TECHNOLOGY <span>✳</span> GROWTH <span>✳</span>
           </div>
         </div>
-        <ProblemFinder />
+        <ProblemFinder configured={emailReady} />
         <Solutions />
         <Work />
         <Capabilities />

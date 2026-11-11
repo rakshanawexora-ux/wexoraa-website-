@@ -1,33 +1,15 @@
-# UX strategy — agency redesign
+# UX strategy — full discovery and enquiry flow
 
-## Evidence and scope
+This is brief-informed design and expert inspection, not research with real visitors. The user asked for the remaining pages, a more interactive hero, a 12-question scored survey and stronger enquiry paths. Earlier score-free/15-question plans are superseded.
 
-This is brief-informed design and expert inspection, not research with real visitors. The six requested reference sites were previously blocked by proxy 403; no invented observations about them are claimed. The user rejected the initial visual direction and requested images, different typography, modern minimal composition, motion, hover, parallax and business-problem discovery. This revision responds directly to that feedback.
+Known-need journey: Solutions or Services → specific detail → challenge/approach/deliverables/FAQ → enquiry with service context. Unknown-need journey: homepage survey → transparent score/category breakdown → evidence-backed opportunities → optional enquiry including all answers.
 
-## Visitor jobs
+No email gate hides results. No fake urgency, mandatory booking, fabricated client proof or guarantee that every visitor will enquire. Conversion is supported through visible routes, specific service language, next-step expectations and low-friction contact choices.
 
-| Visitor                            | Need                                                     | Response                                                        |
-| ---------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- |
-| Growing business owner             | Understand where to start without knowing service jargon | Four-path problem finder and full business assessment           |
-| Established-company decision maker | Evaluate technical and operational fit                   | Operate solution, engineering cards, process detail             |
-| Brand stakeholder                  | Judge creative quality and digital thinking              | Original imagery, editorial hierarchy, labelled studio concepts |
+The 12-question survey uses native selection controls, visible progress, back/revision, uncertainty choices and non-sensitive session persistence. Four context questions do not affect score. Eight equal-weight capability questions feed an explained 0–100 rubric and four category summaries. Unknown-heavy responses receive an honest insufficient-context result.
 
-Known-need journey: What we do → Build/Operate/Grow → service chip → contact conversation. Uncertain-need journey: business roadblock → stage → explained recommendation → relevant contact intent, or the 15-question assessment.
+Hero pointer movement drives separate depth/tilt and light layers with Motion springs. Scroll parallax and logo doodles retain native scrolling. Reduced-motion/touch alternatives preserve essential content and controls. UI primary greens come directly from the official SVG.
 
-## Discovery logic
+Email forms explain use and consent, do not subscribe to marketing, preserve data on failure and wait for provider acceptance before success. Phone/WhatsApp appear only for configured official contacts. The missing configuration is visible rather than presenting a false working enquiry channel.
 
-The homepage finder maps an explicitly chosen challenge to a transparent direction. Business stage adds context, not a fake numerical score. The full assessment has 15 questions; the systems-connectivity question is omitted when daily operations are entirely manual. Progress recalculates to 14, and the omission is explained.
-
-Recommendations follow explicit answers: unsatisfactory digital presence → Digital Presence; spreadsheets/inconsistent lead handling → Lead Management; separate/manual operations → Operations; system-connection gaps → CRM/ERP; repetitive work → Automation/AI; enquiries/inconsistent measurement → Marketing/Growth. Selected priorities determine order. No assessment claims scientific validation.
-
-No personal contacts are collected. Non-sensitive selections persist in the tab's session, can be revised, and can be cleared from the summary. The page explicitly states that nothing was submitted. Email capture is not implemented.
-
-## Visual and interaction rationale
-
-Space Grotesk replaces the wide Syne headings; DM Sans provides a quieter interface. Original sculptural imagery expresses connection without abstract flowchart overload. Studio concept imagery demonstrates an aesthetic direction without implying commissioned work. Material-inspired shape, tonal selection, native controls, focus and feedback conventions provide consistency.
-
-Motion is layered: bounded parallax for depth, image zoom and arrow feedback for affordance, cursor-follow and magnetic CTA for desktop detail. Native cursor and page scroll are preserved. Touch and reduced-motion alternatives are explicit.
-
-## Remaining evidence gaps
-
-The supplied official logo is now integrated. Real client work, testimonials, actual company contacts and legal details remain missing. Do not substitute fabricated identities. Full business approval, real-user testing, backend delivery/security and deployment QA remain outstanding.
+Work pages are original illustrative concepts; no commercial client outcomes are claimed. Business contacts, legal/privacy identity and live email verification remain required external inputs.

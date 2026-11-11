@@ -1,56 +1,65 @@
 import Link from "next/link";
-import { Header, Footer } from "@/components/home";
-import type { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Start a conversation — Wexoraa Infotech",
-  robots: { index: false, follow: true },
+import { Header, Footer, ContactLinks } from "@/components/home";
+import EnquiryForm from "@/components/enquiry-form";
+import { emailConfigured } from "@/lib/enquiry";
+export const metadata = {
+  title: "Discuss your project — Wexoraa Infotech",
+  description:
+    "Tell Wexoraa about your website, software, automation or growth requirement. Start with a clear, focused conversation.",
+  alternates: { canonical: "/contact" },
 };
-export default function Contact() {
-  const phone = process.env.NEXT_PUBLIC_WEXORAA_PHONE;
-  const whatsapp = process.env.NEXT_PUBLIC_WEXORAA_WHATSAPP;
+export default async function Contact({
+  searchParams,
+}: {
+  searchParams: Promise<{ interest?: string }>;
+}) {
+  const query = await searchParams;
   return (
     <>
       <Header />
-      <main id="main" className="simple-page">
-        <p className="eyebrow">LET’S FIND YOUR NEXT MOVE</p>
-        <h1>
-          Good things start
-          <br />
-          with a conversation.
-        </h1>
-        <p>
-          A website, a connected business system or a broader digital ambition.
-          Start with what you want to change.
-        </p>
-        {phone || whatsapp ? (
-          <div className="hero-actions">
-            {phone && (
-              <Link
-                className="button"
-                href={`tel:${phone.replace(/[^+\d]/g, "")}`}
-              >
-                Call Wexoraa ↗
-              </Link>
-            )}
-            {whatsapp && (
-              <Link
-                className="button button-outline"
-                href={`https://wa.me/${whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi Wexoraa, I'd like to discuss a technology or digital growth requirement for my business.")}`}
-              >
-                Message on WhatsApp ↗
-              </Link>
-            )}
+      <main id="main">
+        <section className="section contact-layout">
+          <div className="contact-intro">
+            <p className="eyebrow">
+              <span /> YOUR NEXT CHAPTER STARTS HERE
+            </p>
+            <h1>
+              Good things start
+              <br />
+              with a conversation.
+            </h1>
+            <p>
+              A focused project, a connected business system or a bigger
+              ambition. Tell us what you want to change.
+            </p>
+            <div className="contact-expectations">
+              <h2>What happens next?</h2>
+              <ol>
+                <li>We review the context you share.</li>
+                <li>We clarify the goals and practical next steps.</li>
+                <li>If there is a fit, we define a clear scope together.</li>
+              </ol>
+              <p>
+                No automatic marketing subscription. No obligation to commit.
+              </p>
+            </div>
+            <ContactLinks />
+            <Link className="text-link" href="/business-assessment">
+              Not sure where to start? Try 12 questions ↗
+            </Link>
           </div>
-        ) : (
-          <div className="notice">
-            Contact details are awaiting confirmation. Online enquiries will be
-            available when the email integration is configured. This preview
-            does not collect or submit personal information.
+          <div className="contact-form-card">
+            <h2>Tell us about your project.</h2>
+            <EnquiryForm
+              configured={emailConfigured()}
+              interest={
+                typeof query.interest === "string"
+                  ? query.interest.slice(0, 120)
+                  : ""
+              }
+            />
           </div>
-        )}
-        <Link className="text-link" href="/#solutions">
-          Explore how we can help ↗
-        </Link>
+        </section>
       </main>
       <Footer />
     </>

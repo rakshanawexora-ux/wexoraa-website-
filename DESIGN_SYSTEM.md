@@ -36,7 +36,7 @@ All 15 Material-inspired typography roles remain available as CSS custom propert
 
 ## Components and states
 
-Filled/outlined/text/icon actions, responsive navigation, image cards, selectable problem cards, accessible solution tabs, process accordion, native radio/checkbox cards, step progress, inline notices and result chips. Default/hover/pressed/focus-visible/disabled/selected states are implemented. Form loading/sending/success/error states belong to the future email backend; the current assessment only produces an on-device summary and never claims a submission.
+Filled/outlined/text/icon actions, responsive navigation, image cards, selectable problem cards, accessible solution tabs, process accordion, native radio/checkbox cards, step progress, inline notices and result chips. Default/hover/pressed/focus-visible/disabled/selected states are implemented. Enquiry forms implement loading, retryable error and provider-acceptance success states, plus explicit privacy consent. The survey shows an on-device score without collecting contacts; sending its summary is optional and uses server recalculation.
 
 Selection states expose aria-selected/aria-pressed or native checked state. Process controls expose aria-expanded and matching panel IDs. Focus-visible uses a 3px high-contrast ring. The selection-limit notice uses role=status. Buttons and inputs use semantic controls, not clickable decorative elements.
 
@@ -49,6 +49,10 @@ Fine-pointer devices alone receive the cursor accent. Touch and reduced-motion u
 ## Adaptive behavior
 
 Desktop uses split editorial introductions and staggered image cards. Mobile stacks the content, changes solution tabs to a horizontal row, uses a navigation disclosure and keeps assessment controls comfortably spaced. Tested at 360, 390, 768, 1024 and 1440px. No horizontal document overflow is allowed.
+
+## Survey and conversion components
+
+The 12-question survey is shared between homepage and standalone route. Radio/checkbox option cards, visible progress, four category tracks, a numeric score ring with an accessible text alternative, expandable methodology and optional enquiry all use the same tokens. Unknown data never silently scores as zero. Contacts remain out of session storage. Inner pages reuse a hero, content grid, service-specific enquiry path and final conversation CTA.
 
 ## Asset usage
 

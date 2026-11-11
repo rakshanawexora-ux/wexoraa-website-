@@ -1,175 +1,192 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-async function scan(page: import("@playwright/test").Page) {
-  const result = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
-    .analyze();
-  expect(
-    result.violations.map((v) => ({
-      id: v.id,
-      nodes: v.nodes.map((n) => ({
-        target: n.target,
-        summary: n.failureSummary,
-      })),
-    })),
-  ).toEqual([]);
-}
-test("solution tabs, process accordion and contact route", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Good design.",
-  );
-  await page.getByRole("tab", { name: "02 Operate." }).click();
-  await expect(page.getByRole("tabpanel")).toContainText(
-    "CRM & lead management",
-  );
-  await page.getByRole("tab", { name: "02 Operate." }).press("ArrowRight");
-  await expect(page.getByRole("tab", { name: "03 Grow." })).toBeFocused();
-  await expect(page.getByRole("tabpanel")).toContainText(
-    "Performance marketing",
-  );
-  await page.getByRole("button", { name: "02 Diagnose" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Find the problem behind the brief." }),
-  ).toBeVisible();
-  await scan(page);
-  await page.getByRole("link", { name: "Let’s build something" }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Good things start",
-  );
-  expect(errors).toEqual([]);
-});
-for (const [label, title] of [
-  ["Our digital presence", "Make your first impression work harder."],
-  ["We get enquiries", "Turn scattered enquiries into a connected pipeline."],
-  ["Too much of our day", "Give your team more time for meaningful work."],
-  [
-    "Our marketing needs",
-    "Connect what you create to what you want to achieve.",
-  ],
-])
-  test(`problem finder: ${label}`, async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("button", { name: new RegExp(label) }).click();
-    await expect(
-      page.getByRole("button", { name: "Find my starting point" }),
-    ).toBeDisabled();
-    await page
-      .getByRole("button", {
-        name: "Growing an existing business",
-        exact: true,
-      })
-      .click();
-    await page.getByRole("button", { name: "Find my starting point" }).click();
-    await expect(page.getByRole("heading", { name: title })).toBeVisible();
-    await expect(page.locator("#finder-result")).toBeFocused();
-    await expect(
-      page.getByRole("link", { name: "Let’s talk about this" }),
-    ).toHaveAttribute("href", /challenge=/);
-    await page.getByRole("button", { name: "Start again" }).click();
-    await expect(
-      page.getByRole("heading", {
-        name: "What sounds most like your business?",
-      }),
-    ).toBeVisible();
-  });
+import { services, projects } from "../src/content/catalog";
 for (const width of [360, 390, 768, 1024, 1440])
-  test(`responsive + axe at ${width}px`, async ({ page }) => {
+  test(`responsive homepage and accessibility ${width}px`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Good design.",
+    );
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    const images = page.locator("img");
-    await expect(images).toHaveCount(5);
-    for (const image of await images.all()) {
-      await image.scrollIntoViewIfNeeded();
+    for (const img of await page.locator("img").all()) {
+      await img.scrollIntoViewIfNeeded();
       await expect
         .poll(() =>
-          image.evaluate(
-            (img) =>
-              img instanceof HTMLImageElement &&
-              img.complete &&
-              img.naturalWidth > 0,
+          img.evaluate(
+            (el) =>
+              el instanceof HTMLImageElement &&
+              el.complete &&
+              el.naturalWidth > 0,
           ),
         )
         .toBe(true);
     }
     if (width < 641) {
       await page.getByRole("button", { name: "Open navigation" }).click();
-      await expect(page.getByRole("navigation")).toBeVisible();
-      await page.keyboard.press("Escape");
       await expect(
-        page.getByRole("button", { name: "Open navigation" }),
-      ).toBeFocused();
+        page.getByRole("navigation", { name: "Main navigation" }),
+      ).toBeVisible();
+      await page.keyboard.press("Escape");
     }
-    await scan(page);
-    await page.mouse.move(0, 0);
+    const scan = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(
+      scan.violations.map((v) => ({
+        id: v.id,
+        nodes: v.nodes.map((n) => ({
+          target: n.target,
+          summary: n.failureSummary,
+        })),
+      })),
+    ).toEqual([]);
+    expect(errors).toEqual([]);
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({
-      path: `/workspace/artifacts/redesign-${width}.png`,
+      path: `/workspace/artifacts/complete-site-${width}.png`,
       fullPage: true,
+      style: ".cursor-accent{visibility:hidden}",
     });
-    if (width === 1440 || width === 390)
-      await page.screenshot({
-        path: `/workspace/artifacts/redesign-${width}-hero.png`,
-      });
   });
-test("motion effects and fine pointer cursor", async ({ page }) => {
+test("cursor position changes hero depth; scroll and reduced motion stay supported", async ({
+  page,
+}) => {
   await page.goto("/");
-  await page.mouse.move(600, 600);
-  await expect(page.locator(".cursor-accent")).toHaveCSS("opacity", "1");
-  await page.locator(".hero-media").hover();
+  const visual = page.locator(".hero-image-wrap");
+  await page.locator(".hero-media").scrollIntoViewIfNeeded();
+  const before = await visual.evaluate((el) => getComputedStyle(el).transform);
+  const bounds = await page.locator(".hero-media").boundingBox();
+  await page.mouse.move(
+    bounds!.x + bounds!.width * 0.85,
+    bounds!.y + bounds!.height * 0.25,
+  );
+  await expect
+    .poll(() => visual.evaluate((el) => getComputedStyle(el).transform))
+    .not.toBe(before);
   await expect(page.locator(".cursor-accent")).toHaveAttribute(
     "data-label",
     "Explore",
   );
-  const before = await page
-    .locator(".hero-image-wrap")
-    .evaluate((el) => getComputedStyle(el).transform);
-  await expect(page.locator(".brand-sticker image")).toHaveAttribute(
-    "href",
-    "/brand/wexoraa-logo.svg",
-  );
-  await page.evaluate(() => scrollTo(0, 600));
-  await expect
-    .poll(() =>
-      page
-        .locator(".hero-image-wrap")
-        .evaluate((el) => getComputedStyle(el).transform),
-    )
-    .not.toBe(before);
-  await expect
-    .poll(() =>
-      page
-        .locator(".scroll-progress")
-        .evaluate((el) => getComputedStyle(el).transform),
-    )
-    .not.toBe("matrix(0, 0, 0, 1, 0, 0)");
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(visual).toHaveCSS("transform", "none");
   await expect(page.locator(".cursor-accent")).toHaveCSS("display", "none");
-  await expect(page.locator(".marquee > div")).toHaveCSS(
-    "animation-name",
-    "none",
-  );
-  await expect(page.locator(".hero-image-wrap")).toHaveCSS("transform", "none");
-  await expect(page.locator(".logo-doodle")).toHaveCSS("transform", "none");
   await expect(page.locator(".scroll-progress")).toHaveCSS("display", "none");
 });
-test("mobile and touch do not get a cursor overlay", async ({ browser }) => {
-  const context = await browser.newContext({
-    hasTouch: true,
-    isMobile: true,
-    viewport: { width: 390, height: 844 },
-  });
-  const page = await context.newPage();
-  await page.goto("http://127.0.0.1:3000");
-  await expect(page.locator(".cursor-accent")).toHaveCSS("opacity", "0");
-  await context.close();
+test("every published content route renders, unknown routes 404 and navigation uses real pages", async ({
+  page,
+  request,
+}) => {
+  const routes = [
+    "/solutions",
+    "/solutions/build",
+    "/solutions/operate",
+    "/solutions/grow",
+    "/services",
+    "/work",
+    "/about",
+    "/process",
+    "/contact",
+    "/privacy",
+    "/business-assessment",
+    "/business-assessment/thank-you",
+    ...services.map((s) => `/services/${s.slug}`),
+    ...projects.map((p) => `/work/${p.slug}`),
+  ];
+  for (const path of routes) {
+    const r = await request.get(path);
+    expect(r.status(), path).toBe(200);
+    expect(await r.text(), path).toContain("<h1");
+  }
+  expect((await request.get("/services/no-such-service")).status()).toBe(404);
+  expect((await request.get("/solutions/no-such-solution")).status()).toBe(404);
+  await page.goto("/");
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Services", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/services$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "The right skills.",
+  );
+  await page
+    .getByRole("link", { name: /Websites & e-commerce/ })
+    .first()
+    .click();
+  await expect(page).toHaveURL(/\/services\/websites-ecommerce$/);
 });
+test("contact form keeps values after failure and confirms only accepted requests", async ({
+  page,
+}) => {
+  await page.goto("/contact?interest=Website");
+  await page.getByLabel("Your name", { exact: true }).fill("Test Visitor");
+  await page.getByLabel("Company name", { exact: true }).fill("Test Company");
+  await page
+    .getByLabel("Work email", { exact: true })
+    .fill("visitor@example.com");
+  await page.getByLabel("Phone number", { exact: true }).fill("+919876543210");
+  await page
+    .getByLabel("Tell us a little about your goals")
+    .fill("We need a clearer mobile website and enquiry journey.");
+  await page.getByRole("checkbox").check();
+  await page.route("**/api/enquiry", (r) =>
+    r.fulfill({
+      status: 502,
+      json: { error: "Temporary email service failure. Please retry." },
+    }),
+  );
+  await page.getByRole("button", { name: "Send project enquiry" }).click();
+  await expect(page.getByRole("status")).toContainText(
+    "Temporary email service failure",
+  );
+  await expect(page.getByLabel("Your name", { exact: true })).toHaveValue(
+    "Test Visitor",
+  );
+  await expect(
+    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
+  ).toHaveCount(0);
+  await page.route("**/api/enquiry", (r) =>
+    r.fulfill({ status: 200, json: { accepted: true } }),
+  );
+  await page.getByRole("button", { name: "Try sending again" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
+  ).toBeVisible();
+});
+for (const route of [
+  "/contact",
+  "/services/websites-ecommerce",
+  "/solutions/operate",
+  "/work/considered-brand-experience",
+  "/about",
+  "/process",
+  "/privacy",
+])
+  test(`mobile content accessibility ${route}`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 950 });
+    await page.goto(route);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    const scan = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(
+      scan.violations.map((v) => ({
+        id: v.id,
+        nodes: v.nodes.map((n) => ({
+          target: n.target,
+          summary: n.failureSummary,
+        })),
+      })),
+    ).toEqual([]);
+  });

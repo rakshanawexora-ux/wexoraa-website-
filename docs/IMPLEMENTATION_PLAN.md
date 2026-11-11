@@ -1,20 +1,20 @@
-# Current implementation and remaining work
+# Website implementation status
 
-## Completed redesign
+## Implemented
 
-- Modern minimal image-led homepage with original optimized artwork.
-- Space Grotesk + DM Sans typography and Material 3-inspired semantic tokens/states.
-- Desktop cursor-follow, magnetic CTA, bounded parallax, viewport movement, hover/zoom and reduced-motion/touch behavior.
-- Interactive homepage business-problem finder.
-- Browser-only 15-question assessment with a conditional 14-question path, session persistence, revision, ranking and deterministic recommendations.
-- Honest contact availability route and privacy notice describing local assessment storage.
-- Automated responsive/accessibility/motion/interaction/assessment checks and screenshots.
+- Brand-led homepage and pointer-reactive hero (image tilt/depth/light) with spring parallax, official-SVG doodles, magnetic CTA, cursor feedback and reduced-motion behavior.
+- All requested marketing routes: solutions overview/3 categories, services overview/12 details, work overview/2 clearly labelled concept details, about, process, contact, privacy and assessment thank-you.
+- Shared templates and centralized content; real route navigation and per-service enquiry paths.
+- Exactly 12 survey questions embedded in the homepage and on a standalone page, with transparent score, categories, unknown exclusions, revision, session-only non-sensitive answers and optional lead capture.
+- Zod-validated email-only Resend handler, consent, request-size limits, honeypot, bounded process-local throttling, duplicate/idempotency checks, HTML escaping and accepted-only success.
+- Metadata, conditional canonical origin, sitemap and robots behavior.
 
-## Still required for complete business launch
+## External launch requirements
 
-1. Approved contacts, real client work and optional testimonials. The supplied official SVG and its sampled green are integrated.
-2. Contact collection and secure Resend email submission. Current assessment never submits anything.
-3. Full supporting solutions/services/work/about/process pages and finalized legal/privacy information.
-4. Complete canonical/domain configuration, sitemap/robots/social image, comprehensive assistive-technology, performance and deployment QA.
+- Approved real phone/WhatsApp contacts and public contact details.
+- Verified Resend sending domain, server credential and recipient inbox; allowed outbound api.resend.com.
+- Approved legal/privacy identity, contact and retention schedule.
+- Actual provider/deployed-site verification, platform WAF/shared rate limits, performance and comprehensive manual assistive-technology review.
+- Real client work/testimonials only if supplied. Concept pages are not client case studies.
 
-The earlier onboarding settings service could not confirm saving its draft. Current setup is reproducible from README.md; no environment publication or deployment is claimed.
+No credentials were found in environment metadata or variable presence checks. No secret values were printed, no email was sent and nothing was deployed or published by this task.

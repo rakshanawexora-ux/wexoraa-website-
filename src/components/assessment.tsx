@@ -8,288 +8,345 @@ import {
   Check,
   RotateCcw,
 } from "lucide-react";
-import { Header, Footer } from "./home";
-import { questions, opportunities, type Answers } from "@/content/assessment";
-const storageKey = "wexoraa-assessment-v2";
-export default function Assessment() {
+import {
+  questions,
+  scoreAssessment,
+  validAnswers,
+  type Answers,
+} from "@/content/assessment";
+import EnquiryForm from "./enquiry-form";
+const storageKey = "wexoraa-survey-12-v1";
+export default function Survey({
+  configured = false,
+  embedded = false,
+}: {
+  configured?: boolean;
+  embedded?: boolean;
+}) {
   const [answers, setAnswers] = useState<Answers>({});
   const [index, setIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [complete, setComplete] = useState(false);
   const [notice, setNotice] = useState("");
+  const [enquire, setEnquire] = useState(false);
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       try {
-        const raw = sessionStorage.getItem(storageKey);
-        if (raw) {
-          const data = JSON.parse(raw);
-          if (data && typeof data === "object" && !Array.isArray(data)) {
-            const valid: Answers = {};
-            for (const q of questions) {
-              if (Array.isArray(data[q.id]))
-                valid[q.id] = data[q.id]
-                  .filter(
-                    (v: unknown) =>
-                      typeof v === "string" && q.options.includes(v),
-                  )
-                  .slice(0, q.multi ? (q.max ?? q.options.length) : 1);
-            }
-            setAnswers(valid);
-          }
-        }
+        const stored = sessionStorage.getItem(storageKey);
+        if (stored) setAnswers(validAnswers(JSON.parse(stored)));
       } catch {}
       setReady(true);
     });
     return () => cancelAnimationFrame(frame);
   }, []);
   useEffect(() => {
-    if (!ready) return;
-    try {
-      sessionStorage.setItem(storageKey, JSON.stringify(answers));
-    } catch {}
+    if (ready)
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify(answers));
+      } catch {}
   }, [answers, ready]);
-  const visible = questions.filter(
-    (q) =>
-      !(
-        q.id === "connected" &&
-        answers.operations?.includes("Spreadsheets and manual processes")
-      ),
-  );
-  const safeIndex = Math.min(index, visible.length - 1);
-  const question = visible[safeIndex];
-  const selected = answers[question.id] || [];
-  const results = opportunities(
-    answers.operations?.includes("Spreadsheets and manual processes")
-      ? { ...answers, connected: [] }
-      : answers,
-  );
+  const q = questions[index];
+  const selected = answers[q.id] || [];
+  const result = scoreAssessment(answers);
+  function focus() {
+    requestAnimationFrame(() => {
+      const heading = title.current;
+      heading?.focus({ preventScroll: true });
+      if (heading) {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top < 110 || rect.bottom > window.innerHeight - 80)
+          heading.scrollIntoView({
+            block: "start",
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+              .matches
+              ? "auto"
+              : "smooth",
+          });
+      }
+    });
+  }
   function move(next: number) {
     setIndex(next);
     setNotice("");
-    requestAnimationFrame(() => title.current?.focus());
+    focus();
   }
   function select(value: string) {
     setNotice("");
-    if (!question.multi) {
-      setAnswers({ ...answers, [question.id]: [value] });
+    if (!q.multi) {
+      setAnswers({ ...answers, [q.id]: [value] });
       return;
     }
-    const current = answers[question.id] || [];
+    const current = answers[q.id] || [];
     if (current.includes(value)) {
-      setAnswers({
-        ...answers,
-        [question.id]: current.filter((x) => x !== value),
-      });
+      setAnswers({ ...answers, [q.id]: current.filter((x) => x !== value) });
       return;
     }
-    const exclusive = (option: string) =>
-      /not sure|not actively|none \/ /i.test(option);
-    if (exclusive(value)) {
-      setAnswers({ ...answers, [question.id]: [value] });
+    if (value === "Not sure yet") {
+      setAnswers({ ...answers, [q.id]: [value] });
       return;
     }
-    const choices = current.filter((option) => !exclusive(option));
-    if (question.max && choices.length >= question.max) {
-      setNotice(
-        `Choose up to ${question.max} areas. Remove one to change your selection.`,
-      );
+    const choices = current.filter((a) => a !== "Not sure yet");
+    if (choices.length >= 3) {
+      setNotice("Choose up to three. Remove one to change the order.");
       return;
     }
-    setAnswers({ ...answers, [question.id]: [...choices, value] });
+    setAnswers({ ...answers, [q.id]: [...choices, value] });
   }
   function reset() {
     setAnswers({});
     setComplete(false);
+    setEnquire(false);
     move(0);
     try {
       sessionStorage.removeItem(storageKey);
     } catch {}
   }
   return (
-    <>
-      <Header />
-      <main id="main" className="assessment-page">
-        <div className="assessment-heading">
-          <p className="eyebrow">
-            <span /> FIND YOUR BUSINESS PROBLEM
-          </p>
-          <h1>
-            Clarity starts
-            <br />
-            with a question.
-          </h1>
-          <p>
-            A practical reflection on your business. No score, no sales tricks —
-            just a useful starting point.
-          </p>
-        </div>
-        <div className="assessment-shell">
-          {!complete ? (
-            <>
-              <div className="assessment-progress">
-                <span>
-                  QUESTION {safeIndex + 1} OF {visible.length}
-                </span>
-                <span>
-                  {Math.round(((safeIndex + 1) / visible.length) * 100)}%
-                </span>
-              </div>
-              <div className="progress-track">
-                <span
-                  style={{
-                    width: `${((safeIndex + 1) / visible.length) * 100}%`,
-                  }}
-                />
-              </div>
-              <h2 ref={title} tabIndex={-1} id="assessment-question">
-                {question.title}
-              </h2>
-              <p className="assessment-hint">
-                {question.hint ||
-                  "Choose the closest fit, or skip if it does not apply."}
-              </p>
-              <div
-                className="assessment-options"
-                role="group"
-                aria-labelledby="assessment-question"
-              >
-                {question.options.map((option) => (
-                  <label
-                    key={`${question.id}-${option}`}
-                    className={
-                      selected.includes(option)
-                        ? "assessment-option selected"
-                        : "assessment-option"
-                    }
-                  >
-                    <input
-                      type={question.multi ? "checkbox" : "radio"}
-                      name={question.id}
-                      value={option}
-                      checked={selected.includes(option)}
-                      onChange={() => select(option)}
-                    />
-                    <span>{option}</span>
-                    {selected.includes(option) && (
-                      <span className="option-check">
-                        {question.id === "priorities" ? (
-                          selected.indexOf(option) + 1
-                        ) : (
-                          <Check size={16} />
-                        )}
-                      </span>
-                    )}
-                  </label>
-                ))}
-              </div>
-              <p className="field-notice" role="status">
-                {notice}
-              </p>
-              <div className="assessment-controls">
-                <button
-                  className="text-button"
-                  disabled={safeIndex === 0}
-                  onClick={() => move(safeIndex - 1)}
-                >
-                  <ArrowLeft size={16} /> Back
-                </button>
-                <button
-                  className="text-button"
-                  onClick={() => {
-                    setAnswers({ ...answers, [question.id]: [] });
-                    if (safeIndex === visible.length - 1) setComplete(true);
-                    else move(safeIndex + 1);
-                  }}
-                >
-                  Skip
-                </button>
-                <button
-                  className="button"
-                  disabled={!selected.length}
-                  onClick={() => {
-                    if (safeIndex === visible.length - 1) {
-                      setComplete(true);
-                      requestAnimationFrame(() => title.current?.focus());
-                    } else move(safeIndex + 1);
-                  }}
-                >
-                  {safeIndex === visible.length - 1
-                    ? "See my opportunities"
-                    : "Next question"}
-                  <ArrowRight size={17} />
-                </button>
-              </div>
-              <p className="assessment-privacy">
-                Unfinished answers stay in this browser tab’s session. No
-                contact details are requested or stored.{" "}
-                {visible.length < 15
-                  ? "The systems-connection question is omitted because you selected manual processes."
-                  : ""}
-              </p>
-            </>
-          ) : (
-            <div className="assessment-results">
-              <span className="result-chip">
-                <Check size={14} /> YOUR PRELIMINARY SUMMARY
+    <div className={`survey-container ${embedded ? "embedded-survey" : ""}`}>
+      <div className="assessment-shell">
+        {!complete ? (
+          <>
+            <div className="assessment-progress">
+              <span>QUESTION {index + 1} OF 12</span>
+              <span>
+                {index < 2
+                  ? "YOUR BUSINESS"
+                  : index < 10
+                    ? "YOUR DIGITAL FOUNDATIONS"
+                    : "YOUR NEXT STEP"}
               </span>
-              <h2 ref={title} tabIndex={-1}>
-                A few possibilities.
-                <br />A clearer next step.
-              </h2>
+            </div>
+            <div
+              className="progress-track"
+              role="progressbar"
+              aria-label="Assessment progress"
+              aria-valuenow={index + 1}
+              aria-valuemin={0}
+              aria-valuemax={12}
+            >
+              <span style={{ width: `${((index + 1) / 12) * 100}%` }} />
+            </div>
+            <h3
+              ref={title}
+              tabIndex={-1}
+              id={embedded ? "home-survey-question" : "assessment-question"}
+            >
+              {q.title}
+            </h3>
+            <p className="assessment-hint">{q.hint}</p>
+            <div
+              className="assessment-options"
+              role="group"
+              aria-labelledby={
+                embedded ? "home-survey-question" : "assessment-question"
+              }
+            >
+              {q.options.map((option) => (
+                <label
+                  key={`${q.id}-${option}`}
+                  className={
+                    selected.includes(option)
+                      ? "assessment-option selected"
+                      : "assessment-option"
+                  }
+                >
+                  <input
+                    disabled={!ready}
+                    type={q.multi ? "checkbox" : "radio"}
+                    name={q.id}
+                    value={option}
+                    checked={selected.includes(option)}
+                    onChange={() => select(option)}
+                  />
+                  <span>{option}</span>
+                  {selected.includes(option) && (
+                    <span className="option-check" aria-hidden="true">
+                      {q.multi ? (
+                        selected.indexOf(option) + 1
+                      ) : (
+                        <Check size={16} />
+                      )}
+                    </span>
+                  )}
+                </label>
+              ))}
+            </div>
+            <p className="field-notice" role="status">
+              {notice}
+            </p>
+            <div className="assessment-controls">
+              <button
+                className="text-button"
+                disabled={index === 0}
+                onClick={() => move(index - 1)}
+              >
+                <ArrowLeft size={16} /> Back
+              </button>
+              <button
+                className="button"
+                disabled={!selected.length}
+                onClick={() => {
+                  if (index === 11) {
+                    setComplete(true);
+                    focus();
+                  } else move(index + 1);
+                }}
+              >
+                {index === 11
+                  ? "See my digital-strength score"
+                  : "Next question"}
+                <ArrowRight size={17} />
+              </button>
+            </div>
+            <div className="survey-reassurance">
+              <Check size={14} />
+              <span>
+                No email needed to see your result. Answers stay in this tab’s
+                session.
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className="assessment-results">
+            <span className="result-chip">
+              <Check size={14} /> YOUR DIGITAL-STRENGTH SNAPSHOT
+            </span>
+            <h3 ref={title} tabIndex={-1}>
+              Your score. Your opportunities.
+              <br />
+              Your next move.
+            </h3>
+            <div className="score-overview">
+              <div
+                className="score-ring"
+                role="img"
+                aria-label={
+                  result.score === null
+                    ? "Insufficient known responses to calculate a score"
+                    : `Digital-strength score ${result.score} out of 100`
+                }
+                style={{
+                  background: `conic-gradient(var(--primary) ${(result.score ?? 0) * 3.6}deg, #e4ebdc 0deg)`,
+                }}
+              >
+                <div>
+                  <strong>{result.score ?? "—"}</strong>
+                  <span>
+                    {result.score === null ? "MORE CONTEXT" : "OUT OF 100"}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h4>{result.band}</h4>
+                <p>
+                  {result.score === null
+                    ? "Choose known answers to at least four of the eight capability questions for a meaningful score."
+                    : `Based on ${result.eligible} of 8 known capability answers. Your business size, industry and timing do not affect this score.`}
+                </p>
+              </div>
+            </div>
+            <div className="category-scores">
+              {result.categories.map((c) => (
+                <div key={c.title}>
+                  <span>{c.title}</span>
+                  <strong>
+                    {c.score === null ? "Not enough context" : `${c.score}/100`}
+                  </strong>
+                  <div className="category-track">
+                    <i style={{ width: `${c.score ?? 0}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <details className="score-method">
+              <summary>How is my score calculated?</summary>
               <p>
-                These suggestions follow directly from your answers. This is not
-                a scientifically validated diagnosis, and no information has
-                been submitted to Wexoraa.
+                Each known capability answer receives 0–3 points: 0 = not
+                established, 1 = mostly manual or inconsistent, 2 = partly
+                established, 3 = consistently established. All eight questions
+                have equal weight. Score = earned points ÷ maximum points for
+                known answers × 100, rounded. “Not sure / not applicable” is
+                excluded, not scored as zero. At least four known capability
+                answers are required. Bands: below 40 foundations to build;
+                40–69 progress with gaps; 70–100 strong foundations.
               </p>
-              {results.length ? (
-                results.map((r, i) => (
-                  <div key={r.title} className="opportunity">
-                    <span>0{i + 1}</span>
+              <p>
+                This transparent self-reported rubric is a conversation starter.
+                It is not a scientific diagnostic, external benchmark, audit or
+                prediction of revenue.
+              </p>
+            </details>
+            <div className="next-opportunities">
+              <h4>Your clearest opportunities</h4>
+              {result.opportunities.length ? (
+                result.opportunities.slice(0, 3).map((c) => (
+                  <div className="opportunity" key={c.title}>
                     <div>
-                      <h3>{r.title}</h3>
-                      <p>{r.reason}</p>
+                      <h4>{c.title}</h4>
+                      <p>{c.reason}</p>
+                      <small>Based on: {c.evidence.join(" · ")}</small>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="opportunity">
-                  <p>
-                    Your answers don’t point to one clear opportunity yet. A
-                    conversation about your goals may be more useful than a
-                    general recommendation.
-                  </p>
-                </div>
+                <p>
+                  {result.score === null
+                    ? "A conversation can help clarify the areas you are unsure about."
+                    : "Your answers describe strong foundations. Review performance and priorities regularly to decide what deserves attention next."}
+                </p>
               )}
-              <div className="assessment-controls">
-                <button
-                  className="text-button"
-                  onClick={() => {
-                    setComplete(false);
-                    move(0);
-                  }}
-                >
-                  <ArrowLeft size={16} /> Revise answers
-                </button>
-                <Link
-                  className="button"
-                  href={`/contact?interest=${results[0]?.interest || "business-review"}`}
-                >
-                  Discuss the next step <ArrowUpRight size={17} />
-                </Link>
-              </div>
-              <button className="text-button" onClick={reset}>
-                <RotateCcw size={15} /> Clear answers and start again
+            </div>
+            <div className="assessment-controls">
+              <button
+                className="text-button"
+                onClick={() => {
+                  setComplete(false);
+                  setEnquire(false);
+                  move(0);
+                }}
+              >
+                <ArrowLeft size={16} /> Revise answers
+              </button>
+              <button
+                className="button"
+                onClick={() => setEnquire(!enquire)}
+                aria-expanded={enquire}
+                aria-controls="survey-enquiry"
+              >
+                {enquire ? "Hide enquiry form" : "Discuss my results"}
+                <ArrowUpRight size={17} />
               </button>
             </div>
-          )}
-        </div>
-        <p className="assessment-disclaimer">
-          A conversation starter, not a diagnostic assessment. You can skip
-          questions and revise your answers.
-        </p>
-      </main>
-      <Footer />
-    </>
+            {enquire && (
+              <div id="survey-enquiry" className="survey-enquiry">
+                <h4>Turn the snapshot into a conversation.</h4>
+                <p>
+                  Tell us where to reach you. Your answers and server-calculated
+                  score will be included.
+                </p>
+                <EnquiryForm
+                  configured={configured}
+                  answers={answers}
+                  interest={
+                    result.opportunities[0]?.title || "Digital-strength review"
+                  }
+                />
+              </div>
+            )}
+            <button className="text-button" onClick={reset}>
+              <RotateCcw size={15} /> Clear answers and start again
+            </button>
+            <p className="form-note">
+              Nothing has been sent to Wexoraa unless you submit the enquiry and
+              the email provider accepts it.
+            </p>
+            <Link className="text-link" href="/services">
+              Explore relevant services <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

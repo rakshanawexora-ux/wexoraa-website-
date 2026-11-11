@@ -1,18 +1,17 @@
 # Wexoraa Infotech
 
-A Next.js App Router + TypeScript website with a modern minimal agency design, image-led storytelling, Material 3-inspired UI and interactive business discovery.
+A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 12-question digital-strength survey and email-only enquiries.
 
-## Develop
+## Run
 
-Node.js 24 and npm 11 are tested.
+Node 24 / npm 11 are tested. In your checkout:
 
 ```sh
-cd /workspace/wexoraa-website-
-npm ci --cache /workspace/.npm-cache
+npm ci
 npm run dev
 ```
 
-Use the existing isolated checkout; do not create a worktree unless requested. No secrets are required to run the homepage or browser-only assessment. On another machine, run `npm ci` in your project folder; the workspace cache option is specific to this cloud environment.
+Cloud tasks should use the existing isolated checkout at `/workspace/wexoraa-website-`, without creating a worktree unless requested. If needed, use `npm ci --cache /workspace/.npm-cache` in this cloud environment.
 
 ## Validate
 
@@ -23,28 +22,44 @@ npm run build
 npx playwright test
 ```
 
-Tests start the production server, so build first. System Chromium defaults to `/usr/bin/chromium`; set PLAYWRIGHT_CHROMIUM_PATH to another installed Chromium executable where needed. Screenshots are saved under `/workspace/artifacts/redesign-<width>.png` in cloud runs.
+Build before browser tests; they start the production server. Chromium defaults to `/usr/bin/chromium`; override PLAYWRIGHT_CHROMIUM_PATH elsewhere. Tests cover all content routes, responsive/accessibility checks, scoring, survey flows, cursor interaction, form failure/retry and mocked email-handler security/delivery acceptance. No real provider email has been sent.
 
-## Implemented
+## Routes
 
-- Complete agency homepage redesign with Space Grotesk / DM Sans, generous editorial typography, rounded media, tonal Material-inspired components and responsive layouts.
-- Original optimized WebP artwork, explicitly labelled as studio concepts.
-- Fine-pointer cursor accent, contextual cursor labels, magnetic CTA, bounded hero parallax, viewport movement, image zoom and hover transitions. Reduced-motion and touch alternatives.
-- Two-step homepage problem finder with four challenge-specific recommendation paths.
-- `/business-assessment`: 15-question browser-only flow, conditional 14-question manual-process path, accurate progress, native radio/multi-select cards, up-to-three ranked priorities, skip/back/revision, session-only answer persistence and transparent deterministic recommendations.
-- Header/footer, solution tabs, process accordion, contact availability route and updated preview privacy information.
-- Automated interaction, image-loading, responsive, accessibility, cursor, reduced-motion and assessment tests.
+- `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, parallax, embedded 12-question survey.
+- `/solutions`, `/solutions/build`, `/solutions/operate`, `/solutions/grow`.
+- `/services` and 12 `/services/[slug]` pages with problems, approach, deliverables, FAQ and enquiry links.
+- `/work` and two `/work/[slug]` illustrative studio concepts. No commissioned client work or results are fabricated.
+- `/about`, `/process`, `/contact`, `/privacy`.
+- `/business-assessment`, `/business-assessment/thank-you`.
+- `/api/enquiry`, `/sitemap.xml`, `/robots.txt`.
 
-## Current limits
+Service/project content is centralized in src/content/catalog.ts. The official SVG is preserved unchanged. UI greens are #83C040 and #53B900, with darker accessible text and derived tonal surfaces.
 
-The assessment does not collect contacts or submit leads. Its result explicitly states that no data has been sent to Wexoraa. Email infrastructure, verified company contacts, finalized privacy/legal details, supporting service/solution/case-study routes, full SEO crawl configuration and deployment validation remain separate work. This is not a complete production lead-generation system.
+## Survey score
 
-The supplied official logo is integrated without recoloring or distortion. Approved client evidence, testimonials and contact numbers have not been supplied. Never invent these. Main navigation points to implemented homepage sections. Contact route honestly explains when company contacts are unconfigured.
+Exactly 12 questions: 4 contextual (industry, stage, priorities, timing) and 8 scored capability questions. Known capability answers earn 0–3 points with equal weight. Overall = earned ÷ eligible maximum × 100. Unknown/not-applicable answers are excluded. At least 4 known capability responses and all 12 answered questions are required for a score. Categories show digital presence, customer journey, systems/operations, marketing/measurement.
 
-## Configuration
+The method and bands are visible in the result. This is an explained self-report rubric, not a validated audit, external benchmark or revenue predictor. Results are available without contact capture. Only selected business answers persist in tab session storage; contacts do not. The server recalculates the score when an assessment enquiry is sent.
 
-`.env.example` lists planned Resend credentials and optional approved phone/WhatsApp values. Credentials must stay server-only and must not be committed. NEXT_PUBLIC_SITE_URL is the actual HTTPS deployment origin; public variables require a rebuild after changes. Phone and WhatsApp links only render when configured.
+## Enquiry configuration
 
-Email-only lead capture has no durable lead backup. Provider acceptance does not guarantee inbox delivery. Future implementation requires safe templates, Zod validation, request limits, duplicate/spam protection, accepted-only success, retries, secure credentials and shared/platform rate limits appropriate for serverless instances.
+Copy `.env.example` to `.env.local` locally, or enter values securely in hosting settings:
 
-See DESIGN_SYSTEM.md, docs/UX_STRATEGY.md, docs/HEURISTIC_EVALUATION.md, docs/QA_RESULTS.md and docs/DEPLOYMENT.md. All fonts and illustrations are self-hosted; fonts retain their OFL notices.
+- RESEND_API_KEY: server-only Resend API credential.
+- WEXORAA_FROM_EMAIL: **bare email address on a verified sending domain**.
+- WEXORAA_LEAD_EMAIL: approved receiving inbox, bare email address.
+- NEXT_PUBLIC_WEXORAA_PHONE and NEXT_PUBLIC_WEXORAA_WHATSAPP: approved business numbers. WhatsApp includes country code.
+- NEXT_PUBLIC_SITE_URL: actual HTTPS deployment origin, required for canonical/sitemap and indexable robots output.
+
+Never commit credentials or send them in chat. Public values are embedded at build time and require a rebuild. Resend access requires outbound HTTPS to api.resend.com. No domain or credentials are currently supplied; forms display an honest configuration notice and return 503 rather than claiming delivery.
+
+## Email behavior and limits
+
+The handler uses Zod validation, a 16KB streaming body limit, same-origin browser checks, honeypot, temporary hashed throttling, bounded duplicate state, escaped HTML/plain-text templates, provider idempotency and a timeout. Contact details, consent timestamp, all survey answers and a server-calculated result are included for assessment leads. No form contents are logged by the handler.
+
+Success appears only after an email provider response with an acceptance ID. Acceptance is not guaranteed inbox delivery. Failure preserves entered values for retry. No database or admin dashboard is created; there is no durable application lead backup. Mailbox/provider retention and legal/privacy details need business approval.
+
+Temporary throttling and duplicate maps are process-local and reset on restart; use platform WAF/shared rate limiting for multi-instance serverless production. Vercel-provided forwarding metadata is used only when VERCEL is set. Other deployments share one conservative process bucket unless adapted to their trusted proxy.
+
+See docs/DEPLOYMENT.md, docs/QA_RESULTS.md, docs/SCORING.md and DESIGN_SYSTEM.md. Real provider delivery, approved business/privacy details and deployment verification remain launch prerequisites; a production-readiness claim is not made.

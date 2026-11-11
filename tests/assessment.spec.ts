@@ -1,129 +1,121 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-test("15 questions, resume answers, prioritization, recommendations and revision", async ({
+import {
+  questions,
+  scoreAssessment,
+  type Answers,
+} from "../src/content/assessment";
+function answersAt(level: number): Answers {
+  return Object.fromEntries(
+    questions.map((q) => [q.id, [q.points ? q.options[level] : q.options[0]]]),
+  );
+}
+test("transparent score boundaries, context invariance and unknown exclusions", () => {
+  expect(questions).toHaveLength(12);
+  expect(scoreAssessment(answersAt(0)).score).toBe(100);
+  expect(scoreAssessment(answersAt(3)).score).toBe(0);
+  const a = answersAt(1);
+  expect(scoreAssessment(a).score).toBe(67);
+  a.industry = [questions[0].options[3]];
+  a.stage = [questions[1].options[2]];
+  expect(scoreAssessment(a).score).toBe(67);
+  for (const q of questions.filter((q) => q.points).slice(0, 4))
+    a[q.id] = [q.options[4]];
+  expect(scoreAssessment(a).eligible).toBe(4);
+  expect(scoreAssessment(a).score).toBe(67);
+  a.automation = [questions.find((q) => q.id === "automation")!.options[4]];
+  expect(scoreAssessment(a).score).toBeNull();
+  delete a.timing;
+  expect(scoreAssessment(a).complete).toBe(false);
+});
+test("12-step survey on homepage, resume, score, revision and enquiry stays optional", async ({
   page,
 }) => {
-  await page.goto("/business-assessment");
-  await page.getByLabel("Retail & e-commerce", { exact: true }).check();
+  await page.goto("/");
+  const survey = page.locator(".embedded-survey");
+  await survey.getByRole("radio").first().check();
   await page.reload();
-  await expect(
-    page.getByLabel("Retail & e-commerce", { exact: true }),
-  ).toBeChecked();
-  await page.getByRole("button", { name: "Next question" }).click();
-  for (let i = 1; i < 15; i++) {
-    const inputs = page.locator(".assessment-options input");
-    await inputs.first().check();
-    if (i === 13) {
-      await inputs.nth(1).check();
-      await inputs.nth(2).check();
-      await inputs.nth(3).click();
-      await expect(page.getByRole("status")).toContainText("Choose up to 3");
-      await expect(inputs.nth(3)).not.toBeChecked();
-    }
-    await page
+  await expect(survey.getByRole("radio").first()).toBeChecked();
+  for (let i = 0; i < 12; i++) {
+    if (i === 10) {
+      await survey.getByRole("checkbox").first().check();
+    } else await survey.getByRole("radio").first().check();
+    await survey
       .getByRole("button", {
-        name: i === 14 ? "See my opportunities" : "Next question",
+        name: i === 11 ? "See my digital-strength score" : "Next question",
       })
       .click();
   }
   await expect(
-    page.getByRole("heading", {
-      name: "A few possibilities. A clearer next step.",
+    survey.getByRole("img", { name: "Digital-strength score 100 out of 100" }),
+  ).toBeVisible();
+  await expect(
+    survey.getByText("Strong foundations", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Your name", { exact: true })).toHaveCount(0);
+  await survey.getByText("How is my score calculated?").click();
+  await expect(
+    survey.getByText("Each known capability answer", { exact: false }),
+  ).toBeVisible();
+  await survey.getByRole("button", { name: "Discuss my results" }).click();
+  await expect(
+    survey.getByRole("form", { name: "Discuss my assessment" }),
+  ).toBeVisible();
+  await expect(
+    survey.getByText("Online email sending is awaiting configuration.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await survey.getByRole("button", { name: "Revise answers" }).click();
+  await expect(survey.getByRole("radio").first()).toBeChecked();
+});
+test("unknowns do not produce a misleading score; mobile survey is accessible", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 950 });
+  await page.goto("/business-assessment");
+  for (let i = 0; i < 12; i++) {
+    if (i === 10)
+      await page
+        .getByRole("checkbox", { name: "Not sure yet", exact: true })
+        .check();
+    else if (i >= 2 && i <= 9)
+      await page
+        .getByRole("radio", { name: "Not sure / not applicable", exact: true })
+        .check();
+    else await page.getByRole("radio").first().check();
+    await page
+      .getByRole("button", {
+        name: i === 11 ? "See my digital-strength score" : "Next question",
+      })
+      .click();
+  }
+  await expect(
+    page.getByRole("img", {
+      name: "Insufficient known responses to calculate a score",
     }),
   ).toBeVisible();
   await expect(
-    page.getByText("no information has been submitted", { exact: false }),
+    page.getByText("More context needed", { exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".opportunity").first()).toContainText(
-    "Digital Presence",
-  );
   const scan = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
     .analyze();
-  expect(scan.violations).toEqual([]);
-  await page.getByRole("button", { name: "Revise answers" }).click();
-  await expect(
-    page.getByLabel("Retail & e-commerce", { exact: true }),
-  ).toBeChecked();
-});
-test("manual-process branch updates progress and skip does not submit data", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 360, height: 900 });
-  await page.goto("/business-assessment");
-  for (let i = 0; i < 9; i++)
-    await page.getByRole("button", { name: "Skip", exact: true }).click();
+  expect(
+    scan.violations.map((v) => ({
+      id: v.id,
+      nodes: v.nodes.map((n) => n.target),
+    })),
+  ).toEqual([]);
   await page
-    .getByLabel("Spreadsheets and manual processes", { exact: true })
-    .check();
-  await expect(page.getByText("QUESTION 10 OF 14")).toBeVisible();
-  await page.getByRole("button", { name: "Next question" }).click();
+    .getByRole("button", { name: "Clear answers and start again" })
+    .click();
   await expect(
-    page.getByRole("heading", {
-      name: "Which repetitive tasks consume the most employee time?",
-    }),
+    page.getByRole("heading", { name: "What kind of business do you run?" }),
   ).toBeVisible();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  const scan = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
-    .analyze();
-  expect(scan.violations).toEqual([]);
-  for (let i = 10; i < 14; i++)
-    await page.getByRole("button", { name: "Skip", exact: true }).click();
-  await page
-    .getByRole("button", { name: "Clear answers and start again" })
-    .click();
-  await expect(
-    page.getByRole("heading", {
-      name: "What industry does your business operate in?",
-    }),
-  ).toBeVisible();
-  await expect
-    .poll(() =>
-      page.evaluate(() => sessionStorage.getItem("wexoraa-assessment-v2")),
-    )
-    .toMatch(/^(null|\{\})$/);
-});
-test("uncertain answers are exclusive and omitted branch answers do not affect insights", async ({
-  page,
-}) => {
-  await page.goto("/business-assessment");
-  await page.evaluate(() =>
-    sessionStorage.setItem(
-      "wexoraa-assessment-v2",
-      JSON.stringify({
-        connected: ["Partially"],
-        operations: ["Spreadsheets and manual processes"],
-      }),
-    ),
-  );
-  await page.reload();
-  for (let i = 0; i < 3; i++)
-    await page.getByRole("button", { name: "Skip", exact: true }).click();
-  await page
-    .getByLabel("Improve our digital presence", { exact: true })
-    .check();
-  await page.getByLabel("Not sure yet", { exact: true }).check();
-  await expect(
-    page.getByLabel("Improve our digital presence", { exact: true }),
-  ).not.toBeChecked();
-  await page.getByRole("button", { name: "Next question" }).click();
-  for (let i = 4; i < 14; i++) {
-    await page
-      .getByRole("button", {
-        name: i === 9 ? "Next question" : "Skip",
-        exact: true,
-      })
-      .click();
-  }
-  await expect(
-    page.getByRole("heading", {
-      name: "A few possibilities. A clearer next step.",
-    }),
-  ).toBeVisible();
-  await expect(page.locator(".opportunity")).not.toContainText("CRM / ERP");
 });
