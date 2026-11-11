@@ -1,5 +1,5 @@
 :root {
-  --primary: #84c341;
+  --primary: #83c040;
   --on-primary: #15210c;
   --primary-container: #e7f1dc;
   --on-primary-container: #243817;
@@ -2234,5 +2234,23 @@ svg {
   .project-overlay h3 {
     font-size: clamp(48px, 14vw, 64px);
     letter-spacing: -2.5px;
+  }
+}
+
+.brand-logo {
+  display: block;
+  width: 178px;
+  height: auto;
+}
+.footer-logo {
+  display: inline-block;
+  background: var(--surface);
+  padding: 14px 18px;
+  border-radius: var(--shape-medium);
+  margin-bottom: 24px;
+}
+@media (max-width: 640px) {
+  .header .brand-logo {
+    width: 154px;
   }
 }

@@ -2,7 +2,7 @@
 
 ## Direction
 
-Light mineral surfaces, dark typography, olive secondary tones, controlled Wexoraa green accents, large editorial imagery and restrained technical sections. Material 3 principles underpin semantic roles, shapes, states, adaptive layouts and motion. This is a custom implementation, not a claim of official component certification. The official logo is still absent; the header is text, not a replacement logo. The brand green remains provisional.
+Light mineral surfaces, dark typography, olive secondary tones, controlled Wexoraa green accents, large editorial imagery and restrained technical sections. Material 3 principles underpin semantic roles, shapes, states, adaptive layouts and motion. This is a custom implementation, not a claim of official component certification. The supplied official SVG is used unchanged in the header and on a light footer plate. Its 296:60 aspect ratio and original colors are preserved. Brand primary #83C040 is sampled directly from the symbol; the supplied wordmark also contains #53B900. The oversized footer lettering remains decorative text.
 
 ## Color roles
 
@@ -10,7 +10,7 @@ All values live in `src/app/globals.css`.
 
 | Role                                     | Value             | Purpose                                        |
 | ---------------------------------------- | ----------------- | ---------------------------------------------- |
-| primary / on-primary                     | #84C341 / #15210C | Brand accents and readable green surfaces      |
+| primary / on-primary                     | #83C040 / #15210C | Brand accents and readable green surfaces      |
 | primary-container / on-primary-container | #E7F1DC / #243817 | Selected assessment options and tonal emphasis |
 | secondary / on-secondary                 | #4F6350 / #FFFFFF | Supporting emphasis                            |
 | surface / on-surface                     | #F8F9F5 / #20251E | Main canvas and primary text                   |

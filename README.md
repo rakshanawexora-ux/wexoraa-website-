@@ -39,7 +39,7 @@ Tests start the production server, so build first. System Chromium defaults to `
 
 The assessment does not collect contacts or submit leads. Its result explicitly states that no data has been sent to Wexoraa. Email infrastructure, verified company contacts, finalized privacy/legal details, supporting service/solution/case-study routes, full SEO crawl configuration and deployment validation remain separate work. This is not a complete production lead-generation system.
 
-Official logo, approved client evidence, testimonials and contact numbers have not been supplied. Never invent these. Main navigation points to implemented homepage sections. Contact route honestly explains when company contacts are unconfigured.
+The supplied official logo is integrated without recoloring or distortion. Approved client evidence, testimonials and contact numbers have not been supplied. Never invent these. Main navigation points to implemented homepage sections. Contact route honestly explains when company contacts are unconfigured.
 
 ## Configuration
 

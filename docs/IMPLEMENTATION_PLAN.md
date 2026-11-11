@@ -12,7 +12,7 @@
 
 ## Still required for complete business launch
 
-1. Official logo, sampled green, approved contacts, real client work and optional testimonials.
+1. Approved contacts, real client work and optional testimonials. The supplied official SVG and its sampled green are integrated.
 2. Contact collection and secure Resend email submission. Current assessment never submits anything.
 3. Full supporting solutions/services/work/about/process pages and finalized legal/privacy information.
 4. Complete canonical/domain configuration, sitemap/robots/social image, comprehensive assistive-technology, performance and deployment QA.

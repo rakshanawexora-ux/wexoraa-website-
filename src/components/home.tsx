@@ -73,7 +73,14 @@ export function Header() {
   return (
     <header className="header">
       <Link href="/" className="wordmark" aria-label="Wexoraa Infotech home">
-        wexoraa<span>infotech</span>
+        <Image
+          src="/brand/wexoraa-logo.svg"
+          alt="Wexoraa Infotech"
+          width={296}
+          height={60}
+          className="brand-logo"
+          priority
+        />
       </Link>
       <nav
         aria-label="Main navigation"
@@ -807,6 +814,19 @@ export function Footer() {
           </Link>
         </div>
         <div className="footer-aside">
+          <Link
+            href="/"
+            className="footer-logo"
+            aria-label="Wexoraa Infotech home"
+          >
+            <Image
+              src="/brand/wexoraa-logo.svg"
+              alt="Wexoraa Infotech"
+              width={296}
+              height={60}
+              className="brand-logo"
+            />
+          </Link>
           <p>
             Good people.
             <br />

@@ -30,4 +30,4 @@ Motion is layered: bounded parallax for depth, image zoom and arrow feedback for
 
 ## Remaining evidence gaps
 
-Official logo, real client work, testimonials, actual company contacts and legal details remain missing. Do not substitute fabricated identities. Full business approval, real-user testing, backend delivery/security and deployment QA remain outstanding.
+The supplied official logo is now integrated. Real client work, testimonials, actual company contacts and legal details remain missing. Do not substitute fabricated identities. Full business approval, real-user testing, backend delivery/security and deployment QA remain outstanding.

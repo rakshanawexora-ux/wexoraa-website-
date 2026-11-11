@@ -87,7 +87,7 @@ for (const width of [360, 390, 768, 1024, 1440])
       ),
     ).toBe(true);
     const images = page.locator("img");
-    await expect(images).toHaveCount(3);
+    await expect(images).toHaveCount(5);
     for (const image of await images.all()) {
       await image.scrollIntoViewIfNeeded();
       await expect
