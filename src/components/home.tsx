@@ -18,6 +18,7 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import ClientMarquee from "@/components/client-marquee";
 import CinematicHero from "@/components/cinematic-hero";
 import MotionShowcase from "@/components/motion-showcase";
 import { EnquiryCTA } from "@/components/enquiry-popup";
@@ -762,6 +763,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
       <Header />
       <main id="main">
         <CinematicHero />
+        <ClientMarquee />
         <MotionShowcase />
         <ProblemFinder configured={emailReady} />
         <Solutions />

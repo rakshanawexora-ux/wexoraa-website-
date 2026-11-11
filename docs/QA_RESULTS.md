@@ -66,3 +66,7 @@ Visual artifacts: `/workspace/artifacts/wexoraa-cinematic-desktop.png`, `wexoraa
 Final verification: **32 tests passed (57.5s)**, production build, lint, TypeScript and whitespace checks pass. The new service-guidance test verifies hero → retained motion film → survey DOM order, all three descriptive service tabs, each illustration loading, the four relevant service URLs per group, and keyboard focus from the growth-score invitation. Existing scoring, unknown-answer, resume, optional enquiry, provider/retry, SEO, route, motion, responsive and axe checks remain passing. Early review found long mobile tab labels causing overflow and a light film CTA label on green; the mobile tabs now stack and CTA text uses readable charcoal.
 
 Final artifacts: `/workspace/artifacts/clear-header-1440.png`, `clear-services-1440.png`, `clear-services-390.png`, `growth-survey-1440.png`, `growth-survey-390.png`, `white-footer-1440.png`, `white-footer-390.png`. The original motion MP4/poster and supplied logo were not modified.
+
+## Client-logo marquee
+
+Added four unique supplied client marks as a cleaned transparent sprite; unavailable earlier inline marks are documented in `public/ASSETS.md`, not replaced with fabricated logos. Checks: **6 passed (42.6s)**, covering five homepage viewport/axe/image-loading cases and local pause/resume, accessible unique names, reduced-motion static grid and no horizontal overflow. Production build, lint, TypeScript and whitespace checks pass. Review captures: `/workspace/artifacts/client-marquee-1440.png` and `client-marquee-390.png`.
