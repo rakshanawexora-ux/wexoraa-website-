@@ -190,3 +190,161 @@ for (const route of [
       })),
     ).toEqual([]);
   });
+
+test("studio film plays, pauses and obeys the site motion control", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const video = page.locator(".brand-film");
+  await expect(
+    page.getByRole("button", { name: "Play studio film" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Play studio film" }).click();
+  await expect
+    .poll(() =>
+      video.evaluate((el) =>
+        el instanceof HTMLVideoElement ? el.currentTime : 0,
+      ),
+    )
+    .toBeGreaterThan(0.2);
+  await expect(
+    page.getByRole("button", { name: "Pause studio film" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
+  await expect
+    .poll(() =>
+      video.evaluate((el) => el instanceof HTMLVideoElement && el.paused),
+    )
+    .toBe(true);
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-motion-paused",
+    "true",
+  );
+  await page
+    .getByRole("button", { name: "Resume motion", exact: true })
+    .click();
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-motion-paused",
+    "false",
+  );
+  await page.getByRole("button", { name: "Play studio film" }).click();
+  await page.getByRole("button", { name: "Pause studio film" }).click();
+  await expect
+    .poll(() =>
+      video.evaluate((el) => el instanceof HTMLVideoElement && el.paused),
+    )
+    .toBe(true);
+});
+test("inner page graphic changes selection and service card reacts to pointer movement", async ({
+  page,
+}) => {
+  await page.goto("/services");
+  await page
+    .locator(".studio-scene")
+    .getByRole("button", { name: "Operate", exact: true })
+    .click();
+  await expect(page.locator(".scene-bottom")).toContainText(
+    "Connect the way work happens.",
+  );
+  await expect(
+    page.getByRole("link", { name: "Explore Operate solutions" }),
+  ).toHaveAttribute("href", "/solutions/operate");
+  const card = page.locator(".catalog-card").first();
+  await card.scrollIntoViewIfNeeded();
+  const box = await card.boundingBox();
+  await page.mouse.move(
+    box!.x + box!.width * 0.85,
+    box!.y + box!.height * 0.25,
+  );
+  await expect
+    .poll(() => card.evaluate((el) => el.style.getPropertyValue("--tilt-y")))
+    .not.toBe("");
+  await expect
+    .poll(() => card.evaluate((el) => getComputedStyle(el).transform))
+    .not.toBe("none");
+  await expect(
+    page.getByRole("navigation", { name: "Footer explore" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
+  await expect(card).toHaveCSS("transform", "none");
+});
+
+test("service explorer filters, searches and recovers from no results", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 950 });
+  await page.goto("/services");
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
+  await page
+    .getByRole("button", { name: "Operate", exact: true })
+    .last()
+    .click();
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(4);
+  await page.getByRole("searchbox", { name: "Search services" }).fill("CRM");
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(1);
+  await page
+    .getByRole("searchbox", { name: "Search services" })
+    .fill("unmatched-example");
+  await expect(
+    page.getByRole("heading", { name: "No exact match yet." }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Reset filters" }).click();
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
+  const scan = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(
+    scan.violations.map((v) => ({
+      id: v.id,
+      nodes: v.nodes.map((n) => n.target),
+    })),
+  ).toEqual([]);
+});
+
+test("skill review: header motion control never covers search and targets remain usable", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/services");
+  const toggle = page.getByRole("button", {
+    name: "Pause motion",
+    exact: true,
+  });
+  await expect(toggle).toBeVisible();
+  const target = await toggle.boundingBox();
+  expect(target!.width).toBeGreaterThanOrEqual(44);
+  expect(target!.height).toBeGreaterThanOrEqual(44);
+  const search = page.getByRole("searchbox", { name: "Search services" });
+  await search.scrollIntoViewIfNeeded();
+  await search.focus();
+  const box = await search.boundingBox();
+  const header = await page.locator(".header").boundingBox();
+  expect(box!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+  await expect(search).toHaveCSS("font-size", "16px");
+  await search.fill("CRM");
+  const clear = await page
+    .getByRole("button", { name: "Clear service search" })
+    .boundingBox();
+  expect(clear!.width).toBeGreaterThanOrEqual(44);
+  expect(clear!.height).toBeGreaterThanOrEqual(44);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.goto("/services");
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Solutions", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Resume motion", exact: true }),
+  ).toBeVisible();
+});

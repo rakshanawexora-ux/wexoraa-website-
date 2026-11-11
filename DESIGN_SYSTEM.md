@@ -57,3 +57,15 @@ The 12-question survey is shared between homepage and standalone route. Radio/ch
 ## Asset usage
 
 `hero-art.webp`: original AI-generated silver/green sculptural concept, approximately 155KB. `brand-art.webp`: original AI-generated unbranded packaging concept, approximately 192KB. Both use next/image with reserved dimensions, responsive sizes and lazy loading below the fold. Neither is evidence of client work; the section explicitly says studio concepts. No fake client identities, testimonials or project results are introduced.
+
+## Site-wide interactive layer
+
+All routes share a cursor accent and motion preference control. Translation-only section reveals preserve text contrast through the transition. Fine-pointer cards gain a bounded 2.5-degree tilt, positional green highlight and elevated hover state; keyboard focus retains a clear outline. Forms and reading text are not transformed with the pointer.
+
+Inner-page heroes contain an interactive brand scene: clicking Build/Operate/Grow changes the supporting description and destination link. Rings and status accents are decorative. `/services` adds accessible pressed-state category filters, a labelled keyword search, a result count and an empty-state reset. Motion layout transitions keep search/filter changes connected.
+
+The mid-homepage motion film is a self-hosted original brand graphic, not client footage. It has a static poster, explicit play/pause and no audio or autoplay. Essential messaging also exists as nearby text. Ambient motion can be paused site-wide; reduced-motion also removes tilt/parallax/continuous CSS motion. New footer navigation is grouped, with a large enquiry invitation and accessible contact routes.
+
+## UI UX Pro Max adoption
+
+The imported project skill lives at `.agents/skills/ui-ux-pro-max/SKILL.md`; its MIT license and pinned source are included. Verified UX outcomes and project-specific decisions are in `design-system/wexoraa-infotech/MASTER.md`, with a services-page override. Official colors and current typography override incompatible generator defaults. The global motion control is now a labelled 44px header action, not a floating overlay; search input text is 16px and its clear target is 44px.

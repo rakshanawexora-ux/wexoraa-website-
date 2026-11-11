@@ -8,7 +8,6 @@ import {
   useSpring,
   useScroll,
   useTransform,
-  useReducedMotion,
 } from "motion/react";
 import {
   ArrowUpRight,
@@ -25,6 +24,9 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import MotionShowcase from "@/components/motion-showcase";
+import { MotionToggle } from "@/components/site-experience";
+import { useExperienceMotion as useReducedMotion } from "@/hooks/use-experience-motion";
 
 function Arrow() {
   return <ArrowUpRight size={19} aria-hidden="true" />;
@@ -104,6 +106,7 @@ export function Header() {
           </span>
         </Link>
       </nav>
+      <MotionToggle />
       <button
         ref={ref}
         className="icon-button mobile-toggle"
@@ -117,7 +120,7 @@ export function Header() {
     </header>
   );
 }
-function Cursor() {
+export function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
@@ -183,22 +186,6 @@ function Magnetic({
         {children}
       </Link>
     </motion.div>
-  );
-}
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 28,
-    restDelta: 0.001,
-  });
-  const reduced = useReducedMotion();
-  return (
-    <motion.div
-      aria-hidden="true"
-      className="scroll-progress"
-      style={{ scaleX: reduced ? 0 : progress }}
-    />
   );
 }
 function LogoDoodle() {
@@ -785,18 +772,27 @@ export function ContactLinks() {
 }
 export function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-top">
-        <div>
-          <Label>HAVE SOMETHING IN MIND?</Label>
-          <Link href="/contact" className="footer-big" data-cursor="Let’s talk">
-            Let’s make
-            <br />
-            it happen.
-            <ArrowUpRight />
-          </Link>
-        </div>
-        <div className="footer-aside">
+    <footer className="footer footer-v2">
+      <div className="footer-invite">
+        <p className="eyebrow">
+          <span /> YOUR NEXT CHAPTER
+        </p>
+        <Link
+          href="/contact"
+          className="footer-invite-link"
+          data-cursor="Let’s talk"
+        >
+          Got a good
+          <br />
+          challenge?
+          <span>
+            <ArrowUpRight size={52} />
+          </span>
+        </Link>
+        <p>Bring the ambition. Let’s find the right direction.</p>
+      </div>
+      <div className="footer-content">
+        <div className="footer-brand-column">
           <Link
             href="/"
             className="footer-logo"
@@ -811,37 +807,66 @@ export function Footer() {
             />
           </Link>
           <p>
-            Good people.
+            Creative thinking.
             <br />
-            Interesting challenges.
+            Technical depth.
             <br />
-            New possibilities.
+            Connected possibilities.
           </p>
           <ContactLinks />
         </div>
-      </div>
-      <div className="footer-wordmark" aria-hidden="true">
-        wexoraa<span>↗</span>
+        <nav aria-label="Footer explore">
+          <span>EXPLORE</span>
+          {[
+            ["Solutions", "/solutions"],
+            ["Services", "/services"],
+            ["Studio concepts", "/work"],
+            ["Our approach", "/process"],
+          ].map(([t, h]) => (
+            <Link key={h} href={h}>
+              {t}
+              <ArrowUpRight size={14} />
+            </Link>
+          ))}
+        </nav>
+        <nav aria-label="Footer connect">
+          <span>CONNECT</span>
+          {[
+            ["About Wexoraa", "/about"],
+            ["Find your business problem", "/business-assessment"],
+            ["Start a conversation", "/contact"],
+            ["Privacy", "/privacy"],
+          ].map(([t, h]) => (
+            <Link key={h} href={h}>
+              {t}
+              <ArrowUpRight size={14} />
+            </Link>
+          ))}
+        </nav>
+        <div className="footer-orbit" aria-hidden="true">
+          <div />
+          <div />
+          <span>
+            BUILD.
+            <br />
+            OPERATE.
+            <br />
+            GROW.
+          </span>
+        </div>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Wexoraa Infotech</span>
         <span>COIMBATORE, INDIA</span>
-        <Link href="/services">Services</Link>
-        <Link href="/solutions">Solutions</Link>
-        <Link href="/process">Process</Link>
-        <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
-        <Link href="/privacy">Privacy</Link>
         <Link href="/#top">Back to top ↑</Link>
       </div>
     </footer>
   );
 }
+
 export default function Home({ emailReady = false }: { emailReady?: boolean }) {
   return (
     <>
-      <Cursor />
-      <ScrollProgress />
       <Header />
       <main id="main">
         <Hero />
@@ -854,6 +879,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         </div>
         <ProblemFinder configured={emailReady} />
         <Solutions />
+        <MotionShowcase />
         <Work />
         <Capabilities />
         <Process />

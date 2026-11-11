@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import SiteExperience from "@/components/site-experience";
+import { Cursor } from "@/components/home";
 const display = localFont({
   src: "../../public/fonts/space-grotesk.ttf",
   weight: "400 700",
@@ -38,6 +40,8 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <SiteExperience />
+        <Cursor />
         {children}
       </body>
     </html>

@@ -13,3 +13,9 @@ Hero pointer movement drives separate depth/tilt and light layers with Motion sp
 Email forms explain use and consent, do not subscribe to marketing, preserve data on failure and wait for provider acceptance before success. Phone/WhatsApp appear only for configured official contacts. The missing configuration is visible rather than presenting a false working enquiry channel.
 
 Work pages are original illustrative concepts; no commercial client outcomes are claimed. Business contacts, legal/privacy identity and live email verification remain required external inputs.
+
+## Interaction refinement
+
+The user requested a more expressive site beyond the homepage. A shared pointer/reveal layer now covers route content. Inner-page brand scenes are selectable, with descriptions and links tied to the selection; service search/filter solves discovery rather than adding decoration alone. Hover highlights, tilt, arrow movement and section translation provide visible feedback. The redesigned footer uses an invitation and grouped links instead of oversized plain lettering.
+
+The homepage film is an original motion graphic with deliberate playback, not an automatically playing third-party embed. A global motion pause and reduced-motion behavior offer control. Reading copy and form fields do not receive pointer transforms. No interaction gates access to content or requires visitors to watch the film before continuing.

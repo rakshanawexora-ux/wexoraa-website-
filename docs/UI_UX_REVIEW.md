@@ -1,0 +1,27 @@
+# UI/UX review — interactive studio revision
+
+The user supplied https://github.com/nextlevelbuilder/ui-ux-pro-max-skill after the initial manual review. The skill is now imported at `.agents/skills/ui-ux-pro-max/SKILL.md`, pinned to revision `6ae86f61f520d6ca229d2f40e070410638c908c5` with its MIT license. Its local search workflow and references were read and applied. The project-specific synthesis is `design-system/wexoraa-infotech/MASTER.md`; generic palette/font recommendations conflicting with the official brand were not adopted.
+
+Actual searches: two design-system queries (initial broad query, then one narrower retry), an explicit minimalism style search, focus-not-obscured UX search, reduced-motion/parallax UX search, and a Next.js image-optimization query after the first stack query returned no match. The verified rules led to a header-mounted motion control, larger touch/search targets, balanced wrapping, preserved brand/type and retained reduced-motion/manual film controls. This is skill-assisted expert review, not a real-user study.
+
+## Goal
+
+Make the site feel expressive and interactive while keeping service discovery, assessment and enquiry readable and usable. Motion should reinforce feedback and hierarchy rather than gate content.
+
+| Finding                                          | Severity | Applied correction                                                                                    |
+| ------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------- |
+| Inner pages feel like plain text templates       | 3        | Pointer-reactive, selectable brand scene and shared section-entry movement                            |
+| Hover feedback is too quiet                      | 2        | Bounded card tilt, positional highlight, arrow movement, border and elevation changes                 |
+| Services are a long passive list                 | 2        | Pressed-state filters, labelled search, count and resettable empty state                              |
+| Footer is dominated by plain oversized lettering | 2        | Enquiry invitation, grouped Explore/Connect navigation and restrained brand motif                     |
+| Continuous effects can distract                  | 3        | Site-wide pause, reduced-motion behavior, native scrolling and explicit film playback                 |
+| Fading body text lowers contrast mid-transition  | 3        | Removed opacity transitions; reveals move fully opaque content                                        |
+| Video could add an unnecessary download          | 2        | Original 473KB MP4, 40KB poster, no autoplay, preload none and no third-party embed                   |
+| Mobile users lack a fine pointer                 | 2        | Native clickable controls and direct links remain; pointer tilt is disabled on coarse-pointer devices |
+| Extra decoration could interfere with enquiries  | 3        | Form controls and reading text do not receive pointer transforms                                      |
+
+## Validation
+
+Existing survey/form/API and route checks continue to pass. Automated responsive/axe checks cover 360, 390, 768, 1024 and 1440px on the homepage and representative inner pages. New functional checks cover actual local film playback/pause, the global motion control, brand-scene selection, card pointer response, filtering/search/reset and reduced-motion behavior. Desktop/mobile/footer screenshots and a live interaction recording support visual review.
+
+This is partial automated and expert evidence. No real-user study, full assistive-technology certification, performance benchmark or live Resend delivery claim is made.

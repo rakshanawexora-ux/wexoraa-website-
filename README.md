@@ -63,3 +63,15 @@ Success appears only after an email provider response with an acceptance ID. Acc
 Temporary throttling and duplicate maps are process-local and reset on restart; use platform WAF/shared rate limiting for multi-instance serverless production. Vercel-provided forwarding metadata is used only when VERCEL is set. Other deployments share one conservative process bucket unless adapted to their trusted proxy.
 
 See docs/DEPLOYMENT.md, docs/QA_RESULTS.md, docs/SCORING.md and DESIGN_SYSTEM.md. Real provider delivery, approved business/privacy details and deployment verification remain launch prerequisites; a production-readiness claim is not made.
+
+## Studio-wide motion layer
+
+Inner-page heroes now include a pointer-reactive, selectable Build/Operate/Grow scene. Service discovery supports category filters, keyword search and a resettable empty state. Catalog/project/engineering cards share pointer tilt and a positional highlight; sections enter with translation only so text contrast remains stable. The custom cursor is available across routes.
+
+The homepage includes an original silent 8-second MP4 brand graphic (`public/motion/wexoraa-studio.mp4`, approximately 473KB) and a 40KB WebP poster. It uses `preload="none"`, starts on request and has play/pause controls. The site-wide Pause motion control pauses ambient motion and active film playback; reduced-motion preferences disable nonessential pointer/parallax effects. The footer is rebuilt as an enquiry panel, grouped navigation and a quiet animated brand motif.
+
+The optional source renderer is `scripts/render-studio-film.mjs`. It requires Chromium, Playwright's video tooling, system ffmpeg and the existing font/logo assets. The cloud's prepared video-tooling cache can be selected with `PLAYWRIGHT_BROWSERS_PATH=/workspace/.playwright node scripts/render-studio-film.mjs`; another machine needs its own installed browser/video tooling and `PLAYWRIGHT_CHROMIUM_PATH` if Chromium is elsewhere. The committed film and poster mean rerendering is not required for install/build/start. Temporary render files go to ignored `.studio-render/`.
+
+## Imported UI/UX skill
+
+The user-requested UI UX Pro Max skill is vendored at `.agents/skills/ui-ux-pro-max`, with MIT license and pinned source revision in IMPORTED.md. Read its SKILL.md and run its Python search script by the absolute installed path. Adopted project guidance is in `design-system/wexoraa-infotech/MASTER.md`; official brand constraints override mismatched generic palettes/fonts. The motion pause control is integrated into the header so it cannot cover search or enquiry fields.

@@ -6,3 +6,8 @@ out/
 *.tsbuildinfo
 playwright-report/
 test-results/
+
+.studio-render/
+
+__pycache__/
+*.pyc

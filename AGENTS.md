@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Project UI/UX skill
+
+For UI structure, visual design and interaction work, read [.agents/skills/ui-ux-pro-max/SKILL.md](.agents/skills/ui-ux-pro-max/SKILL.md). It is imported from the user-requested upstream repository; its source revision and MIT license are in that directory. Invoke its Python search script by the absolute installed path. Preserve the supplied Wexoraa logo, #83C040 / #53B900 brand colors and the user-approved product requirements over generic search palettes or fonts. The project-specific adopted rules are in design-system/wexoraa-infotech/MASTER.md.
