@@ -2,16 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import {
   ArrowUpRight,
-  ArrowDown,
   ChevronDown,
   Plus,
   Minus,
@@ -25,6 +18,7 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import CinematicHero from "@/components/cinematic-hero";
 import MotionShowcase from "@/components/motion-showcase";
 import { EnquiryCTA } from "@/components/enquiry-popup";
 import { usePathname } from "next/navigation";
@@ -258,259 +252,6 @@ export function Cursor() {
     />
   );
 }
-function Magnetic({
-  children,
-  className = "",
-  href,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  href: string;
-}) {
-  const reduced = useReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 200, damping: 18 });
-  const sy = useSpring(y, { stiffness: 200, damping: 18 });
-  return (
-    <motion.div
-      style={{ x: sx, y: sy }}
-      onPointerMove={(e) => {
-        if (reduced || e.pointerType !== "mouse") return;
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set((e.clientX - r.left - r.width / 2) * 0.12);
-        y.set((e.clientY - r.top - r.height / 2) * 0.12);
-      }}
-      onPointerLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-    >
-      <Link href={href} className={className}>
-        {children}
-      </Link>
-    </motion.div>
-  );
-}
-function LogoDoodle() {
-  const reduced = useReducedMotion();
-  return (
-    <motion.svg
-      className="logo-doodle"
-      viewBox="0 0 340 145"
-      aria-hidden="true"
-      focusable="false"
-      animate={reduced ? {} : { y: [0, -6, 0], rotate: [-2, 1, -2] }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <motion.path
-        d="M282 46C243 10 99 13 58 51C18 89 85 124 190 116C269 110 316 80 289 60"
-        className="doodle-orbit"
-        initial={false}
-        animate={reduced ? {} : { pathLength: [0.86, 1, 0.86] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <image
-        href="/brand/wexoraa-logo.svg"
-        x="85"
-        y="48"
-        width="185"
-        height="37.5"
-        preserveAspectRatio="xMidYMid meet"
-      />
-      <path
-        d="M298 29l2-12m9 17 10-6m-10 18 12 3M34 107c-11 11-9 22 8 23m-9-8 10 8-1-12"
-        className="doodle-spark"
-      />
-    </motion.svg>
-  );
-}
-function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 65,
-    damping: 25,
-    restDelta: 0.001,
-  });
-  const y = useTransform(progress, [0, 1], [0, 155]);
-  const scale = useTransform(progress, [0, 1], [1.06, 1]);
-  const titleY = useTransform(progress, [0, 1], [0, -55]);
-  const stickerY = useTransform(progress, [0, 1], [0, -70]);
-  const stickerRotate = useTransform(progress, [0, 1], [5, -8]);
-  const captionY = useTransform(progress, [0, 1], [0, -24]);
-  const pathLength = useTransform(progress, [0, 0.55], [0.35, 1]);
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const px = useSpring(pointerX, { stiffness: 110, damping: 22 });
-  const py = useSpring(pointerY, { stiffness: 110, damping: 22 });
-  const rotateX = useTransform(py, [-1, 1], [4, -4]);
-  const rotateY = useTransform(px, [-1, 1], [-5, 5]);
-  const imageX = useTransform(px, [-1, 1], [-22, 22]);
-  const imageY = useTransform(() => y.get() + py.get() * -16);
-  const glowX = useTransform(px, [-1, 1], [-160, 160]);
-  const glowY = useTransform(py, [-1, 1], [-90, 90]);
-  return (
-    <section ref={ref} className="hero" id="top">
-      <div className="hero-topline">
-        <Label>INDEPENDENT THINKING. CONNECTED POSSIBILITIES.</Label>
-        <span className="location">
-          <span /> COIMBATORE, INDIA · WORKING EVERYWHERE
-        </span>
-      </div>
-      <div className="hero-title">
-        <motion.h1 style={{ y: reduced ? 0 : titleY }}>
-          {["Good design.", "Smart technology.", "Better business."].map(
-            (line, i) => (
-              <motion.span
-                key={line}
-                className={`hero-line ${i === 2 ? "hero-highlight" : ""}`}
-                initial={false}
-                animate={reduced ? {} : { y: [16, 0] }}
-                transition={{
-                  duration: 0.9,
-                  delay: i * 0.09,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                {line}
-              </motion.span>
-            ),
-          )}
-        </motion.h1>
-        <div className="hero-intro">
-          <LogoDoodle />
-          <span className="hero-index">
-            A LITTLE CURIOSITY. A BIGGER PICTURE.
-          </span>
-          <p>
-            We bring brands, digital experiences and business systems together.
-            One connected partner for your next chapter.
-          </p>
-          <Magnetic className="button" href="/contact">
-            Let’s build something{" "}
-            <span>
-              <Arrow />
-            </span>
-          </Magnetic>
-          <Link className="hero-discover" href="#challenge">
-            Find your business problem <ArrowDown size={15} />
-          </Link>
-        </div>
-      </div>
-      <div
-        className="hero-media"
-        data-cursor="Explore"
-        onPointerMove={(e) => {
-          if (reduced || e.pointerType !== "mouse") return;
-          const r = e.currentTarget.getBoundingClientRect();
-          pointerX.set(((e.clientX - r.left) / r.width - 0.5) * 2);
-          pointerY.set(((e.clientY - r.top) / r.height - 0.5) * 2);
-        }}
-        onPointerLeave={() => {
-          pointerX.set(0);
-          pointerY.set(0);
-        }}
-      >
-        <motion.div
-          className="hero-image-wrap"
-          style={{
-            y: reduced ? 0 : imageY,
-            x: reduced ? 0 : imageX,
-            rotateX: reduced ? 0 : rotateX,
-            rotateY: reduced ? 0 : rotateY,
-            scale: reduced ? 1 : scale,
-          }}
-        >
-          <Image
-            src="/hero-art.webp"
-            alt="Silver and green sculptural ribbons interlocking into one connected form"
-            fill
-            priority
-            sizes="100vw"
-            className="hero-image"
-          />
-        </motion.div>
-        <motion.div
-          className="hero-pointer-light"
-          aria-hidden="true"
-          style={{ x: reduced ? 0 : glowX, y: reduced ? 0 : glowY }}
-        />
-        <span className="hero-pointer-hint" aria-hidden="true">
-          MOVE YOUR CURSOR · EXPLORE THE CONNECTION
-        </span>
-        <div className="media-top">
-          <span>CONNECTED BY DESIGN</span>
-          <span>W / STUDIO EXPLORATION 001</span>
-        </div>
-        <motion.svg
-          className="hero-scroll-doodle"
-          viewBox="0 0 500 300"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <motion.path
-            d="M25 135C4 45 126 5 203 54S213 230 328 215C440 201 385 78 465 47m-17-1 18-2-4 18"
-            style={{ pathLength: reduced ? 1 : pathLength }}
-          />
-        </motion.svg>
-        <motion.div
-          className="hero-media-bottom"
-          style={{ y: reduced ? 0 : captionY }}
-        >
-          <span className="media-caption">
-            Different disciplines.
-            <br />
-            One shared direction.
-          </span>
-          <Link
-            className="image-round"
-            href="#solutions"
-            aria-label="Explore our solutions"
-          >
-            <ArrowDown size={24} />
-          </Link>
-        </motion.div>
-        <motion.div
-          className="brand-sticker"
-          style={{
-            y: reduced ? 0 : stickerY,
-            rotate: reduced ? 0 : stickerRotate,
-          }}
-          aria-hidden="true"
-        >
-          <svg viewBox="0 0 296 60" focusable="false">
-            <image
-              href="/brand/wexoraa-logo.svg"
-              width="296"
-              height="60"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </svg>
-          <span>BUILD. OPERATE. GROW.</span>
-          <svg
-            className="sticker-scribble"
-            viewBox="0 0 160 22"
-            focusable="false"
-          >
-            <path d="M3 14Q70-3 156 7M19 20Q80 6 141 16" />
-          </svg>
-        </motion.div>
-      </div>
-      <div className="hero-bottom">
-        <span>STRATEGY MEETS CREATIVITY. CREATIVITY MEETS CODE.</span>
-        <Link href="#challenge">
-          FIND YOUR NEXT MOVE <ArrowDown size={15} />
-        </Link>
-      </div>
-    </section>
-  );
-}
-
 function ProblemFinder({ configured = false }: { configured?: boolean }) {
   return (
     <section className="problem section" id="challenge">
@@ -982,7 +723,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
     <>
       <Header />
       <main id="main">
-        <Hero />
+        <CinematicHero />
         <div className="marquee" aria-hidden="true">
           <div>
             STRATEGY <span>✳</span> DESIGN <span>✳</span> TECHNOLOGY{" "}

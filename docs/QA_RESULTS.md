@@ -54,3 +54,9 @@ Added all 12 service URLs to a server-rendered header disclosure, grouped Build/
 Verification includes desktop/mobile disclosure activation and service navigation, rendered HTML service URLs, restored CTA/dialog, responsive homepage accessibility at five widths, inner-page footer accessibility and route checks. Green-panel supporting text was darkened after axe identified insufficient contrast.
 
 Final result: all 8 targeted navigation/route/responsive accessibility tests pass (35.6 seconds). Production build, lint, TypeScript and whitespace checks pass.
+
+## Cinematic hero from supplied reference recording
+
+Production build and lint/TypeScript checks pass. Full existing suite: **30 passed (58.0s)**. Following visual refinements to the hero entrance and dark inner-page graphic, targeted pointer/reduced-motion, new orbit offscreen-pause/discovery and seven inner-page accessibility checks: **9 passed (11.6s)**. Checks include keyboard/touch-friendly actual links and enquiry dialog access under reduced motion; no scroll locking or global motion controller was introduced.
+
+Visual artifacts: `/workspace/artifacts/wexoraa-cinematic-desktop.png`, `wexoraa-cinematic-mobile.png`, `wexoraa-cinematic-services.png`; interaction recording: `/workspace/artifacts/wexoraa-cinematic-preview.webm`. The MP4 supplied by the user is an inspection reference, not a production asset.

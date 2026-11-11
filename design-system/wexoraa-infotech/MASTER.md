@@ -19,13 +19,13 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 
 - Exact supplied logo SVG, unchanged proportions/colors; no approximation.
 - Primary #86C232; supporting #61892F; secondary #222629; neutrals #474B4F / #6B6E70. Keep official SVG unchanged. Use dark readable on-primary text.
-- Predominantly light neutral canvas; selected charcoal technical/film/footer sections.
+- Recording-led cinematic dark home hero, header and inner-page entrances; light neutral reading/survey surfaces; charcoal technical/film/footer sections.
 - Space Grotesk headings and DM Sans body, self-hosted with OFL notices. No Inter substitution.
 - Base reading/input text 16px where practical; smaller metadata remains supporting information, not the sole source of meaning. Balanced headings and natural reflow; no forced nonbreaking words.
 
 ## Interaction contract
 
-- Hero depth reacts to pointer position. Inner-page scene selection changes copy and a real destination link.
+- Cinematic hero uses original Wexoraa artwork, oversized white/green type, orbital paths and two functional discovery cards. Hero depth reacts to pointer position; orbit animation pauses offscreen and with reduced motion. Keep initial header/hero boundary steady. Inner-page scene selection changes copy and a real destination link.
 - Service filters/search solve discovery; empty results include a reset and a contact route.
 - Pointer tilt is bounded and omitted for coarse pointers/reduced motion. Essential actions also work by click/tap/keyboard.
 - Section entry uses translation, not faded body copy. State correctness does not wait for an animation end.

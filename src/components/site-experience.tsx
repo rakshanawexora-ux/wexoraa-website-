@@ -61,7 +61,7 @@ export default function SiteExperience() {
     );
     document
       .querySelectorAll(
-        "main > section, main .catalog-card, main .process-page-list article",
+        "main > section:not(.hero-cinematic):not(.page-hero), main .catalog-card, main .process-page-list article",
       )
       .forEach((el) => observer.observe(el));
     let scrollFrame = 0;

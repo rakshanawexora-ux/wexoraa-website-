@@ -5531,3 +5531,614 @@ html:has(.enquiry-dialog[open]) {
 .footer-modern .footer-invite > .eyebrow > span {
   background: var(--brand-charcoal);
 }
+
+/* Recording-led studio direction: cinematic space, editorial type, orbital motion. */
+.header {
+  background: var(--brand-charcoal);
+  border-color: color-mix(in srgb, white 14%, transparent);
+}
+.header > .wordmark {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+.header .brand-logo {
+  width: 158px;
+}
+.header .nav > a,
+.header .nav > a[data-active="true"],
+.nav-services-trigger > a,
+.nav-services-trigger > a[data-active="true"],
+.nav-services-trigger > button {
+  color: white;
+}
+.nav-services-trigger > button:hover,
+.nav-services-trigger > button[aria-expanded="true"] {
+  background: color-mix(in srgb, white 10%, transparent);
+}
+.header .mobile-toggle {
+  color: white;
+  border-color: color-mix(in srgb, white 25%, transparent);
+}
+.header :focus-visible {
+  outline-color: var(--primary);
+}
+.header .services-dropdown :focus-visible {
+  outline-color: var(--brand-charcoal);
+}
+.hero-cinematic.hero-media {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100svh - 92px);
+  height: auto;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  padding: 26px var(--gutter) 28px;
+  margin: 0;
+  max-width: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 8%;
+  row-gap: 30px;
+  overflow: hidden;
+  perspective: none;
+  background: var(--brand-charcoal);
+  color: white;
+}
+.hero-cinematic .cinematic-backdrop {
+  position: absolute;
+  inset: -4%;
+  z-index: -4;
+  width: auto;
+  height: auto;
+  opacity: 0.3;
+  filter: grayscale(0.85);
+}
+.hero-cinematic .hero-image {
+  object-fit: cover;
+  object-position: 65% 50%;
+}
+.cinematic-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    linear-gradient(
+      90deg,
+      var(--brand-charcoal) 4%,
+      color-mix(in srgb, var(--brand-charcoal) 88%, transparent) 34%,
+      color-mix(in srgb, var(--brand-charcoal) 28%, transparent) 100%
+    ),
+    linear-gradient(0deg, var(--brand-charcoal), transparent 40%);
+}
+.cinematic-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, white 20%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, white 20%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 120px 120px;
+  mask-image: linear-gradient(90deg, transparent 30%, black);
+}
+.cinematic-meta {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: color-mix(in srgb, white 76%, transparent);
+}
+.cinematic-meta > span:first-child {
+  padding: 7px 10px;
+  color: var(--brand-charcoal);
+  background: var(--primary);
+}
+.cinematic-meta > span:last-child {
+  align-self: center;
+}
+.cinematic-copy {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  position: relative;
+  z-index: 2;
+  padding-block: 20px 30px;
+}
+.cinematic-copy h1 {
+  font-family: var(--font-display);
+  font-size: clamp(66px, 7.7vw, 126px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+  font-weight: 600;
+  margin: 0;
+  text-wrap: initial;
+}
+.cinematic-copy h1 > span {
+  display: block;
+  white-space: nowrap;
+}
+.cinematic-copy h1 em {
+  font-style: normal;
+  color: var(--primary);
+}
+.cinematic-copy > p {
+  max-width: 405px;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-top: 30px;
+  color: color-mix(in srgb, white 82%, transparent);
+}
+.cinematic-enquiry {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  min-height: 48px;
+  margin-top: 22px;
+  padding-block: 8px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--primary);
+  color: white;
+}
+.cinematic-enquiry svg {
+  color: var(--primary);
+  transition: transform 0.25s;
+}
+.cinematic-enquiry:hover svg {
+  transform: translate(3px, -3px);
+}
+.orbital-field {
+  position: absolute;
+  width: min(61vw, 920px);
+  aspect-ratio: 1;
+  top: 48%;
+  left: 66%;
+  translate: -50% -50%;
+  pointer-events: none;
+  z-index: -1;
+}
+.orbital-ring {
+  position: absolute;
+  border: 1px solid color-mix(in srgb, white 23%, transparent);
+  border-radius: 50%;
+  animation: studio-orbit 65s linear infinite;
+}
+.orbital-ring-1 {
+  inset: 2%;
+  animation-duration: 95s;
+}
+.orbital-ring-2 {
+  inset: 13%;
+  animation-duration: 73s;
+  animation-direction: reverse;
+}
+.orbital-ring-3 {
+  inset: 24%;
+  animation-duration: 48s;
+}
+.orbital-ring-4 {
+  inset: 35%;
+  animation-duration: 32s;
+  animation-direction: reverse;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+}
+.orbital-satellite {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  top: 50%;
+  left: -5px;
+  background: color-mix(in srgb, white 80%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 18px color-mix(in srgb, white 14%, transparent);
+}
+.satellite-secondary {
+  left: auto;
+  right: 14%;
+  top: 14%;
+  width: 6px;
+  height: 6px;
+}
+.orbital-ring-2 > .orbital-satellite:first-child {
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+}
+.orbital-axis {
+  position: absolute;
+  background: color-mix(in srgb, white 12%, transparent);
+}
+.axis-horizontal {
+  height: 1px;
+  width: 100%;
+  top: 50%;
+}
+.axis-vertical {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+}
+.orbital-core {
+  position: absolute;
+  inset: 43%;
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--primary) 14%, transparent),
+    transparent
+  );
+}
+.orbital-core > span {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: -12px;
+  left: calc(50% - 12px);
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 45px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+.orbital-core > i {
+  position: absolute;
+  inset: 18%;
+  border: 1px solid color-mix(in srgb, white 18%, transparent);
+  border-radius: 50%;
+}
+.orbital-core > b {
+  font-family: var(--font-display);
+  color: var(--primary);
+  font-size: 24px;
+  font-weight: 500;
+}
+.orbital-caption {
+  position: absolute;
+  top: 16%;
+  left: 39%;
+  font-family: monospace;
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  color: color-mix(in srgb, white 66%, transparent);
+}
+.orbital-coordinate {
+  position: absolute;
+  bottom: 22%;
+  left: 14%;
+  font-family: monospace;
+  font-size: 9px;
+  color: color-mix(in srgb, white 65%, transparent);
+}
+.cinematic-paths {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+.cinematic-card {
+  display: block;
+  min-height: 162px;
+  border: 1px solid color-mix(in srgb, white 24%, transparent);
+  background: color-mix(in srgb, var(--brand-charcoal) 75%, transparent);
+  padding: 22px;
+  backdrop-filter: blur(12px);
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.25s;
+}
+.cinematic-card > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+}
+.cinematic-card h2 {
+  font-size: clamp(20px, 1.9vw, 29px);
+  letter-spacing: -1px;
+  font-weight: 500;
+  margin-top: 22px;
+  line-height: 1.15;
+}
+.cinematic-card p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 12px;
+  color: color-mix(in srgb, white 78%, transparent);
+}
+.cinematic-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--brand-charcoal) 94%, transparent);
+}
+.cinematic-bottom {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, white 18%, transparent);
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: color-mix(in srgb, white 75%, transparent);
+}
+.cinematic-bottom > a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+}
+.hero-cinematic :focus-visible {
+  outline-color: var(--primary);
+}
+.hero-cinematic[data-orbit-active="false"] .orbital-ring {
+  animation-play-state: paused;
+}
+@keyframes studio-orbit {
+  to {
+    rotate: 360deg;
+  }
+}
+/* Carry the same visual language into service and information-page entrances. */
+.page-hero {
+  background: var(--brand-charcoal);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 80% 40%,
+    color-mix(in srgb, var(--primary) 9%, transparent),
+    transparent 55%
+  );
+}
+.page-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+.page-hero .page-hero-copy > p:not(.eyebrow) {
+  color: color-mix(in srgb, white 80%, transparent);
+}
+.page-hero .eyebrow {
+  color: var(--primary);
+}
+.page-hero .page-hero-actions > .text-link {
+  color: white;
+}
+.page-hero .page-hero-copy > h1 {
+  letter-spacing: -0.06em;
+  line-height: 1.03;
+}
+.page-hero :focus-visible {
+  outline-color: var(--primary);
+}
+@media (min-width: 1600px) {
+  .hero-cinematic.hero-media {
+    min-height: 840px;
+  }
+}
+@media (max-width: 1100px) {
+  .hero-cinematic.hero-media {
+    column-gap: 3%;
+  }
+  .cinematic-card {
+    padding: 18px;
+  }
+  .cinematic-copy h1 {
+    font-size: 8.1vw;
+  }
+}
+@media (max-width: 900px) {
+  .header > .nav {
+    background: var(--brand-charcoal);
+  }
+  .header .brand-logo {
+    width: 144px;
+  }
+  .hero-cinematic.hero-media {
+    min-height: calc(100svh - 80px);
+    gap: 24px;
+  }
+  .cinematic-meta > span:last-child {
+    display: none;
+  }
+  .cinematic-copy h1 {
+    font-size: 9vw;
+  }
+  .cinematic-paths {
+    grid-template-columns: 1fr;
+    align-self: end;
+    margin-bottom: 25px;
+  }
+  .cinematic-card {
+    min-height: 120px;
+  }
+  .cinematic-card h2 {
+    margin-top: 12px;
+  }
+  .orbital-field {
+    width: 85vw;
+    left: 72%;
+    top: 45%;
+  }
+  .cinematic-copy > p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 640px) {
+  .header > .wordmark {
+    padding: 7px 9px;
+  }
+  .header .brand-logo {
+    width: 135px;
+  }
+  .hero-cinematic.hero-media {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 22px var(--gutter) 18px;
+    min-height: calc(100svh - 80px);
+  }
+  .cinematic-meta {
+    font-size: 9px;
+  }
+  .cinematic-copy {
+    align-self: stretch;
+    padding-block: 35px 28px;
+  }
+  .cinematic-copy h1 {
+    font-size: clamp(50px, 12.7vw, 80px);
+    line-height: 1;
+  }
+  .cinematic-copy > p {
+    max-width: 315px;
+    font-size: 14px;
+    margin-top: 22px;
+  }
+  .cinematic-enquiry {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .orbital-field {
+    width: 125vw;
+    left: 92%;
+    top: 36%;
+    opacity: 0.55;
+  }
+  .orbital-caption,
+  .orbital-coordinate {
+    display: none;
+  }
+  .cinematic-paths {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0 0 24px;
+  }
+  .cinematic-card {
+    padding: 14px;
+    min-height: 150px;
+  }
+  .cinematic-card h2 {
+    font-size: 22px;
+    margin-top: 18px;
+  }
+  .cinematic-card > span {
+    font-size: 8px;
+    letter-spacing: 0;
+    align-items: flex-start;
+  }
+  .cinematic-card > span svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .cinematic-card p {
+    font-size: 11px;
+  }
+  .cinematic-bottom {
+    margin-top: auto;
+    font-size: 8px;
+    padding-top: 8px;
+  }
+  .cinematic-bottom > span {
+    display: none;
+  }
+  .cinematic-copy h1 > span {
+    white-space: normal;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic .hero-image-wrap,
+  .orbital-field,
+  .cinematic-copy,
+  .cinematic-card:hover {
+    transform: none !important;
+  }
+  .orbital-ring {
+    animation: none;
+  }
+  .cinematic-enquiry:hover svg {
+    transform: none;
+  }
+}
+.cinematic-last em {
+  margin-left: 0.09em;
+}
+.orbital-ring-1 {
+  animation-delay: -24s;
+}
+.orbital-ring-2 {
+  animation-delay: -13s;
+}
+.orbital-ring-3 {
+  animation-delay: -31s;
+}
+.orbital-ring-4 {
+  animation-delay: -8s;
+}
+.page-hero .inner-visual {
+  background: var(--brand-charcoal);
+  color: white;
+  border-color: color-mix(in srgb, white 22%, transparent);
+  border-radius: 4px;
+}
+.page-hero .scene-top,
+.page-hero .scene-bottom {
+  border-color: color-mix(in srgb, white 20%, transparent);
+}
+.page-hero .scene-top,
+.page-hero .scene-bottom span {
+  color: color-mix(in srgb, white 75%, transparent);
+}
+.page-hero .scene-bottom p {
+  color: white;
+}
+.page-hero .scene-node {
+  background: var(--brand-charcoal);
+  color: white;
+  border-color: color-mix(in srgb, white 35%, transparent);
+  border-radius: 4px;
+}
+.page-hero .scene-node:hover,
+.page-hero .scene-node[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--brand-charcoal);
+  border-color: var(--primary);
+}
+.page-hero .scene-bottom > a {
+  background: var(--primary);
+  color: var(--brand-charcoal);
+}
