@@ -130,6 +130,13 @@ test("motion effects and fine pointer cursor", async ({ page }) => {
     "data-label",
     "Explore",
   );
+  const before = await page
+    .locator(".hero-image-wrap")
+    .evaluate((el) => getComputedStyle(el).transform);
+  await expect(page.locator(".brand-sticker image")).toHaveAttribute(
+    "href",
+    "/brand/wexoraa-logo.svg",
+  );
   await page.evaluate(() => scrollTo(0, 600));
   await expect
     .poll(() =>
@@ -137,7 +144,14 @@ test("motion effects and fine pointer cursor", async ({ page }) => {
         .locator(".hero-image-wrap")
         .evaluate((el) => getComputedStyle(el).transform),
     )
-    .not.toBe("none");
+    .not.toBe(before);
+  await expect
+    .poll(() =>
+      page
+        .locator(".scroll-progress")
+        .evaluate((el) => getComputedStyle(el).transform),
+    )
+    .not.toBe("matrix(0, 0, 0, 1, 0, 0)");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator(".cursor-accent")).toHaveCSS("display", "none");
   await expect(page.locator(".marquee > div")).toHaveCSS(
@@ -145,6 +159,8 @@ test("motion effects and fine pointer cursor", async ({ page }) => {
     "none",
   );
   await expect(page.locator(".hero-image-wrap")).toHaveCSS("transform", "none");
+  await expect(page.locator(".logo-doodle")).toHaveCSS("transform", "none");
+  await expect(page.locator(".scroll-progress")).toHaveCSS("display", "none");
 });
 test("mobile and touch do not get a cursor overlay", async ({ browser }) => {
   const context = await browser.newContext({

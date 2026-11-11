@@ -12,17 +12,17 @@ All values live in `src/app/globals.css`.
 | ---------------------------------------- | ----------------- | ---------------------------------------------- |
 | primary / on-primary                     | #83C040 / #15210C | Brand accents and readable green surfaces      |
 | primary-container / on-primary-container | #E7F1DC / #243817 | Selected assessment options and tonal emphasis |
-| secondary / on-secondary                 | #4F6350 / #FFFFFF | Supporting emphasis                            |
-| surface / on-surface                     | #F8F9F5 / #20251E | Main canvas and primary text                   |
+| secondary / on-secondary                 | #36571C / #FFFFFF | Supporting emphasis                            |
+| surface / on-surface                     | #FAFBF8 / #181B16 | Main canvas and primary text                   |
 | surface-container-low                    | #F0F2EC           | Quiet supporting surfaces                      |
 | surface-container                        | #E9ECE3           | Supporting cards                               |
 | surface-container-high                   | #DFE5D7           | Stronger tonal surfaces                        |
 | surface-variant                          | #E3E7DE           | Supporting decoration                          |
 | outline / outline-variant                | #6D7766 / #D4DBCC | Strong and quiet boundaries                    |
 | error / on-error                         | #B3261E / #FFFFFF | Inline selection-limit feedback                |
-| inverse-surface / inverse-on-surface     | #202820 / #F8FAF2 | Dark sections and inverse filled actions       |
+| inverse-surface / inverse-on-surface     | #1A1E17 / #F8FAF2 | Dark sections and inverse filled actions       |
 
-Never place white text on the brand green without checking contrast. The principal filled CTA uses an inverse dark treatment. Radio/checkbox selection uses both a native control and tonal/border changes. Contrast is checked through axe at the five responsive targets; automated results are not full WCAG certification.
+Never place white text on the brand green without checking contrast. The principal filled CTA uses exact logo green with dark on-primary text; hover uses the secondary logo green #53B900. Radio/checkbox selection uses both a native control and tonal/border changes. Contrast is checked through axe at the five responsive targets; automated results are not full WCAG certification.
 
 ## Typography
 
@@ -42,7 +42,7 @@ Selection states expose aria-selected/aria-pressed or native checked state. Proc
 
 ## Motion
 
-Motion for React: bounded hero scroll parallax, subtle viewport translation, spring cursor-follow accent and magnetic primary CTA. CSS: project-image zoom, arrow direction, tonal hover, card lift and slow decorative marquee. Shared short 180ms and medium 360ms durations with standard Material-inspired easing. Nothing uses scroll hijacking or removes the native cursor.
+Motion for React (the current Framer Motion package): spring-smoothed layered hero parallax for image, title, caption and official-logo sticker; scroll-drawn SVG doodle; global scroll-progress line; subtle viewport translation; spring cursor-follow accent and magnetic primary CTA. Official-logo doodles embed the original SVG with preserved aspect ratio, surrounded by separate decorative strokes. The small floating doodle is hidden on mobile, while the logo sticker and scroll doodle remain visible. CSS: project-image zoom, arrow direction, tonal hover, card lift and slow decorative marquee. Shared short 180ms and medium 360ms durations with standard Material-inspired easing. Nothing uses scroll hijacking or removes the native cursor.
 
 Fine-pointer devices alone receive the cursor accent. Touch and reduced-motion users do not. Reduced motion also disables parallax, marquee and CSS transitions; essential content is visible before animation or hydration. Cursor overlays are aria-hidden and pointer-events:none, so they cannot intercept controls or text selection.
 

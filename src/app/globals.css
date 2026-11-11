@@ -2254,3 +2254,306 @@ svg {
     width: 154px;
   }
 }
+/* Brand-led hero: exact supplied logo greens, neutral canvas, bounded motion. */
+:root {
+  --brand-green: #83c040;
+  --brand-green-secondary: #53b900;
+  --primary: var(--brand-green);
+  --secondary: #36571c;
+  --surface: #fafbf8;
+  --on-surface: #181b16;
+  --inverse-surface: #1a1e17;
+}
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--brand-green);
+  transform-origin: 0 50%;
+  z-index: 80;
+  pointer-events: none;
+}
+.hero {
+  padding-top: 34px;
+}
+.hero-title {
+  gap: 48px;
+  align-items: end;
+  margin-top: 44px;
+}
+.hero-title h1 {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 8px;
+}
+.hero-title h1 > .hero-line {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  color: var(--on-surface);
+}
+.hero-highlight {
+  position: relative;
+  z-index: 0;
+}
+.hero-highlight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 47% -0.04em -0.015em;
+  background: var(--brand-green);
+  border-radius: 6px 3px 8px 3px;
+  transform: rotate(-1.1deg);
+}
+.hero-intro {
+  position: relative;
+  padding-bottom: 8px;
+}
+.logo-doodle {
+  width: 235px;
+  height: 100px;
+  display: block;
+  margin: -18px 0 12px -12px;
+  overflow: visible;
+  pointer-events: none;
+}
+.doodle-orbit,
+.doodle-spark {
+  fill: none;
+  stroke: var(--brand-green);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.doodle-spark {
+  stroke: var(--on-surface);
+  stroke-width: 1.5;
+}
+.hero-intro > p {
+  margin: 16px 0 24px;
+}
+.hero-discover {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  min-height: 44px;
+  margin-top: 9px;
+  color: #384b2b;
+  width: max-content;
+  border-bottom: 1px solid transparent;
+}
+.hero-discover:hover {
+  border-color: var(--brand-green);
+}
+.button:not(.button-outline) {
+  background: var(--brand-green);
+  color: var(--on-primary);
+}
+.button:not(.button-outline):hover {
+  background: var(--brand-green-secondary);
+  color: #111;
+}
+.nav-contact > span {
+  background: var(--brand-green);
+  color: var(--on-primary);
+}
+.nav-contact:hover > span {
+  background: var(--brand-green-secondary);
+}
+.hero-media {
+  border-radius: 24px;
+}
+.hero-scroll-doodle {
+  position: absolute;
+  width: 38%;
+  height: 70%;
+  left: 7%;
+  top: 8%;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero-scroll-doodle path {
+  fill: none;
+  stroke: var(--brand-green);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.brand-sticker {
+  position: absolute;
+  top: 18%;
+  right: 5%;
+  width: 198px;
+  background: #fafbf8f5;
+  border: 1px solid #d7e2ca;
+  border-radius: 12px;
+  padding: 25px 18px 16px;
+  box-shadow: 0 16px 35px #17210d15;
+  pointer-events: none;
+}
+.brand-sticker > svg:first-child {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.brand-sticker > span {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  text-align: center;
+  color: #26391a;
+  margin-top: 15px;
+}
+.sticker-scribble {
+  display: block;
+  height: 19px;
+  width: 100%;
+  margin-top: 4px;
+}
+.sticker-scribble path {
+  fill: none;
+  stroke: var(--brand-green);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.eyebrow > span,
+.location > span {
+  background: var(--brand-green);
+}
+.marquee {
+  background: #f1f6ea;
+}
+.marquee span {
+  color: var(--brand-green-secondary);
+}
+.progress-track > span {
+  background: var(--brand-green-secondary);
+}
+.circle-link {
+  background: var(--brand-green);
+  border-color: var(--brand-green);
+  color: var(--on-primary);
+}
+.circle-link:hover {
+  background: var(--brand-green-secondary);
+}
+.footer,
+.engineering {
+  background: var(--inverse-surface);
+}
+.footer-wordmark {
+  color: var(--brand-green);
+}
+.partner h2 > span,
+.process-left h2 > span,
+.partnership h2 > span,
+.problem h2 span {
+  color: #526b3a;
+}
+@media (max-width: 1100px) {
+  .hero-title {
+    gap: 32px;
+  }
+  .logo-doodle {
+    width: 200px;
+    height: 85px;
+  }
+  .brand-sticker {
+    width: 175px;
+    padding: 22px 15px 12px;
+  }
+}
+@media (max-width: 800px) {
+  .logo-doodle {
+    width: 175px;
+    height: 75px;
+    margin-top: -10px;
+  }
+  .hero-index {
+    font-size: 8px;
+  }
+  .hero-intro > p {
+    font-size: 13px;
+  }
+  .hero-discover {
+    font-size: 11px;
+  }
+  .brand-sticker {
+    width: 155px;
+  }
+  .brand-sticker > span {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+}
+@media (max-width: 640px) {
+  .hero-title {
+    position: relative;
+    gap: 25px;
+    margin: 32px 0 28px;
+  }
+  .hero-title h1 {
+    font-size: clamp(40px, 10.2vw, 66px);
+    line-height: 1.09;
+  }
+  .hero-title h1 > .hero-line {
+    max-width: 100%;
+  }
+  .hero-highlight::before {
+    border-radius: 3px;
+  }
+  .hero-intro {
+    padding-bottom: 0;
+  }
+  .logo-doodle {
+    display: none;
+  }
+  .hero-intro > p {
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+  .hero-discover {
+    font-size: 12px;
+    margin-top: 7px;
+    min-height: 44px;
+  }
+  .hero-media {
+    height: 390px;
+    border-radius: 18px;
+  }
+  .brand-sticker {
+    width: 145px;
+    padding: 20px 12px 12px;
+    top: 14%;
+    right: 6%;
+    border-radius: 10px;
+  }
+  .brand-sticker > span {
+    font-size: 6px;
+    margin-top: 10px;
+  }
+  .sticker-scribble {
+    height: 14px;
+  }
+  .hero-scroll-doodle {
+    width: 60%;
+    height: 50%;
+    left: 1%;
+    top: 24%;
+  }
+  .hero-scroll-doodle path {
+    stroke-width: 2;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title h1,
+  .logo-doodle,
+  .brand-sticker,
+  .hero-media-bottom {
+    transform: none !important;
+  }
+  .scroll-progress {
+    display: none;
+  }
+}

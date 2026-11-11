@@ -35,3 +35,7 @@ Motion is implemented with Motion for React and CSS, not mocked. Reduced-motion 
 ## Not claimed
 
 No contact submission, Resend provider test, guaranteed inbox delivery, full service-page suite, real client evidence, deployment, Lighthouse/Core Web Vitals benchmark, real-user usability study or comprehensive assistive-technology audit. The assessment explicitly says that no information was submitted. No production-readiness claim is made.
+
+## Brand-led hero refinement
+
+Logo-green filled actions/highlights, official-SVG doodles, spring-smoothed layered parallax and scroll-progress indicator were added. Lint and production build passed. All 12 homepage browser tests passed, including axe/responsive checks at all five target widths, image completion and reduced-motion/touch behavior. The motion test additionally verifies a changed image transform after scrolling and preserved SVG source references.
