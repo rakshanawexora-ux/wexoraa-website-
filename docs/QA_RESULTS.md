@@ -46,3 +46,11 @@ Latest user request: remove global motion controls; use #86C232, #61892F, #22262
 Browser checks exercise native modal opening, initial focus, Escape closing and trigger focus restoration, mobile axe accessibility, compact payload and accepted-submission UI using a mocked API (no live email). SEO checks cover domain-dependent canonical/structured metadata and the actual generated social PNG. A live browser reduced-motion change exposed a nonreactive hook; the hook now subscribes to media-query changes, without any visible global controller. Contact delivery still requires the documented Resend configuration; indexing/canonical URLs require the actual `NEXT_PUBLIC_SITE_URL` at build time.
 
 Verification: production build, lint, TypeScript and diff whitespace checks pass. The 28-case suite passed 26 cases before two motion regressions were corrected. Targeted rechecks pass for film playback/reduced-motion changes, compact popup submission and card reduced-motion behavior. The card assertion accepts an identity transform matrix as well as `none` because both represent zero movement. The film's playback controls stay outside parallax movement; other scene/hero scroll effects remain.
+
+## Header services and footer follow-up
+
+Added all 12 service URLs to a server-rendered header disclosure, grouped Build/Operate/Grow. Services overview stays a direct link; the separate toggle supports keyboard/touch, Escape and focus restoration. Mobile navigation scrolls within the available viewport. Restored the large green “Got a good challenge?” enquiry CTA, followed by an inset rounded charcoal footer with capabilities links. Skill query `keyboard navigation dropdown --domain ux` returned applicable keyboard navigation, skip-link and sticky-navigation guidance. Existing skip links and brand palette remain.
+
+Verification includes desktop/mobile disclosure activation and service navigation, rendered HTML service URLs, restored CTA/dialog, responsive homepage accessibility at five widths, inner-page footer accessibility and route checks. Green-panel supporting text was darkened after axe identified insufficient contrast.
+
+Final result: all 8 targeted navigation/route/responsive accessibility tests pass (35.6 seconds). Production build, lint, TypeScript and whitespace checks pass.

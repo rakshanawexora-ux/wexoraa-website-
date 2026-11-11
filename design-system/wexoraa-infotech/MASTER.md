@@ -29,7 +29,9 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 - Service filters/search solve discovery; empty results include a reset and a contact route.
 - Pointer tilt is bounded and omitted for coarse pointers/reduced motion. Essential actions also work by click/tap/keyboard.
 - Section entry uses translation, not faded body copy. State correctness does not wait for an animation end.
-- Global motion pause lives in the header; do not float it over form fields or search controls.
+- No global motion controller (user request). Respect browser reduced-motion preferences.
+- Header services disclosure contains all 12 direct service URLs, grouped Build/Operate/Grow. Keep the Services overview link separate, with a 44px disclosure button, keyboard access and Escape/focus restoration.
+- Preserve the expressive green “Got a good challenge?” CTA above the rounded charcoal footer; CTA opens the existing enquiry dialog.
 - Explicit film play/pause; no autoplay, no audio, no external embed.
 - No locked scroll, cursor removal, fake urgency, invented client proof or email-gated assessment results.
 

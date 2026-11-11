@@ -12,6 +12,7 @@ import {
 import {
   ArrowUpRight,
   ArrowDown,
+  ChevronDown,
   Plus,
   Minus,
   Menu,
@@ -22,7 +23,7 @@ import {
   MoveUpRight,
 } from "lucide-react";
 import { solutions, processSteps } from "@/content/site";
-import { serviceFor } from "@/content/catalog";
+import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
 import MotionShowcase from "@/components/motion-showcase";
 import { EnquiryCTA } from "@/components/enquiry-popup";
@@ -62,18 +63,25 @@ function Reveal({
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesToggle = useRef<HTMLButtonElement>(null);
   const ref = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    if (!open) return;
+    if (!open && !servicesOpen) return;
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setOpen(false);
-        ref.current?.focus();
+        if (servicesOpen) {
+          setServicesOpen(false);
+          servicesToggle.current?.focus();
+        } else {
+          setOpen(false);
+          ref.current?.focus();
+        }
       }
     };
     document.addEventListener("keydown", key);
     return () => document.removeEventListener("keydown", key);
-  }, [open]);
+  }, [open, servicesOpen]);
   return (
     <header className="header">
       <Link href="/" className="wordmark" aria-label="Wexoraa Infotech home">
@@ -97,17 +105,100 @@ export function Header() {
           ["Work", "/work"],
           ["About", "/about"],
           ["Contact", "/contact"],
-        ].map(([text, url]) => (
-          <Link
-            key={url}
-            href={url}
-            data-active={pathname === url || pathname.startsWith(url + "/")}
-            aria-current={pathname === url ? "page" : undefined}
-            onClick={() => setOpen(false)}
-          >
-            {text}
-          </Link>
-        ))}
+        ].map(([text, url]) =>
+          text === "Services" ? (
+            <div
+              className="nav-services"
+              key={url}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget))
+                  setServicesOpen(false);
+              }}
+            >
+              <div className="nav-services-trigger">
+                <Link
+                  href="/services"
+                  data-active={pathname.startsWith("/services")}
+                  aria-current={pathname === "/services" ? "page" : undefined}
+                  onClick={() => {
+                    setOpen(false);
+                    setServicesOpen(false);
+                  }}
+                >
+                  Services
+                </Link>
+                <button
+                  ref={servicesToggle}
+                  type="button"
+                  aria-label="Browse all services"
+                  aria-expanded={servicesOpen}
+                  aria-controls="services-dropdown"
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                >
+                  <ChevronDown size={16} />
+                </button>
+              </div>
+              <div
+                className="services-dropdown"
+                id="services-dropdown"
+                hidden={!servicesOpen}
+              >
+                <div className="services-dropdown-heading">
+                  <span>CONNECTED CAPABILITIES</span>
+                  <Link
+                    href="/services"
+                    onClick={() => {
+                      setOpen(false);
+                      setServicesOpen(false);
+                    }}
+                  >
+                    View all services <Arrow />
+                  </Link>
+                </div>
+                <div className="services-dropdown-grid">
+                  {["build", "operate", "grow"].map((group) => (
+                    <section key={group} aria-label={`${group} services`}>
+                      <h2>{group}</h2>
+                      {services
+                        .filter((service) => service.group === group)
+                        .map((service) => (
+                          <Link
+                            key={service.slug}
+                            href={`/services/${service.slug}`}
+                            aria-current={
+                              pathname === `/services/${service.slug}`
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={() => {
+                              setOpen(false);
+                              setServicesOpen(false);
+                            }}
+                          >
+                            {service.title}
+                            <ArrowUpRight size={15} aria-hidden="true" />
+                          </Link>
+                        ))}
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Link
+              key={url}
+              href={url}
+              data-active={pathname === url || pathname.startsWith(url + "/")}
+              aria-current={pathname === url ? "page" : undefined}
+              onClick={() => {
+                setOpen(false);
+                setServicesOpen(false);
+              }}
+            >
+              {text}
+            </Link>
+          ),
+        )}
       </nav>
       <EnquiryCTA
         interest="Project enquiry"
@@ -123,7 +214,10 @@ export function Header() {
         aria-label={open ? "Close navigation" : "Open navigation"}
         aria-controls="main-navigation"
         aria-expanded={open}
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+          setServicesOpen(false);
+        }}
       >
         {open ? <X /> : <Menu />}
       </button>
@@ -782,72 +876,102 @@ export function ContactLinks() {
 }
 export function Footer() {
   return (
-    <footer className="footer footer-final">
-      <div className="footer-brief">
-        <div>
-          <p className="eyebrow">
-            <span /> YOUR NEXT MOVE
-          </p>
-          <h2>Have a project in mind?</h2>
-          <p>Let’s turn the right conversation into a clear next step.</p>
-        </div>
-        <EnquiryCTA interest="Project enquiry" className="button">
-          Tell us about it <Arrow />
+    <footer className="footer footer-final footer-modern">
+      <div className="footer-invite">
+        <p className="eyebrow">
+          <span /> YOUR NEXT CHAPTER
+        </p>
+        <EnquiryCTA interest="Project enquiry" className="footer-invite-link">
+          Got a good
+          <br />
+          challenge?
+          <span>
+            <ArrowUpRight size={52} />
+          </span>
         </EnquiryCTA>
+        <p>Bring the ambition. Let’s find the right direction.</p>
       </div>
-      <div className="footer-main">
-        <div className="footer-brand">
-          <Link
-            href="/"
-            className="footer-logo"
-            aria-label="Wexoraa Infotech home"
-          >
-            <Image
-              src="/brand/wexoraa-logo.svg"
-              alt="Wexoraa Infotech"
-              width={296}
-              height={60}
-              className="brand-logo"
-            />
-          </Link>
-          <p>
-            Design, technology and growth.
-            <br />
-            Connected around your business.
-          </p>
-          <span className="footer-place">COIMBATORE, TAMIL NADU · INDIA</span>
+      <div className="footer-panel">
+        <div className="footer-panel-top">
+          <span>ONE PARTNER. CONNECTED POSSIBILITIES.</span>
+          <span>
+            BUILD <i /> OPERATE <i /> GROW
+          </span>
         </div>
-        <nav aria-label="Footer explore">
-          <h3>Explore</h3>
-          {[
-            ["Solutions", "/solutions"],
-            ["Services", "/services"],
-            ["Work", "/work"],
-            ["About", "/about"],
-            ["Our process", "/process"],
-          ].map(([t, h]) => (
-            <Link key={h} href={h}>
-              {t}
+        <div className="footer-main">
+          <div className="footer-brand">
+            <Link
+              href="/"
+              className="footer-logo"
+              aria-label="Wexoraa Infotech home"
+            >
+              <Image
+                src="/brand/wexoraa-logo.svg"
+                alt="Wexoraa Infotech"
+                width={296}
+                height={60}
+                className="brand-logo"
+              />
             </Link>
-          ))}
-        </nav>
-        <nav aria-label="Footer connect">
-          <h3>Let’s connect</h3>
-          <EnquiryCTA
-            interest="Project enquiry"
-            className="footer-enquiry-link"
-          >
-            Discuss your project <Arrow />
-          </EnquiryCTA>
-          <Link href="/business-assessment">Find your business problem</Link>
-          <Link href="/contact">Contact Wexoraa</Link>
-          <ContactLinks />
-        </nav>
-      </div>
-      <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Wexoraa Infotech</span>
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/#top">Back to top ↑</Link>
+            <p>
+              Design, technology and growth.
+              <br />
+              Connected around your business.
+            </p>
+            <span className="footer-place">COIMBATORE, TAMIL NADU · INDIA</span>
+          </div>
+          <nav aria-label="Footer explore">
+            <h3>Explore</h3>
+            {[
+              ["Solutions", "/solutions"],
+              ["Services", "/services"],
+              ["Work", "/work"],
+              ["About", "/about"],
+              ["Our process", "/process"],
+            ].map(([t, h]) => (
+              <Link key={h} href={h}>
+                {t}
+              </Link>
+            ))}
+          </nav>
+          <nav aria-label="Footer services">
+            <h3>Capabilities</h3>
+            {services
+              .filter((service) =>
+                [
+                  "websites-ecommerce",
+                  "brand-strategy-identity",
+                  "ui-ux-design",
+                  "crm-lead-management",
+                ].includes(service.slug),
+              )
+              .map((service) => (
+                <Link key={service.slug} href={`/services/${service.slug}`}>
+                  {service.title}
+                </Link>
+              ))}
+            <Link href="/services">
+              All services <Arrow />
+            </Link>
+          </nav>
+          <nav aria-label="Footer connect">
+            <h3>Let’s connect</h3>
+            <EnquiryCTA
+              interest="Project enquiry"
+              className="footer-enquiry-link"
+            >
+              Discuss your project <Arrow />
+            </EnquiryCTA>
+            <Link href="/business-assessment">Find your business problem</Link>
+            <Link href="/contact">Contact Wexoraa</Link>
+            <ContactLinks />
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Wexoraa Infotech</span>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/#top">Back to top ↑</Link>
+        </div>
       </div>
     </footer>
   );
