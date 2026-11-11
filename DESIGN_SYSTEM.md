@@ -1,51 +1,55 @@
-# Wexoraa design system — homepage review
+# Wexoraa design system — modern agency revision
 
-## Foundation
+## Direction
 
-A custom implementation of Material 3 principles, with an editorial Syne display layer. This is not a claim of official Material component certification. The current component set covers the homepage; forms, dialogs, feedback and assessment components belong to subsequent phases.
+Light mineral surfaces, dark typography, olive secondary tones, controlled Wexoraa green accents, large editorial imagery and restrained technical sections. Material 3 principles underpin semantic roles, shapes, states, adaptive layouts and motion. This is a custom implementation, not a claim of official component certification. The official logo is still absent; the header is text, not a replacement logo. The brand green remains provisional.
 
 ## Color roles
 
-Centralized in `src/app/globals.css`. Brand green `#84C341` is provisional until the official logo is supplied. Never use it behind white button text: the primary action uses dark `#17220E` text. Secondary text uses darker neutral greens after axe contrast review.
+All values live in `src/app/globals.css`.
 
-| Role                                     | Value             | Purpose                        |
-| ---------------------------------------- | ----------------- | ------------------------------ |
-| primary / on-primary                     | #84C341 / #17220E | Main actions, selected accents |
-| primary-container / on-primary-container | #E9F3DC / #283D13 | Tonal emphasis                 |
-| secondary / on-secondary                 | #536348 / #FFFFFF | Secondary emphasis             |
-| surface / on-surface                     | #FDFDFB / #20221E | Main canvas and text           |
-| surface-container-low                    | #F5F6F1           | Quiet sections                 |
-| surface-container                        | #EEF0E9           | Cards                          |
-| surface-container-high                   | #E5E8DE           | Stronger tonal surfaces        |
-| surface-variant                          | #E7EADF           | Decorative supporting surfaces |
-| outline / outline-variant                | #74796B / #DCE0D4 | Strong and quiet boundaries    |
-| error / on-error                         | #B3261E / #FFFFFF | Reserved for form feedback     |
-| inverse-surface / inverse-on-surface     | #171C18 / #F4F5EF | Technical section              |
+| Role                                     | Value             | Purpose                                        |
+| ---------------------------------------- | ----------------- | ---------------------------------------------- |
+| primary / on-primary                     | #84C341 / #15210C | Brand accents and readable green surfaces      |
+| primary-container / on-primary-container | #E7F1DC / #243817 | Selected assessment options and tonal emphasis |
+| secondary / on-secondary                 | #4F6350 / #FFFFFF | Supporting emphasis                            |
+| surface / on-surface                     | #F8F9F5 / #20251E | Main canvas and primary text                   |
+| surface-container-low                    | #F0F2EC           | Quiet supporting surfaces                      |
+| surface-container                        | #E9ECE3           | Supporting cards                               |
+| surface-container-high                   | #DFE5D7           | Stronger tonal surfaces                        |
+| surface-variant                          | #E3E7DE           | Supporting decoration                          |
+| outline / outline-variant                | #6D7766 / #D4DBCC | Strong and quiet boundaries                    |
+| error / on-error                         | #B3261E / #FFFFFF | Inline selection-limit feedback                |
+| inverse-surface / inverse-on-surface     | #202820 / #F8FAF2 | Dark sections and inverse filled actions       |
+
+Never place white text on the brand green without checking contrast. The principal filled CTA uses an inverse dark treatment. Radio/checkbox selection uses both a native control and tonal/border changes. Contrast is checked through axe at the five responsive targets; automated results are not full WCAG certification.
 
 ## Typography
 
-Syne variable weights 600–700: display and heading roles. Manrope 400–700: body and interface. Official OFL fonts are bundled, with licenses in `public/fonts`. Google Fonts requests were denied by the cloud policy, so this stage uses `next/font/local`; switch to `next/font/google` only when `fonts.googleapis.com` and `fonts.gstatic.com` are allowed and a new build succeeds.
+The redesign replaces Syne and Manrope with **Space Grotesk** for editorial headings and **DM Sans** for body/interface text, following the user's request to change typography. Variable OFL font files and license notices are bundled in `public/fonts`. `next/font/local` avoids network dependencies; Google Fonts endpoints were blocked in this environment.
 
-All 15 requested type roles are CSS variables: display large/medium/small, headline large/medium/small, title large/medium/small, body large/medium/small and label large/medium/small. Hero and section sizes use clamp. Body copy uses 16px, with smaller interface metadata. Display text uses negative tracking and short line lengths.
+All 15 Material-inspired typography roles remain available as CSS custom properties. Display sizes are fluid using clamp; body copy is generally 15–16px, supporting metadata 9–12px. Compact image labels are supplemental, not the sole source of essential information. Use short headings and controlled negative tracking.
 
-## Spacing and adaptive layout
+## Spacing, shapes and elevation
 
-4px scale, from `--space-1` to `--space-24`. Fluid section padding 64–120px; container gutters 24–80px. Six-column process becomes three columns on mobile; solution panels and project grids become single-column. Mobile navigation uses a disclosure with Escape and focus restoration.
-
-## Shape and elevation
-
-Extra-small 4, small 8, medium 12, large 20, extra-large 28, full 999px. Quiet cards favor borders and tonal fill; only technical nodes and concept art receive restrained shadows. Full radius is reserved for small status dots and the final action.
-
-## Motion
-
-Short 160ms and medium 300ms, standard `cubic-bezier(.2,0,0,1)`. Motion for React supports the hero transition, CSS handles simple state changes and signal flow. Content remains visible before hydration. Reduced motion removes transitions and signal animation. No scroll hijacking, custom cursor or parallax is included at this review stage.
+4px spacing scale; fluid 24–80px gutters and 72–144px section padding. Small 8px, medium 12px, large 20px, extra-large 28px and full shape tokens. Full radius is reserved for actions/chips, while media use large rounded rectangles and assessment cards use medium corners. Elevation is quiet and concentrated on the business-problem finder.
 
 ## Components and states
 
-Filled/outlined/text actions, icon action, responsive navigation, segmented comparison, tab group, selectable system nodes, process steps, project cards, content notice. Hover and pressed states use tonal changes; focus-visible has a 3px ring with offset. Selected state is exposed through aria-pressed/aria-selected. Disabled buttons have opacity and cursor treatment. Loading/error/success form components are not yet implemented.
+Filled/outlined/text/icon actions, responsive navigation, image cards, selectable problem cards, accessible solution tabs, process accordion, native radio/checkbox cards, step progress, inline notices and result chips. Default/hover/pressed/focus-visible/disabled/selected states are implemented. Form loading/sending/success/error states belong to the future email backend; the current assessment only produces an on-device summary and never claims a submission.
 
-Example: `.button` = filled; `.button.button-outline` = outlined; `.text-link` = supporting action. Interactive options must be buttons; navigation must use links. Future form primitives should follow the same tokens and use Radix where it materially improves keyboard behavior.
+Selection states expose aria-selected/aria-pressed or native checked state. Process controls expose aria-expanded and matching panel IDs. Focus-visible uses a 3px high-contrast ring. The selection-limit notice uses role=status. Buttons and inputs use semantic controls, not clickable decorative elements.
 
-## Accessibility
+## Motion
 
-Semantic headings and landmarks, skip link, visible focus, keyboard-operated tabs (arrows/Home/End), selected states, live comparison/process feedback, labelled icon actions, reduced motion. Do not convey selection through color alone. Maintain at least 4.5:1 contrast for regular text and 3:1 for large text. Automated axe checks supplement manual keyboard/layout review and do not establish complete WCAG conformance.
+Motion for React: bounded hero scroll parallax, subtle viewport translation, spring cursor-follow accent and magnetic primary CTA. CSS: project-image zoom, arrow direction, tonal hover, card lift and slow decorative marquee. Shared short 180ms and medium 360ms durations with standard Material-inspired easing. Nothing uses scroll hijacking or removes the native cursor.
+
+Fine-pointer devices alone receive the cursor accent. Touch and reduced-motion users do not. Reduced motion also disables parallax, marquee and CSS transitions; essential content is visible before animation or hydration. Cursor overlays are aria-hidden and pointer-events:none, so they cannot intercept controls or text selection.
+
+## Adaptive behavior
+
+Desktop uses split editorial introductions and staggered image cards. Mobile stacks the content, changes solution tabs to a horizontal row, uses a navigation disclosure and keeps assessment controls comfortably spaced. Tested at 360, 390, 768, 1024 and 1440px. No horizontal document overflow is allowed.
+
+## Asset usage
+
+`hero-art.webp`: original AI-generated silver/green sculptural concept, approximately 155KB. `brand-art.webp`: original AI-generated unbranded packaging concept, approximately 192KB. Both use next/image with reserved dimensions, responsive sizes and lazy loading below the fold. Neither is evidence of client work; the section explicitly says studio concepts. No fake client identities, testimonials or project results are introduced.

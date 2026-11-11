@@ -1,25 +1,33 @@
-# UX strategy and reference access
+# UX strategy — agency redesign
 
-## Scope and research status
+## Evidence and scope
 
-This is a brief-informed design hypothesis, not research with users. All six supplied reference URLs were requested during development and rejected with a proxy 403: Stripe India, DD.NYC web design, Widelab, Phenomenon Studio, Storm Brain and League Design. No observations about their visual design or usability are claimed. The original composition follows the supplied light-first, editorial, technical direction.
+This is brief-informed design and expert inspection, not research with real visitors. The six requested reference sites were previously blocked by proxy 403; no invented observations about them are claimed. The user rejected the initial visual direction and requested images, different typography, modern minimal composition, motion, hover, parallax and business-problem discovery. This revision responds directly to that feedback.
 
-## Jobs to be done
+## Visitor jobs
 
-| Visitor                            | Job                                                                  | Homepage response                                                  |
-| ---------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Growing business owner             | Find one accountable partner without coordinating multiple suppliers | Vendor comparison, connected diagram, partnership stages           |
-| Established company decision-maker | Understand technical fit and integration approach                    | Dark systems architecture, Operate panel, process timeline         |
-| Premium brand stakeholder          | Judge quality of thinking and digital execution                      | Editorial hierarchy, Build panel, explicitly illustrative concepts |
+| Visitor                            | Need                                                     | Response                                                        |
+| ---------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- |
+| Growing business owner             | Understand where to start without knowing service jargon | Four-path problem finder and full business assessment           |
+| Established-company decision maker | Evaluate technical and operational fit                   | Operate solution, engineering cards, process detail             |
+| Brand stakeholder                  | Judge creative quality and digital thinking              | Original imagery, editorial hierarchy, labelled studio concepts |
 
-Journey A, known need: navigation → services/capabilities → relevant solution tab → project conversation. Journey B, uncertain need: business challenge → connected delivery comparison → business conversation. The 15-question assessment follows design approval; the current assessment CTA scrolls to a business-conversation section and never pretends a questionnaire exists.
+Known-need journey: What we do → Build/Operate/Grow → service chip → contact conversation. Uncertain-need journey: business roadblock → stage → explained recommendation → relevant contact intent, or the 15-question assessment.
 
-## Design decisions
+## Discovery logic
 
-Problem recognition precedes solution detail. A three-way Build/Operate/Grow tab group reduces initial choice load, while retaining explicit service names. Interactive diagrams explain coordination and system connection. Process steps expose supporting detail without an oversized paragraph grid. Project and ongoing engagement options support different commitment levels.
+The homepage finder maps an explicitly chosen challenge to a transparent direction. Business stage adds context, not a fake numerical score. The full assessment has 15 questions; the systems-connectivity question is omitted when daily operations are entirely manual. Progress recalculates to 14, and the omission is explained.
 
-No fake metrics, client logos, testimonials or delivery guarantees. Work cards are concepts with disclosures, not portfolio claims. Official logo and color sampling are pending. Contact numbers are rendered only when configured; no dummy numbers or email addresses are used. Contact route explicitly describes the preview's limitations.
+Recommendations follow explicit answers: unsatisfactory digital presence → Digital Presence; spreadsheets/inconsistent lead handling → Lead Management; separate/manual operations → Operations; system-connection gaps → CRM/ERP; repetitive work → Automation/AI; enquiries/inconsistent measurement → Marketing/Growth. Selected priorities determine order. No assessment claims scientific validation.
 
-## Design thinking progression
+No personal contacts are collected. Non-sensitive selections persist in the tab's session, can be revised, and can be cleared from the summary. The page explicitly states that nothing was submitted. Email capture is not implemented.
 
-Empathize/define: business brief and hypothesized visitor jobs. Ideate/prototype: this functional homepage. Test: automated browsers, keyboard behavior, axe and responsive review. Iterate: contrast and body-size corrections applied. Next step: stakeholder design review; then build assessment, real email forms and supporting routes. Real-user testing remains outstanding.
+## Visual and interaction rationale
+
+Space Grotesk replaces the wide Syne headings; DM Sans provides a quieter interface. Original sculptural imagery expresses connection without abstract flowchart overload. Studio concept imagery demonstrates an aesthetic direction without implying commissioned work. Material-inspired shape, tonal selection, native controls, focus and feedback conventions provide consistency.
+
+Motion is layered: bounded parallax for depth, image zoom and arrow feedback for affordance, cursor-follow and magnetic CTA for desktop detail. Native cursor and page scroll are preserved. Touch and reduced-motion alternatives are explicit.
+
+## Remaining evidence gaps
+
+Official logo, real client work, testimonials, actual company contacts and legal details remain missing. Do not substitute fabricated identities. Full business approval, real-user testing, backend delivery/security and deployment QA remain outstanding.

@@ -1,27 +1,20 @@
-# Implementation checkpoints
+# Current implementation and remaining work
 
-## Current review checkpoint: foundation + homepage
+## Completed redesign
 
-- Next.js/TypeScript project, locked dependencies and reusable content configuration.
-- Light-first homepage with Syne display, Manrope body, provisional green, tokenized Material 3 color/shape/state system.
-- Working system visual, comparison, solution tabs, process timeline, mobile navigation and relevant contact destinations.
-- Responsive and accessibility validation; screenshots for stakeholder review.
+- Modern minimal image-led homepage with original optimized artwork.
+- Space Grotesk + DM Sans typography and Material 3-inspired semantic tokens/states.
+- Desktop cursor-follow, magnetic CTA, bounded parallax, viewport movement, hover/zoom and reduced-motion/touch behavior.
+- Interactive homepage business-problem finder.
+- Browser-only 15-question assessment with a conditional 14-question path, session persistence, revision, ranking and deterministic recommendations.
+- Honest contact availability route and privacy notice describing local assessment storage.
+- Automated responsive/accessibility/motion/interaction/assessment checks and screenshots.
 
-The brief requires approval of the homepage direction before continuing. The remaining phases below have not been implemented.
+## Still required for complete business launch
 
-## After design approval
+1. Official logo, sampled green, approved contacts, real client work and optional testimonials.
+2. Contact collection and secure Resend email submission. Current assessment never submits anything.
+3. Full supporting solutions/services/work/about/process pages and finalized legal/privacy information.
+4. Complete canonical/domain configuration, sitemap/robots/social image, comprehensive assistive-technology, performance and deployment QA.
 
-1. Assessment: 15 questions, conditional flow, transparent recommendations, session-only non-sensitive persistence, privacy consent and revision controls.
-2. Email-only lead system: Zod validation, secure Resend handler, spam protection, safe structured email, failure/retry behavior and provider-acceptance success.
-3. Supporting pages: solutions, services, work templates, about, process, assessment thank-you and finalized privacy content.
-4. Full QA: form security, responsive assessment, manual accessibility, performance, SEO crawl configuration and deployment checks.
-
-## Missing content and configuration
-
-Non-blocking for design review: official logo, exact sampled green, approved client logos, real case studies/outcomes, genuine testimonials and approved social accounts. Do not substitute fabricated evidence.
-
-Required before contact launch: actual phone/WhatsApp, approved recipient inbox, verified sender domain, Resend credentials and finalized privacy details. Values must be entered securely, never in chat or committed files. Current contact route collects nothing.
-
-## Environment persistence
-
-Dependency installation, build and browser execution succeeded in the current machine. The onboarding draft read/update service returned INVALID_ARGUMENT and could not confirm saving install_script/start_skill. Reproduction and startup steps are in README.md; no reusable environment publication is claimed.
+The earlier onboarding settings service could not confirm saving its draft. Current setup is reproducible from README.md; no environment publication or deployment is claimed.

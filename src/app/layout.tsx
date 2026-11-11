@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-const syne = localFont({
-  src: "../../public/fonts/syne.ttf",
-  weight: "600 700",
+const display = localFont({
+  src: "../../public/fonts/space-grotesk.ttf",
+  weight: "400 700",
   variable: "--font-display",
   display: "swap",
 });
-const manrope = localFont({
-  src: "../../public/fonts/manrope.ttf",
+const body = localFont({
+  src: "../../public/fonts/dm-sans.ttf",
   weight: "400 700",
   variable: "--font-body",
   display: "swap",
@@ -34,7 +34,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${manrope.variable}`}>
+      <body className={`${display.variable} ${body.variable}`}>
         <a className="skip-link" href="#main">
           Skip to content
         </a>

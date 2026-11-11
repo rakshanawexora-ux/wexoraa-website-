@@ -1,18 +1,20 @@
-# Heuristic evaluation — homepage phase
+# Nielsen evaluation — redesign
 
-Expert inspection and automated testing, not a study with real users. Severity: 0 none observed; 1 cosmetic; 2 moderate; 3 major; 4 critical. Results are scoped to implemented pages.
+Expert inspection plus automated browser checks; no claim of real-user testing. Severity uses 1 cosmetic, 2 moderate, 3 major, 4 critical.
 
-| Nielsen heuristic               | Finding                                                   | Severity | Correction or status                                                                  |
-| ------------------------------- | --------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
-| Visibility of system status     | Interactive diagrams need clear selection feedback        | 2        | Selected state, aria-pressed, tab state and live summaries implemented                |
-| Match with the real world       | Abstract vendor labels could hide capabilities            | 2        | Concrete service lists and business outcomes accompany the diagram                    |
-| User control and freedom        | Mobile disclosure needs keyboard dismissal                | 2        | Escape closes navigation and restores toggle focus                                    |
-| Consistency and standards       | Multiple interaction styles could fragment the experience | 2        | Shared color, focus, action and spacing tokens                                        |
-| Error prevention                | Visitors could mistake concept art for client evidence    | 3        | Per-card labels and a separate disclosure explain illustrative content                |
-| Recognition rather than recall  | Users may not know which service fits                     | 2        | Business challenge, three solution areas and conversation path                        |
-| Flexibility and efficiency      | Tabs need complete keyboard behavior                      | 2        | Arrow keys, Home/End and roving tab index                                             |
-| Aesthetic and minimalist design | Secondary text was too small and pale                     | 2        | Body text enlarged; contrast colors revised after axe findings                        |
-| Recognize, diagnose and recover | A pretend enquiry would silently lose leads               | 3        | No submission form until backend is implemented; explicit availability notice         |
-| Help and documentation          | Missing contacts and business policies                    | 3        | Preview-only notice and deployment/content checklist; business details remain pending |
+| Heuristic                | Risk                                                   | Severity | Resolution                                                                         |
+| ------------------------ | ------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------- |
+| Visibility of status     | Visitor loses assessment position                      | 2        | Accurate current/total and percentage, including conditional branch                |
+| Match with real world    | Visitors cannot name the right service                 | 3        | Business-language roadblocks map to explained opportunities                        |
+| Control and freedom      | Wrong answer or accidental navigation                  | 2        | Back, skip, revise, restart and session answer restoration                         |
+| Consistency              | Ad hoc UI and unrelated effects                        | 2        | Shared semantic color/shape/type/motion tokens, native controls                    |
+| Error prevention         | Excess priority selections                             | 2        | Three-item maximum and inline notice, preserving existing selection                |
+| Recognition over recall  | Service jargon without context                         | 2        | Explicit service chips, problem explanation and supporting copy                    |
+| Efficiency               | Mouse-only interactions                                | 2        | Native radio/checkbox controls, arrow/Home/End tabs, Escape navigation             |
+| Aesthetic/minimal design | Previous design lacked agency imagery and hierarchy    | 3        | Replaced homepage composition, typography and visuals; restrained media and motion |
+| Error recovery           | False submission or invisible failure                  | 3        | No fake form send; summary explicitly says nothing was submitted                   |
+| Help/documentation       | Visitors mistake suggestions for diagnosis or evidence | 3        | Preliminary-summary disclaimer and explicit studio-concept labels                  |
 
-Required next-phase evaluation: assessment progress/branching, validation errors, preserved answers, email acceptance/failure/retry, duplicate suppression, spam protections, and privacy disclosure. None of those flows have been tested or claimed complete.
+Additional corrections: darker solution-tab metadata after contrast audit; responsive footer typography and concept overlays after screenshot review. Cursor overlay cannot intercept interactions and is disabled for touch/reduced motion. Viewport and asset-loading checks cover the requested widths.
+
+Pending: contact submission, email acceptance/failure/retry, server-side security, complete company privacy policy, manual screen-reader audit and real-user evaluation.

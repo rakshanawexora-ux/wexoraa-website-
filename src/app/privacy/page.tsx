@@ -16,8 +16,12 @@ export default function Privacy() {
           deserves care.
         </h1>
         <p>
-          This development preview has no enquiry submission, assessment storage
-          or analytics integration. It does not request contact information.
+          This development preview has no enquiry submission or analytics
+          integration. The business assessment keeps only your selected business
+          answers in this browser tab’s session storage, so you can revise them.
+          You can clear them using “Clear answers and start again” on the
+          summary screen. Nothing is sent to Wexoraa, and contact details are
+          not requested or stored.
         </p>
         <h2>Before enquiries launch</h2>
         <p>
