@@ -56,3 +56,7 @@ Buttons may use a bounded 3px/2px cursor attraction, rolling arrow, subtle light
 ## FAQ and compact discovery
 
 Native homepage FAQ disclosures share one content source with FAQPage structured data. Services must open on desktop hover while retaining touch click and keyboard Escape/focus behavior. Use compact borderless monochrome client marks, colour on hover and no visible pause button. Keep cursor effects small and transparent. Rolling-arrow wrappers must never inherit legacy footer-circle dimensions/backgrounds/colours. The systems service illustration uses wrapping DOM text rather than baked-in SVG labels to avoid clipped or overlapping captions on small screens.
+
+## Projects and client stories
+
+Use a large project image with a charcoal detail panel and manual previous/next browsing. Existing projects are labelled studio concepts until real commissioned work is supplied. The user requested existing client names in testimonial cards pending later updates: use `src/content/testimonials.ts`, with explicit pending states while quote fields are null. Never fill real client names with invented praise, people, ratings or results. Actual supplied feedback can replace the placeholder through the same content source. No autoplay or extra generic enquiry CTAs.

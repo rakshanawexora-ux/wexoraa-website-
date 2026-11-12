@@ -18,6 +18,8 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import ProjectShowcase from "@/components/project-showcase";
+import ClientStories from "@/components/client-stories";
 import HomeFaq from "@/components/home-faq";
 import SystemsIllustration from "@/components/systems-illustration";
 import ActionArrow from "@/components/action-arrow";
@@ -458,87 +460,6 @@ function Solutions() {
     </section>
   );
 }
-function Work() {
-  return (
-    <section className="work section" id="work">
-      <Reveal className="section-heading">
-        <div>
-          <Label>A FEW DESIGN IDEAS</Label>
-          <h2>
-            See what your next
-            <br />
-            project could look like.
-          </h2>
-        </div>
-        <span className="work-note">
-          STUDIO CONCEPTS
-          <br />
-          Not commissioned client work.
-        </span>
-      </Reveal>
-      <div className="work-grid">
-        <Link
-          href="/work/considered-brand-experience"
-          className="work-card"
-          data-cursor="View"
-        >
-          <div className="project-image brand-image">
-            <Image
-              src="/brand-art.webp"
-              alt="Editorial concept of an olive and cream skincare brand with carefully arranged packaging"
-              fill
-              sizes="(max-width:640px) 100vw, 60vw"
-            />
-            <span className="project-pill">BRAND EXPERIENCE</span>
-            <span className="project-view">
-              <Arrow />
-            </span>
-          </div>
-          <div className="work-title">
-            <div>
-              <h3>A considered first impression.</h3>
-              <p>Brand identity · Art direction · Digital experience</p>
-            </div>
-            <span>01 / CONCEPT</span>
-          </div>
-        </Link>
-        <Link
-          href="/work/connected-business-concept"
-          className="work-card secondary-project"
-          data-cursor="Explore"
-        >
-          <div className="project-image product-image">
-            <Image
-              src="/hero-art.webp"
-              alt="Connected silver and green sculptural forms as a technology concept"
-              fill
-              sizes="(max-width:640px) 100vw, 40vw"
-            />
-            <span className="project-pill">CONNECTED THINKING</span>
-            <div className="project-overlay">
-              <span>LESS FRICTION.</span>
-              <h3>
-                More
-                <br />
-                possibility.
-              </h3>
-            </div>
-            <span className="project-view">
-              <Arrow />
-            </span>
-          </div>
-          <div className="work-title">
-            <div>
-              <h3>Designed to connect.</h3>
-              <p>Digital strategy · Systems · Automation</p>
-            </div>
-            <span>02 / CONCEPT</span>
-          </div>
-        </Link>
-      </div>
-    </section>
-  );
-}
 function Process() {
   const [active, setActive] = useState(0);
   return (
@@ -789,7 +710,8 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <MotionShowcase />
         <ProblemFinder configured={emailReady} />
         <Solutions />
-        <Work />
+        <ProjectShowcase />
+        <ClientStories />
         <Capabilities />
         <Process />
         <Partnership />

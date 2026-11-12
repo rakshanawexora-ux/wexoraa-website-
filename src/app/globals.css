@@ -7640,3 +7640,373 @@ html:has(.enquiry-dialog[open]) {
 .client-logo-card.client-dark:hover .client-sprite {
   filter: grayscale(0) invert(0);
 }
+
+/* Large project features with purposeful, manual browsing. */
+.project-showcase {
+  background: white;
+  border-top: 1px solid var(--outline-variant);
+}
+.showcase-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 42px;
+}
+.showcase-heading-row h2 {
+  font-size: clamp(38px, 5vw, 70px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  margin-top: 24px;
+}
+.showcase-heading-row > p {
+  max-width: 370px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--brand-slate);
+}
+.showcase-heading-row > p strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 14px;
+}
+.project-showcase-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--brand-charcoal);
+}
+.showcase-image-link {
+  display: block;
+  min-width: 0;
+}
+.project-showcase .showcase-image {
+  position: relative;
+  height: 100%;
+  min-height: 540px;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--surface-container-low);
+}
+.project-showcase .showcase-image > img {
+  object-fit: cover;
+  transform: translateY(var(--image-drift, 0px)) scale(1.08);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.showcase-image-link:hover .showcase-image > img {
+  transform: translateY(var(--image-drift, 0px)) scale(1.13);
+}
+.showcase-image-tag {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: white;
+  color: var(--brand-charcoal);
+  border-radius: 6px;
+  font-size: 11px;
+  padding: 9px 12px;
+  max-width: calc(100% - 48px);
+  line-height: 1.5;
+}
+.showcase-image-arrow {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--brand-charcoal);
+}
+.showcase-project-copy {
+  padding: 42px;
+  align-self: center;
+  color: white;
+  min-width: 0;
+}
+.showcase-project-index {
+  color: var(--primary);
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.showcase-project-copy h3 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.1vw, 48px);
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  font-weight: 500;
+  margin-top: 25px;
+}
+.showcase-project-copy > p {
+  font-size: 14px;
+  line-height: 1.85;
+  margin-top: 24px;
+  color: color-mix(in srgb, white 83%, transparent);
+}
+.showcase-work-label {
+  display: block;
+  font-family: monospace;
+  color: color-mix(in srgb, white 75%, transparent);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 30px;
+}
+.showcase-project-copy ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 28px;
+}
+.showcase-project-copy li {
+  padding-block: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  border-bottom: 1px solid color-mix(in srgb, white 18%, transparent);
+}
+.showcase-project-copy :focus-visible {
+  outline-color: var(--primary);
+}
+.showcase-project-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding-top: 22px;
+}
+.showcase-project-bottom > p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: monospace;
+  font-size: 12px;
+}
+.showcase-project-bottom > p span {
+  color: var(--brand-slate);
+}
+.showcase-project-bottom > p b {
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--brand-slate);
+  margin-left: 16px;
+}
+.showcase-project-bottom > div {
+  display: flex;
+  gap: 10px;
+}
+.showcase-project-bottom button {
+  width: 48px;
+  padding: 12px;
+}
+/* Real client names; visibly pending text until actual feedback is supplied. */
+.client-stories {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  gap: 7%;
+  background: var(--primary-container);
+  border-top: 1px solid var(--outline-variant);
+}
+.client-stories-intro h2 {
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+  margin-top: 24px;
+}
+.client-stories-intro > p:last-of-type {
+  color: var(--brand-slate);
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 310px;
+  margin-top: 24px;
+}
+.client-stories-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+.client-stories-controls > button {
+  width: 48px;
+  padding: 12px;
+  background: white;
+}
+.client-stories-controls > span {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--brand-slate);
+  margin-left: 8px;
+}
+.client-stories-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.client-story-card {
+  border: 1px solid var(--outline-variant);
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.client-story-status {
+  font-size: 9px;
+  font-family: monospace;
+  letter-spacing: 0.8px;
+  color: var(--brand-slate);
+  line-height: 1.6;
+}
+.client-story-mark {
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+.client-story-mark > span {
+  position: relative;
+  overflow: hidden;
+  width: 172px;
+  max-width: 100%;
+  height: 70px;
+}
+.client-story-mark > .story-mark-tall {
+  width: 70px;
+}
+.client-story-mark img {
+  position: absolute;
+  width: 400%;
+  max-width: none;
+  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  filter: grayscale(1);
+}
+.story-mark-dark img {
+  filter: grayscale(1) invert(1);
+}
+.client-story-placeholder {
+  color: var(--brand-slate);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  margin: 26px 0 30px;
+}
+.client-story-card blockquote {
+  font-family: var(--font-display);
+  font-size: 23px;
+  line-height: 1.6;
+  margin: 24px 0 32px;
+  color: var(--brand-charcoal);
+}
+.client-story-person {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--outline-variant);
+}
+.client-story-person h3 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.client-story-person p,
+.client-story-person > span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--brand-slate);
+  margin-top: 6px;
+}
+@media (max-width: 1100px) {
+  .showcase-project-copy {
+    padding: 30px;
+  }
+  .client-stories {
+    gap: 35px;
+  }
+  .client-story-card {
+    padding: 22px;
+  }
+}
+@media (max-width: 900px) {
+  .showcase-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .project-showcase-layout {
+    grid-template-columns: 1fr;
+  }
+  .project-showcase .showcase-image {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16/10;
+  }
+  .showcase-project-copy {
+    padding: 35px;
+  }
+  .client-stories {
+    grid-template-columns: 1fr;
+  }
+  .client-stories-intro > p:last-of-type {
+    max-width: 500px;
+  }
+}
+@media (max-width: 640px) {
+  .showcase-heading-row {
+    margin-bottom: 28px;
+  }
+  .showcase-heading-row h2 {
+    font-size: 42px;
+  }
+  .showcase-heading-row > p {
+    font-size: 14px;
+  }
+  .project-showcase .showcase-image {
+    aspect-ratio: 4/3;
+  }
+  .showcase-image-tag {
+    top: 16px;
+    left: 16px;
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+  .showcase-project-copy {
+    padding: 26px;
+  }
+  .showcase-project-copy h3 {
+    font-size: 34px;
+  }
+  .showcase-project-bottom > p b {
+    display: none;
+  }
+  .client-stories-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .client-story-card {
+    padding: 25px;
+  }
+  .client-story-mark > span {
+    width: 172px;
+  }
+  .client-story-mark > .story-mark-tall {
+    width: 70px;
+  }
+  .client-story-placeholder {
+    font-size: 18px;
+    margin-block: 20px 26px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-showcase .showcase-image > img,
+  .showcase-image-link:hover .showcase-image > img {
+    transform: none;
+  }
+}

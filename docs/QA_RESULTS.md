@@ -90,3 +90,9 @@ Visual/interaction artifacts: `/workspace/artifacts/live-motion-desktop.png`, `l
 Review images: `/workspace/artifacts/refined-service-dropdown.png`, `compact-client-logos.png`, `home-faq-desktop.png`, `fixed-footer-arrow.png`, `responsive-systems-illustration.png`.
 
 Final logo visual refinement retains tonal detail with grayscale instead of flattening artwork to solid black. White-lettered marks use inverted grayscale on the white canvas and return to their original colours/dark backing on hover. The original sprite is unchanged. Final marquee behavior/reduced-motion check passed **1/1 (5.4s)** and production build passed after this CSS-only adjustment.
+
+## Project showcase and testimonial-ready cards
+
+**37 tests passed (1.3m)**. Added coverage verifies next/previous project browsing, updated concept links, keyboard activation, client-card browsing, explicit pending feedback with no quote blocks, phone-width axe checks and no horizontal overflow. Existing homepage/inner-page, FAQ, hover menu, logo, motion, survey, API, SEO and enquiry checks remain passing. Build, lint, TypeScript and whitespace checks pass.
+
+Artifacts: `/workspace/artifacts/project-showcase-1440.png`, `project-showcase-390.png`, `client-stories-1440.png`, `client-stories-390.png`. These include clearly marked studio concepts and pending testimonial content, per the user's request to update client feedback later.
