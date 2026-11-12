@@ -7627,3 +7627,16 @@ html:has(.enquiry-dialog[open]) {
 .footer-modern .footer-invite-link:hover > .action-arrow {
   color: inherit;
 }
+/* Keep tonal detail in monochrome marks instead of flattening their artwork. */
+.client-logo-viewport .client-sprite {
+  filter: grayscale(1);
+}
+.client-logo-card.client-dark .client-sprite {
+  filter: grayscale(1) invert(1);
+}
+.client-logo-card:hover .client-sprite {
+  filter: grayscale(0);
+}
+.client-logo-card.client-dark:hover .client-sprite {
+  filter: grayscale(0) invert(0);
+}
