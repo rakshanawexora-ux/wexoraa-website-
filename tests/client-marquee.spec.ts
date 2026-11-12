@@ -32,12 +32,12 @@ test("client marks stay readable with controllable motion and a static reduced-m
     name: "Oneway Drop Taxi",
     exact: true,
   });
-  await expect(logo).toHaveCSS("filter", "grayscale(1)");
+  await expect(logo).toHaveCSS("filter", "grayscale(1) brightness(0)");
   await logo.hover();
-  await expect(logo).toHaveCSS("filter", "grayscale(0)");
+  await expect(logo).toHaveCSS("filter", "grayscale(0) brightness(1)");
   await window.evaluate((el) => el.blur());
   await page.mouse.move(2, 2);
-  await expect(logo).toHaveCSS("filter", "grayscale(1)");
+  await expect(logo).toHaveCSS("filter", "grayscale(1) brightness(0)");
   await expect(section.locator(".client-marquee-track")).toHaveCSS(
     "animation-play-state",
     "running",

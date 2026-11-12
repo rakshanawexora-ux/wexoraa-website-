@@ -30,18 +30,23 @@ test("home explains each service group with a working illustration and relevant 
       .click();
     const panel = page.getByRole("tabpanel");
     await expect(panel.getByRole("img", { name: area.imageAlt })).toBeVisible();
-    await expect
-      .poll(() =>
-        panel
-          .locator("img")
-          .evaluate(
-            (el) =>
-              el instanceof HTMLImageElement &&
-              el.complete &&
-              el.naturalWidth > 0,
-          ),
-      )
-      .toBe(true);
+    if (area.id !== "operate")
+      await expect
+        .poll(() =>
+          panel
+            .locator("img")
+            .evaluate(
+              (el) =>
+                el instanceof HTMLImageElement &&
+                el.complete &&
+                el.naturalWidth > 0,
+            ),
+        )
+        .toBe(true);
+    else
+      await expect(
+        panel.getByText("One clear view.", { exact: true }),
+      ).toBeVisible();
     for (const service of services.filter(
       (service) => service.group === area.id,
     ))

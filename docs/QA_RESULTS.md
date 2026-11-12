@@ -82,3 +82,9 @@ Removed the visible Pause logos button and repeated homepage CTAs from the film,
 **35 tests passed (1.2m)**, including a new live graphic selection/reduced-motion/mobile accessibility check. Existing hover contrast, five-width homepage scans, client-logo behavior, survey/scoring, routes/SEO, service tabs, card interactions, video playback and enquiry retry/popup checks remain passing. Production build, lint, TypeScript and whitespace checks pass.
 
 Visual/interaction artifacts: `/workspace/artifacts/live-motion-desktop.png`, `live-motion-mobile.png`, `/workspace/artifacts/button-and-motion-preview.webm`.
+
+## FAQ, hover services and compact client strip
+
+**36 tests passed (1.3m)**. Coverage includes native FAQ mouse/keyboard expansion and mobile axe, matching visible FAQ/schema content, desktop services hover traversal/closing and existing touch/keyboard navigation, compact monochrome/colour client marks, responsive systems illustration and the footer arrow remaining 18px rather than inheriting a legacy circle. Following a final footer-arrow colour inheritance fix, targeted FAQ/navigation and light/dark hover contrast rechecks passed **2/2 (6.4s)**. Production build, lint, TypeScript and whitespace checks pass.
+
+Review images: `/workspace/artifacts/refined-service-dropdown.png`, `compact-client-logos.png`, `home-faq-desktop.png`, `fixed-footer-arrow.png`, `responsive-systems-illustration.png`.

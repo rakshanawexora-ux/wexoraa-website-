@@ -10,9 +10,6 @@ export default function ClientMarquee() {
     <section className="client-marquee" aria-labelledby="client-title">
       <div className="client-marquee-heading">
         <div>
-          <p className="eyebrow">
-            <span /> OUR CLIENTS
-          </p>
           <h2 id="client-title">Businesses we’ve worked with.</h2>
         </div>
       </div>

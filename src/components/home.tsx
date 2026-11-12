@@ -18,6 +18,8 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import HomeFaq from "@/components/home-faq";
+import SystemsIllustration from "@/components/systems-illustration";
 import ActionArrow from "@/components/action-arrow";
 import BusinessMotionGraphic from "@/components/business-motion-graphic";
 import ClientMarquee from "@/components/client-marquee";
@@ -62,6 +64,17 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesToggle = useRef<HTMLButtonElement>(null);
+  const hoverOpened = useRef(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  useEffect(
+    () => () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    },
+    [],
+  );
   const ref = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open && !servicesOpen) return;
@@ -69,6 +82,7 @@ export function Header() {
       if (e.key === "Escape") {
         if (servicesOpen) {
           setServicesOpen(false);
+          hoverOpened.current = false;
           servicesToggle.current?.focus();
         } else {
           setOpen(false);
@@ -107,6 +121,28 @@ export function Header() {
             <div
               className="nav-services"
               key={url}
+              onPointerEnter={(e) => {
+                if (
+                  e.pointerType !== "mouse" ||
+                  !matchMedia("(min-width:901px)").matches
+                )
+                  return;
+                cancelClose();
+                if (!servicesOpen) hoverOpened.current = true;
+                setServicesOpen(true);
+              }}
+              onPointerLeave={(e) => {
+                if (
+                  e.pointerType !== "mouse" ||
+                  !matchMedia("(min-width:901px)").matches
+                )
+                  return;
+                cancelClose();
+                closeTimer.current = setTimeout(() => {
+                  setServicesOpen(false);
+                  hoverOpened.current = false;
+                }, 160);
+              }}
               onBlur={(e) => {
                 if (!e.currentTarget.contains(e.relatedTarget))
                   setServicesOpen(false);
@@ -130,7 +166,14 @@ export function Header() {
                   aria-label="Browse all services"
                   aria-expanded={servicesOpen}
                   aria-controls="services-dropdown"
-                  onClick={() => setServicesOpen(!servicesOpen)}
+                  onClick={() => {
+                    cancelClose();
+                    if (hoverOpened.current) {
+                      hoverOpened.current = false;
+                      return;
+                    }
+                    setServicesOpen(!servicesOpen);
+                  }}
                 >
                   <ChevronDown size={16} />
                 </button>
@@ -375,14 +418,18 @@ function Solutions() {
           aria-labelledby={`tab-${solutions[active].id}`}
         >
           <div className="solution-service-image">
-            <Image
-              src={solutions[active].image}
-              alt={solutions[active].imageAlt}
-              width={800}
-              height={450}
-              loading="eager"
-              sizes="(max-width:900px) 100vw, 50vw"
-            />
+            {active === 1 ? (
+              <SystemsIllustration label={solutions[active].imageAlt} />
+            ) : (
+              <Image
+                src={solutions[active].image}
+                alt={solutions[active].imageAlt}
+                width={800}
+                height={450}
+                loading="eager"
+                sizes="(max-width:900px) 100vw, 50vw"
+              />
+            )}
           </div>
           <span className="solution-icon">
             {active === 0 ? (
@@ -746,6 +793,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <Capabilities />
         <Process />
         <Partnership />
+        <HomeFaq />
       </main>
       <Footer />
     </>

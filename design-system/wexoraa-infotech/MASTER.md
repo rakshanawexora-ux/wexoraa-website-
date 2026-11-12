@@ -52,3 +52,7 @@ Client marks default to monochrome and reveal their supplied colours on hover. N
 ## Purposeful motion polish
 
 Buttons may use a bounded 3px/2px cursor attraction, rolling arrow, subtle light and press response. Preserve immediate #222629/white colour changes and readable labels. Touch and reduced motion omit attraction. The capability section's Website / Systems / Marketing graphic changes actual readable DOM stages and explanations; decorative travelling packets pause offscreen and stop for reduced motion. Stagger card entry and bound project-image depth; keep native scrolling and no extra generic enquiry prompts.
+
+## FAQ and compact discovery
+
+Native homepage FAQ disclosures share one content source with FAQPage structured data. Services must open on desktop hover while retaining touch click and keyboard Escape/focus behavior. Use compact borderless monochrome client marks, colour on hover and no visible pause button. Keep cursor effects small and transparent. Rolling-arrow wrappers must never inherit legacy footer-circle dimensions/backgrounds/colours. The systems service illustration uses wrapping DOM text rather than baked-in SVG labels to avoid clipped or overlapping captions on small screens.
