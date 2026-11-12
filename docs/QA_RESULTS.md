@@ -102,3 +102,7 @@ Artifacts: `/workspace/artifacts/project-showcase-1440.png`, `project-showcase-3
 **38 tests passed (1.4m)**. New browser check measures the stage remaining at 112px during two different native scroll positions, verifies the image transform changes and the second project activates, and verifies static positioning for reduced-motion/mobile layouts. Existing manual project controls, gallery/client stories, FAQ/menu, five-width contrast scans, survey/API/SEO and enquiry checks remain passing. Build, lint, TypeScript and whitespace checks pass.
 
 Actual scrolling proof: `/workspace/artifacts/sticky-parallax-preview.webm`; chapter captures: `sticky-project-chapter-1.png` and `sticky-project-chapter-2.png` in the same directory. The recording scrolls down and back through the pinned scene, rather than showing only a static sticky CSS declaration.
+
+## Responsive sticky activation fix
+
+New compact-window checks at 1366×635 and 800×600 verify actual pinned coordinates, action visibility within the viewport, native scrolling and no horizontal overflow. Phone image pinning was also measured manually at y=96 before/after scrolling, with a static reduced-motion fallback. In the full 41-case run, 39 passed and the two new compact checks hit a test-side lexical-variable error; after fixing that test callback, all **4 sticky checks passed (7.5s)**. Build, lint, TypeScript and whitespace checks pass. Screenshots: `/workspace/artifacts/laptop-sticky-project.png`, `phone-sticky-project.png`.

@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/content/catalog";
 import ActionArrow from "./action-arrow";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
-const stickyQuery = "(min-width: 1001px) and (min-height: 680px)";
+const stickyQuery = "(min-width: 768px) and (min-height: 500px)";
 function subscribeSticky(update: () => void) {
   const media = window.matchMedia(stickyQuery);
   media.addEventListener("change", update);
@@ -54,7 +54,9 @@ export default function ProjectShowcase() {
       return;
     }
     const top =
-      track.current.getBoundingClientRect().top + window.scrollY - 112;
+      track.current.getBoundingClientRect().top +
+      window.scrollY -
+      parseFloat(getComputedStyle(stage.current).top);
     const distance = Math.max(
       0,
       track.current.offsetHeight - stage.current.offsetHeight,

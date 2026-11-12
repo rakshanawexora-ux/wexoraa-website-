@@ -8033,7 +8033,7 @@ html:has(.enquiry-dialog[open]) {
 .project-scroll-cue {
   display: none;
 }
-@media (min-width: 1001px) and (min-height: 680px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
   .project-story-track {
     height: 230svh;
   }
@@ -8127,7 +8127,7 @@ html:has(.enquiry-dialog[open]) {
     transition: none;
   }
 }
-@media (min-width: 1001px) and (min-height: 680px) and (max-height: 800px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 768px) and (min-height: 500px) and (max-height: 800px) and (prefers-reduced-motion: no-preference) {
   .project-story-stage .showcase-work-label,
   .project-story-stage .showcase-project-copy ul {
     display: none;
@@ -8137,5 +8137,80 @@ html:has(.enquiry-dialog[open]) {
   }
   .project-story-stage .showcase-project-copy h3 {
     font-size: 30px;
+  }
+}
+
+/* Keep scroll storytelling active in real laptop and VS Code preview sizes. */
+@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
+  .project-story-stage .project-showcase-layout {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    height: min(680px, calc(100svh - 215px));
+    min-height: 0;
+  }
+  .project-story-stage .showcase-image {
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+  .project-story-stage .showcase-project-copy {
+    padding: 22px 26px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1000px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
+  .project-story-stage {
+    top: 96px;
+  }
+  .project-story-stage .project-showcase-layout {
+    height: calc(100svh - 195px);
+  }
+  .solutions-layout .solution-menu,
+  .process-left,
+  .client-stories-intro {
+    position: static;
+  }
+}
+@media (min-width: 768px) and (min-height: 500px) and (max-height: 680px) and (prefers-reduced-motion: no-preference) {
+  .project-story-stage .showcase-project-copy {
+    padding: 18px 22px;
+  }
+  .project-story-stage .showcase-project-copy h3 {
+    font-size: 25px;
+    line-height: 1.1;
+    margin-top: 12px;
+  }
+  .project-story-stage .showcase-project-copy > p {
+    font-size: 12px;
+    line-height: 1.65;
+    margin-top: 12px;
+  }
+  .project-story-stage .showcase-project-index {
+    font-size: 9px;
+  }
+  .project-story-stage .showcase-project-copy > .button {
+    margin-top: 16px;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 767px) and (min-height: 550px) and (prefers-reduced-motion: no-preference) {
+  .project-showcase-layout {
+    overflow: clip;
+  }
+  .showcase-image-link {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    z-index: 0;
+  }
+  .showcase-project-copy {
+    position: relative;
+    z-index: 1;
+    background: var(--brand-charcoal);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-image-link {
+    position: static;
   }
 }

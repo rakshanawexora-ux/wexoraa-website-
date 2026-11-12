@@ -75,3 +75,7 @@ The optional source renderer is `scripts/render-studio-film.mjs`. It requires Ch
 ## Imported UI/UX skill
 
 The user-requested UI UX Pro Max skill is vendored at `.agents/skills/ui-ux-pro-max`, with MIT license and pinned source revision in IMPORTED.md. Read its SKILL.md and run its Python search script by the absolute installed path. Adopted project guidance is in `design-system/wexoraa-infotech/MASTER.md`; official brand constraints override mismatched generic palettes/fonts. The motion pause control is integrated into the header so it cannot cover search or enquiry fields.
+
+### After pulling changes locally
+
+Stop the currently running server with Ctrl+C. `git pull origin main` updates source files; it does not rebuild an already-running production server. For a fresh production preview, run `npm run build` followed by `npm run start`. For development, restart with `npm run dev`. Check `git log -1 --oneline` to confirm the expected commit, then refresh the browser. No new dependency installation is required for the responsive sticky fix.
