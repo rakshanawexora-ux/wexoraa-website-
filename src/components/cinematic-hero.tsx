@@ -26,11 +26,13 @@ export default function CinematicHero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const depthY = useTransform(() => py.get() * 12 + scrollYProgress.get() * 75);
+  const depthY = useTransform(
+    () => py.get() * 12 + scrollYProgress.get() * 140,
+  );
   const depthX = useTransform(px, [-1, 1], [-18, 18]);
   const fieldX = useTransform(px, [-1, 1], [-28, 28]);
-  const fieldY = useTransform(py, [-1, 1], [-22, 22]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -35]);
+  const fieldY = useTransform(() => py.get() * 22 - scrollYProgress.get() * 90);
+  const titleY = useTransform(scrollYProgress, [0, 1], [0, -65]);
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(([entry]) =>

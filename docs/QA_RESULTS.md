@@ -96,3 +96,9 @@ Final logo visual refinement retains tonal detail with grayscale instead of flat
 **37 tests passed (1.3m)**. Added coverage verifies next/previous project browsing, updated concept links, keyboard activation, client-card browsing, explicit pending feedback with no quote blocks, phone-width axe checks and no horizontal overflow. Existing homepage/inner-page, FAQ, hover menu, logo, motion, survey, API, SEO and enquiry checks remain passing. Build, lint, TypeScript and whitespace checks pass.
 
 Artifacts: `/workspace/artifacts/project-showcase-1440.png`, `project-showcase-390.png`, `client-stories-1440.png`, `client-stories-390.png`. These include clearly marked studio concepts and pending testimonial content, per the user's request to update client feedback later.
+
+## Native sticky project chapters
+
+**38 tests passed (1.4m)**. New browser check measures the stage remaining at 112px during two different native scroll positions, verifies the image transform changes and the second project activates, and verifies static positioning for reduced-motion/mobile layouts. Existing manual project controls, gallery/client stories, FAQ/menu, five-width contrast scans, survey/API/SEO and enquiry checks remain passing. Build, lint, TypeScript and whitespace checks pass.
+
+Actual scrolling proof: `/workspace/artifacts/sticky-parallax-preview.webm`; chapter captures: `sticky-project-chapter-1.png` and `sticky-project-chapter-2.png` in the same directory. The recording scrolls down and back through the pinned scene, rather than showing only a static sticky CSS declaration.
