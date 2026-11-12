@@ -48,3 +48,7 @@ Cinematic hero → retained original motion film → conversational 12-question 
 ## Current homepage interaction refinements
 
 Client marks default to monochrome and reveal their supplied colours on hover. No visible Pause logos control: the focusable client strip pauses on hover or keyboard focus and uses a static grid for reduced motion. Hover CTAs use #222629 with white text/icons; change both colours immediately, preserving only small transform feedback. Keep the homepage free of repeated generic enquiry CTAs in the film, process, capability cards and partnership sections. Header, hero, survey and final footer actions are the main entry points.
+
+## Purposeful motion polish
+
+Buttons may use a bounded 3px/2px cursor attraction, rolling arrow, subtle light and press response. Preserve immediate #222629/white colour changes and readable labels. Touch and reduced motion omit attraction. The capability section's Website / Systems / Marketing graphic changes actual readable DOM stages and explanations; decorative travelling packets pause offscreen and stop for reduced motion. Stagger card entry and bound project-image depth; keep native scrolling and no extra generic enquiry prompts.

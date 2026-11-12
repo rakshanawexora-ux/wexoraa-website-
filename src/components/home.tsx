@@ -18,6 +18,8 @@ import {
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import Survey from "@/components/assessment";
+import ActionArrow from "@/components/action-arrow";
+import BusinessMotionGraphic from "@/components/business-motion-graphic";
 import ClientMarquee from "@/components/client-marquee";
 import CinematicHero from "@/components/cinematic-hero";
 import MotionShowcase from "@/components/motion-showcase";
@@ -26,7 +28,7 @@ import { usePathname } from "next/navigation";
 import { useExperienceMotion as useReducedMotion } from "@/hooks/use-experience-motion";
 
 function Arrow() {
-  return <ArrowUpRight size={19} aria-hidden="true" />;
+  return <ActionArrow />;
 }
 function Label({ children }: { children: React.ReactNode }) {
   return (
@@ -550,6 +552,7 @@ function Capabilities() {
           easier. We help you get both right.
         </p>
       </div>
+      <BusinessMotionGraphic />
       <div className="engineering-grid">
         {[
           [

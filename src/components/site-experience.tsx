@@ -15,8 +15,33 @@ export default function SiteExperience() {
     cards.forEach((c) => c.classList.add("experience-card"));
     let frame = 0;
     let active: HTMLElement | null = null;
+    let action: HTMLElement | null = null;
+    const resetAction = () => {
+      action?.style.removeProperty("--action-x");
+      action?.style.removeProperty("--action-y");
+    };
     const pointer = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
+      const nextAction = (e.target as Element)?.closest<HTMLElement>(
+        ".button,.film-toggle,.service-enquire",
+      );
+      if (action !== nextAction) resetAction();
+      action = nextAction;
+      if (action) {
+        const r = action.getBoundingClientRect();
+        action.style.setProperty(
+          "--action-x",
+          `${Math.max(-3, Math.min(3, (e.clientX - r.left - r.width / 2) * 0.035))}px`,
+        );
+        action.style.setProperty(
+          "--action-y",
+          `${Math.max(-2, Math.min(2, (e.clientY - r.top - r.height / 2) * 0.06))}px`,
+        );
+        action.style.setProperty(
+          "--action-glow",
+          `${((e.clientX - r.left) / r.width) * 100}%`,
+        );
+      }
       const card = (e.target as Element)?.closest<HTMLElement>(
         ".experience-card",
       );
@@ -38,6 +63,7 @@ export default function SiteExperience() {
       });
     };
     const leave = () => {
+      resetAction();
       if (active) {
         active.style.setProperty("--tilt-x", "0deg");
         active.style.setProperty("--tilt-y", "0deg");
@@ -64,6 +90,31 @@ export default function SiteExperience() {
         "main > section:not(.hero-cinematic):not(.page-hero), main .catalog-card, main .process-page-list article",
       )
       .forEach((el) => observer.observe(el));
+    const staggerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const index = [...(el.parentElement?.children || [])].indexOf(el);
+          el.animate(
+            [
+              { translate: "0 20px", scale: ".985" },
+              { translate: "0 0", scale: "1" },
+            ],
+            {
+              duration: 650,
+              delay: Math.min(index * 75, 225),
+              easing: "cubic-bezier(.22,1,.36,1)",
+            },
+          );
+          staggerObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.12 },
+    );
+    document
+      .querySelectorAll(".engineering-card,.solution-menu button,.work-title")
+      .forEach((el) => staggerObserver.observe(el));
     let scrollFrame = 0;
     const scroll = () => {
       cancelAnimationFrame(scrollFrame);
@@ -73,6 +124,15 @@ export default function SiteExperience() {
           "--site-progress",
           `${total > 0 ? scrollY / total : 0}`,
         );
+        document
+          .querySelectorAll<HTMLElement>(".project-image")
+          .forEach((el) => {
+            const r = el.getBoundingClientRect();
+            el.style.setProperty(
+              "--image-drift",
+              `${Math.max(-18, Math.min(18, (innerHeight / 2 - r.top - r.height / 2) * 0.045))}px`,
+            );
+          });
         document
           .querySelectorAll<HTMLElement>("[data-parallax]")
           .forEach((el) => {
@@ -90,6 +150,8 @@ export default function SiteExperience() {
       cancelAnimationFrame(frame);
       cancelAnimationFrame(scrollFrame);
       observer.disconnect();
+      staggerObserver.disconnect();
+      resetAction();
       document.removeEventListener("pointermove", pointer);
       document.removeEventListener("pointerleave", leave);
       window.removeEventListener("scroll", scroll);

@@ -10,6 +10,7 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import ActionArrow from "./action-arrow";
 import { EnquiryCTA } from "./enquiry-popup";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 
@@ -99,7 +100,7 @@ export default function CinematicHero() {
           className="button cinematic-enquiry"
           interest="Let’s build something together"
         >
-          Let’s build something <ArrowUpRight size={19} />
+          Let’s build something <ActionArrow />
         </EnquiryCTA>
       </motion.div>
       <motion.div
