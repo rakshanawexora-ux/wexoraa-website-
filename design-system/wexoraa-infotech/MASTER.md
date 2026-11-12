@@ -66,3 +66,7 @@ Use a large project image with a charcoal detail panel and manual previous/next 
 Latest project behavior: desktop/tablet >=768px wide and >=500px high uses a 230svh native scroll track, sticky stage at 112px, scroll-driven image depth/scale and concept changes. Manual arrows navigate through that same track. Do not intercept wheel events or lock scrolling. Mobile/short/reduced-motion views retain normal flow and manual browsing. Keep the scene and controls within the viewport; supplementary service lists may be omitted in short pinned stages because the full project route remains available. Sticky service menus/process introductions and stronger bounded hero depth support the same scroll narrative.
 
 Responsive sticky visibility: do not restrict to tall desktop-only windows. Enable the pinned scene at 768×500 and larger, with compact typography and stage sizing. Phones use native image-only sticky stacking; reduced motion stays static. Manual navigation reads the actual sticky top offset rather than assuming a fixed desktop header.
+
+## Hero slide behavior
+
+Three hero messages rotate every six seconds while visible and not being keyboard-interacted with. No pause/play UI in the hero (explicit user request). Named slide selectors allow direct selection. Hide/offscreen/focus/reduced-motion states stop automatic updates; reduced motion retains manual selection. Preserve one active h1, readable copy space, existing brand art and native pointer/scroll depth. Video playback controls elsewhere are separate and remain functional.

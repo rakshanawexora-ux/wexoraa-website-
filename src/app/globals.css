@@ -8214,3 +8214,89 @@ html:has(.enquiry-dialog[open]) {
     position: static;
   }
 }
+
+/* Hero carousel: a fresh message every six seconds, without playback controls. */
+.hero-cinematic .hero-slider-background {
+  opacity: 0;
+  transition: opacity 0.75s ease;
+}
+.hero-cinematic .hero-slider-background.is-active {
+  opacity: 1;
+}
+.cinematic-copy > p {
+  min-height: 87px;
+}
+.hero-slide-indicators {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.hero-slide-indicators > button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.hero-slide-indicators > button > span {
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: color-mix(in srgb, white 45%, transparent);
+  transition:
+    width 0.25s,
+    background 0.25s;
+  border-radius: 3px;
+}
+.hero-slide-indicators > button[aria-pressed="true"] > span {
+  width: 30px;
+  background: var(--primary);
+}
+.hero-slide-indicators > span {
+  font-family: monospace;
+  font-size: 10px;
+  margin-left: 12px;
+  color: color-mix(in srgb, white 80%, transparent);
+}
+@media (max-width: 640px) {
+  .cinematic-copy > p {
+    min-height: 76px;
+  }
+  .cinematic-bottom {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .hero-slide-indicators {
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+  .hero-slide-indicators > button {
+    width: 32px;
+    height: 44px;
+  }
+  .hero-slide-indicators > button > span {
+    width: 14px;
+  }
+  .hero-slide-indicators > button[aria-pressed="true"] > span {
+    width: 22px;
+  }
+  .hero-slide-indicators > span {
+    margin-left: 8px;
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic .hero-slider-background {
+    transition: none;
+  }
+}
+@media (max-width: 640px) {
+  .cinematic-copy > p {
+    min-height: 104px;
+  }
+}
