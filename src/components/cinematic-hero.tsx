@@ -10,7 +10,6 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { heroSlides } from "@/content/hero-slides";
 import ActionArrow from "./action-arrow";
 import { EnquiryCTA } from "./enquiry-popup";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
@@ -19,27 +18,6 @@ export default function CinematicHero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useExperienceMotion();
   const [visible, setVisible] = useState(true);
-  const [slideIndex, setSlideIndex] = useState(0);
-  const [focused, setFocused] = useState(false);
-  const slide = heroSlides[slideIndex];
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    function schedule() {
-      clearTimeout(timer);
-      if (visible && !reduced && !focused && !document.hidden) {
-        timer = setTimeout(
-          () => setSlideIndex((current) => (current + 1) % heroSlides.length),
-          6000,
-        );
-      }
-    }
-    schedule();
-    document.addEventListener("visibilitychange", schedule);
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("visibilitychange", schedule);
-    };
-  }, [slideIndex, visible, reduced, focused]);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const px = useSpring(x, { stiffness: 65, damping: 24 });
@@ -70,13 +48,6 @@ export default function CinematicHero() {
       className="hero hero-media hero-cinematic"
       data-cursor="Explore"
       data-orbit-active={visible && !reduced}
-      data-hero-slide={slideIndex + 1}
-      aria-roledescription="carousel"
-      aria-label="Wexoraa services"
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
-      }}
       onPointerMove={(e) => {
         if (reduced || e.pointerType !== "mouse") return;
         const bounds = e.currentTarget.getBoundingClientRect();
@@ -97,18 +68,14 @@ export default function CinematicHero() {
           scale: 1.12,
         }}
       >
-        {["/hero-art.webp", "/brand-art.webp"].map((src, index) => (
-          <Image
-            key={src}
-            src={src}
-            alt=""
-            fill
-            priority={index === 0}
-            loading={index === 0 ? undefined : "eager"}
-            sizes="100vw"
-            className={`hero-image hero-slider-background ${slide.image === src ? "is-active" : ""}`}
-          />
-        ))}
+        <Image
+          src="/hero-art.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero-image"
+        />
       </motion.div>
       <div className="cinematic-shade" aria-hidden="true" />
       <div className="cinematic-grid" aria-hidden="true" />
@@ -120,26 +87,17 @@ export default function CinematicHero() {
         className="cinematic-copy"
         style={{ y: reduced ? 0 : titleY }}
       >
-        <motion.h1
-          key={`title-${slideIndex}`}
-          initial={false}
-          animate={reduced ? {} : { y: [14, 0] }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span>{slide.first}</span>
-          <span>{slide.second}</span>
+        <h1>
+          <span>Good design.</span>
+          <span>Smart tech.</span>
           <span className="cinematic-last">
-            {slide.prefix} <em>{slide.accent}</em>
+            Real <em>impact.</em>
           </span>
-        </motion.h1>
-        <motion.p
-          key={`description-${slideIndex}`}
-          initial={false}
-          animate={reduced ? {} : { y: [10, 0] }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {slide.description}
-        </motion.p>
+        </h1>
+        <p>
+          We help you build a better website, simplify daily work and reach more
+          customers. One team, here to help.
+        </p>
         <EnquiryCTA
           className="button cinematic-enquiry"
           interest="Let’s build something together"
@@ -192,26 +150,7 @@ export default function CinematicHero() {
         <Link href="#challenge">
           SCROLL TO FIND YOUR STARTING POINT <ArrowDown size={15} />
         </Link>
-        <div
-          className="hero-slide-indicators"
-          role="group"
-          aria-label="Choose a hero slide"
-        >
-          {heroSlides.map((item, index) => (
-            <button
-              key={item.label}
-              type="button"
-              aria-label={`Show slide ${index + 1}: ${item.label}`}
-              aria-pressed={slideIndex === index}
-              onClick={() => setSlideIndex(index)}
-            >
-              <span />
-            </button>
-          ))}
-          <span aria-hidden="true">
-            0{slideIndex + 1} / 0{heroSlides.length}
-          </span>
-        </div>
+        <span>DESIGN / SOFTWARE / MARKETING</span>
       </div>
     </section>
   );
