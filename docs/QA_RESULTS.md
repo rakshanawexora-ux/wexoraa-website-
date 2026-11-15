@@ -106,3 +106,7 @@ Actual scrolling proof: `/workspace/artifacts/sticky-parallax-preview.webm`; cha
 ## Responsive sticky activation fix
 
 New compact-window checks at 1366×635 and 800×600 verify actual pinned coordinates, action visibility within the viewport, native scrolling and no horizontal overflow. Phone image pinning was also measured manually at y=96 before/after scrolling, with a static reduced-motion fallback. In the full 41-case run, 39 passed and the two new compact checks hit a test-side lexical-variable error; after fixing that test callback, all **4 sticky checks passed (7.5s)**. Build, lint, TypeScript and whitespace checks pass. Screenshots: `/workspace/artifacts/laptop-sticky-project.png`, `phone-sticky-project.png`.
+
+## Homepage snap scrolling
+
+Existing full regression run: 41 checks passed; the new snap check initially expected literal `y proximity`, while Chromium serializes the default-proximity value as `y`. After correcting that semantic assertion, the new check passed **1/1 (2.5s)**. It measures the FAQ settling at 100px from a nearby scroll position, verifies form-focus suppression, reduced-motion/phone fallback and no snapping on `/services`. Build, lint, TypeScript and whitespace checks pass. No user content, credentials, forms or contact routing changed.

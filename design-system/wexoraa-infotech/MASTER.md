@@ -66,3 +66,7 @@ Use a large project image with a charcoal detail panel and manual previous/next 
 Latest project behavior: desktop/tablet >=768px wide and >=500px high uses a 230svh native scroll track, sticky stage at 112px, scroll-driven image depth/scale and concept changes. Manual arrows navigate through that same track. Do not intercept wheel events or lock scrolling. Mobile/short/reduced-motion views retain normal flow and manual browsing. Keep the scene and controls within the viewport; supplementary service lists may be omitted in short pinned stages because the full project route remains available. Sticky service menus/process introductions and stronger bounded hero depth support the same scroll narrative.
 
 Responsive sticky visibility: do not restrict to tall desktop-only windows. Enable the pinned scene at 768×500 and larger, with compact typography and stage sizing. Phones use native image-only sticky stacking; reduced motion stays static. Manual navigation reads the actual sticky top offset rather than assuming a fixed desktop header.
+
+## Native homepage snapping
+
+Use home-only `scroll-snap-type: y proximity` on suitable desktop/tablet viewports. Major sections snap to their starts using native header scroll padding. No mandatory stops or wheel interception. Suppress snapping for focused survey/project/client controls and open enquiry dialogs. Phone, reduced-motion and other routes retain free scrolling. Long sections must remain readable/traversable, and existing sticky project storytelling must keep working.

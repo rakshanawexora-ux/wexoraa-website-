@@ -704,7 +704,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
   return (
     <>
       <Header />
-      <main id="main">
+      <main id="main" className="home-page">
         <CinematicHero />
         <ClientMarquee />
         <MotionShowcase />

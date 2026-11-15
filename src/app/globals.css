@@ -8214,3 +8214,40 @@ html:has(.enquiry-dialog[open]) {
     position: static;
   }
 }
+
+/* Home-only proximity snapping: settle at section edges without trapping long content. */
+@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
+  html:has(.home-page) {
+    scroll-snap-type: y proximity;
+  }
+  .home-page
+    > :is(
+      .hero-cinematic,
+      .motion-showcase,
+      .problem,
+      .solutions,
+      .project-showcase,
+      .client-stories,
+      .engineering,
+      .process,
+      .partnership,
+      .home-faq
+    ) {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+  html:has(.home-page) .footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+  html:has(.home-page .survey-container:focus-within),
+  html:has(.home-page .project-showcase:focus-within),
+  html:has(.home-page):has(dialog[open]) {
+    scroll-snap-type: none;
+  }
+}
+@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
+  html:has(.home-page .client-marquee:focus-within) {
+    scroll-snap-type: none;
+  }
+}
