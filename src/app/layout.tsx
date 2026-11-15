@@ -1,4 +1,3 @@
-import BrandFrameDefs from "@/components/brand-frame-defs";
 import { pageMetadata, organizationSchema } from "@/lib/seo";
 import StructuredData from "@/components/structured-data";
 import type { Metadata } from "next";
@@ -32,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${display.variable} ${body.variable}`}>
-        <BrandFrameDefs />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

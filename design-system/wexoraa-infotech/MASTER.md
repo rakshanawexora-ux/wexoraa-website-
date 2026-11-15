@@ -71,6 +71,6 @@ Responsive sticky visibility: do not restrict to tall desktop-only windows. Enab
 
 Use home-only `scroll-snap-type: y proximity` on suitable desktop/tablet viewports. Major sections snap to their starts using native header scroll padding. No mandatory stops or wheel interception. Suppress snapping for focused survey/project/client controls and open enquiry dialogs. Phone, reduced-motion and other routes retain free scrolling. Long sections must remain readable/traversable, and existing sticky project storytelling must keep working.
 
-## Signature container
+## Clean editorial redesign
 
-Use the original Wexoraa W-cut-out/lifted-corner frame on selected feature containers. Read `CONTAINER.md` before changing the shape or applying it elsewhere. The normalized source generates the web clip and three SVG masters. Preserve content safe areas, inset focus indicators, white negative space and simple form controls. Do not replace or recolour the official logo.
+The user rejected W-cut containers and approved a white, rounded editorial direction. Use simple 16–28px rounded feature surfaces, a white hero with charcoal type and a green underline, and a separate interactive charcoal artwork panel. Keep Space Grotesk / DM Sans and the supplied brand palette. Service tabs use charcoal selection with white copy; the adjacent visual panel stays light. Preserve the native sticky project chapter, survey, reduced-motion behavior and enquiry flow. No decorative clipping paths on reading or interactive surfaces.

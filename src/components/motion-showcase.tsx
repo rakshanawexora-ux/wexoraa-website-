@@ -26,7 +26,7 @@ export default function MotionShowcase() {
   }
   return (
     <section
-      className="motion-showcase section signature-frame signature-section"
+      className="motion-showcase section"
       aria-labelledby="showcase-heading"
     >
       <div className="showcase-heading">

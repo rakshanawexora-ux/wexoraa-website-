@@ -45,7 +45,7 @@ export default function CinematicHero() {
     <section
       ref={ref}
       id="top"
-      className="hero hero-media hero-cinematic signature-frame signature-section"
+      className="hero hero-media hero-cinematic"
       data-cursor="Explore"
       data-orbit-active={visible && !reduced}
       onPointerMove={(e) => {
@@ -59,29 +59,9 @@ export default function CinematicHero() {
         y.set(0);
       }}
     >
-      <motion.div
-        className="hero-image-wrap cinematic-backdrop"
-        aria-hidden="true"
-        style={{
-          x: reduced ? 0 : depthX,
-          y: reduced ? 0 : depthY,
-          scale: 1.12,
-        }}
-      >
-        <Image
-          src="/hero-art.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hero-image"
-        />
-      </motion.div>
-      <div className="cinematic-shade" aria-hidden="true" />
-      <div className="cinematic-grid" aria-hidden="true" />
       <div className="cinematic-meta">
-        <span>W.01 / WEXORAA</span>
-        <span>COIMBATORE, INDIA · CONNECTED EVERYWHERE</span>
+        <span>YOUR NEXT CHAPTER STARTS HERE</span>
+        <span>COIMBATORE ↗ WORKING EVERYWHERE</span>
       </div>
       <motion.div
         className="cinematic-copy"
@@ -105,31 +85,83 @@ export default function CinematicHero() {
           Let’s build something <ActionArrow />
         </EnquiryCTA>
       </motion.div>
-      <motion.div
-        className="orbital-field"
-        aria-hidden="true"
-        style={{ x: reduced ? 0 : fieldX, y: reduced ? 0 : fieldY }}
-      >
-        <div className="orbital-axis axis-horizontal" />
-        <div className="orbital-axis axis-vertical" />
-        {[1, 2, 3, 4].map((n) => (
-          <div key={n} className={`orbital-ring orbital-ring-${n}`}>
-            <span className="orbital-satellite" />
-            <span className="orbital-satellite satellite-secondary" />
+      <div className="hero-visual" aria-hidden="true">
+        <motion.div
+          className="hero-image-wrap cinematic-backdrop"
+          aria-hidden="true"
+          style={{
+            x: reduced ? 0 : depthX,
+            y: reduced ? 0 : depthY,
+            scale: 1.12,
+          }}
+        >
+          <Image
+            src="/hero-art.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hero-image"
+          />
+        </motion.div>
+        <div className="cinematic-shade" aria-hidden="true" />
+        <div className="cinematic-grid" aria-hidden="true" />
+        <motion.div
+          className="orbital-field"
+          aria-hidden="true"
+          style={{ x: reduced ? 0 : fieldX, y: reduced ? 0 : fieldY }}
+        >
+          <div className="orbital-axis axis-horizontal" />
+          <div className="orbital-axis axis-vertical" />
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className={`orbital-ring orbital-ring-${n}`}>
+              <span className="orbital-satellite" />
+              <span className="orbital-satellite satellite-secondary" />
+            </div>
+          ))}
+          <div className="orbital-core">
+            <span />
+            <i />
+            <b>W</b>
           </div>
-        ))}
-        <div className="orbital-core">
-          <span />
-          <i />
-          <b>W</b>
+          <span className="orbital-caption">
+            DIFFERENT DISCIPLINES.
+            <br />
+            ONE SHARED DIRECTION.
+          </span>
+          <span className="orbital-coordinate">W / 11.0168° N</span>
+        </motion.div>
+        <div className="hero-visual-label">
+          <span /> IDEAS INTO EVERYDAY IMPACT
         </div>
-        <span className="orbital-caption">
-          DIFFERENT DISCIPLINES.
-          <br />
-          ONE SHARED DIRECTION.
-        </span>
-        <span className="orbital-coordinate">W / 11.0168° N</span>
-      </motion.div>
+        <motion.div
+          className="hero-float-note note-design"
+          style={{ x: reduced ? 0 : depthX, y: reduced ? 0 : fieldY }}
+        >
+          <span>01 / DESIGN</span>
+          <strong>Make a lasting impression.</strong>
+          <div className="note-swatches">
+            <i />
+            <i />
+            <i />
+          </div>
+        </motion.div>
+        <motion.div
+          className="hero-float-note note-growth"
+          style={{ x: reduced ? 0 : fieldX, y: reduced ? 0 : py }}
+        >
+          <span>02 / BETTER SYSTEMS</span>
+          <strong>Less busywork. More possibility.</strong>
+          <div className="note-progress">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+        </motion.div>
+        <span className="hero-visual-foot">DESIGN + TECHNOLOGY + GROWTH</span>
+      </div>
       <div className="cinematic-paths">
         <Link href="#challenge" className="cinematic-card">
           <span>
