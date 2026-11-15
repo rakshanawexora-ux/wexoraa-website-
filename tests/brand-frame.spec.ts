@@ -12,7 +12,7 @@ test("signature frames preserve interactive content and export reusable SVG artw
     await hero.evaluate((el) => {
       const r = el.getBoundingClientRect();
       const point = document.elementFromPoint(
-        r.left + r.width * 0.746,
+        r.left + r.width * 0.25,
         r.top + r.height * 0.02,
       );
       return el.contains(point);

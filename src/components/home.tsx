@@ -419,7 +419,7 @@ function Solutions() {
           tabIndex={0}
           aria-labelledby={`tab-${solutions[active].id}`}
         >
-          <div className="solution-service-image signature-frame">
+          <div className="solution-service-image">
             {active === 1 ? (
               <SystemsIllustration label={solutions[active].imageAlt} />
             ) : (
