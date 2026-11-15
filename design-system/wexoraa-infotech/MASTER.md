@@ -73,4 +73,4 @@ Use home-only `scroll-snap-type: y proximity` on suitable desktop/tablet viewpor
 
 ## Signature container
 
-The user approved the Offset silhouette (option 01): raised rounded right shoulder, broad lower body. Read `CONTAINER.md` for safe areas. White is the main page background; use #86C232 for the survey chapter and accents, #222629 for feature panels and text. Keep ordinary forms and service illustrations simple. Preserve the official logo.
+Use the original Wexoraa W-cut-out/lifted-corner frame on selected feature containers. Read `CONTAINER.md` before changing the shape or applying it elsewhere. The normalized source generates the web clip and three SVG masters. Preserve content safe areas, inset focus indicators, white negative space and simple form controls. Do not replace or recolour the official logo.
