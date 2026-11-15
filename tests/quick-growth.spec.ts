@@ -11,6 +11,7 @@ test("four questions, animated preparation, visible result and contact-only foll
   page,
 }) => {
   await page.goto("/");
+  await page.locator(".survey-start").click();
   const check = page.locator(".quick-check");
   for (let i = 0; i < 4; i++) {
     await check.getByRole("radio").nth(2).check();

@@ -9,7 +9,7 @@ export default function SiteExperience() {
     if (reduced) return;
     const cards = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".catalog-card,.engineering-card,.deliverable-card,.work-card,.process-page-list article,.client-story-card,.portfolio-card,.portfolio-note,.quick-check",
+        ".catalog-card,.engineering-card,.deliverable-card,.work-card,.process-page-list article,.client-story-card,.portfolio-card,.portfolio-note",
       ),
     );
     cards.forEach((c) => c.classList.add("experience-card"));

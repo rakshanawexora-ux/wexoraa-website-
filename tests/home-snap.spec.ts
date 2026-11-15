@@ -4,6 +4,11 @@ test("home settles near section edges while forms, other pages and reduced motio
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator(".scroll-expand")).toHaveAttribute(
+    "data-progress",
+    /./,
+  );
   await expect(page.locator("html")).toHaveCSS(
     "scroll-snap-type",
     /^y(?: proximity)?$/,
@@ -19,12 +24,12 @@ test("home settles near section edges while forms, other pages and reduced motio
   await expect
     .poll(async () => Math.round((await faq.boundingBox())!.y))
     .toBe(100);
-  await page.locator(".embedded-survey input").first().focus();
+  await page.locator(".survey-start").click();
+  await expect(
+    page.getByRole("dialog", { name: "YOUR BUSINESS GROWTH CHECK" }),
+  ).toBeVisible();
   await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
-  await page
-    .locator(".embedded-survey input")
-    .first()
-    .evaluate((el) => el.blur());
+  await page.keyboard.press("Escape");
   await expect(page.locator("html")).toHaveCSS(
     "scroll-snap-type",
     /^y(?: proximity)?$/,

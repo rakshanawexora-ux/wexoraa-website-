@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
-import QuickGrowthCheck from "@/components/quick-growth-check";
+import GrowthInvitation from "@/components/growth-invitation";
 import ProjectShowcase from "@/components/project-showcase";
 import ClientStories from "@/components/client-stories";
 import HomeFaq from "@/components/home-faq";
@@ -311,38 +311,6 @@ export function Cursor() {
       className="cursor-accent"
       style={{ left: sx, top: sy }}
     />
-  );
-}
-function ProblemFinder({ configured = false }: { configured?: boolean }) {
-  return (
-    <section className="problem section" id="challenge">
-      <Reveal className="problem-intro">
-        <Label>LET’S CHECK YOUR BUSINESS</Label>
-        <h2>
-          How ready is your business
-          <br />
-          <span>for its next stage of growth?</span>
-        </h2>
-        <p>
-          Let’s find your next step. Just 4 quick questions about your website,
-          marketing and day-to-day work. See what’s going well and where a few
-          changes could help.
-        </p>
-        <div className="survey-benefits">
-          <span>✓ Get your business growth-readiness score</span>
-          <span>✓ See what to work on first</span>
-          <span>✓ See your snapshot before sharing contact details</span>
-        </div>
-        <a className="button survey-start" href="#home-survey-question">
-          Check my growth score <Arrow />
-        </a>
-        <p className="survey-explainer">
-          A practical check of your digital setup, not a sales forecast. Your
-          result is based on the answers you share.
-        </p>
-      </Reveal>
-      <QuickGrowthCheck configured={configured} />
-    </section>
   );
 }
 function Solutions() {
@@ -724,10 +692,10 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
       <main id="main" className="home-page">
         <CinematicHero />
         <ClientMarquee />
-        <MotionShowcase />
-        <ProblemFinder configured={emailReady} />
         <Solutions />
         <ProjectShowcase />
+        <MotionShowcase />
+        <GrowthInvitation configured={emailReady} />
         <ClientStories />
         <Capabilities />
         <Process />
