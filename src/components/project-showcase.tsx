@@ -94,7 +94,7 @@ export default function ProjectShowcase() {
       <div className="project-story-track" ref={track} data-sticky={sticky}>
         <div className="project-story-stage" ref={stage}>
           <div
-            className="project-showcase-layout"
+            className="project-showcase-layout signature-frame"
             aria-roledescription="carousel"
             aria-label="Studio concepts"
           >

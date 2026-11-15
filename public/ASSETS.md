@@ -15,3 +15,7 @@ motion/wexoraa-studio.mp4 is an original silent motion graphic composed from cod
 The earlier four inline marks (Exploring Munnar, the Covai home-services mark, Gym Hack and Purple Drop Taxi) were not available as local source files or within the image tool's reference window, so they have not been substituted or fabricated. Current marquee has four unique clients, with decorative repetitions for seamless scrolling. This is based on the user's identification of these businesses as clients; no extra testimonial, result or partnership claim was added.
 
 Latest display treatment: client marks are grayscale by default and reveal their supplied colours on the hovered card. This is a reversible CSS filter; the transparent source sprite is unchanged.
+
+## Signature container artwork
+
+`brand/wexoraa-signature-frame.svg`, its charcoal variant and outline variant are original vector container geometry, generated from `src/brand/signature.ts` using `scripts/export-brand-frame.mjs`. They are supporting brand frames, not replacements for the supplied official logo. Their rounded W cut-out/lifted-corner motif is applied through a reusable web SVG clip. See `design-system/wexoraa-infotech/CONTAINER.md` for safe-area/use guidance.

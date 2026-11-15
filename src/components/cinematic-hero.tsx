@@ -45,7 +45,7 @@ export default function CinematicHero() {
     <section
       ref={ref}
       id="top"
-      className="hero hero-media hero-cinematic"
+      className="hero hero-media hero-cinematic signature-frame signature-section"
       data-cursor="Explore"
       data-orbit-active={visible && !reduced}
       onPointerMove={(e) => {
@@ -80,7 +80,7 @@ export default function CinematicHero() {
       <div className="cinematic-shade" aria-hidden="true" />
       <div className="cinematic-grid" aria-hidden="true" />
       <div className="cinematic-meta">
-        <span>W.01 / INDEPENDENT DIGITAL STUDIO</span>
+        <span>W.01 / WEXORAA</span>
         <span>COIMBATORE, INDIA · CONNECTED EVERYWHERE</span>
       </div>
       <motion.div
@@ -133,14 +133,14 @@ export default function CinematicHero() {
       <div className="cinematic-paths">
         <Link href="#challenge" className="cinematic-card">
           <span>
-            01 / FIND THE GAP <ArrowUpRight size={17} />
+            01 / YOUR SCORE <ArrowUpRight size={17} />
           </span>
           <h2>Your next move.</h2>
           <p>12 questions. Your business growth score.</p>
         </Link>
         <Link href="/services" className="cinematic-card">
           <span>
-            02 / CONNECT THE DOTS <ArrowUpRight size={17} />
+            02 / SERVICES <ArrowUpRight size={17} />
           </span>
           <h2>Built around you.</h2>
           <p>Brand. Technology. Business growth.</p>

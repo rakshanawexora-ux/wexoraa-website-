@@ -34,7 +34,7 @@ Build before browser tests; they start the production server. Chromium defaults 
 - `/business-assessment`, `/business-assessment/thank-you`.
 - `/api/enquiry`, `/sitemap.xml`, `/robots.txt`.
 
-Service/project content is centralized in src/content/catalog.ts. The official SVG is preserved unchanged. UI greens are #83C040 and #53B900, with darker accessible text and derived tonal surfaces.
+Service/project content is centralized in src/content/catalog.ts. The official SVG is preserved unchanged. UI colours are #86C232, #61892F, #222629, #474B4F and #6B6E70, with accessible derived surfaces; the original logo artwork is unchanged.
 
 ## Survey score
 

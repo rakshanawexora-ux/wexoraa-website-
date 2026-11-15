@@ -110,3 +110,9 @@ New compact-window checks at 1366×635 and 800×600 verify actual pinned coordin
 ## Homepage snap scrolling
 
 Existing full regression run: 41 checks passed; the new snap check initially expected literal `y proximity`, while Chromium serializes the default-proximity value as `y`. After correcting that semantic assertion, the new check passed **1/1 (2.5s)**. It measures the FAQ settling at 100px from a nearby scroll position, verifies form-focus suppression, reduced-motion/phone fallback and no snapping on `/services`. Build, lint, TypeScript and whitespace checks pass. No user content, credentials, forms or contact routing changed.
+
+## Wexoraa signature brand frame
+
+**43 tests passed (1.2m)**. New check verifies one shared clip definition, actual negative-space clipping with a hit test, usable hero enquiry controls at desktop/phone sizes, all three SVG exports returning image content and no mobile overflow. Existing sticky/snap, FAQ, projects/client stories, survey, API/SEO, motion and contrast checks remain passing. Following a final wide-screen metadata offset refinement, the brand-frame recheck passed **1/1 (2.5s)**. Production build, lint, TypeScript and whitespace checks pass.
+
+Artifacts: `/workspace/artifacts/wexoraa-signature-frame-guide.png`, `wexoraa-signature-frame-kit.zip`, `signature-hero-1440.png` and `signature-hero-390.png`. Editable masters are committed under `public/brand`; usage/source instructions are in `design-system/wexoraa-infotech/CONTAINER.md`.

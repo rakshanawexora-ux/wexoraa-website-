@@ -8251,3 +8251,64 @@ html:has(.enquiry-dialog[open]) {
     scroll-snap-type: none;
   }
 }
+
+/* Wexoraa signature container: two rounded W valleys and a lifted lower-left edge. */
+.brand-frame-defs {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+}
+.signature-frame {
+  clip-path: url(#wexoraa-signature-frame);
+  border-radius: 0;
+}
+.signature-section {
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+}
+.hero-cinematic.hero-media.signature-section {
+  min-height: calc(100svh - 124px);
+  margin: 16px;
+  width: calc(100% - 32px);
+}
+.hero-cinematic.signature-frame .cinematic-meta > span:last-child {
+  position: absolute;
+  top: 86px;
+  right: var(--gutter);
+}
+.project-showcase-layout.signature-frame {
+  overflow: clip;
+}
+.project-showcase-layout.signature-frame .showcase-image-link:focus-visible {
+  outline-offset: -6px;
+}
+.solution-service-image.signature-frame {
+  border: 0;
+}
+@media (max-width: 900px) {
+  .hero-cinematic.hero-media.signature-section {
+    min-height: calc(100svh - 112px);
+  }
+}
+@media (max-width: 640px) {
+  .signature-section {
+    margin-inline: 10px;
+    width: calc(100% - 20px);
+  }
+  .hero-cinematic.hero-media.signature-section {
+    margin: 10px;
+    width: calc(100% - 20px);
+    min-height: calc(100svh - 100px);
+  }
+  .hero-cinematic.signature-frame .cinematic-meta > span:last-child {
+    display: none;
+  }
+}
+@supports not (clip-path: url(#wexoraa-signature-frame)) {
+  .signature-frame {
+    border-radius: 20px;
+  }
+}
+.hero-cinematic.signature-frame .cinematic-meta > span:last-child {
+  top: max(86px, 8.5%);
+}
