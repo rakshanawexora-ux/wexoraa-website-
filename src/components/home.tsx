@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
-import Survey from "@/components/assessment";
+import QuickGrowthCheck from "@/components/quick-growth-check";
 import ProjectShowcase from "@/components/project-showcase";
 import ClientStories from "@/components/client-stories";
 import HomeFaq from "@/components/home-faq";
@@ -53,7 +53,15 @@ function Reveal({
     <motion.div
       className={className}
       initial={false}
-      whileInView={reduced ? {} : { y: [24, 0] }}
+      whileInView={
+        reduced
+          ? {}
+          : {
+              y: [24, 0],
+              opacity: [0.25, 1],
+              filter: ["blur(8px)", "blur(0px)"],
+            }
+      }
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -316,14 +324,14 @@ function ProblemFinder({ configured = false }: { configured?: boolean }) {
           <span>for its next stage of growth?</span>
         </h2>
         <p>
-          Let’s find out together. Answer 12 simple questions about your
-          website, marketing and day-to-day work. See what’s going well and
-          where a few changes could help.
+          Let’s find your next step. Just 4 quick questions about your website,
+          marketing and day-to-day work. See what’s going well and where a few
+          changes could help.
         </p>
         <div className="survey-benefits">
           <span>✓ Get your business growth-readiness score</span>
           <span>✓ See what to work on first</span>
-          <span>✓ No email or signup needed</span>
+          <span>✓ See your snapshot before sharing contact details</span>
         </div>
         <a className="button survey-start" href="#home-survey-question">
           Check my growth score <Arrow />
@@ -333,7 +341,7 @@ function ProblemFinder({ configured = false }: { configured?: boolean }) {
           result is based on the answers you share.
         </p>
       </Reveal>
-      <Survey configured={configured} embedded />
+      <QuickGrowthCheck configured={configured} />
     </section>
   );
 }
@@ -370,6 +378,15 @@ function Solutions() {
               aria-selected={i === active}
               tabIndex={i === active ? 0 : -1}
               aria-controls="solution-panel"
+              onPointerEnter={(e) => {
+                if (
+                  e.pointerType === "mouse" &&
+                  !e.currentTarget.parentElement?.querySelector(
+                    ":focus-visible",
+                  )
+                )
+                  setActive(i);
+              }}
               onClick={() => setActive(i)}
               onKeyDown={(e) => {
                 if (
@@ -419,7 +436,7 @@ function Solutions() {
           tabIndex={0}
           aria-labelledby={`tab-${solutions[active].id}`}
         >
-          <div className="solution-service-image">
+          <div className="solution-service-image" key={solutions[active].id}>
             {active === 1 ? (
               <SystemsIllustration label={solutions[active].imageAlt} />
             ) : (

@@ -8,11 +8,13 @@ export default function EnquiryForm({
   interest = "",
   configured = false,
   compact = false,
+  summaryText,
 }: {
   answers?: Answers;
   interest?: string;
   configured?: boolean;
   compact?: boolean;
+  summaryText?: string;
 }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -176,17 +178,23 @@ export default function EnquiryForm({
       {compact && (
         <input type="hidden" name="interest" value={interest} readOnly />
       )}
-      <label>
-        Tell us about your project
-        <textarea
-          name="message"
-          required
-          minLength={10}
-          maxLength={3000}
-          rows={4}
-          placeholder="What would you like to change? What does a useful result look like?"
-        />
-      </label>
+      {summaryText ? (
+        <input type="hidden" name="message" value={summaryText} />
+      ) : (
+        <>
+          <label>
+            Tell us about your project
+            <textarea
+              name="message"
+              required
+              minLength={10}
+              maxLength={3000}
+              rows={4}
+              placeholder="What would you like to change? What does a useful result look like?"
+            />
+          </label>
+        </>
+      )}
       <label className="honeypot" aria-hidden="true">
         Leave this field empty
         <input name="companyUrl" tabIndex={-1} autoComplete="off" />

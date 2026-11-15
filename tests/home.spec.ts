@@ -37,6 +37,15 @@ for (const width of [360, 390, 768, 1024, 1440])
       ).toBeVisible();
       await page.keyboard.press("Escape");
     }
+    await page.evaluate(async () => {
+      await new Promise(requestAnimationFrame);
+      await Promise.all(
+        document
+          .getAnimations()
+          .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+          .map((a) => a.finished.catch(() => {})),
+      );
+    });
     const scan = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
       .analyze();
@@ -178,6 +187,15 @@ for (const route of [
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
+    await page.evaluate(async () => {
+      await new Promise(requestAnimationFrame);
+      await Promise.all(
+        document
+          .getAnimations()
+          .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+          .map((a) => a.finished.catch(() => {})),
+      );
+    });
     const scan = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
       .analyze();
@@ -288,6 +306,15 @@ test("service explorer filters, searches and recovers from no results", async ({
   ).toBeVisible();
   await page.getByRole("button", { name: "Reset filters" }).click();
   await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
+  await page.evaluate(async () => {
+    await new Promise(requestAnimationFrame);
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+        .map((a) => a.finished.catch(() => {})),
+    );
+  });
   const scan = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
     .analyze();
@@ -317,6 +344,15 @@ test("simple service enquiry popup is accessible and restores focus", async ({
       'input[name="name"], input[name="email"], input[name="phone"]',
     ),
   ).toHaveCount(3);
+  await page.evaluate(async () => {
+    await new Promise(requestAnimationFrame);
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+        .map((a) => a.finished.catch(() => {})),
+    );
+  });
   const scan = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
     .analyze();

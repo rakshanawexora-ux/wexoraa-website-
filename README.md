@@ -1,6 +1,6 @@
 # Wexoraa Infotech
 
-A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 12-question digital-strength survey and email-only enquiries.
+A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and email-only enquiries.
 
 ## Run
 
@@ -26,7 +26,7 @@ Build before browser tests; they start the production server. Chromium defaults 
 
 ## Routes
 
-- `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, parallax, embedded 12-question survey.
+- `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, parallax, short 4-question business snapshot, contact-only follow-up, asymmetric concept portfolio grid and pointer-reactive client stories.
 - `/solutions`, `/solutions/build`, `/solutions/operate`, `/solutions/grow`.
 - `/services` and 12 `/services/[slug]` pages with problems, approach, deliverables, FAQ and enquiry links.
 - `/work` and two `/work/[slug]` illustrative studio concepts. No commissioned client work or results are fabricated.
@@ -38,7 +38,9 @@ Service/project content is centralized in src/content/catalog.ts. The official S
 
 ## Survey score
 
-Exactly 12 questions: 4 contextual (industry, stage, priorities, timing) and 8 scored capability questions. Known capability answers earn 0–3 points with equal weight. Overall = earned ÷ eligible maximum × 100. Unknown/not-applicable answers are excluded. At least 4 known capability responses and all 12 answered questions are required for a score. Categories show digital presence, customer journey, systems/operations, marketing/measurement.
+The homepage asks four capability questions (website, marketing, follow-up, systems). Known answers earn 0–2 points, unknowns are excluded, and at least two known responses are required. Contact details are optional after the result; its self-reported summary is included in the enquiry message. No contact details are stored locally.
+
+The separate `/business-assessment` route retains the detailed assessment. Exactly 12 questions: 4 contextual (industry, stage, priorities, timing) and 8 scored capability questions. Known capability answers earn 0–3 points with equal weight. Overall = earned ÷ eligible maximum × 100. Unknown/not-applicable answers are excluded. At least 4 known capability responses and all 12 answered questions are required for a score. Categories show digital presence, customer journey, systems/operations, marketing/measurement.
 
 The method and bands are visible in the result. This is an explained self-report rubric, not a validated audit, external benchmark or revenue predictor. Results are available without contact capture. Only selected business answers persist in tab session storage; contacts do not. The server recalculates the score when an assessment enquiry is sent.
 

@@ -6,22 +6,14 @@ test("project browsing updates the concept link and client stories remain clearl
 }) => {
   await page.goto("/");
   const work = page.locator(".project-showcase");
-  await expect(
-    work.getByRole("heading", { name: projects[0].title, exact: true }),
-  ).toBeVisible();
-  await work.getByRole("button", { name: "Next project" }).click();
-  await expect(
-    work.getByRole("heading", { name: projects[1].title, exact: true }),
-  ).toBeVisible();
-  await expect(
-    work.getByRole("link", { name: "View the concept" }),
-  ).toHaveAttribute("href", `/work/${projects[1].slug}`);
-  const prev = work.getByRole("button", { name: "Previous project" });
-  await prev.focus();
-  await page.keyboard.press("Enter");
-  await expect(
-    work.getByRole("heading", { name: projects[0].title, exact: true }),
-  ).toBeVisible();
+  for (const project of projects) {
+    await expect(
+      work.getByRole("heading", { name: project.title, exact: true }),
+    ).toBeVisible();
+    await expect(
+      work.getByRole("link", { name: `View ${project.title}`, exact: true }),
+    ).toHaveAttribute("href", `/work/${project.slug}`);
+  }
   const stories = page.locator(".client-stories");
   await expect(
     stories.getByRole("heading", { name: "Intercity Riders", exact: true }),
@@ -36,6 +28,15 @@ test("project browsing updates the concept link and client stories remain clearl
   ).toBeVisible();
   await page.setViewportSize({ width: 390, height: 950 });
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.evaluate(async () => {
+    await new Promise(requestAnimationFrame);
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+        .map((a) => a.finished.catch(() => {})),
+    );
+  });
   const scan = await new AxeBuilder({ page })
     .include(".project-showcase")
     .include(".client-stories")

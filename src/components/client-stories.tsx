@@ -19,7 +19,10 @@ export default function ClientStories() {
           <br />
           behind the projects.
         </h2>
-        <p>A space for feedback from the businesses we work with.</p>
+        <p>
+          Different businesses. Shared ambition. Meet a few of the brands in our
+          client community.
+        </p>
         <div className="client-stories-controls">
           <button
             type="button"
@@ -52,8 +55,14 @@ export default function ClientStories() {
           return (
             <article
               key={story.company}
-              className={`client-story-card ${story.quote ? "has-feedback" : "feedback-pending"}`}
+              className={`client-story-card experience-card ${story.quote ? "has-feedback" : "feedback-pending"}`}
             >
+              <div className="story-decoration" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+                <b>“</b>
+              </div>
               <span className="client-story-status">
                 {story.quote ? "CLIENT FEEDBACK" : "FEEDBACK COMING SOON"}
               </span>
@@ -77,9 +86,9 @@ export default function ClientStories() {
                 <blockquote>{story.quote}</blockquote>
               ) : (
                 <p className="client-story-placeholder">
-                  Feedback from this client
+                  A client story in the making.
                   <br />
-                  will be added here.
+                  Their words, coming soon.
                 </p>
               )}
               <div className="client-story-person">

@@ -28,11 +28,11 @@ test("transparent score boundaries, context invariance and unknown exclusions", 
   delete a.timing;
   expect(scoreAssessment(a).complete).toBe(false);
 });
-test("12-step survey on homepage, resume, score, revision and enquiry stays optional", async ({
+test("detailed assessment page, resume, score, revision and enquiry stays optional", async ({
   page,
 }) => {
-  await page.goto("/");
-  const survey = page.locator(".embedded-survey");
+  await page.goto("/business-assessment");
+  const survey = page.locator(".survey-container");
   await survey.getByRole("radio").first().check();
   await page.reload();
   await expect(survey.getByRole("radio").first()).toBeChecked();

@@ -9,7 +9,7 @@ export default function SiteExperience() {
     if (reduced) return;
     const cards = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".catalog-card,.engineering-card,.deliverable-card,.work-card,.process-page-list article",
+        ".catalog-card,.engineering-card,.deliverable-card,.work-card,.process-page-list article,.client-story-card,.portfolio-card,.portfolio-note,.quick-check",
       ),
     );
     cards.forEach((c) => c.classList.add("experience-card"));
@@ -76,10 +76,16 @@ export default function SiteExperience() {
         for (const entry of entries)
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
-            el.animate([{ translate: "0 28px" }, { translate: "0 0" }], {
-              duration: 700,
-              easing: "cubic-bezier(.22,1,.36,1)",
-            });
+            el.animate(
+              [
+                { translate: "0 28px", opacity: 0.2, filter: "blur(8px)" },
+                { translate: "0 0", opacity: 1, filter: "blur(0px)" },
+              ],
+              {
+                duration: 700,
+                easing: "cubic-bezier(.22,1,.36,1)",
+              },
+            );
             observer.unobserve(el);
           }
       },
@@ -115,6 +121,32 @@ export default function SiteExperience() {
     document
       .querySelectorAll(".engineering-card,.solution-menu button,.work-title")
       .forEach((el) => staggerObserver.observe(el));
+    const textObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.animate(
+              [
+                {
+                  opacity: 0.25,
+                  filter: "blur(7px)",
+                  transform: "translateY(18px)",
+                },
+                { opacity: 1, filter: "blur(0px)", transform: "translateY(0)" },
+              ],
+              { duration: 650, easing: "cubic-bezier(.22,1,.36,1)" },
+            );
+            textObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+    document
+      .querySelectorAll(
+        "main section h2,main section > p,.showcase-heading-row,.client-stories-intro",
+      )
+      .forEach((el) => textObserver.observe(el));
     let scrollFrame = 0;
     const scroll = () => {
       cancelAnimationFrame(scrollFrame);
@@ -150,6 +182,7 @@ export default function SiteExperience() {
       cancelAnimationFrame(frame);
       cancelAnimationFrame(scrollFrame);
       observer.disconnect();
+      textObserver.disconnect();
       staggerObserver.disconnect();
       resetAction();
       document.removeEventListener("pointermove", pointer);

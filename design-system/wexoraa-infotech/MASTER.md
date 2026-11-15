@@ -74,3 +74,9 @@ Use home-only `scroll-snap-type: y proximity` on suitable desktop/tablet viewpor
 ## Clean editorial redesign
 
 The user rejected W-cut containers and approved a white, rounded editorial direction. Use simple 16–28px rounded feature surfaces, a white hero with charcoal type and a green underline, and a separate interactive charcoal artwork panel. Keep Space Grotesk / DM Sans and the supplied brand palette. Service tabs use charcoal selection with white copy; the adjacent visual panel stays light. Preserve the native sticky project chapter, survey, reduced-motion behavior and enquiry flow. No decorative clipping paths on reading or interactive surfaces.
+
+## Interactive snapshot and portfolio update
+
+The homepage now uses four capability questions (website, marketing, follow-up, systems), followed by a visible score and optional contact-only form. Unknowns are excluded, at least two known answers are required; no external audit is implied. Contact data is not stored locally. The detailed 12-question assessment remains on its own route. The short report is included in enquiry message text, not passed as a legacy twelve-answer payload.
+
+Replace the previous project carousel/sticky chapter with an asymmetric two-concept portfolio grid and two clearly labelled service tiles. Never present service tiles as completed client work. Testimonials retain real client names and pending quotes, with decorative pointer response. Service tabs switch on mouse hover while preserving click, touch and keyboard; do not steal keyboard focus. Blur/fade reveals keep content visible by default and stop under reduced motion. Use loading animation for route boundaries and the short result transition.
