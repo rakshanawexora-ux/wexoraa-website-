@@ -21,8 +21,14 @@ test("homepage actions stay readable on light and dark surfaces when hovered", a
   ]) {
     const action = page.locator(selector);
     await action.hover();
-    await expect(action).toHaveCSS("background-color", "rgb(34, 38, 41)");
-    await expect(action).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(action).toHaveCSS(
+      "background-color",
+      selector === ".survey-start" ? "rgb(255, 255, 255)" : "rgb(34, 38, 41)",
+    );
+    await expect(action).toHaveCSS(
+      "color",
+      selector === ".survey-start" ? "rgb(34, 38, 41)" : "rgb(255, 255, 255)",
+    );
     const scan = await new AxeBuilder({ page })
       .include(selector)
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])

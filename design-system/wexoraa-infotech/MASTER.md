@@ -84,3 +84,7 @@ Replace the previous project carousel/sticky chapter with an asymmetric two-conc
 ## ScrollExpand and modal checker
 
 Latest user direction: show the short growth checker inside a native modal, launched from a compact invitation rather than a full questionnaire section. Preserve answers on close/reopen, trap focus natively, restore trigger focus, allow Escape/backdrop dismissal and lock background scrolling. Services and portfolio now precede the studio media. The React Bits ScrollExpand source supplied by the user is integrated as JavaScript + CSS, with header-aware native pinning, preallocated track height, live reduced-motion/static fallback, image/video support and explicit video playback. Do not replace it with a generic reveal animation.
+
+## Growth placement, contact step and roadmap
+
+Place the growth invitation immediately after the client logo strip. Use a charcoal surface, primary green emphasis and prominent “Check my score” button. Collect contact details as the first modal step, with a skip option. Keep contact data in component memory; do not submit it automatically. Results animate a real final score with a count-up and SVG ring, static under reduced motion. Prefill the optional send form and collapse completed contact fields to avoid asking twice. Replace the old process accordion with six accessible tabs, a numbered visual panel and a short stage explanation. Preserve arrow/Home/End keyboard selection.

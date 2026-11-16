@@ -3,16 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { quickQuestions, quickScore } from "@/content/quick-check";
 import EnquiryForm from "./enquiry-form";
+import AnimatedScore from "./animated-score";
 export default function QuickGrowthCheck({
   configured = false,
 }: {
   configured?: boolean;
 }) {
+  const [contact, setContact] = useState({ name: "", email: "", phone: "" });
   const [values, setValues] = useState<number[]>([]);
   const [step, setStep] = useState(0);
-  const [phase, setPhase] = useState<"questions" | "loading" | "result">(
-    "questions",
-  );
+  const [phase, setPhase] = useState<
+    "contact" | "questions" | "loading" | "result"
+  >("contact");
   const heading = useRef<HTMLHeadingElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
@@ -38,11 +40,86 @@ export default function QuickGrowthCheck({
   }
   return (
     <div className="quick-check embedded-survey">
-      {phase === "questions" ? (
+      {phase === "contact" ? (
+        <form
+          className="snapshot-contact-step"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setPhase("questions");
+            requestAnimationFrame(() => heading.current?.focus());
+          }}
+        >
+          <div className="quick-check-top">
+            <span>LET’S START WITH YOU</span>
+            <span>01 / 05</span>
+          </div>
+          <h3 id="home-survey-question" ref={heading} tabIndex={-1}>
+            Who are we helping grow?
+          </h3>
+          <p>
+            Your details stay in this session. We only send them if you choose
+            to share your snapshot at the end.
+          </p>
+          <label>
+            Your name
+            <input
+              name="name"
+              autoComplete="name"
+              required
+              minLength={2}
+              maxLength={100}
+              value={contact.name}
+              onChange={(e) => setContact({ ...contact, name: e.target.value })}
+            />
+          </label>
+          <label>
+            Work email
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              maxLength={254}
+              value={contact.email}
+              onChange={(e) =>
+                setContact({ ...contact, email: e.target.value })
+              }
+            />
+          </label>
+          <label>
+            Phone number
+            <input
+              name="phone"
+              type="tel"
+              required
+              autoComplete="tel"
+              minLength={7}
+              maxLength={30}
+              value={contact.phone}
+              onChange={(e) =>
+                setContact({ ...contact, phone: e.target.value })
+              }
+            />
+          </label>
+          <button className="button" type="submit">
+            Let’s check my business <ArrowUpRight size={16} />
+          </button>
+          <button
+            className="text-link"
+            type="button"
+            onClick={() => {
+              setPhase("questions");
+              requestAnimationFrame(() => heading.current?.focus());
+            }}
+          >
+            Skip for now
+          </button>
+        </form>
+      ) : phase === "questions" ? (
         <>
           <div className="quick-check-top">
             <span>YOUR BUSINESS, AT A GLANCE</span>
-            <span>0{step + 1} / 04</span>
+            <span>0{step + 2} / 05</span>
           </div>
           <div className="quick-progress" aria-hidden="true">
             {quickQuestions.map((q, i) => (
@@ -80,9 +157,10 @@ export default function QuickGrowthCheck({
             <button
               type="button"
               className="button button-outline"
-              disabled={step === 0}
+
               onClick={() => {
-                setStep(step - 1);
+                if (step === 0) setPhase("contact");
+                else setStep(step - 1);
                 requestAnimationFrame(() => heading.current?.focus());
               }}
             >
@@ -100,7 +178,7 @@ export default function QuickGrowthCheck({
             </button>
           </div>
           <p className="quick-footnote">
-            Just 4 questions. No signup to see your result.
+            4 business questions. Your snapshot is up next.
           </p>
         </>
       ) : phase === "loading" ? (
@@ -129,18 +207,7 @@ export default function QuickGrowthCheck({
                       : "Your next chapter starts here."}
               </h3>
             </div>
-            <div
-              className="snapshot-score"
-              role="img"
-              aria-label={
-                score === null
-                  ? "More context needed"
-                  : `Digital readiness ${score} out of 100`
-              }
-            >
-              <strong>{score ?? "—"}</strong>
-              <span>{score === null ? "MORE CONTEXT" : "OUT OF 100"}</span>
-            </div>
+            <AnimatedScore score={score} />
           </div>
           <p className="quick-footnote">
             A quick view of your digital setup, based on your answers. Unknown
@@ -186,13 +253,15 @@ export default function QuickGrowthCheck({
           <div className="snapshot-contact">
             <h4>Want help with your next step?</h4>
             <p>
-              Leave your contact details and we can talk through your snapshot.
+              Share your snapshot when you’re ready. Your score is already yours
+              to keep.
             </p>
             <EnquiryForm
               configured={configured}
               compact
               interest="Quick business growth snapshot"
               summaryText={summary}
+              initialContact={contact}
             />
           </div>
         </>

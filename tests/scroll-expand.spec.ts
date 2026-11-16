@@ -62,6 +62,7 @@ test("growth dialog traps focus, restores trigger and preserves answers on reope
   await expect(dialog).toBeVisible();
   await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
   await expect(page.locator("#home-survey-question")).toBeFocused();
+  await dialog.getByRole("button", { name: "Skip for now" }).click();
   await dialog.getByRole("radio").nth(1).check();
   await page.keyboard.press("Escape");
   await expect(dialog).not.toBeVisible();

@@ -7,7 +7,6 @@ import {
   ArrowUpRight,
   ChevronDown,
   Plus,
-  Minus,
   Menu,
   X,
   Layers3,
@@ -448,44 +447,99 @@ function Solutions() {
 function Process() {
   const [active, setActive] = useState(0);
   return (
-    <section className="process section" id="process">
-      <div className="process-left">
-        <Label>GOOD WORK IS A CONVERSATION</Label>
-        <h2>
-          A little curiosity.
-          <br />A clear direction.
-          <br />
-          <span>A better result.</span>
-        </h2>
+    <section className="process section process-roadmap" id="process">
+      <div className="roadmap-heading">
+        <div>
+          <Label>FROM FIRST HELLO TO WHAT’S NEXT</Label>
+          <h2>
+            A clear path.
+            <br />
+            <span>Built together.</span>
+          </h2>
+        </div>
         <p>
-          We ask, listen and challenge assumptions.
-          <br />
-          Then we make a plan worth building.
+          You’ll always know what we’re working on, what comes next and where
+          your input matters.
         </p>
       </div>
-      <div className="process-list">
-        {processSteps.map(([name, title, desc], i) => (
-          <div
-            key={name}
-            className={active === i ? "process-item selected" : "process-item"}
-          >
-            <h3>
-              <button
-                aria-expanded={active === i}
-                aria-controls={`process-${i}`}
-                onClick={() => setActive(active === i ? -1 : i)}
-              >
-                <span>0{i + 1}</span>
-                {name}
-                {active === i ? <Minus size={19} /> : <Plus size={19} />}
-              </button>
-            </h3>
-            <div id={`process-${i}`} hidden={active !== i}>
-              <h4>{title}</h4>
-              <p>{desc}</p>
-            </div>
+      <div className="roadmap-layout">
+        <div
+          className="roadmap-steps"
+          role="tablist"
+          aria-label="Our project process"
+        >
+          {processSteps.map(([name], i) => (
+            <button
+              type="button"
+              key={name}
+              role="tab"
+              id={`roadmap-tab-${i}`}
+              aria-selected={active === i}
+              aria-controls="roadmap-panel"
+              tabIndex={active === i ? 0 : -1}
+              onClick={() => setActive(i)}
+              onKeyDown={(e) => {
+                if (
+                  [
+                    "ArrowDown",
+                    "ArrowUp",
+                    "ArrowRight",
+                    "ArrowLeft",
+                    "Home",
+                    "End",
+                  ].includes(e.key)
+                ) {
+                  e.preventDefault();
+                  const next =
+                    e.key === "Home"
+                      ? 0
+                      : e.key === "End"
+                        ? 5
+                        : (i +
+                            (["ArrowDown", "ArrowRight"].includes(e.key)
+                              ? 1
+                              : 5)) %
+                          6;
+                  setActive(next);
+                  document.getElementById(`roadmap-tab-${next}`)?.focus();
+                }
+              }}
+            >
+              <span>0{i + 1}</span>
+              <strong>{name}</strong>
+              <ArrowUpRight size={20} />
+            </button>
+          ))}
+        </div>
+        <div
+          className="roadmap-panel"
+          role="tabpanel"
+          id="roadmap-panel"
+          aria-labelledby={`roadmap-tab-${active}`}
+          tabIndex={0}
+        >
+          <div className="roadmap-art" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <span>0{active + 1}</span>
           </div>
-        ))}
+          <div className="roadmap-panel-copy" key={active}>
+            <span className="eyebrow">
+              STEP 0{active + 1} / {processSteps[active][0].toUpperCase()}
+            </span>
+            <h3>{processSteps[active][1]}</h3>
+            <p>{processSteps[active][2]}</p>
+            <div className="roadmap-progress" aria-hidden="true">
+              {processSteps.map(([name], i) => (
+                <i key={name} className={i <= active ? "complete" : ""} />
+              ))}
+            </div>
+            <span className="roadmap-caption">
+              Your feedback shapes every stage.
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -692,10 +746,10 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
       <main id="main" className="home-page">
         <CinematicHero />
         <ClientMarquee />
+        <GrowthInvitation configured={emailReady} />
         <Solutions />
         <ProjectShowcase />
         <MotionShowcase />
-        <GrowthInvitation configured={emailReady} />
         <ClientStories />
         <Capabilities />
         <Process />

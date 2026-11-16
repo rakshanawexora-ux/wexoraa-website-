@@ -9,12 +9,14 @@ export default function EnquiryForm({
   configured = false,
   compact = false,
   summaryText,
+  initialContact,
 }: {
   answers?: Answers;
   interest?: string;
   configured?: boolean;
   compact?: boolean;
   summaryText?: string;
+  initialContact?: { name: string; email: string; phone: string };
 }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -64,6 +66,81 @@ export default function EnquiryForm({
       requestAnimationFrame(() => feedback.current?.focus());
     }
   }
+  const contactFields = (
+    <div className="form-grid">
+      <label>
+        Your name
+        <input
+          defaultValue={initialContact?.name}
+          name="name"
+          autoComplete="name"
+          required
+          minLength={2}
+          maxLength={100}
+        />
+      </label>
+      {!compact && (
+        <label>
+          Company name
+          <input
+            name="company"
+            autoComplete="organization"
+            required
+            minLength={2}
+            maxLength={150}
+          />
+        </label>
+      )}
+      {compact && <input type="hidden" name="company" value="" />}
+      <label>
+        Work email
+        <input
+          defaultValue={initialContact?.email}
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          maxLength={254}
+        />
+      </label>
+      <label>
+        Phone number
+        <input
+          defaultValue={initialContact?.phone}
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          required
+          minLength={7}
+          maxLength={30}
+        />
+      </label>
+      {!compact && (
+        <label>
+          Website <small>(optional)</small>
+          <input
+            name="website"
+            type="url"
+            autoComplete="url"
+            placeholder="https://"
+            maxLength={300}
+          />
+        </label>
+      )}
+      {compact && <input type="hidden" name="website" value="" />}
+      {!compact && (
+        <label>
+          Preferred contact
+          <select name="preferred" defaultValue="Email">
+            <option>Email</option>
+            <option>Phone</option>
+            <option>WhatsApp</option>
+          </select>
+        </label>
+      )}
+      {compact && <input type="hidden" name="preferred" value="Email" />}
+    </div>
+  );
   if (state === "success")
     return (
       <div className="send-success" ref={feedback} tabIndex={-1} role="status">
@@ -93,76 +170,19 @@ export default function EnquiryForm({
           but sending will be available once setup is complete.
         </div>
       )}
-      <div className="form-grid">
-        <label>
-          Your name
-          <input
-            name="name"
-            autoComplete="name"
-            required
-            minLength={2}
-            maxLength={100}
-          />
-        </label>
-        {!compact && (
-          <label>
-            Company name
-            <input
-              name="company"
-              autoComplete="organization"
-              required
-              minLength={2}
-              maxLength={150}
-            />
-          </label>
-        )}
-        {compact && <input type="hidden" name="company" value="" />}
-        <label>
-          Work email
-          <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            maxLength={254}
-          />
-        </label>
-        <label>
-          Phone number
-          <input
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            required
-            minLength={7}
-            maxLength={30}
-          />
-        </label>
-        {!compact && (
-          <label>
-            Website <small>(optional)</small>
-            <input
-              name="website"
-              type="url"
-              autoComplete="url"
-              placeholder="https://"
-              maxLength={300}
-            />
-          </label>
-        )}
-        {compact && <input type="hidden" name="website" value="" />}
-        {!compact && (
-          <label>
-            Preferred contact
-            <select name="preferred" defaultValue="Email">
-              <option>Email</option>
-              <option>Phone</option>
-              <option>WhatsApp</option>
-            </select>
-          </label>
-        )}
-        {compact && <input type="hidden" name="preferred" value="Email" />}
-      </div>
+      {initialContact?.name &&
+      initialContact?.email &&
+      initialContact?.phone ? (
+        <details className="snapshot-contact-review">
+          <summary>
+            {initialContact.name} · {initialContact.email}
+            <span>Edit contact details</span>
+          </summary>
+          {contactFields}
+        </details>
+      ) : (
+        contactFields
+      )}
       {!compact && (
         <label>
           What would you like help with?

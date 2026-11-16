@@ -16,7 +16,7 @@ test("home explains each service group with a working illustration and relevant 
           hero.compareDocumentPosition(film) & Node.DOCUMENT_POSITION_FOLLOWING,
         ) &&
         Boolean(
-          film.compareDocumentPosition(survey) &
+          survey.compareDocumentPosition(film) &
           Node.DOCUMENT_POSITION_FOLLOWING,
         )
       );

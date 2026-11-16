@@ -36,9 +36,9 @@ export default function GrowthInvitation({
             <span /> SMALL CHECK. CLEARER NEXT STEP.
           </p>
           <h2 id="growth-invite-title">
-            Your next move?
+            How ready is your business
             <br />
-            <em>Let’s find it.</em>
+            <em>for its next big step?</em>
           </h2>
           <p>
             Four quick questions. A clearer picture of your website, marketing
@@ -49,10 +49,10 @@ export default function GrowthInvitation({
             className="button survey-start"
             onClick={() => setOpen(true)}
           >
-            Check my growth score <ArrowUpRight size={18} />
+            Check my score <ArrowUpRight size={20} />
           </button>
           <span className="growth-invite-note">
-            Free to check · No signup to see your result
+            4 business questions · Personal growth snapshot
           </span>
         </div>
         <div className="growth-invite-art" aria-hidden="true">
@@ -63,7 +63,11 @@ export default function GrowthInvitation({
             <span>
               YOUR
               <br />
-              <b>NEXT MOVE</b>
+              <b>
+                GROWTH
+                <br />
+                SNAPSHOT
+              </b>
             </span>
           </div>
           <span className="radar-tag radar-tag-1">Website</span>
