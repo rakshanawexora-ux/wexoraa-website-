@@ -11030,3 +11030,79 @@ html {
 .missing-page .hero-actions {
   flex-wrap: wrap;
 }
+/* Mobile growth checker: keep decorative art and the score out of the text column. */
+.growth-invite-copy,
+.growth-invite-art {
+  min-width: 0;
+}
+.growth-dialog {
+  scroll-padding-block: 90px 24px;
+}
+.growth-dialog-top button {
+  flex-shrink: 0;
+}
+.growth-dialog .snapshot-contact-step label,
+.growth-dialog .form-grid > label {
+  min-width: 0;
+}
+.growth-dialog input,
+.growth-dialog select,
+.growth-dialog textarea {
+  min-width: 0;
+  max-width: 100%;
+  scroll-margin-block: 90px 24px;
+}
+.snapshot-problem h4 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 767px) {
+  .growth-invitation {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+  .growth-invitation .survey-start {
+    width: 100%;
+    justify-content: space-between;
+    white-space: nowrap;
+    gap: 16px;
+    padding: 16px 18px;
+    min-height: 56px;
+    font-size: 15px;
+  }
+  .growth-invite-art {
+    width: 100%;
+    max-width: 360px;
+    justify-self: center;
+  }
+}
+@media (max-width: 480px) {
+  .quick-result-heading {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 22px;
+    text-align: center;
+  }
+  .quick-result-heading > div:first-child {
+    min-width: 0;
+    width: 100%;
+  }
+  .quick-result-heading h3 {
+    margin-bottom: 0;
+  }
+  .snapshot-score.animated-score {
+    width: 124px;
+  }
+}
+@media (max-width: 767px) {
+  .growth-dialog input,
+  .growth-dialog select,
+  .growth-dialog textarea {
+    font-size: 16px;
+  }
+}
+@media (max-width: 767px) {
+  .growth-invite-art .radar-tag-2 {
+    top: 10px;
+    right: 0;
+  }
+}

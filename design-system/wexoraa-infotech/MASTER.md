@@ -106,3 +106,7 @@ The modal begins with business name, type, stage, selected challenge and a short
 Latest user direction restores a lightweight one-time fade on reading content across routes. Use IntersectionObserver and opacity 0.85→1 with an 8px translate over 320ms, without blur, snapping, root CSS writes, wheel interception or large parent/form fades. Unobserve on entry, clean up on navigation and disable for reduced motion. This supersedes the previous no-fade preference while preserving its performance fixes.
 
 Inner pages share white editorial heroes, a clear one-team USP, charcoal interactive visual panels, rounded pale cards and charcoal final enquiry panels. Use plain-language service deliverables and short, useful introductions. `src/content/page-seo.ts` stores main-route snippets; generated service/solution/work pages have unique page-specific metadata through `pageMetadata`. Keep thank-you noindex, existing canonical/domain guards and honest studio-concept labelling.
+
+## Small-screen growth-check layout
+
+On mobile explicitly use one column for the invitation so the radar artwork sits below the copy. The CTA stays full width on one line. At 480px and below stack the animated score above the result heading, with wrapping business names and zero horizontal modal overflow. Use 16px mobile input/select/textarea text, minimum 44px close target and dialog scroll padding for short viewports. Keep the native focus trap and preserve answers on close/reopen. Test 320, 360, 390 and 430px through the full result/contact flow.
