@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ArrowUpRight } from "lucide-react";
-import { EnquiryCTA } from "@/components/enquiry-popup";
 import { solutions } from "@/content/site";
 import { services } from "@/content/catalog";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
@@ -19,7 +18,7 @@ export default function ServiceExplorer() {
         .includes(query.trim().toLowerCase()),
   );
   return (
-    <section className="section service-explorer">
+    <section className="section service-explorer" id="service-directory">
       <div className="service-explorer-top">
         <div>
           <p className="eyebrow">
@@ -98,17 +97,12 @@ export default function ServiceExplorer() {
                 </span>
                 <h3>{s.title}</h3>
                 <p>{s.intro}</p>
-                <strong>Explore the approach ↗</strong>
+                <ul className="service-card-includes">
+                  {s.deliverables.slice(0, 2).map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </Link>
-              <div className="service-card-actions">
-                <EnquiryCTA
-                  interest={s.title}
-                  label={`Enquire about ${s.title}`}
-                  className="service-enquire"
-                >
-                  Enquire now <ArrowUpRight size={16} />
-                </EnquiryCTA>
-              </div>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -129,9 +123,6 @@ export default function ServiceExplorer() {
           >
             Reset filters
           </button>
-          <Link className="button text-link" href="/contact">
-            Describe your challenge <ArrowUpRight size={17} />
-          </Link>
         </div>
       )}
     </section>

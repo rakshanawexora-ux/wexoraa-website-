@@ -72,8 +72,8 @@ export default async function Page({
           <summary>{s.question}</summary>
           <p>{s.answer}</p>
         </details>
-        <Link className="button text-link" href={`/solutions/${s.group}`}>
-          See how our services work together ↗
+        <Link className="button text-link" href="/services">
+          Explore what we do ↗
         </Link>
       </section>
       <section className="section">

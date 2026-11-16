@@ -95,10 +95,6 @@ test("every published content route renders, unknown routes 404 and navigation u
   request,
 }) => {
   const routes = [
-    "/solutions",
-    "/solutions/build",
-    "/solutions/operate",
-    "/solutions/grow",
     "/services",
     "/work",
     "/about",
@@ -120,11 +116,11 @@ test("every published content route renders, unknown routes 404 and navigation u
   await page.goto("/");
   await page
     .getByRole("navigation", { name: "Main navigation" })
-    .getByRole("link", { name: "Services", exact: true })
+    .getByRole("link", { name: "What we do", exact: true })
     .click();
   await expect(page).toHaveURL(/\/services$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Design, websites, software and marketing. One team.",
+    "Better design. Easier work. More ways to grow.",
   );
   await page
     .getByRole("link", { name: /Websites & online stores/ })
@@ -173,7 +169,6 @@ test("contact form keeps values after failure and confirms only accepted request
 for (const route of [
   "/contact",
   "/services/websites-ecommerce",
-  "/solutions/operate",
   "/work/considered-brand-experience",
   "/about",
   "/process",
@@ -256,8 +251,8 @@ test("inner page graphic changes selection and service card reacts to pointer mo
     "Keep your customers, team and tasks connected.",
   );
   await expect(
-    page.getByRole("link", { name: "Explore Systems solutions" }),
-  ).toHaveAttribute("href", "/solutions/operate");
+    page.getByRole("link", { name: "Explore Systems services" }),
+  ).toHaveAttribute("href", "/services#operate");
   const card = page.locator(".catalog-card").first();
   await card.scrollIntoViewIfNeeded();
   const box = await card.boundingBox();
@@ -334,7 +329,8 @@ test("simple service enquiry popup is accessible and restores focus", async ({
   await expect(
     page.getByRole("button", { name: "Pause motion", exact: true }),
   ).toHaveCount(0);
-  const cta = page.locator(".service-card-actions a").first();
+  await expect(page.locator(".service-card-actions")).toHaveCount(0);
+  const cta = page.locator(".header-project");
   await cta.click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();

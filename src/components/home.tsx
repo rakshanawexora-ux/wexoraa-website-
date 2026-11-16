@@ -102,13 +102,12 @@ export function Header() {
         className={`nav ${open ? "open" : ""}`}
       >
         {[
-          ["Solutions", "/solutions"],
-          ["Services", "/services"],
+          ["What we do", "/services"],
           ["Work", "/work"],
           ["About", "/about"],
           ["Contact", "/contact"],
         ].map(([text, url]) =>
-          text === "Services" ? (
+          text === "What we do" ? (
             <div
               className="nav-services"
               key={url}
@@ -149,7 +148,7 @@ export function Header() {
                     setServicesOpen(false);
                   }}
                 >
-                  Services
+                  What we do
                 </Link>
                 <button
                   ref={servicesToggle}
@@ -183,7 +182,7 @@ export function Header() {
                       setServicesOpen(false);
                     }}
                   >
-                    View all services <Arrow />
+                    Explore what we do <Arrow />
                   </Link>
                 </div>
                 <div className="services-dropdown-grid">
@@ -681,8 +680,7 @@ export function Footer() {
           <nav aria-label="Footer explore">
             <h3>Explore</h3>
             {[
-              ["Solutions", "/solutions"],
-              ["Services", "/services"],
+              ["What we do", "/services"],
               ["Work", "/work"],
               ["About", "/about"],
               ["Our process", "/process"],

@@ -11400,3 +11400,228 @@ html {
     font-size: 9px;
   }
 }
+.what-overview-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+.what-overview-heading h2 {
+  font-size: clamp(30px, 3.7vw, 54px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin-top: 22px;
+}
+.what-overview-heading > p {
+  max-width: 330px;
+  color: var(--brand-slate);
+  font-size: 15px;
+  line-height: 1.85;
+}
+.what-area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.what-area {
+  min-width: 0;
+  border: 1px solid var(--outline-variant);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--surface-container-low);
+  scroll-margin-top: 110px;
+}
+.what-area-visual {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--primary-container);
+  display: grid;
+  align-items: center;
+}
+.what-area-visual > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.what-area-visual .systems-illustration {
+  padding: 14px;
+  gap: 6px;
+}
+.what-area-visual .systems-illustration-card {
+  padding: 8px;
+}
+.what-area-visual .systems-illustration-card > strong {
+  font-size: 12px;
+}
+.what-area-visual .systems-illustration-card > span {
+  font-size: 8px;
+}
+.what-area-visual .systems-illustration-core {
+  padding: 12px;
+}
+.what-area-visual .systems-illustration-core > strong {
+  font-size: 20px;
+}
+.what-area-visual .systems-illustration-core > span {
+  font-size: 8px;
+}
+.what-area-visual .systems-illustration-core p {
+  font-size: 10px;
+}
+.what-area-copy {
+  padding: 28px;
+}
+.what-area-copy > span {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--brand-slate);
+}
+.what-area-copy h2 {
+  font-size: 27px;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-top: 18px;
+}
+.what-area-copy p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--brand-slate);
+  margin-top: 18px;
+}
+.what-area-copy ul {
+  padding-left: 18px;
+  margin-top: 20px;
+  font-size: 13px;
+  line-height: 2;
+  color: var(--brand-charcoal);
+}
+.service-card-includes {
+  padding-left: 18px;
+  margin-top: 22px;
+  border-top: 1px solid var(--outline-variant);
+  padding-top: 18px;
+}
+.inner-page .service-card-includes li {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.service-results > div > .catalog-card {
+  height: 100%;
+}
+.what-expect > h2 {
+  font-size: clamp(32px, 3.8vw, 56px);
+  letter-spacing: -0.05em;
+  margin-top: 22px;
+}
+.what-expect > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 38px;
+}
+.what-expect article {
+  border-top: 2px solid var(--primary);
+  padding-top: 22px;
+}
+.what-expect article > span {
+  font-size: 11px;
+  color: var(--brand-slate);
+}
+.what-expect h3 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin-top: 18px;
+}
+.what-expect article > p {
+  color: var(--brand-slate);
+  line-height: 1.8;
+  font-size: 14px;
+  margin-top: 16px;
+}
+.portfolio-index {
+  gap: 32px;
+  align-items: start;
+}
+.portfolio-index .work-card:nth-child(2) {
+  margin-top: 90px;
+}
+.portfolio-index .project-image {
+  aspect-ratio: 1.18;
+  height: auto;
+}
+.work-card-detail {
+  padding: 0 24px 26px;
+}
+.work-card-detail > p {
+  color: var(--brand-slate);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.work-card-detail ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.work-card-detail li {
+  padding: 6px 10px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 24px;
+  color: var(--brand-charcoal);
+  font-size: 10px;
+}
+@media (max-width: 1000px) {
+  .what-area-grid {
+    grid-template-columns: 1fr;
+  }
+  .what-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+  .what-area-visual {
+    aspect-ratio: auto;
+    min-height: 240px;
+  }
+  .what-overview-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .what-overview-heading > p {
+    max-width: 620px;
+  }
+}
+@media (max-width: 640px) {
+  .what-area {
+    display: block;
+    border-radius: 20px;
+  }
+  .what-area-visual {
+    aspect-ratio: 16/11;
+    min-height: 0;
+  }
+  .what-area-copy {
+    padding: 24px;
+  }
+  .what-expect > div {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-index .work-card:nth-child(2) {
+    margin-top: 0;
+  }
+  .work-card-detail {
+    padding-inline: 20px;
+  }
+}
+
+.what-area-visual > img {
+  object-fit: contain;
+}
+.what-area-visual .systems-illustration-card p {
+  display: none;
+}

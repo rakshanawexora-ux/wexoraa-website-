@@ -15,7 +15,7 @@ export default function Page() {
       title="See a few ideas in action."
       intro="Take a look at how we think about brands, websites and connected systems. These are studio concepts, not commissioned client projects."
     >
-      <section className="section work-grid">
+      <section className="section work-grid portfolio-index">
         {projects.map((p) => (
           <Link className="work-card" key={p.slug} href={`/work/${p.slug}`}>
             <div className="project-image">
@@ -32,7 +32,15 @@ export default function Page() {
                 <h2>{p.title}</h2>
                 <p>{p.type}</p>
               </div>
-              <span>EXPLORE ↗</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <div className="work-card-detail">
+              <p>{p.problem.replace("Studio brief: ", "")}</p>
+              <ul>
+                {p.services.map((service) => (
+                  <li key={service}>{service}</li>
+                ))}
+              </ul>
             </div>
           </Link>
         ))}

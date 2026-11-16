@@ -8,11 +8,15 @@ export function PageShell({
   title,
   intro,
   children,
+  heroActions = true,
+  finalCTA = true,
 }: {
   eyebrow: string;
   title: string;
   intro: string;
   children: React.ReactNode;
+  heroActions?: boolean;
+  finalCTA?: boolean;
 }) {
   return (
     <>
@@ -34,35 +38,39 @@ export function PageShell({
               Design, software & marketing. One team that gets your business.
             </span>
             <p>{intro}</p>
-            <div className="page-hero-actions">
-              <EnquiryCTA interest={title} className="button">
-                Discuss your project <ArrowUpRight size={18} />
-              </EnquiryCTA>
-              <Link className="button text-link" href="/business-assessment">
-                Check your growth score <ArrowUpRight size={17} />
-              </Link>
-            </div>
+            {heroActions && (
+              <div className="page-hero-actions">
+                <EnquiryCTA interest={title} className="button">
+                  Discuss your project <ArrowUpRight size={18} />
+                </EnquiryCTA>
+                <Link className="button text-link" href="/business-assessment">
+                  Check your growth score <ArrowUpRight size={17} />
+                </Link>
+              </div>
+            )}
           </div>
           <StudioScene />
         </section>
         {children}
-        <section className="page-final section">
-          <p className="eyebrow">
-            <span /> LET’S TALK ABOUT YOUR BUSINESS
-          </p>
-          <h2>
-            Not sure where to start?
-            <br />
-            Let’s work it out together.
-          </h2>
-          <p>
-            Tell us what is getting in the way, or what you would like to do
-            next. We will help you find a practical first step.
-          </p>
-          <EnquiryCTA interest={title} className="button">
-            Tell us what you need <ArrowUpRight size={18} />
-          </EnquiryCTA>
-        </section>
+        {finalCTA && (
+          <section className="page-final section">
+            <p className="eyebrow">
+              <span /> LET’S TALK ABOUT YOUR BUSINESS
+            </p>
+            <h2>
+              Not sure where to start?
+              <br />
+              Let’s work it out together.
+            </h2>
+            <p>
+              Tell us what is getting in the way, or what you would like to do
+              next. We will help you find a practical first step.
+            </p>
+            <EnquiryCTA interest={title} className="button">
+              Tell us what you need <ArrowUpRight size={18} />
+            </EnquiryCTA>
+          </section>
+        )}
       </main>
       <Footer />
     </>

@@ -12,7 +12,7 @@ export const routeSeo: Record<string, { title: string; description: string }> =
         "Meet Wexoraa, your Coimbatore team for design, websites, business software and marketing. Clear conversations, connected work and support after launch.",
     },
     "/services": {
-      title: "Web Design, Software & Marketing Services | Wexoraa",
+      title: "What We Do: Design, Software & Marketing | Wexoraa",
       description:
         "Find help with branding, website design, apps, CRM, automation, SEO and digital marketing. Start with what your business needs and grow with one team.",
     },

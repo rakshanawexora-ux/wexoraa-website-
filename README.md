@@ -26,9 +26,10 @@ Build before browser tests; they start the production server. Chromium defaults 
 
 ## Routes
 
-- `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, parallax, short 4-question business snapshot, contact-only follow-up, asymmetric concept portfolio grid and pointer-reactive client stories.
-- `/solutions`, `/solutions/build`, `/solutions/operate`, `/solutions/grow`.
-- `/services` and 12 `/services/[slug]` pages with problems, approach, deliverables, FAQ and enquiry links.
+- `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, short 4-question business snapshot, optional contact details and asymmetric concept portfolio grid. The testimonial section is removed.
+- `/services`: What we do, with three illustrated service groups, a searchable 12-service directory and a simple working-together overview. Repeated enquiry buttons are removed from this page.
+- `/services/[slug]`: 12 service detail pages with problems, approach, deliverables, FAQ and enquiry links.
+- Legacy `/solutions` and `/solutions/build`, `/solutions/operate`, `/solutions/grow` permanently redirect to `/services` and its relevant section; they are absent from navigation and the sitemap.
 - `/work` and two `/work/[slug]` illustrative studio concepts. No commissioned client work or results are fabricated.
 - `/about`, `/process`, `/contact`, `/privacy`.
 - `/business-assessment`, `/business-assessment/thank-you`.

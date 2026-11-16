@@ -118,3 +118,7 @@ The homepage client section now uses a white editorial heading, one split spotli
 ## Testimonials removed
 
 Latest user instruction removes the homepage testimonials/client-stories section. Keep the existing automatic client-logo marquee. Do not reintroduce the spotlight, quote placeholders or additional testimonial controls without a new request.
+
+## What we do and removed Solutions pages
+
+Navigation/footer now label `/services` as “What we do”. Solutions pages are removed from menus and sitemap; legacy URLs permanently redirect to `/services` or the relevant `#build/#operate/#grow` overview. Update internal links directly to the destination. The what-we-do page uses three illustrated service groups, the searchable 12-service directory with useful deliverables, and a clear expectations section. It has no repeated card enquiry buttons, hero CTA pair or page-final CTA; shared header/footer contact remains available. Portfolio retains honest studio-concept labels and adds project context/tags. The requested wexoraa.in reference could not be viewed (proxy 403); do not claim an exact match.

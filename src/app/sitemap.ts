@@ -6,10 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (!origin) return [];
   const paths = [
     "",
-    "/solutions",
-    "/solutions/build",
-    "/solutions/operate",
-    "/solutions/grow",
     "/services",
     "/work",
     "/about",

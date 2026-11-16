@@ -7,7 +7,6 @@ for (const width of [390, 1440])
     for (const route of [
       "/about",
       "/services",
-      "/solutions/build",
       "/services/crm-lead-management",
       "/work",
       "/work/considered-brand-experience",

@@ -53,7 +53,6 @@ test("every page has a unique title, description and one clear main heading", as
     "/",
     "/about",
     "/services",
-    "/solutions",
     "/process",
     "/work",
     "/contact",
@@ -61,7 +60,6 @@ test("every page has a unique title, description and one clear main heading", as
     "/business-assessment",
     "/business-assessment/thank-you",
     ...services.map((s) => `/services/${s.slug}`),
-    ...["build", "operate", "grow"].map((s) => `/solutions/${s}`),
     ...projects.map((p) => `/work/${p.slug}`),
   ];
   const titles = new Set<string>();

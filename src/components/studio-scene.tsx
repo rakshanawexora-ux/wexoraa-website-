@@ -93,8 +93,8 @@ export default function StudioScene() {
           <p>{areas[index].text}</p>
         </div>
         <Link
-          href={`/solutions/${areas[index].id}`}
-          aria-label={`Explore ${areas[index].title} solutions`}
+          href={`/services#${areas[index].id}`}
+          aria-label={`Explore ${areas[index].title} services`}
         >
           <ArrowUpRight size={22} />
         </Link>
