@@ -1,7 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Header, Footer } from "@/components/home";
 export const metadata = {
-  title: "Your next conversation — Wexoraa",
+  ...pageMetadata(
+    "Your Next Step | Wexoraa",
+    "What to prepare for your project conversation.",
+    "/business-assessment/thank-you",
+  ),
   robots: { index: false, follow: true },
 };
 export default function Page() {
@@ -15,18 +20,17 @@ export default function Page() {
           <br />A useful conversation.
         </h1>
         <p>
-          If you submitted an enquiry and saw provider acceptance, Wexoraa can
-          review your context and follow up using your preferred contact method.
-          Visiting this page alone does not submit an enquiry.
+          If your form showed a success message, your enquiry has been accepted
+          and we can review your details. Opening this page alone does not send
+          an enquiry.
         </p>
         <h2>What to have in mind</h2>
         <p>
-          Your main priority, current tools, any important timeline and the
-          people involved in the decision will help make the conversation
-          useful.
+          Think about what you want to improve, the tools you use and when you
+          need it. We can work through the rest together.
         </p>
         <Link className="button" href="/services">
-          Explore our capabilities ↗
+          Explore our services ↗
         </Link>
       </main>
       <Footer />

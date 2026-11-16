@@ -16,7 +16,7 @@ export default function Page() {
           <p className="eyebrow">
             <span /> CHECK YOUR BUSINESS GROWTH READINESS
           </p>
-          <h1>Want to see your business growth score?</h1>
+          <h1>Where could your business work better?</h1>
           <p>
             Answer 12 simple questions about your website, marketing and daily
             work. Get a growth-readiness score and practical next steps, with no

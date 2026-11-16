@@ -68,7 +68,7 @@ See docs/DEPLOYMENT.md, docs/QA_RESULTS.md, docs/SCORING.md and DESIGN_SYSTEM.md
 
 ## Studio-wide motion layer
 
-Inner-page heroes now include a pointer-reactive, selectable Build/Operate/Grow scene. Service discovery supports category filters, keyword search and a resettable empty state. Catalog/project/engineering cards share pointer tilt and a positional highlight; reading content stays fully visible without scroll entry animations. The custom cursor is available across routes.
+Inner-page heroes now include a pointer-reactive, selectable Build/Operate/Grow scene. Service discovery supports category filters, keyword search and a resettable empty state. Catalog/project/engineering cards share pointer tilt and a positional highlight; reading content uses a subtle one-time fade, without blur or large parent/form animations. The custom cursor is available across routes.
 
 The homepage includes an original silent 8-second MP4 brand graphic (`public/motion/wexoraa-studio.mp4`, approximately 473KB) and a 40KB WebP poster. It uses `preload="none"`, starts on request and has play/pause controls. The site-wide Pause motion control pauses ambient motion and active film playback; reduced-motion preferences disable nonessential pointer/parallax effects. The footer is rebuilt as an enquiry panel, grouped navigation and a quiet animated brand motif.
 
@@ -90,4 +90,8 @@ The growth invitation follows the client logo marquee. Its native dialog include
 
 ## Scroll performance
 
-Page scrolling is native and free: no scroll snapping, scroll-time text blur/fade, global parallax loop, progress-bar root CSS writes or per-card scroll measurements. Hero interaction is pointer-only. Studio media opens with two composited scale transforms and a static circular boundary, rather than an animated clip-path; its copy stays visible. Header glass uses an opaque surface rather than a live backdrop filter. Pointer card/button bounds are read once in a single animation frame before style writes, on fine pointers only.
+Page scrolling is native and free: no scroll snapping, blur or continuously scroll-linked text fades, global parallax loop, progress-bar root CSS writes or per-card scroll measurements. Hero interaction is pointer-only. Studio media opens with two composited scale transforms and a static circular boundary, rather than an animated clip-path; its copy stays visible. Header glass uses an opaque surface rather than a live backdrop filter. Pointer card/button bounds are read once in a single animation frame before style writes, on fine pointers only.
+
+## Consistent page design and SEO
+
+All marketing routes share the homepage’s white/charcoal/green design and a clear “design, software and marketing—one team” promise. Main-route search snippets live in `src/content/page-seo.ts`; dynamic detail routes generate their own titles and descriptions. Canonical/social URLs still depend on `NEXT_PUBLIC_SITE_URL`; thank-you remains noindex. A single intersection observer provides subtle one-time content fades without blur or per-scroll layout work, and reduced motion stays static.

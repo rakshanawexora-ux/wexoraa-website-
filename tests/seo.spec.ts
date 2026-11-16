@@ -44,3 +44,41 @@ test("social image renders and pages have unique descriptive metadata", async ({
     services.match(/<title>(.*?)<\/title>/)?.[1],
   );
 });
+
+test("every page has a unique title, description and one clear main heading", async ({
+  page,
+}) => {
+  const { services, projects } = await import("../src/content/catalog");
+  const paths = [
+    "/",
+    "/about",
+    "/services",
+    "/solutions",
+    "/process",
+    "/work",
+    "/contact",
+    "/privacy",
+    "/business-assessment",
+    "/business-assessment/thank-you",
+    ...services.map((s) => `/services/${s.slug}`),
+    ...["build", "operate", "grow"].map((s) => `/solutions/${s}`),
+    ...projects.map((p) => `/work/${p.slug}`),
+  ];
+  const titles = new Set<string>();
+  for (const path of paths) {
+    await page.goto(path);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+    const title = await page.title();
+    expect(title.length).toBeGreaterThan(15);
+    expect(titles.has(title), path).toBe(false);
+    titles.add(title);
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    expect(description?.length, path).toBeGreaterThan(60);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      "content",
+      title,
+    );
+  }
+});

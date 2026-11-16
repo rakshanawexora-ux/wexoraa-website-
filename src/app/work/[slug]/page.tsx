@@ -14,7 +14,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const p = projects.find((p) => p.slug === slug);
   return p
-    ? pageMetadata(`${p.title} — Wexoraa Infotech`, p.solution, `/work/${slug}`)
+    ? pageMetadata(
+        `${p.title} | Studio Concept | Wexoraa`,
+        `Explore this Wexoraa studio concept: ${p.type.toLowerCase()}. See the brief, design ideas and proposed solution.`,
+        `/work/${slug}`,
+      )
     : { title: "Page not found", robots: { index: false, follow: false } };
 }
 export default async function Page({

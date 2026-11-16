@@ -29,15 +29,14 @@ export default async function Contact({
               with a conversation.
             </h1>
             <p>
-              A focused project, a connected business system or a bigger
-              ambition. Tell us what you want to change.
+              A better website, less manual work or more enquiries—tell us what would make a difference to your business. You’ll speak with one team for design, technology and marketing.
             </p>
             <div className="contact-expectations">
               <h2>What happens next?</h2>
               <ol>
-                <li>We review the context you share.</li>
+                <li>We read what you tell us about your business.</li>
                 <li>We clarify the goals and practical next steps.</li>
-                <li>If there is a fit, we define a clear scope together.</li>
+                <li>If we can help, we explain the work, timing and costs.</li>
               </ol>
               <p>
                 No automatic marketing subscription. No obligation to commit.

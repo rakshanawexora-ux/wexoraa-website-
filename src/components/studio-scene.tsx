@@ -42,9 +42,9 @@ export default function StudioScene() {
     <div className="inner-visual" data-parallax>
       <div className="scene-top">
         <span>
-          <i /> THE CONNECTED STUDIO
+          <i /> ONE CONNECTED TEAM
         </span>
-        <span>LIVE / 0{index + 1}</span>
+        <span>EXPLORE / 0{index + 1}</span>
       </div>
       <motion.div
         className="studio-scene"

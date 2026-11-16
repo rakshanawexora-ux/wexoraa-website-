@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-test("native scrolling stays free and content never uses scroll blur or fade", async ({
+test("native scrolling stays free and lightweight content fades never use blur", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });

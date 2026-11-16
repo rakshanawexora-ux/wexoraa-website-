@@ -17,62 +17,59 @@ export default function Privacy() {
           deserves care.
         </h1>
         <p>
-          This notice describes the implemented website features. Business legal
-          identity, a dedicated privacy contact and an approved inbox retention
-          schedule must be finalized by Wexoraa before public lead collection is
-          enabled.
+          Here is how this website uses the details you share. Wexoraa still
+          needs to confirm its legal business details, privacy contact and how
+          long enquiry emails are kept before online lead collection goes live.
         </p>
-        <h2>Business assessment</h2>
+        <h2>Your business check</h2>
         <p>
-          The 12-question assessment stores your selected business answers in
-          session storage in the current browser tab so you can revise them. It
-          does not store contact details locally. Use “Clear answers and start
-          again” on the results screen to remove those answers. A score is
-          calculated from an explained self-reported rubric; it is not a
-          validated diagnostic or business-performance guarantee.
+          The short homepage check keeps your business details and contact
+          information in page memory while you use it. It does not save them in
+          browser storage or send them automatically. The separate 12-question
+          assessment saves your selected answers in the current browser tab so
+          you can return to them. Use “Clear answers and start again” to remove
+          those saved answers. Neither score is a prediction of sales or a
+          professional business audit.
         </p>
-        <h2>Project and assessment enquiries</h2>
+        <h2>When you send an enquiry</h2>
         <p>
-          If email sending is configured and you choose to submit, we request
-          your name, company, email, phone, preferred contact method,
-          requirement and explicit privacy consent. Website information is
-          optional. An assessment enquiry also includes your answers and a
-          server-calculated summary. These details are used to understand and
-          respond to your requirement. You are not automatically subscribed to
-          marketing.
+          We ask for your name, email, phone number and what you need help with.
+          A business snapshot can include the business details, problem and
+          answers you chose to share. The detailed assessment includes your
+          answers and calculated summary. You must agree to the privacy notice
+          before sending. These details are used to understand your enquiry and
+          reply to you, not to automatically subscribe you to marketing.
         </p>
-        <h2>Email processing and storage</h2>
+        <h2>Where your enquiry goes</h2>
         <p>
-          Submitted information is sent to the configured Wexoraa inbox through
-          Resend and the hosting platform. Their infrastructure may process data
-          outside your country. This application has no lead database or admin
-          dashboard. Information can remain in the recipient mailbox and
-          provider systems according to the relevant policies; email-only
-          capture has no durable application backup. Provider acceptance does
-          not guarantee inbox delivery.
+          When email sending is set up, your enquiry goes to the configured
+          Wexoraa inbox through Resend and the website host. Those providers may
+          process information outside your country. Enquiries may remain in
+          their systems and the inbox under the relevant retention policies.
+          This website does not have a separate lead database or backup. An
+          accepted email is not a guarantee that it reaches the inbox.
         </p>
-        <h2>Security and operational data</h2>
+        <h2>Spam checks and website records</h2>
         <p>
-          Server validation, request limits, spam checks and temporary duplicate
-          controls protect the enquiry endpoint. The handler does not log form
-          contents. Short-lived hashed request identifiers support throttling;
-          in-memory controls do not persist across server restarts or coordinate
-          multiple server instances. Hosting providers may maintain their own
-          operational logs.
+          The website checks form entries and limits repeated requests to help
+          prevent spam. The enquiry handler does not log the contents of your
+          form. Temporary request identifiers are kept in server memory for
+          these checks and reset when the server restarts; they are not shared
+          between servers. The hosting provider may keep its own technical logs.
         </p>
         <h2>Your choices</h2>
         <p>
-          You can view your assessment without supplying contacts, revise or
-          clear answers, and choose whether to enquire. For access, correction
-          or deletion of a submitted enquiry, contact Wexoraa through the
-          approved contact options on the Contact page. Do not submit sensitive
-          personal data in the message.
+          You can see a score without sharing contact details, change your
+          answers and decide whether to send an enquiry. To ask about access,
+          corrections or deletion of a submitted enquiry, use the approved
+          contact options on our Contact page. Please avoid putting sensitive
+          personal information in your message.
         </p>
-        <h2>External contact services</h2>
+        <h2>Phone, WhatsApp and tracking</h2>
         <p>
-          When configured, telephone and WhatsApp actions open their respective
-          services, which have their own privacy practices. This site does not
-          currently include analytics or advertising trackers.
+          When phone and WhatsApp links are configured, they open those
+          services, which have their own privacy policies. This website does not
+          currently use advertising or analytics trackers.
         </p>
       </main>
       <Footer />

@@ -2,10 +2,41 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
-// Pointer-only enhancements. Native scrolling does not measure or rewrite cards.
+// One-time reading fades and pointer feedback; no scroll-time card measurements.
 export default function SiteExperience() {
   const path = usePathname();
   const reduced = useExperienceMotion();
+  useEffect(() => {
+    if (reduced) return;
+    const animations: Animation[] = [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          animations.push(
+            entry.target.animate(
+              [
+                { opacity: 0.85, transform: "translateY(8px)" },
+                { opacity: 1, transform: "translateY(0)" },
+              ],
+              { duration: 320, easing: "cubic-bezier(.22,1,.36,1)" },
+            ),
+          );
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12 },
+    );
+    document
+      .querySelectorAll(
+        "main h1,main h2,main section > p,main .detail-grid > div > p,main .catalog-card > p",
+      )
+      .forEach((el) => observer.observe(el));
+    return () => {
+      observer.disconnect();
+      animations.forEach((animation) => animation.cancel());
+    };
+  }, [path, reduced]);
   useEffect(() => {
     if (reduced || !matchMedia("(hover: hover) and (pointer: fine)").matches)
       return;

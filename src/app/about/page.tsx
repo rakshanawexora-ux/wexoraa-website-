@@ -21,8 +21,7 @@ export default function Page() {
         <div>
           <p>
             Businesses often manage separate vendors for branding, websites,
-            software and marketing. Useful context can disappear between each
-            handoff.
+            software and marketing. It is easy for details to get lost between teams.
           </p>
           <p>
             We keep those conversations in one place. Tell us what you want to
@@ -39,11 +38,11 @@ export default function Page() {
         {[
           [
             "Understand before recommending",
-            "We ask about your people, processes, customers and constraints before choosing a solution.",
+            "We ask how your team works, what your customers need and what is getting in the way.",
           ],
           [
             "Make the scope clear",
-            "We define deliverables, responsibilities and expectations so the next step is easier to understand.",
+            "You know what we will make, what it costs, who does what and when to expect it.",
           ],
           [
             "Support you after launch",

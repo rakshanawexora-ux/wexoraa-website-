@@ -47,20 +47,21 @@ export default function CinematicHero() {
       }}
     >
       <div className="cinematic-meta">
-        <span>YOUR NEXT CHAPTER STARTS HERE</span>
+        <span>DESIGN + TECHNOLOGY + MARKETING / ONE TEAM</span>
         <span>COIMBATORE ↗ WORKING EVERYWHERE</span>
       </div>
       <motion.div className="cinematic-copy">
         <h1>
-          <span>Good design.</span>
-          <span>Smart tech.</span>
+          <span>Design. Tech.</span>
+          <span>Marketing.</span>
           <span className="cinematic-last">
-            Real <em>impact.</em>
+            <em>One team.</em>
           </span>
         </h1>
         <p>
-          We help you build a better website, simplify daily work and reach more
-          customers. One team, here to help.
+          From your brand and website to business software and marketing—work
+          with one team that understands how it all fits together. Start with
+          the help you need today.
         </p>
         <EnquiryCTA
           className="button cinematic-enquiry"

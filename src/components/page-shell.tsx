@@ -17,7 +17,12 @@ export function PageShell({
   return (
     <>
       <Header />
-      <main id="main">
+      <main id="main" className="inner-page">
+        <nav className="page-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span aria-hidden="true">/</span>
+          <span>{eyebrow.split("/")[0].trim()}</span>
+        </nav>
         <section className="page-hero section">
           <div className="page-hero-copy">
             <p className="eyebrow">
@@ -25,6 +30,9 @@ export function PageShell({
               {eyebrow}
             </p>
             <h1>{title}</h1>
+            <span className="page-team-promise">
+              Design, software & marketing. One team that gets your business.
+            </span>
             <p>{intro}</p>
             <div className="page-hero-actions">
               <EnquiryCTA interest={title} className="button">

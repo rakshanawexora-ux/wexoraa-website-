@@ -38,8 +38,8 @@ export default function Page() {
             whether to proceed.
           </p>
           <p>
-            For ongoing support or partnership work, review cadence and response
-            expectations are agreed as part of the engagement.
+            For ongoing work, we agree how often to check in, how to reach us
+            and what support includes before we start.
           </p>
         </div>
       </section>

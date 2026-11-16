@@ -9,7 +9,7 @@ for (const width of [360, 390, 768, 1024, 1440])
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Good design.",
+      "Design. Tech.",
     );
     expect(
       await page.evaluate(
@@ -124,7 +124,7 @@ test("every published content route renders, unknown routes 404 and navigation u
     .click();
   await expect(page).toHaveURL(/\/services$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "What would you like help with?",
+    "Design, websites, software and marketing. One team.",
   );
   await page
     .getByRole("link", { name: /Websites & online stores/ })

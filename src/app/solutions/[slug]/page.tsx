@@ -16,8 +16,8 @@ export async function generateMetadata({
   const s = solutions.find((s) => s.id === slug);
   return s
     ? pageMetadata(
-        `${s.title} — Wexoraa Infotech`,
-        s.description,
+        `${s.title} | Wexoraa`,
+        `${s.description} One team for design, software and marketing in Coimbatore.`,
         `/solutions/${slug}`,
       )
     : { title: "Page not found", robots: { index: false, follow: false } };
@@ -33,7 +33,7 @@ export default async function Page({
   return (
     <PageShell
       eyebrow={`${s.title.toUpperCase()} / CONNECTED SOLUTIONS`}
-      title={s.description}
+      title={s.title}
       intro={s.detail}
     >
       <section className="section solution-explanation">
@@ -64,7 +64,7 @@ export default async function Page({
               <span>SERVICE ↗</span>
               <h3>{x.title}</h3>
               <p>{x.intro}</p>
-              <strong>Explore the approach ↗</strong>
+              <strong>See how we can help ↗</strong>
             </Link>
           ))}
       </section>

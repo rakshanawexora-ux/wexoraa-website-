@@ -10,10 +10,10 @@ export const services = [
     approach:
       "We talk about your business and customers, then design your logo, colours and everyday materials so everything feels like one brand.",
     deliverables: [
-      "Brand discovery and positioning",
-      "Visual identity and art direction",
-      "Typography, color and usage guidelines",
-      "Practical brand application templates",
+      "A clear story about your business and customers",
+      "Logo, colours and a consistent visual style",
+      "Simple rules for using your fonts, colours and logo",
+      "Ready-to-use layouts for everyday brand materials",
     ],
     question: "Do we need a complete rebrand?",
     answer:
@@ -29,10 +29,10 @@ export const services = [
     approach:
       "We plan the pages, screens and steps your customers need. You can review and try the design before development starts.",
     deliverables: [
-      "Journey and information architecture",
-      "Wireframes and interactive prototypes",
+      "A clear plan for pages and customer steps",
+      "Screen layouts and a design you can try",
       "Responsive interface design",
-      "Reusable design-system components",
+      "Consistent buttons, forms and page elements",
     ],
     question: "Can you improve an existing product?",
     answer:
@@ -49,7 +49,7 @@ export const services = [
     approach:
       "We plan your pages, design for mobile and desktop, and build a fast, easy-to-manage website or online store.",
     deliverables: [
-      "Content and conversion structure",
+      "Pages and content that help customers take the next step",
       "Responsive website or storefront",
       "Forms and relevant integrations",
       "Launch checks and handover",
@@ -69,8 +69,8 @@ export const services = [
     approach:
       "We start with what people need to do, agree on the most useful features, and build and test the app in clear stages.",
     deliverables: [
-      "Product discovery and scope",
-      "Application architecture and UX",
+      "A clear list of what your app needs to do",
+      "A plan for how the app works and feels",
       "Web or mobile product development",
       "Testing, release and handover",
     ],
@@ -89,10 +89,10 @@ export const services = [
     approach:
       "We set up one place for customer details, enquiries and follow-up reminders, with a clear view of who is handling each lead.",
     deliverables: [
-      "Sales-process and pipeline mapping",
-      "CRM configuration or integration",
+      "A clear view of each enquiry and next step",
+      "A CRM set up around your sales process",
       "Follow-up workflows and reporting",
-      "Team onboarding and documentation",
+      "Team training and a guide you can keep",
     ],
     question: "Can you connect our current tools?",
     answer:
@@ -109,9 +109,9 @@ export const services = [
     approach:
       "We look at how your team works today and build or connect the software you need, without trying to change everything at once.",
     deliverables: [
-      "Workflow and requirement mapping",
-      "ERP evaluation or custom modules",
-      "Data and integration planning",
+      "A review of how your team works today",
+      "Help choosing business software or building the missing pieces",
+      "A plan for bringing your information together",
       "Testing, training and phased handover",
     ],
     question: "Will every process need to change?",
@@ -129,10 +129,10 @@ export const services = [
     approach:
       "We check which tools can connect, agree on what information they should share, and test that the connection works reliably.",
     deliverables: [
-      "Integration and data-flow design",
-      "API connections and synchronization",
+      "A plan for what your tools need to share",
+      "Connections that keep information up to date",
       "Error handling and monitoring guidance",
-      "Technical documentation and handover",
+      "A clear handover guide for your team",
     ],
     question: "What if an API has limitations?",
     answer:
@@ -150,7 +150,7 @@ export const services = [
     deliverables: [
       "Automation opportunity review",
       "Workflow and integration implementation",
-      "Human review and exception handling",
+      "Clear checks for tasks that need a person",
       "Usage guidance and quality checks",
     ],
     question: "Does every automation need AI?",
@@ -169,9 +169,9 @@ export const services = [
       "We review your website and search presence, improve useful pages and business listings, and track the enquiries that come from search.",
     deliverables: [
       "Search and digital-presence review",
-      "Technical and on-page recommendations",
-      "Content and channel planning",
-      "Measurement and review framework",
+      "Practical improvements to your website and search pages",
+      "A content plan for the places customers find you",
+      "Simple reports and regular progress reviews",
     ],
     question: "Can you guarantee rankings?",
     answer:
@@ -195,7 +195,7 @@ export const services = [
     ],
     question: "Is media spend included?",
     answer:
-      "Media spend, platform fees and production costs should be agreed separately and clearly stated in the proposal.",
+      "Ad budget, platform fees and content costs are agreed separately and shown clearly in your proposal.",
   },
   {
     slug: "video-creative-production",
@@ -228,10 +228,10 @@ export const services = [
     approach:
       "We check your pages, forms and checkout steps for confusing details, then make practical changes and review the results when enough data is available.",
     deliverables: [
-      "Journey and conversion review",
-      "Prioritized UX improvements",
-      "Form and landing-page refinement",
-      "Experiment and measurement plan",
+      "A review of the steps visitors take before enquiring",
+      "The most useful design changes to make first",
+      "Clearer forms and pages for your campaigns",
+      "A plan to test changes and track the response",
     ],
     question: "Will every visitor convert?",
     answer:
@@ -246,11 +246,11 @@ export const projects = [
     image: "/brand-art.webp",
     alt: "Olive and cream botanical packaging studio concept",
     problem:
-      "Illustrative brief: a premium product business needs a coherent identity and online shopping direction.",
+      "Studio brief: a premium product business needs a consistent brand and an easier way for customers to shop online.",
     solution:
-      "A restrained visual language, tactile art direction and a clear product-to-purchase journey.",
+      "A calm, consistent look for the packaging and website, with clear product information and simple steps to buy.",
     outcome:
-      "Concept only. No client engagement, live implementation or measured commercial outcome is claimed.",
+      "A studio concept, not commissioned client work. It has not been launched or measured with real customers.",
     services: [
       "Branding & graphic design",
       "UI/UX design",
@@ -264,11 +264,11 @@ export const projects = [
     image: "/hero-art.webp",
     alt: "Interlocking silver and green sculptural forms",
     problem:
-      "Illustrative brief: customer information and operational tasks live in separate tools.",
+      "Studio brief: customer details and daily tasks are spread across tools, so the team keeps copying information by hand.",
     solution:
-      "A proposed connected workflow, shared data model and clearer handoffs between customer-facing and internal systems.",
+      "Bring enquiries, customer details and team tasks together so people can see what needs to happen next.",
     outcome:
-      "Concept only. Feasibility, integrations and business outcomes would require discovery and real implementation.",
+      "A studio concept. The connections, costs and results would need to be checked with a real business before building.",
     services: [
       "CRM & lead management",
       "Software integrations",

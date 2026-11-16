@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { routeSeo } from "@/content/page-seo";
 export function siteOrigin() {
   const value = process.env.NEXT_PUBLIC_SITE_URL;
   if (!value) return undefined;
@@ -15,6 +16,9 @@ export function pageMetadata(
   description: string,
   path: string,
 ): Metadata {
+  const snippet = routeSeo[path];
+  title = snippet?.title ?? title;
+  description = snippet?.description ?? description;
   const origin = siteOrigin();
   const url = origin ? new URL(path, origin).toString() : undefined;
   return {
@@ -37,7 +41,7 @@ export function pageMetadata(
                 url: new URL("/opengraph-image", origin!).toString(),
                 width: 1200,
                 height: 630,
-                alt: "Wexoraa Infotech — Build. Operate. Grow.",
+                alt: "Wexoraa — One team for design, technology and marketing.",
               },
             ],
           }
@@ -67,7 +71,7 @@ export function organizationSchema() {
         url: origin,
         logo: `${origin}/brand/wexoraa-logo.svg`,
         description:
-          "An integrated technology, creative and business growth partner.",
+          "One team for branding, websites, business software and digital marketing in Coimbatore.",
         areaServed: [
           { "@type": "Place", name: "Coimbatore, Tamil Nadu, India" },
         ],

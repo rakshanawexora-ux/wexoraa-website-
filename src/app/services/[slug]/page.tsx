@@ -18,8 +18,8 @@ export async function generateMetadata({
   const s = services.find((s) => s.slug === slug);
   return s
     ? pageMetadata(
-        `${s.title} — Wexoraa Infotech`,
-        s.intro,
+        `${s.title} | Wexoraa`,
+        `${s.intro} Work with Wexoraa in Coimbatore for a clear plan and support.`,
         `/services/${slug}`,
       )
     : { title: "Page not found", robots: { index: false, follow: false } };
@@ -67,17 +67,17 @@ export default async function Page({
         </aside>
       </section>
       <section className="section service-faq">
-        <h2>A useful question.</h2>
+        <h2>A question you might have.</h2>
         <details open>
           <summary>{s.question}</summary>
           <p>{s.answer}</p>
         </details>
         <Link className="button text-link" href={`/solutions/${s.group}`}>
-          Explore connected {s.group} solutions ↗
+          See how our services work together ↗
         </Link>
       </section>
       <section className="section">
-        <p className="eyebrow">CONNECTED CAPABILITIES</p>
+        <p className="eyebrow">OTHER WAYS WE CAN HELP</p>
         <div className="catalog-grid">
           {services
             .filter((r) => r.group === s.group && r.slug !== s.slug)

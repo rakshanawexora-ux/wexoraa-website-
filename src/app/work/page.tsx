@@ -11,9 +11,9 @@ export const metadata = pageMetadata(
 export default function Page() {
   return (
     <PageShell
-      eyebrow="THINKING, MADE TANGIBLE"
+      eyebrow="OUR DESIGN THINKING, IN PRACTICE"
       title="See a few ideas in action."
-      intro="These are studio-made examples of our design ideas. They are concepts, not paid client projects or customer results."
+      intro="Take a look at how we think about brands, websites and connected systems. These are studio concepts, not commissioned client projects."
     >
       <section className="section work-grid">
         {projects.map((p) => (
