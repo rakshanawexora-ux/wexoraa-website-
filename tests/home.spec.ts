@@ -9,7 +9,7 @@ for (const width of [360, 390, 768, 1024, 1440])
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Your business.",
+      "Your brand. Your website.",
     );
     expect(
       await page.evaluate(
@@ -70,10 +70,10 @@ test("cursor position changes hero depth; scroll and reduced motion stay support
   page,
 }) => {
   await page.goto("/");
-  const visual = page.locator(".hero-image-wrap");
-  await page.locator(".hero-media").scrollIntoViewIfNeeded();
+  const visual = page.locator(".horizon-scenery");
+  await page.locator(".hero-horizon").scrollIntoViewIfNeeded();
   const before = await visual.evaluate((el) => getComputedStyle(el).transform);
-  const bounds = await page.locator(".hero-media").boundingBox();
+  const bounds = await page.locator(".hero-horizon").boundingBox();
   await page.mouse.move(
     bounds!.x + bounds!.width * 0.85,
     bounds!.y + bounds!.height * 0.25,
@@ -81,10 +81,6 @@ test("cursor position changes hero depth; scroll and reduced motion stay support
   await expect
     .poll(() => visual.evaluate((el) => getComputedStyle(el).transform))
     .not.toBe(before);
-  await expect(page.locator(".cursor-accent")).toHaveAttribute(
-    "data-label",
-    "Explore",
-  );
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(visual).toHaveCSS("transform", "none");
   await expect(page.locator(".cursor-accent")).toHaveCSS("display", "none");

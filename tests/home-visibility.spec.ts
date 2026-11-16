@@ -14,7 +14,7 @@ test("homepage actions stay readable on light and dark surfaces when hovered", a
   ).toHaveCount(0);
   for (const selector of [
     ".header-project",
-    ".cinematic-enquiry",
+    ".horizon-actions .button:first-child",
     ".film-toggle",
     ".survey-start",
     ".footer-invite-link",
