@@ -104,3 +104,7 @@ Each marketing page has one normal-flow `.page-frame` root around its header, co
 ## Supplied Work portfolio
 
 The `/work` index uses `src/content/portfolio.ts`, transcribed from the supplied Wexoraa completed-projects document: eight website/ecommerce references and three creative entries. Matching uploaded compositions live in `public/work` as optimized WebP files. Edit each entry's `url` to update its external website; null URLs omit the visit button. Hita's public video URL is pending. VLASY retains the document's concept label. Older `/work/[slug]` studio explorations remain separate from these supplied project references.
+
+## 20-second Wexoraa brand film
+
+The website video section uses `public/motion/wexoraa-brand-20s.mp4` (20 seconds, 1280×720, 30fps, silent H.264 MP4). It is an original programmatically rendered brand animation inspired by the supplied reference, not output from a generative-video model. It uses the official logo, supplied project artwork and one-team messaging. Re-render with `node scripts/render-brand-film.mjs`; Chromium and ffmpeg are required. The section retains native play/pause, offscreen pausing and reduced-motion behavior; lightweight decorative particles pause out of view.

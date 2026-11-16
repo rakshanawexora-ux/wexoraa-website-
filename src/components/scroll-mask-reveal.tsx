@@ -58,6 +58,7 @@ export default function ScrollMaskReveal() {
       className="motion-showcase mask-reveal"
       aria-label="Wexoraa studio mask reveal"
       data-static={reduced}
+      data-playing={playing}
     >
       <div className="mask-reveal-stage">
         <motion.div
@@ -71,8 +72,8 @@ export default function ScrollMaskReveal() {
             <video
               ref={video}
               className="brand-film"
-              src="/motion/wexoraa-studio.mp4"
-              poster="/hero-art.webp"
+              src="/motion/wexoraa-brand-20s.mp4"
+              poster="/motion/brand-20s-poster.webp"
               muted
               loop
               playsInline
@@ -83,6 +84,19 @@ export default function ScrollMaskReveal() {
               onError={() => setError(true)}
             />
             <div className="mask-reveal-shade" />
+            <div className="film-particles" aria-hidden="true">
+              {Array.from({ length: 12 }, (_, i) => (
+                <i
+                  key={i}
+                  style={{
+                    left: `${(i * 29 + 7) % 100}%`,
+                    top: `${(i * 17 + 11) % 100}%`,
+                    animationDelay: `-${i * 0.7}s`,
+                    animationDuration: `${9 + (i % 4)}s`,
+                  }}
+                />
+              ))}
+            </div>
           </motion.div>
         </motion.div>
         <div className="mask-reveal-meta">

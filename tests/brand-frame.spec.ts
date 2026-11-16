@@ -6,9 +6,9 @@ test("rounded hero keeps discovery and enquiry accessible on desktop and mobile"
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
     const hero = page.locator(".hero-cinematic");
-    await expect(hero).toHaveCSS("background-image", /linear-gradient/);
+    await expect(hero).toHaveCSS("background-color", "rgb(255, 255, 255)");
     await expect(hero).toHaveCSS("clip-path", "none");
-    const visual = page.locator(".horizon-landscape");
+    const visual = page.locator(".hero-visual");
     await expect(visual).toBeVisible();
     const bounds = await visual.boundingBox();
     expect(bounds!.width).toBeGreaterThan(250);

@@ -132,6 +132,6 @@ Use the central catalog for all service navigation and group lists: eight Design
 
 Preserve a single normal-flow `.page-frame` root on each marketing page, including home, PageShell, contact, privacy, assessment, thank-you and 404. A fragment containing a sticky header, main and separate footer causes the current Next.js scroll handler to bring the footer into view on navigation. Declare smooth-scroll behavior on the HTML element for the framework’s route-scroll handling; retain native section anchors and avoid a global scroll-to-top effect.
 
-## Centered horizon hero
+## Current hero direction
 
-The approved reference direction is now a centered, light hero with a clear one-team USP, readable charcoal copy and a darker green headline accent. Keep the brand/software/marketing promise explicit. A custom SVG green landscape, floating emblem and seven animated bars sit below the reading area; pointer motion is bounded to the scenery. Stop ambient animation offscreen and under reduced motion. Preserve native scrolling and the existing header. Do not restore the split-screen orbital/browser scene or redundant hero cards.
+User reverted the centered landscape hero. Preserve the earlier split editorial layout, interactive browser graphic, orbital background and pointer effects. The copy states the main USP explicitly: Design. Tech. Marketing. One team. Explain one team for brand, website, business software and digital marketing, reducing coordination between agencies. Keep the current portfolio cover design unchanged.

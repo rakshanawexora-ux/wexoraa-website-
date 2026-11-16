@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import ActionArrow from "./action-arrow";
 import { EnquiryCTA } from "./enquiry-popup";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
@@ -10,115 +11,206 @@ export default function CinematicHero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useExperienceMotion();
   const [visible, setVisible] = useState(true);
-  const x = useMotionValue(0),
-    y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 60, damping: 24 });
-  const sy = useSpring(y, { stiffness: 60, damping: 24 });
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const px = useSpring(x, { stiffness: 65, damping: 24 });
+  const py = useSpring(y, { stiffness: 65, damping: 24 });
+  const depthY = useTransform(py, [-1, 1], [-12, 12]);
+  const depthX = useTransform(px, [-1, 1], [-18, 18]);
+  const fieldX = useTransform(px, [-1, 1], [-28, 28]);
+  const fieldY = useTransform(py, [-1, 1], [-18, 18]);
   useEffect(() => {
+    if (!ref.current) return;
     const observer = new IntersectionObserver(([entry]) =>
       setVisible(entry.isIntersecting),
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
   return (
     <section
       ref={ref}
       id="top"
-      className="hero-cinematic hero-horizon"
+      className="hero hero-media hero-cinematic"
+      data-cursor="Explore"
       data-orbit-active={visible && !reduced}
       onPointerMove={(e) => {
         if (reduced || e.pointerType !== "mouse") return;
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set(((e.clientX - r.left) / r.width - 0.5) * 24);
-        y.set(((e.clientY - r.top) / r.height - 0.5) * 12);
+        const bounds = e.currentTarget.getBoundingClientRect();
+        x.set(((e.clientX - bounds.left) / bounds.width) * 2 - 1);
+        y.set(((e.clientY - bounds.top) / bounds.height) * 2 - 1);
       }}
       onPointerLeave={() => {
         x.set(0);
         y.set(0);
       }}
     >
-      <div className="horizon-copy">
-        <p className="horizon-eyebrow">
-          <span /> ONE TEAM. YOUR WHOLE DIGITAL BUSINESS.
-        </p>
-        <h1>
-          Your brand. Your website.
-          <br />
-          <em>Your next step.</em> One team.
-        </h1>
-        <p className="horizon-intro">
-          We design your brand, build your website and software, and help the
-          right customers find you. One team that connects it all—so you can
-          focus on running your business.
-        </p>
-        <div className="horizon-actions">
-          <EnquiryCTA
-            className="button"
-            interest="Let’s build something together"
-          >
-            Let’s build something <ActionArrow />
-          </EnquiryCTA>
-          <Link href="/services" className="button button-outline">
-            Explore what we do <ActionArrow />
-          </Link>
-        </div>
-        <p className="horizon-promise">
-          Design & branding <span>·</span> Websites & software <span>·</span>{" "}
-          Digital marketing
-        </p>
+      <div className="cinematic-meta">
+        <span>DESIGN + TECHNOLOGY + MARKETING / ONE TEAM</span>
+        <span>COIMBATORE ↗ WORKING EVERYWHERE</span>
       </div>
-      <div className="horizon-landscape" aria-hidden="true">
-        <motion.div
-          className="horizon-scenery"
-          style={{ x: reduced ? 0 : sx, y: reduced ? 0 : sy }}
+      <motion.div className="cinematic-copy">
+        <h1>
+          <span>Design. Tech.</span>
+          <span>Marketing.</span>
+          <span className="cinematic-last">
+            <em>One team.</em>
+          </span>
+        </h1>
+        <p>
+          One team for your brand, website, business software and digital marketing.
+          We connect the design, technology and campaigns—so you spend less time
+          managing different agencies and more time growing your business.
+        </p>
+        <EnquiryCTA
+          className="button cinematic-enquiry"
+          interest="Let’s build something together"
         >
-          <svg viewBox="0 0 1440 440" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="hill-back" x2="0" y2="1">
-                <stop stopColor="#e5edd9" />
-                <stop offset="1" stopColor="#f5f7f1" />
-              </linearGradient>
-              <linearGradient id="hill-front" x2="0" y2="1">
-                <stop stopColor="#b9d499" />
-                <stop offset="1" stopColor="#eef4e6" />
-              </linearGradient>
-            </defs>
-            <path
-              className="horizon-hill"
-              d="M0 140 Q200 120 450 270 Q760 400 1050 150 Q1250 10 1440 35V440H0Z"
-              fill="url(#hill-back)"
-            />
-            <path
-              className="horizon-hill"
-              d="M0 230 Q200 250 410 340 Q850 470 1140 200 Q1320 90 1440 150V440H0Z"
-              fill="url(#hill-front)"
-            />
-            <path
-              d="M0 380 Q420 340 700 400 Q1100 320 1440 360V440H0Z"
-              fill="#f8faf5"
-            />
-          </svg>
-        </motion.div>
-        <div className="horizon-emblem">
-          <div className="horizon-mark">
-            {[1, 2, 3, 4, 5, 6, 7].map((n) => (
-              <i
-                key={n}
-                style={{
-                  height: `${14 + (4 - Math.abs(4 - n)) * 9}px`,
-                  animationDelay: `${n * 0.12}s`,
-                }}
-              />
-            ))}
+          Let’s build something <ActionArrow />
+        </EnquiryCTA>
+      </motion.div>
+      <div className="hero-visual" aria-hidden="true">
+        <motion.div
+          className="hero-image-wrap cinematic-backdrop"
+          aria-hidden="true"
+          style={{
+            x: reduced ? 0 : depthX,
+            y: reduced ? 0 : depthY,
+            scale: 1.12,
+          }}
+        >
+          <div className="hero-business-canvas">
+            <div className="hero-browser">
+              <div className="browser-top">
+                <i />
+                <i />
+                <i />
+                <span>YOUR NEXT CHAPTER</span>
+              </div>
+              <div className="browser-body">
+                <span className="canvas-kicker">
+                  A BUSINESS PEOPLE REMEMBER
+                </span>
+                <strong>
+                  Look better.
+                  <br />
+                  Work smarter.
+                </strong>
+                <div className="canvas-layout">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+                <span className="canvas-button">Make it happen ↗</span>
+              </div>
+            </div>
+            <div className="canvas-signal signal-brand">
+              ✳{" "}
+              <span>
+                YOUR BRAND
+                <br />
+                <b>Clear. Confident. You.</b>
+              </span>
+            </div>
+            <div className="canvas-signal signal-growth">
+              <span>
+                YOUR MARKETING
+                <br />
+                <b>Reach the right people.</b>
+              </span>
+              <div className="canvas-bars">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <i
+                    key={n}
+                    style={{
+                      animationDelay: `${n * 0.15}s`,
+                      height: `${n * 9}px`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-          <span>CONNECTED BY WEXORAA</span>
+        </motion.div>
+        <div className="cinematic-shade" aria-hidden="true" />
+        <div className="cinematic-grid" aria-hidden="true" />
+        <motion.div
+          className="orbital-field"
+          aria-hidden="true"
+          style={{ x: reduced ? 0 : fieldX, y: reduced ? 0 : fieldY }}
+        >
+          <div className="orbital-axis axis-horizontal" />
+          <div className="orbital-axis axis-vertical" />
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className={`orbital-ring orbital-ring-${n}`}>
+              <span className="orbital-satellite" />
+              <span className="orbital-satellite satellite-secondary" />
+            </div>
+          ))}
+          <div className="orbital-core">
+            <span />
+            <i />
+            <b>W</b>
+          </div>
+          <span className="orbital-caption">
+            DIFFERENT DISCIPLINES.
+            <br />
+            ONE SHARED DIRECTION.
+          </span>
+          <span className="orbital-coordinate">W / 11.0168° N</span>
+        </motion.div>
+        <div className="hero-visual-label">
+          <span /> IDEAS INTO EVERYDAY IMPACT
         </div>
-        <div className="horizon-disciplines">
-          <span>Make an impression.</span>
-          <span>Make work simpler.</span>
-          <span>Make your next move.</span>
-        </div>
+        <motion.div
+          className="hero-float-note note-design"
+          style={{ x: reduced ? 0 : depthX, y: reduced ? 0 : fieldY }}
+        >
+          <span>01 / DESIGN</span>
+          <strong>Make a lasting impression.</strong>
+          <div className="note-swatches">
+            <i />
+            <i />
+            <i />
+          </div>
+        </motion.div>
+        <motion.div
+          className="hero-float-note note-growth"
+          style={{ x: reduced ? 0 : fieldX, y: reduced ? 0 : py }}
+        >
+          <span>02 / BETTER SYSTEMS</span>
+          <strong>Less busywork. More possibility.</strong>
+          <div className="note-progress">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+        </motion.div>
+        <span className="hero-visual-foot">DESIGN + TECHNOLOGY + GROWTH</span>
+      </div>
+      <div className="cinematic-paths">
+        <Link href="#challenge" className="cinematic-card">
+          <span>
+            01 / YOUR SCORE <ArrowUpRight size={17} />
+          </span>
+          <h2>Your next move.</h2>
+          <p>4 quick questions. Your business snapshot.</p>
+        </Link>
+        <Link href="/services" className="cinematic-card">
+          <span>
+            02 / SERVICES <ArrowUpRight size={17} />
+          </span>
+          <h2>Built around you.</h2>
+          <p>Brand. Technology. Business growth.</p>
+        </Link>
+      </div>
+      <div className="cinematic-bottom">
+        <Link href="#challenge">
+          SCROLL TO FIND YOUR STARTING POINT <ArrowDown size={15} />
+        </Link>
+        <span>DESIGN / SOFTWARE / MARKETING</span>
       </div>
     </section>
   );
