@@ -11106,3 +11106,297 @@ html {
     right: 0;
   }
 }
+/* A single client spotlight, aligned with the homepage editorial cards. */
+.client-stories.client-stories-editorial {
+  display: block;
+  background: white !important;
+  border-top: 1px solid var(--outline-variant);
+}
+.stories-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 48px;
+  margin-bottom: 38px;
+}
+.stories-heading h2 {
+  font-size: clamp(36px, 4.4vw, 66px);
+  line-height: 1.07;
+  letter-spacing: -0.055em;
+  margin-top: 24px;
+}
+.stories-heading h2 > span {
+  color: var(--brand-slate);
+}
+.stories-heading-side {
+  max-width: 325px;
+}
+.stories-heading-side > p {
+  font-size: 14px;
+  color: var(--brand-slate);
+  line-height: 1.85;
+}
+.stories-heading-side .client-stories-controls {
+  margin-top: 22px;
+}
+.stories-heading-side .client-stories-controls button {
+  border-radius: 50%;
+  width: 44px;
+  min-height: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+}
+.client-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  min-height: 300px;
+}
+.client-feature-identity {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--surface-container-low);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 300px;
+}
+.client-feature-identity::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 270px;
+  height: 270px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  box-shadow:
+    0 0 0 35px #ffffff60,
+    0 0 0 36px var(--outline-variant);
+}
+.client-feature-kicker {
+  font-size: 9px;
+  letter-spacing: 1px;
+  align-self: start;
+  color: var(--brand-slate);
+}
+.client-feature-identity .client-story-mark {
+  margin: 20px 0;
+  justify-content: center;
+  width: 100%;
+  min-height: 110px;
+}
+.client-feature-identity .client-story-mark > span {
+  width: 210px;
+  max-width: 100%;
+  height: 80px;
+}
+.client-feature-identity .client-story-mark > .story-mark-tall {
+  width: 92px;
+  height: 100px;
+}
+.client-feature-number {
+  font: 12px var(--font-body);
+  color: var(--brand-slate);
+  align-self: end;
+}
+.client-feature-content {
+  padding: clamp(28px, 4vw, 58px);
+  background: var(--brand-charcoal);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  min-width: 0;
+}
+.client-feature-status {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--primary);
+  border: 1px solid #86c23266;
+  border-radius: 30px;
+  padding: 8px 12px;
+}
+.client-feature-content h3 {
+  font-size: clamp(30px, 3.5vw, 50px);
+  letter-spacing: -1.7px;
+  line-height: 1.1;
+  margin-top: 26px;
+  color: white;
+  overflow-wrap: anywhere;
+}
+.client-feature-pending {
+  color: #e4e6e3;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.client-feature-content blockquote {
+  font: clamp(24px, 3vw, 40px)/1.35 var(--font-display);
+  letter-spacing: -1px;
+  margin: 24px 0;
+  color: white;
+}
+.client-feature-author h3 {
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  margin-top: 0;
+}
+.client-feature-author p {
+  color: #e4e6e3;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.client-feature-rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+.client-feature-rule span {
+  width: 46px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+.client-feature-rule i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.client-selector {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 18px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.client-selector button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 16px 20px;
+  border: 0;
+  border-right: 1px solid var(--outline-variant);
+  background: white;
+  color: var(--brand-slate);
+  cursor: pointer;
+  text-align: left;
+}
+.client-selector button:last-child {
+  border-right: 0;
+}
+.client-selector button > span:first-child {
+  font-size: 10px;
+}
+.client-selector strong {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.client-selector-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--outline-variant);
+  flex-shrink: 0;
+}
+.client-selector button[aria-selected="true"] {
+  background: var(--primary-container);
+  color: var(--brand-charcoal);
+}
+.client-selector button[aria-selected="true"] .client-selector-dot {
+  background: var(--brand-olive);
+}
+.client-selector button:hover {
+  background: var(--surface-container-low);
+}
+.client-selector button:focus-visible {
+  outline-offset: -4px;
+}
+@media (max-width: 900px) {
+  .client-selector {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .client-selector button:nth-child(2) {
+    border-right: 0;
+  }
+  .client-selector button:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--outline-variant);
+  }
+  .stories-heading {
+    gap: 28px;
+  }
+  .client-feature-identity {
+    padding: 24px;
+  }
+}
+@media (max-width: 640px) {
+  .stories-heading {
+    display: block;
+    margin-bottom: 28px;
+  }
+  .stories-heading-side {
+    max-width: none;
+    margin-top: 22px;
+  }
+  .client-feature {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 22px;
+  }
+  .client-feature-identity {
+    min-height: 210px;
+    padding: 22px;
+  }
+  .client-feature-identity::before {
+    width: 210px;
+    height: 210px;
+  }
+  .client-feature-identity .client-story-mark {
+    min-height: 80px;
+    margin: 8px 0;
+  }
+  .client-feature-identity .client-story-mark > span {
+    width: 190px;
+    height: 72px;
+  }
+  .client-feature-identity .client-story-mark > .story-mark-tall {
+    width: 76px;
+    height: 84px;
+  }
+  .client-feature-content {
+    padding: 28px 24px;
+  }
+  .client-feature-content h3 {
+    font-size: 34px;
+    letter-spacing: -1.2px;
+  }
+  .client-feature-pending {
+    font-size: 14px;
+  }
+  .client-selector button {
+    padding: 14px 12px;
+    gap: 8px;
+    min-height: 70px;
+  }
+  .client-selector strong {
+    font-size: 12px;
+  }
+  .client-selector button > span:first-child {
+    font-size: 9px;
+  }
+}

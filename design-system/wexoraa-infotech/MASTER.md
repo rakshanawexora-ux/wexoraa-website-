@@ -110,3 +110,7 @@ Inner pages share white editorial heroes, a clear one-team USP, charcoal interac
 ## Small-screen growth-check layout
 
 On mobile explicitly use one column for the invitation so the radar artwork sits below the copy. The CTA stays full width on one line. At 480px and below stack the animated score above the result heading, with wrapping business names and zero horizontal modal overflow. Use 16px mobile input/select/textarea text, minimum 44px close target and dialog scroll padding for short viewports. Keep the native focus trap and preserve answers on close/reopen. Test 320, 360, 390 and 430px through the full result/contact flow.
+
+## Editorial client spotlight
+
+The homepage client section now uses a white editorial heading, one split spotlight (pale logo panel + charcoal story panel) and four client selector tabs. Avoid the earlier pair of large pending-quote cards, quote-mark ornaments and section-wide green background. On mobile stack the spotlight and use two columns for selectors; keep keyboard arrows/Home/End and manual previous/next controls. Null quotes must remain honestly pending, never invented testimonials or ratings. Real feedback can replace the pending copy using the same content source.

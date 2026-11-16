@@ -20,8 +20,9 @@ test("project browsing updates the concept link and client stories remain clearl
   ).toBeVisible();
   await expect(stories.locator("blockquote")).toHaveCount(0);
   await expect(
-    stories.getByText("FEEDBACK COMING SOON", { exact: true }),
-  ).toHaveCount(2);
+    stories.getByText("CLIENT STORY / COMING SOON", { exact: true }),
+  ).toHaveCount(1);
+  await stories.getByRole("button", { name: "Next client story" }).click();
   await stories.getByRole("button", { name: "Next client story" }).click();
   await expect(
     stories.getByRole("heading", { name: "TaerG Laundry", exact: true }),
