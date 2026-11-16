@@ -9961,3 +9961,335 @@ html:has(.enquiry-dialog[open]) {
 .snapshot-contact-review[open] summary {
   margin-bottom: 20px;
 }
+/* Floating studio navigation: inset glass frame, dark navigation capsule. */
+.header.floating-header {
+  background: transparent;
+  border: 0;
+  backdrop-filter: none;
+  isolation: isolate;
+  padding-inline: calc(var(--gutter) + 20px);
+  gap: 18px;
+}
+.header.floating-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 12px var(--gutter);
+  border: 1px solid #2226291a;
+  border-radius: 22px;
+  background: #ffffffed;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 8px 30px #22262909;
+  pointer-events: none;
+}
+.header.floating-header .brand-logo {
+  width: 164px;
+}
+.header.floating-header > .nav {
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--brand-charcoal);
+  gap: 0;
+  min-height: 48px;
+}
+.header.floating-header .nav > a {
+  color: white;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 12px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.header.floating-header .nav > a::after {
+  display: none;
+}
+.header.floating-header .nav > a:hover {
+  background: #ffffff1a;
+}
+.header.floating-header .nav > a[data-active="true"] {
+  background: var(--primary);
+  color: var(--brand-charcoal);
+}
+.header.floating-header .nav-services {
+  padding-block: 0;
+  margin-block: 0;
+}
+.header.floating-header .nav-services-trigger {
+  gap: 0;
+  border-radius: 999px;
+  padding-left: 16px;
+}
+.header.floating-header .nav-services-trigger > a {
+  color: white;
+  padding: 10px 0;
+  font-size: 12px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+}
+.header.floating-header .nav-services-trigger > button {
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.header.floating-header .nav-services-trigger:has(> a[data-active="true"]),
+.header.floating-header
+  .nav-services-trigger:has(> button[aria-expanded="true"]) {
+  background: var(--primary);
+}
+.header.floating-header .nav-services-trigger:has(> a[data-active="true"]) > *,
+.header.floating-header
+  .nav-services-trigger:has(> button[aria-expanded="true"])
+  > * {
+  color: var(--brand-charcoal);
+}
+.header.floating-header .nav-services-trigger > button:hover {
+  background: #ffffff1a;
+}
+.header.floating-header .nav :focus-visible {
+  outline-color: var(--primary);
+  outline-offset: 3px;
+}
+.header.floating-header > .header-project {
+  min-height: 46px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 12px;
+  gap: 18px;
+}
+.header.floating-header .services-dropdown {
+  top: calc(100% - 4px);
+  right: var(--gutter);
+  width: min(1000px, calc(100vw - var(--gutter) * 2));
+  border: 1px solid var(--outline-variant);
+  border-radius: 24px;
+  padding: 24px;
+  color: var(--brand-charcoal);
+  box-shadow: 0 24px 64px #22262920;
+}
+.header.floating-header .services-dropdown-heading {
+  padding: 0 4px 18px;
+}
+.header.floating-header .services-dropdown-heading > span {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.header.floating-header .services-dropdown-heading > a {
+  font-size: 12px;
+}
+.header.floating-header .services-dropdown-grid {
+  gap: 12px;
+  padding-top: 18px;
+}
+.header.floating-header .services-dropdown-grid section {
+  padding: 20px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: 16px;
+}
+.service-group-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.service-group-badge > svg {
+  color: var(--brand-charcoal);
+  background: var(--primary);
+  padding: 9px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+}
+.service-group-badge > span {
+  color: var(--brand-slate);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.header.floating-header .services-dropdown-grid h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  text-transform: none;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.header.floating-header .services-dropdown-grid section > a {
+  font-size: 12px;
+  color: var(--brand-slate);
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-inline: -10px;
+  line-height: 1.5;
+}
+.header.floating-header .services-dropdown-grid section > a:hover {
+  color: var(--brand-charcoal);
+  background: white;
+}
+.header.floating-header .services-dropdown :focus-visible {
+  outline-color: var(--brand-charcoal);
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  .header.floating-header {
+    gap: 12px;
+    padding-inline: calc(var(--gutter) + 16px);
+  }
+  .header.floating-header .brand-logo {
+    width: 145px;
+  }
+  .header.floating-header .nav > a {
+    padding-inline: 12px;
+  }
+  .header.floating-header > .header-project {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header.floating-header > .header-project > span {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .header.floating-header {
+    padding-inline: 32px;
+    gap: 12px;
+  }
+  .header.floating-header::before {
+    inset: 10px 16px;
+    border-radius: 18px;
+  }
+  .header.floating-header .brand-logo {
+    width: 154px;
+  }
+  .header.floating-header > .nav {
+    display: none;
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 16px;
+    right: 16px;
+    margin: 0;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--outline-variant);
+    border-radius: 22px;
+    max-height: calc(100dvh - 96px);
+    overflow: auto;
+    box-shadow: 0 20px 60px #22262924;
+  }
+  .header.floating-header > .nav.open {
+    display: flex;
+    gap: 4px;
+  }
+  .header.floating-header .nav > a {
+    color: var(--brand-charcoal);
+    font-size: 19px;
+    min-height: 52px;
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+  .header.floating-header .nav > a:hover {
+    background: var(--surface-container-low);
+  }
+  .header.floating-header .nav-services-trigger {
+    padding-left: 16px;
+    border-radius: 12px;
+    justify-content: space-between;
+  }
+  .header.floating-header .nav-services-trigger > a {
+    font-size: 19px;
+    min-height: 52px;
+    color: var(--brand-charcoal);
+  }
+  .header.floating-header .nav-services-trigger > button {
+    color: var(--brand-charcoal);
+    width: 44px;
+    height: 44px;
+    margin-right: 6px;
+  }
+  .header.floating-header .nav :focus-visible {
+    outline-color: var(--brand-charcoal);
+    outline-offset: -2px;
+  }
+  .header.floating-header .services-dropdown {
+    position: static;
+    width: auto;
+    margin: 12px 0 4px;
+    padding: 14px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+  .header.floating-header .services-dropdown-heading {
+    display: block;
+    padding-bottom: 12px;
+  }
+  .header.floating-header .services-dropdown-heading > a {
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .header.floating-header .services-dropdown-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 14px;
+  }
+  .header.floating-header .services-dropdown-grid section {
+    padding: 16px;
+  }
+  .service-group-badge {
+    margin-bottom: 14px;
+  }
+  .header.floating-header .services-dropdown-grid section > a {
+    font-size: 13px;
+  }
+  .header.floating-header > .header-project {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 12px;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header.floating-header > .header-project > span {
+    display: none;
+  }
+  .header.floating-header > .mobile-toggle {
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: var(--surface-container-low);
+    color: var(--brand-charcoal);
+  }
+}
+@media (max-width: 360px) {
+  .header.floating-header {
+    padding-inline: 26px;
+    gap: 8px;
+  }
+  .header.floating-header .brand-logo {
+    width: 136px;
+  }
+}
+/* Keep the icon visible when the compact CTA hides its text label. */
+.header.floating-header > .header-project > .action-arrow {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+}
+.header.floating-header .nav > a {
+  transition: box-shadow 0.2s;
+}
+.header.floating-header .nav-services-trigger > a,
+.header.floating-header .nav-services-trigger > button {
+  transition: transform 0.2s;
+}

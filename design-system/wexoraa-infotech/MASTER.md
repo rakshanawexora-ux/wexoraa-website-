@@ -88,3 +88,9 @@ Latest user direction: show the short growth checker inside a native modal, laun
 ## Growth placement, contact step and roadmap
 
 Place the growth invitation immediately after the client logo strip. Use a charcoal surface, primary green emphasis and prominent “Check my score” button. Collect contact details as the first modal step, with a skip option. Keep contact data in component memory; do not submit it automatically. Results animate a real final score with a count-up and SVG ring, static under reduced motion. Prefill the optional send form and collapse completed contact fields to avoid asking twice. Replace the old process accordion with six accessible tabs, a numbered visual panel and a short stage explanation. Preserve arrow/Home/End keyboard selection.
+
+## Floating studio navigation
+
+Use an inset white glass frame with a charcoal desktop navigation capsule, green active state and project CTA. Retain normal header flow and height so the scroll studio offset remains correct. The services disclosure uses three light category cards and all twelve real service links. On mobile use a rounded scrollable white panel, with click and Escape support; preserve keyboard focus visibility.
+
+Pro Scroll Mask and Bending Marquee are requested but pending license/official registry access. Do not substitute an invented component and call it React Bits Pro. Keep the existing media reveal until the actual replacement is available.

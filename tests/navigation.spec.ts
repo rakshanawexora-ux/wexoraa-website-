@@ -5,6 +5,7 @@ for (const width of [390, 1440]) {
   test(`service discovery and footer ${width}px`, async ({ page, request }) => {
     await page.setViewportSize({ width, height: 950 });
     await page.goto("/");
+    await expect(page.locator(".header-project svg").first()).toBeVisible();
     if (width < 901)
       await page.getByRole("button", { name: "Open navigation" }).click();
     const toggle = page.getByRole("button", { name: "Browse all services" });
@@ -17,6 +18,11 @@ for (const width of [390, 1440]) {
         dropdown.getByRole("link", { name: service.title, exact: true }),
       ).toHaveAttribute("href", `/services/${service.slug}`);
     expect(await dropdown.locator("section a").count()).toBe(12);
+    const menuScan = await new AxeBuilder({ page })
+      .include(".header")
+      .withTags(["wcag2a", "wcag2aa"])
+      .analyze();
+    expect(menuScan.violations).toEqual([]);
     expect(await (await request.get("/")).text()).toContain(
       "/services/websites-ecommerce",
     );

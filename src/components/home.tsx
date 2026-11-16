@@ -103,7 +103,7 @@ export function Header() {
     return () => document.removeEventListener("keydown", key);
   }, [open, servicesOpen]);
   return (
-    <header className="header">
+    <header className="header floating-header">
       <Link href="/" className="wordmark" aria-label="Wexoraa Infotech home">
         <Image
           src="/brand/wexoraa-logo.svg"
@@ -193,7 +193,7 @@ export function Header() {
                 hidden={!servicesOpen}
               >
                 <div className="services-dropdown-heading">
-                  <span>WHAT CAN WE HELP YOU WITH?</span>
+                  <span>ONE TEAM. ALL THE PIECES.</span>
                   <Link
                     href="/services"
                     onClick={() => {
@@ -205,8 +205,18 @@ export function Header() {
                   </Link>
                 </div>
                 <div className="services-dropdown-grid">
-                  {["build", "operate", "grow"].map((group) => (
+                  {["build", "operate", "grow"].map((group, index) => (
                     <section key={group} aria-label={`${group} services`}>
+                      <div className="service-group-badge" aria-hidden="true">
+                        {index === 0 ? (
+                          <Layers3 size={20} />
+                        ) : index === 1 ? (
+                          <Workflow size={20} />
+                        ) : (
+                          <ChartNoAxesCombined size={20} />
+                        )}
+                        <span>0{index + 1}</span>
+                      </div>
                       <h2>
                         {
                           solutions.find((area) => area.id === group)
