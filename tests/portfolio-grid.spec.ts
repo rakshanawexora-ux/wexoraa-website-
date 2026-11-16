@@ -19,5 +19,5 @@ for (const width of [390, 800, 1440])
       ),
     ).toBe(true);
     await cards.first().getByRole("link").first().click();
-    await expect(page).toHaveURL(/work\//);
+    await expect(page).toHaveURL(/work#/);
   });

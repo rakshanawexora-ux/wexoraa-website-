@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
@@ -52,16 +51,16 @@ export default function CinematicHero() {
       </div>
       <motion.div className="cinematic-copy">
         <h1>
-          <span>Design. Tech.</span>
-          <span>Marketing.</span>
+          <span>Your business.</span>
+          <span>Its next chapter.</span>
           <span className="cinematic-last">
-            <em>One team.</em>
+            <em>Built together.</em>
           </span>
         </h1>
         <p>
-          From your brand and website to business software and marketing—work
-          with one team that understands how it all fits together. Start with
-          the help you need today.
+          Need a better website, a stronger brand or more customers finding you?
+          We bring design, software and digital marketing together—so you spend
+          less time coordinating and more time running your business.
         </p>
         <EnquiryCTA
           className="button cinematic-enquiry"
@@ -80,14 +79,58 @@ export default function CinematicHero() {
             scale: 1.12,
           }}
         >
-          <Image
-            src="/hero-art.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-image"
-          />
+          <div className="hero-business-canvas">
+            <div className="hero-browser">
+              <div className="browser-top">
+                <i />
+                <i />
+                <i />
+                <span>YOUR NEXT CHAPTER</span>
+              </div>
+              <div className="browser-body">
+                <span className="canvas-kicker">
+                  A BUSINESS PEOPLE REMEMBER
+                </span>
+                <strong>
+                  Look better.
+                  <br />
+                  Work smarter.
+                </strong>
+                <div className="canvas-layout">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+                <span className="canvas-button">Make it happen ↗</span>
+              </div>
+            </div>
+            <div className="canvas-signal signal-brand">
+              ✳{" "}
+              <span>
+                YOUR BRAND
+                <br />
+                <b>Clear. Confident. You.</b>
+              </span>
+            </div>
+            <div className="canvas-signal signal-growth">
+              <span>
+                YOUR MARKETING
+                <br />
+                <b>Reach the right people.</b>
+              </span>
+              <div className="canvas-bars">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <i
+                    key={n}
+                    style={{
+                      animationDelay: `${n * 0.15}s`,
+                      height: `${n * 9}px`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
         <div className="cinematic-shade" aria-hidden="true" />
         <div className="cinematic-grid" aria-hidden="true" />

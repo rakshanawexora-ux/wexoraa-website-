@@ -9,7 +9,7 @@ for (const width of [360, 390, 768, 1024, 1440])
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Design. Tech.",
+      "Your business.",
     );
     expect(
       await page.evaluate(

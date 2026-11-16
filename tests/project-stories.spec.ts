@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { projects } from "../src/content/catalog";
+import { portfolio } from "../src/content/portfolio";
+const projects = portfolio.filter(p => ["Exploring Munnar", "Gym Hack"].includes(p.title));
 test("project links work and the removed testimonial section stays absent", async ({
   page,
 }) => {
@@ -12,7 +13,7 @@ test("project links work and the removed testimonial section stays absent", asyn
     ).toBeVisible();
     await expect(
       work.getByRole("link", { name: `View ${project.title}`, exact: true }),
-    ).toHaveAttribute("href", `/work/${project.slug}`);
+    ).toHaveAttribute("href", `/work#${project.image.split("/").pop()?.replace(".webp", "")}`);
   }
   await expect(page.locator(".client-stories")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 950 });

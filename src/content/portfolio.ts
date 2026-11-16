@@ -13,18 +13,6 @@ export const portfolio = [
     status: "Website project",
   },
   {
-    title: "VPS Infra Associates",
-    category: "Website",
-    image: "/work/vps-infra-associates.webp",
-    description:
-      "A responsive corporate website for a construction and infrastructure company, designed to communicate its business profile, services and completed projects through a clear, professional presentation.",
-    detail:
-      "Company profile; construction services; project portfolio and gallery; enquiry form; WhatsApp and call integration; mobile-friendly navigation.",
-    tags: ["CONSTRUCTION & INFRASTRUCTURE WEBSITE"],
-    url: "https://vpsinfraassociates.com/",
-    status: "Website project",
-  },
-  {
     title: "Intercity Riders",
     category: "Website",
     image: "/work/intercity-riders.webp",
@@ -95,6 +83,18 @@ export const portfolio = [
     tags: ["BEAUTY & SALON WEBSITE"],
     url: "https://vlasy-project.onrender.com/",
     status: "Website concept",
+  },
+  {
+    title: "VPS Infra Associates",
+    category: "Website",
+    image: "/work/vps-infra-associates.webp",
+    description:
+      "A responsive corporate website for a construction and infrastructure company, designed to communicate its business profile, services and completed projects through a clear, professional presentation.",
+    detail:
+      "Company profile; construction services; project portfolio and gallery; enquiry form; WhatsApp and call integration; mobile-friendly navigation.",
+    tags: ["CONSTRUCTION & INFRASTRUCTURE WEBSITE"],
+    url: "https://vpsinfraassociates.com/",
+    status: "Website project",
   },
   {
     title: "Hita Home Décor",

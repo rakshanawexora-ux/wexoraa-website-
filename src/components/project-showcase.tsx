@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/content/catalog";
+import { portfolio } from "@/content/portfolio";
+const projects = portfolio.filter((p) =>
+  ["Exploring Munnar", "Gym Hack"].includes(p.title),
+);
 import ActionArrow from "./action-arrow";
 export default function ProjectShowcase() {
   return (
@@ -14,40 +17,40 @@ export default function ProjectShowcase() {
         <div>
           <p className="eyebrow">
             <span />
-            SELECTED EXPLORATIONS
+            SELECTED PROJECTS
           </p>
           <h2 id="projects-title">
-            Big ideas.
+            Real businesses.
             <br />
-            Made tangible.
+            Work we’ve delivered.
           </h2>
         </div>
         <p>
-          A closer look at brand, websites and better business systems.
+          A travel booking platform and a fitness nutrition online store.
           <br />
-          <strong>Studio concepts — not commissioned client work.</strong>
+          <strong>Designed around what each business needs.</strong>
         </p>
       </div>
       <div className="portfolio-grid">
         {projects.map((project, i) => (
           <article
-            key={project.slug}
+            key={project.image}
             className={`portfolio-card portfolio-card-${i + 1}`}
           >
             <Link
-              href={`/work/${project.slug}`}
+              href={`/work#${project.image.split("/").pop()?.replace(".webp", "")}`}
               className="portfolio-image-link"
               aria-label={`View ${project.title}`}
             >
               <div className="project-image">
                 <Image
                   src={project.image}
-                  alt={project.alt}
+                  alt={`${project.title} website showcase`}
                   fill
                   sizes="(max-width:767px) 100vw, 60vw"
                 />
                 <span className="portfolio-label" aria-hidden="true">
-                  0{i + 1} / STUDIO CONCEPT
+                  0{i + 1} / WEBSITE PROJECT
                 </span>
                 <span className="portfolio-arrow">
                   <ActionArrow />
@@ -56,13 +59,17 @@ export default function ProjectShowcase() {
             </Link>
             <div className="portfolio-caption">
               <div>
-                <p>{project.type}</p>
+                <p>{project.category}</p>
                 <h3>
-                  <Link href={`/work/${project.slug}`}>{project.title}</Link>
+                  <Link
+                    href={`/work#${project.image.split("/").pop()?.replace(".webp", "")}`}
+                  >
+                    {project.title}
+                  </Link>
                 </h3>
               </div>
               <div className="portfolio-tags">
-                {project.services.slice(0, 3).map((s) => (
+                {project.tags.slice(0, 3).map((s) => (
                   <span key={s}>{s}</span>
                 ))}
               </div>

@@ -30,7 +30,11 @@ export default function WorkShowcase() {
             (item) => filter === "All projects" || item.category === filter,
           )
           .map((item, i) => (
-            <article className="work-story" key={item.image}>
+            <article
+              className="work-story"
+              key={item.image}
+              id={item.image.split("/").pop()?.replace(".webp", "")}
+            >
               <div className="work-story-media supplied-work-media">
                 <Image
                   src={item.image}
