@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
-import Link from "next/link";
-import Image from "next/image";
-import { PageShell } from "@/components/page-shell";
-import { projects } from "@/content/catalog";
+import { Header, Footer } from "@/components/home";
+import WorkShowcase from "@/components/work-showcase";
 export const metadata = pageMetadata(
   "Studio concepts and approach — Wexoraa",
   "Explore illustrative brand and connected-system concepts, with clear context and no fabricated client results.",
@@ -10,41 +8,24 @@ export const metadata = pageMetadata(
 );
 export default function Page() {
   return (
-    <PageShell
-      eyebrow="OUR DESIGN THINKING, IN PRACTICE"
-      title="See a few ideas in action."
-      intro="Take a look at how we think about brands, websites and connected systems. These are studio concepts, not commissioned client projects."
-    >
-      <section className="section work-grid portfolio-index">
-        {projects.map((p) => (
-          <Link className="work-card" key={p.slug} href={`/work/${p.slug}`}>
-            <div className="project-image">
-              <Image
-                src={p.image}
-                alt={p.alt}
-                fill
-                sizes="(max-width:640px) 100vw,50vw"
-              />
-              <span className="project-pill">STUDIO CONCEPT</span>
-            </div>
-            <div className="work-title">
-              <div>
-                <h2>{p.title}</h2>
-                <p>{p.type}</p>
-              </div>
-              <span aria-hidden="true">↗</span>
-            </div>
-            <div className="work-card-detail">
-              <p>{p.problem.replace("Studio brief: ", "")}</p>
-              <ul>
-                {p.services.map((service) => (
-                  <li key={service}>{service}</li>
-                ))}
-              </ul>
-            </div>
-          </Link>
-        ))}
-      </section>
-    </PageShell>
+    <div className="page-frame">
+      <Header />
+      <main id="main" className="work-page section">
+        <section className="work-intro">
+          <p className="eyebrow">
+            <span /> OUR WORK / OUR THINKING
+          </p>
+          <h1>
+            Explore our projects<span>.</span>
+          </h1>
+          <p>
+            A few ideas for better brands, useful websites and simpler ways to
+            work. These are studio concepts with placeholder imagery.
+          </p>
+        </section>
+        <WorkShowcase />
+      </main>
+      <Footer />
+    </div>
   );
 }
