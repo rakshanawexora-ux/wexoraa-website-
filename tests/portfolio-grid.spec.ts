@@ -11,7 +11,7 @@ for (const width of [390, 800, 1440])
       await card.scrollIntoViewIfNeeded();
       await expect(card.locator("h3")).toBeVisible();
       const r = await card.boundingBox();
-      expect(r!.width).toBeGreaterThan(200);
+      expect(r!.width).toBeGreaterThan(width < 641 ? 130 : 200);
     }
     expect(
       await page.evaluate(

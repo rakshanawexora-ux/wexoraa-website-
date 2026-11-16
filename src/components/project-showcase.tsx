@@ -14,7 +14,7 @@ import ActionArrow from "./action-arrow";
 export default function ProjectShowcase() {
   return (
     <section
-      className="project-showcase section portfolio-minimal"
+      className="project-showcase section portfolio-minimal portfolio-editorial"
       id="work"
       aria-labelledby="projects-title"
     >
@@ -47,29 +47,24 @@ export default function ProjectShowcase() {
               aria-label={`View ${project.title}`}
             >
               <div className="project-image">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} ${project.category} showcase`}
-                  fill
-                  sizes="(max-width:767px) 100vw, 50vw"
-                />
+                <div className="cover-heading">
+                  <span>{project.category}</span>
+                  <h3>{project.title}</h3>
+                </div>
+                <div className="cover-art">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} ${project.category} showcase`}
+                    fill
+                    sizes="(max-width:640px) 100vw, 50vw"
+                  />
+                </div>
+                <span className="cover-visit">Explore project</span>
                 <span className="portfolio-arrow">
                   <ActionArrow />
                 </span>
               </div>
             </Link>
-            <div className="portfolio-caption">
-              <div>
-                <p>{project.category}</p>
-                <h3>
-                  <Link
-                    href={`/work#${project.image.split("/").pop()?.replace(".webp", "")}`}
-                  >
-                    {project.title}
-                  </Link>
-                </h3>
-              </div>
-            </div>
           </article>
         ))}
       </div>
