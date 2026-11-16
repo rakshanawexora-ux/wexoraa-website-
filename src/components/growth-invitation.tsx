@@ -36,13 +36,14 @@ export default function GrowthInvitation({
             <span /> SMALL CHECK. CLEARER NEXT STEP.
           </p>
           <h2 id="growth-invite-title">
-            How ready is your business
+            What’s slowing
             <br />
-            <em>for its next big step?</em>
+            <em>your business down?</em>
           </h2>
           <p>
-            Four quick questions. A clearer picture of your website, marketing
-            and everyday systems.
+            Tell us about your business and the problem you’re facing. Take four
+            quick checks to see your digital-readiness score and where to
+            improve first.
           </p>
           <button
             ref={trigger}
@@ -52,7 +53,7 @@ export default function GrowthInvitation({
             Check my score <ArrowUpRight size={20} />
           </button>
           <span className="growth-invite-note">
-            4 business questions · Personal growth snapshot
+            Your business · Your challenge · A clearer next step
           </span>
         </div>
         <div className="growth-invite-art" aria-hidden="true">

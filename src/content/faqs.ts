@@ -27,6 +27,6 @@ export const homeFaqs = [
   {
     question: "Do I need to share my email to see my growth score?",
     answer:
-      "No. You can answer 4 quick questions and see your result without an email or signup. The score is based on your answers about your digital setup; it is not a forecast of sales. You can share contact details at the start or skip that step. Sending your snapshot to us afterwards is optional.",
+      "No. Tell us about your business and challenge, then answer 4 quick questions to see your result without an email or signup. The score is based on your answers about your digital setup; it is not a forecast of sales. You can share contact details at the start or skip that step. Sending your snapshot to us afterwards is optional.",
   },
 ];

@@ -94,3 +94,9 @@ The user subsequently authorized original equivalents without a Pro license. Use
 ## Scroll performance — latest user preference
 
 Remove all scroll-time text blur/fade and section/card entry animations. Keep reading content fully opaque and sharp. Use native free scrolling with no snap points or wheel interception; smooth behavior is for anchor navigation only. Do not restore global progress CSS writes, card/image parallax measurements or hero scroll transforms. Keep lightweight pointer hover feedback, coalescing bounds reads before writes in one frame. The studio circle uses static border-radius clipping plus outer/inverse inner scale transforms; its text never fades. Avoid live header backdrop filters and permanent layer promotion across all cards. Preserve the marquee's offscreen pause, score count-up and reduced-motion support.
+
+## Business-problem check and page order
+
+Center the desktop navigation capsule independently of the logo/CTA. Homepage order: hero, client logos, problem-check invitation, curved brand marquee, services, studio video, portfolio, capabilities, process, partnership, client stories, FAQ, footer. Add a real `/work` link labelled “View more projects”.
+
+The modal begins with business name, type, stage, selected challenge and a short problem statement, followed by optional contact details and four scored capability questions. Show the provided problem alongside the animated score and prioritize suggestions using the selected challenge. Business identity/stage/free text never alter the numerical score. Include these details in the explicit optional enquiry report and company field; do not auto-send. Ask visitors to contact us for an improvement plan. Preserve free scrolling and sharp text.

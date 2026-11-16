@@ -10,6 +10,30 @@ test("growth invitation directly follows logos and roadmap supports touch and ke
       .locator(".client-marquee")
       .evaluate((el) => el.nextElementSibling?.id),
   ).toBe("challenge");
+  expect(
+    await page
+      .locator("#challenge")
+      .evaluate((el) =>
+        el.nextElementSibling?.nextElementSibling?.classList.contains(
+          "bending-brand-strip",
+        ),
+      ),
+  ).toBe(true);
+  expect(
+    await page
+      .locator("#solutions")
+      .evaluate((el) =>
+        el.nextElementSibling?.classList.contains("mask-reveal"),
+      ),
+  ).toBe(true);
+  expect(
+    await page
+      .locator(".client-stories")
+      .evaluate((el) => el.nextElementSibling?.classList.contains("home-faq")),
+  ).toBe(true);
+  await expect(
+    page.getByRole("link", { name: "View more projects" }),
+  ).toHaveAttribute("href", "/work");
   const process = page.locator("#process");
   const tabs = process.getByRole("tab");
   await tabs.nth(5).click();

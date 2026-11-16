@@ -10,12 +10,14 @@ export default function EnquiryForm({
   compact = false,
   summaryText,
   initialContact,
+  businessName = "",
 }: {
   answers?: Answers;
   interest?: string;
   configured?: boolean;
   compact?: boolean;
   summaryText?: string;
+  businessName?: string;
   initialContact?: { name: string; email: string; phone: string };
 }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
@@ -91,7 +93,7 @@ export default function EnquiryForm({
           />
         </label>
       )}
-      {compact && <input type="hidden" name="company" value="" />}
+      {compact && <input type="hidden" name="company" value={businessName} />}
       <label>
         Work email
         <input

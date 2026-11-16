@@ -86,7 +86,7 @@ Stop the currently running server with Ctrl+C. `git pull origin main` updates so
 
 The studio uses an original circular scroll-mask reveal, replacing the earlier ScrollExpand. An original curved SVG brand marquee sits between portfolio and studio media. These are independently implemented Wexoraa effects, not licensed React Bits Pro components. No key or registry setup is required. See [motion behavior and source files](docs/motion-effects.md).
 
-The growth invitation follows the client logo marquee. Its native dialog includes contact details (with a skip option), four business questions, and an animated score. Answers persist when the modal closes; contact details are not submitted automatically. The process section uses the six-stage keyboard-accessible roadmap.
+The growth invitation follows the client logo marquee. Its native dialog includes business details and a problem statement, optional contact details, four readiness questions, and an animated score with challenge-based suggestions. Answers persist when the modal closes; contact details are not submitted automatically. The process section uses the six-stage keyboard-accessible roadmap.
 
 ## Scroll performance
 

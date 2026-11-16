@@ -1,3 +1,4 @@
+import { fillBusinessDetails } from "./business-details";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 test("original circle mask expands with native scroll and becomes static under reduced motion", async ({
@@ -63,6 +64,7 @@ test("growth dialog traps focus, restores trigger and preserves answers on reope
   await expect(dialog).toBeVisible();
   await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
   await expect(page.locator("#home-survey-question")).toBeFocused();
+  await fillBusinessDetails(page);
   await dialog.getByRole("button", { name: "Skip for now" }).click();
   await dialog.getByRole("radio").nth(1).check();
   await page.keyboard.press("Escape");

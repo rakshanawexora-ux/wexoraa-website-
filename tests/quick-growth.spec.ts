@@ -1,3 +1,4 @@
+import { fillBusinessDetails } from "./business-details";
 import { test, expect } from "@playwright/test";
 import { quickScore } from "../src/content/quick-check";
 test("quick score excludes unknowns and needs two known answers", () => {
@@ -12,6 +13,7 @@ test("four questions, animated preparation, visible result and contact-only foll
 }) => {
   await page.goto("/");
   await page.locator(".survey-start").click();
+  await fillBusinessDetails(page);
   const check = page.locator(".quick-check");
   await check.getByLabel("Your name", { exact: true }).fill("Test Owner");
   await check
@@ -38,7 +40,12 @@ test("four questions, animated preparation, visible result and contact-only foll
     "Test Owner",
   );
   await expect(check.locator("textarea")).toHaveCount(0);
-  await expect(check.locator('input[name="message"]')).toHaveValue(/Website:/);
+  await expect(check.locator('input[name="message"]')).toHaveValue(
+    /We need more enquiries from local customers/,
+  );
+  await expect(check.locator('input[name="company"]')).toHaveValue(
+    "Sample Studio",
+  );
   await check.getByRole("button", { name: "Edit my answers" }).click();
   await expect(check.getByRole("radio").nth(2)).toBeChecked();
 });

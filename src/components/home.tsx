@@ -740,14 +740,14 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <CinematicHero />
         <ClientMarquee />
         <GrowthInvitation configured={emailReady} />
-        <Solutions />
-        <ProjectShowcase />
         <BendingMarquee />
+        <Solutions />
         <MotionShowcase />
-        <ClientStories />
+        <ProjectShowcase />
         <Capabilities />
         <Process />
         <Partnership />
+        <ClientStories />
         <HomeFaq />
       </main>
       <Footer />

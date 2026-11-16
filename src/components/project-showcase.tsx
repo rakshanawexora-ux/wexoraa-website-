@@ -102,6 +102,12 @@ export default function ProjectShowcase() {
           </p>
         </Link>
       </div>
+      <div className="portfolio-more">
+        <p>See more of what we explore and create.</p>
+        <Link href="/work" className="button">
+          View more projects <ActionArrow />
+        </Link>
+      </div>
     </section>
   );
 }

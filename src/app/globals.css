@@ -10567,3 +10567,81 @@ html {
     height: 100%;
   }
 }
+/* Equal side tracks keep the capsule centered without moving the dropdown anchor. */
+@media (min-width: 901px) {
+  .header.floating-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  .header.floating-header > .wordmark {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    margin: 0;
+  }
+  .header.floating-header > .nav {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    translate: none;
+    margin: 0;
+  }
+  .header.floating-header > .header-project {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin: 0;
+  }
+}
+.snapshot-contact-step select,
+.snapshot-contact-step textarea {
+  width: 100%;
+  padding: 13px 14px;
+  min-height: 48px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 10px;
+  background: white;
+  color: var(--brand-charcoal);
+  font: inherit;
+}
+.snapshot-contact-step textarea {
+  resize: vertical;
+}
+.snapshot-problem {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--primary-container);
+  border-radius: 14px;
+}
+.snapshot-problem h4 {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.snapshot-problem p {
+  margin-block: 12px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.snapshot-problem .text-link {
+  min-height: 44px;
+}
+.portfolio-more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 42px;
+  border-top: 1px solid var(--outline-variant);
+  padding-top: 28px;
+}
+.portfolio-more p {
+  color: var(--brand-slate);
+  font-size: 14px;
+}
+@media (max-width: 640px) {
+  .portfolio-more {
+    align-items: start;
+    flex-direction: column;
+  }
+}
