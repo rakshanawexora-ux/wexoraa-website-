@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { projects } from "../src/content/catalog";
-test("project browsing updates the concept link and client stories remain clearly pending", async ({
+test("project links work and the removed testimonial section stays absent", async ({
   page,
 }) => {
   await page.goto("/");
@@ -14,19 +14,7 @@ test("project browsing updates the concept link and client stories remain clearl
       work.getByRole("link", { name: `View ${project.title}`, exact: true }),
     ).toHaveAttribute("href", `/work/${project.slug}`);
   }
-  const stories = page.locator(".client-stories");
-  await expect(
-    stories.getByRole("heading", { name: "Intercity Riders", exact: true }),
-  ).toBeVisible();
-  await expect(stories.locator("blockquote")).toHaveCount(0);
-  await expect(
-    stories.getByText("CLIENT STORY / COMING SOON", { exact: true }),
-  ).toHaveCount(1);
-  await stories.getByRole("button", { name: "Next client story" }).click();
-  await stories.getByRole("button", { name: "Next client story" }).click();
-  await expect(
-    stories.getByRole("heading", { name: "TaerG Laundry", exact: true }),
-  ).toBeVisible();
+  await expect(page.locator(".client-stories")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 950 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.evaluate(async () => {
@@ -40,7 +28,6 @@ test("project browsing updates the concept link and client stories remain clearl
   });
   const scan = await new AxeBuilder({ page })
     .include(".project-showcase")
-    .include(".client-stories")
     .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
     .analyze();
   expect(

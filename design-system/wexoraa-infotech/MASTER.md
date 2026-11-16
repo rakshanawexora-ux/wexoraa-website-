@@ -114,3 +114,7 @@ On mobile explicitly use one column for the invitation so the radar artwork sits
 ## Editorial client spotlight
 
 The homepage client section now uses a white editorial heading, one split spotlight (pale logo panel + charcoal story panel) and four client selector tabs. Avoid the earlier pair of large pending-quote cards, quote-mark ornaments and section-wide green background. On mobile stack the spotlight and use two columns for selectors; keep keyboard arrows/Home/End and manual previous/next controls. Null quotes must remain honestly pending, never invented testimonials or ratings. Real feedback can replace the pending copy using the same content source.
+
+## Testimonials removed
+
+Latest user instruction removes the homepage testimonials/client-stories section. Keep the existing automatic client-logo marquee. Do not reintroduce the spotlight, quote placeholders or additional testimonial controls without a new request.

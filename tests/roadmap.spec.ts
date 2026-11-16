@@ -26,11 +26,7 @@ test("growth invitation directly follows logos and roadmap supports touch and ke
         el.nextElementSibling?.classList.contains("mask-reveal"),
       ),
   ).toBe(true);
-  expect(
-    await page
-      .locator(".client-stories")
-      .evaluate((el) => el.nextElementSibling?.classList.contains("home-faq")),
-  ).toBe(true);
+  await expect(page.locator(".client-stories")).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: "View more projects" }),
   ).toHaveAttribute("href", "/work");

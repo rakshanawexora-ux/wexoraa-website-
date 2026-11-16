@@ -18,7 +18,6 @@ import { solutions, processSteps } from "@/content/site";
 import { services, serviceFor } from "@/content/catalog";
 import GrowthInvitation from "@/components/growth-invitation";
 import ProjectShowcase from "@/components/project-showcase";
-import ClientStories from "@/components/client-stories";
 import HomeFaq from "@/components/home-faq";
 import SystemsIllustration from "@/components/systems-illustration";
 import ActionArrow from "@/components/action-arrow";
@@ -747,7 +746,6 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <Capabilities />
         <Process />
         <Partnership />
-        <ClientStories />
         <HomeFaq />
       </main>
       <Footer />
