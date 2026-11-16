@@ -72,13 +72,13 @@ export default function ScrollMaskReveal() {
             <video
               ref={video}
               className="brand-film"
-              src="/motion/wexoraa-brand-20s.mp4"
-              poster="/motion/brand-20s-poster.webp"
+              src="/motion/reference-showreel.mp4"
+              poster="/motion/reference-showreel-poster.webp"
               muted
               loop
               playsInline
               preload="none"
-              aria-label="Wexoraa studio motion film"
+              aria-label="User-supplied motion design reference film"
               onPlay={() => setPlaying(true)}
               onPause={() => setPlaying(false)}
               onError={() => setError(true)}
@@ -100,7 +100,6 @@ export default function ScrollMaskReveal() {
           </motion.div>
         </motion.div>
         <div className="mask-reveal-meta">
-          <span>WEXORAA / CONNECTED THINKING</span>
           <button
             type="button"
             className="film-toggle"
@@ -110,18 +109,6 @@ export default function ScrollMaskReveal() {
             {playing ? <Pause size={16} /> : <Play size={16} />}
             <span>{playing ? "Pause film" : "Play film"}</span>
           </button>
-        </div>
-        <div className="mask-reveal-copy">
-          <span>ONE TEAM. A CONNECTED BUSINESS.</span>
-          <h2>
-            Good design.
-            <br />
-            Better business.
-          </h2>
-          <p>
-            Bring your brand, website and everyday systems together. We help you
-            turn the pieces into something that works.
-          </p>
         </div>
         <span className="mask-scroll-hint">
           SCROLL TO EXPLORE <ArrowDown size={15} />

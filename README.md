@@ -108,3 +108,5 @@ The `/work` index uses `src/content/portfolio.ts`, transcribed from the supplied
 ## 20-second Wexoraa brand film
 
 The website video section uses `public/motion/wexoraa-brand-20s.mp4` (20 seconds, 1280×720, 30fps, silent H.264 MP4). It is an original programmatically rendered brand animation inspired by the supplied reference, not output from a generative-video model. It uses the official logo, supplied project artwork and one-team messaging. Re-render with `node scripts/render-brand-film.mjs`; Chromium and ffmpeg are required. The section retains native play/pause, offscreen pausing and reduced-motion behavior; lightweight decorative particles pause out of view.
+
+Latest video selection: the user chose the original uploaded reference again. The section now plays `public/motion/reference-showreel.mp4`, with its matching poster and no headline/description overlay. The generated Wexoraa 20-second film remains available as a separate asset.

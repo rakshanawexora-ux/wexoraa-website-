@@ -11769,3 +11769,6 @@ html {
 .mask-reveal[data-playing="true"] .mask-reveal-copy {opacity:0;pointer-events:none;}
 .mask-reveal[data-playing="true"] .mask-reveal-shade {opacity:.12;}
 @media(prefers-reduced-motion:reduce){.film-particles{display:none}}
+
+/* Reference film is presented without a copy overlay. */
+.mask-reveal .mask-reveal-shade {opacity:.12;}

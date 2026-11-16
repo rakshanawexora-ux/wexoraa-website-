@@ -28,7 +28,7 @@ test("original circle mask expands with native scroll and becomes static under r
     "clip-path",
     "none",
   );
-  await expect(root.locator(".mask-reveal-copy")).toHaveCSS("opacity", "1");
+  await expect(root.locator(".mask-reveal-copy")).toHaveCount(0);
   await expect(root.locator(".mask-reveal-media")).toHaveCSS(
     "transform",
     /matrix\(0.22,/,
@@ -38,7 +38,7 @@ test("original circle mask expands with native scroll and becomes static under r
     .poll(async () => Number(await root.getAttribute("data-progress")))
     .toBeGreaterThan(0.95);
   expect(Math.round((await stage.boundingBox())!.y)).toBe(Math.round(header));
-  await expect(root.locator(".mask-reveal-copy")).toHaveCSS("opacity", "1");
+  await expect(root.locator(".mask-reveal-copy")).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(root).toHaveAttribute("data-static", "true");
   await expect(stage).toHaveCSS("position", "relative");
