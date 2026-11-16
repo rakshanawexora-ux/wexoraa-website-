@@ -6,7 +6,7 @@ for (const width of [390, 800, 1440])
     await page.setViewportSize({ width, height: 950 });
     await page.goto("/");
     const cards = page.locator(".portfolio-card");
-    await expect(cards).toHaveCount(2);
+    await expect(cards).toHaveCount(4);
     for (const card of await cards.all()) {
       await card.scrollIntoViewIfNeeded();
       await expect(card.locator("h3")).toBeVisible();

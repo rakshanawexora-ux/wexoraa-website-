@@ -3,13 +3,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { portfolio } from "@/content/portfolio";
 const projects = portfolio.filter((p) =>
-  ["Exploring Munnar", "Gym Hack"].includes(p.title),
+  [
+    "/work/exploring-munnar.webp",
+    "/work/gym-hack.webp",
+    "/work/taerg-laundry-social.webp",
+    "/work/hita-home-d-cor-social.webp",
+  ].includes(p.image),
 );
 import ActionArrow from "./action-arrow";
 export default function ProjectShowcase() {
   return (
     <section
-      className="project-showcase section"
+      className="project-showcase section portfolio-minimal"
       id="work"
       aria-labelledby="projects-title"
     >
@@ -20,15 +25,14 @@ export default function ProjectShowcase() {
             SELECTED PROJECTS
           </p>
           <h2 id="projects-title">
-            Real businesses.
+            A little of what we do.
             <br />
-            Work we’ve delivered.
           </h2>
         </div>
         <p>
-          A travel booking platform and a fitness nutrition online store.
+          Websites, online stores and creative work.
           <br />
-          <strong>Designed around what each business needs.</strong>
+          <strong>Different businesses. The same care in every detail.</strong>
         </p>
       </div>
       <div className="portfolio-grid">
@@ -45,13 +49,10 @@ export default function ProjectShowcase() {
               <div className="project-image">
                 <Image
                   src={project.image}
-                  alt={`${project.title} website showcase`}
+                  alt={`${project.title} ${project.category} showcase`}
                   fill
-                  sizes="(max-width:767px) 100vw, 60vw"
+                  sizes="(max-width:767px) 100vw, 50vw"
                 />
-                <span className="portfolio-label" aria-hidden="true">
-                  0{i + 1} / WEBSITE PROJECT
-                </span>
                 <span className="portfolio-arrow">
                   <ActionArrow />
                 </span>
@@ -68,49 +69,12 @@ export default function ProjectShowcase() {
                   </Link>
                 </h3>
               </div>
-              <div className="portfolio-tags">
-                {project.tags.slice(0, 3).map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
-              </div>
             </div>
           </article>
         ))}
-        <Link href="/services/ui-ux-design" className="portfolio-note">
-          <span>THOUGHTFUL BY DESIGN</span>
-          <h3>
-            Good looks.
-            <br />
-            Even better to use.
-          </h3>
-          <div className="portfolio-wire" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </div>
-          <p>
-            Explore UI/UX design <ActionArrow />
-          </p>
-        </Link>
-        <Link href="/services" className="portfolio-note portfolio-note-dark">
-          <span>BUILT AROUND YOUR BUSINESS</span>
-          <h3>
-            One team.
-            <br />A more connected business.
-          </h3>
-          <div className="portfolio-dots" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
-          <p>
-            Explore our services <ActionArrow />
-          </p>
-        </Link>
       </div>
       <div className="portfolio-more">
-        <p>See more of what we explore and create.</p>
+        <p>More projects. More possibilities.</p>
         <Link href="/work" className="button">
           View more projects <ActionArrow />
         </Link>

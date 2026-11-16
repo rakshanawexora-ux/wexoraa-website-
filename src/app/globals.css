@@ -11721,3 +11721,22 @@ html {
 .work-story {scroll-margin-top:205px;}
 @media(max-width:640px){.hero-visual .cinematic-backdrop{inset:65px 25px}.browser-body{padding:20px}.browser-body strong{font-size:32px}.signal-brand{top:0}.signal-growth{bottom:0}.canvas-signal{padding:12px}.cinematic-copy h1{font-size:clamp(40px,10.5vw,64px)}}
 @media(prefers-reduced-motion:reduce){.hero-browser,.canvas-signal,.canvas-bars i{animation:none!important}}
+
+/* Quiet, image-led homepage portfolio: four real projects, no filler tiles. */
+.portfolio-minimal .showcase-heading-row {align-items:end;margin-bottom:36px;}
+.portfolio-minimal .showcase-heading-row h2 {font-size:clamp(34px,4.3vw,62px);max-width:600px;line-height:1.08;letter-spacing:-.045em;}
+.portfolio-minimal .showcase-heading-row h2 br {display:none;}
+.portfolio-minimal .showcase-heading-row strong {font-weight:400;}
+.portfolio-minimal .portfolio-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:46px 28px;}
+.portfolio-minimal .portfolio-card {grid-column:auto;grid-row:auto;margin:0;padding:0;transform:none;border:0;border-radius:0;background:transparent;box-shadow:none;}
+.portfolio-minimal .portfolio-image-link {display:block;border-radius:16px;overflow:hidden;}
+.portfolio-minimal .portfolio-card .project-image {aspect-ratio:4/3;height:auto;min-height:0;border-radius:16px;background:var(--surface-container-low);}
+.portfolio-minimal .portfolio-card .project-image img {object-fit:contain;transition:transform .65s cubic-bezier(.22,1,.36,1);}
+.portfolio-minimal .portfolio-image-link:hover img {transform:scale(1.025);}
+.portfolio-minimal .portfolio-caption {padding:18px 0 0;}
+.portfolio-minimal .portfolio-caption h3 {font-size:clamp(23px,2.2vw,31px);letter-spacing:-.035em;}
+.portfolio-minimal .portfolio-caption p {font-size:12px;margin-bottom:8px;}
+.portfolio-minimal .portfolio-arrow {width:42px;height:42px;right:16px;bottom:16px;}
+.portfolio-minimal .portfolio-more {margin-top:40px;padding-top:24px;border-top:1px solid var(--outline-variant);}
+@media(max-width:640px){.portfolio-minimal .portfolio-grid{grid-template-columns:1fr;gap:32px}.portfolio-minimal .showcase-heading-row{display:block}.portfolio-minimal .showcase-heading-row>p{margin-top:20px}.portfolio-minimal .portfolio-more{align-items:start;gap:18px;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.portfolio-minimal .project-image img{transition:none;transform:none!important}}
