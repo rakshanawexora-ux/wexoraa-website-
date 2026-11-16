@@ -76,16 +76,10 @@ export default function SiteExperience() {
         for (const entry of entries)
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
-            el.animate(
-              [
-                { translate: "0 28px", opacity: 0.2, filter: "blur(8px)" },
-                { translate: "0 0", opacity: 1, filter: "blur(0px)" },
-              ],
-              {
-                duration: 700,
-                easing: "cubic-bezier(.22,1,.36,1)",
-              },
-            );
+            el.animate([{ translate: "0 28px" }, { translate: "0 0" }], {
+              duration: 700,
+              easing: "cubic-bezier(.22,1,.36,1)",
+            });
             observer.unobserve(el);
           }
       },
@@ -93,7 +87,7 @@ export default function SiteExperience() {
     );
     document
       .querySelectorAll(
-        "main > section:not(.hero-cinematic):not(.page-hero), main .catalog-card, main .process-page-list article",
+        "main > section:not(.hero-cinematic):not(.page-hero):not(.mask-reveal):not(.bending-brand-strip), main .catalog-card, main .process-page-list article",
       )
       .forEach((el) => observer.observe(el));
     const staggerObserver = new IntersectionObserver(

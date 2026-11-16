@@ -26,6 +26,7 @@ import BusinessMotionGraphic from "@/components/business-motion-graphic";
 import ClientMarquee from "@/components/client-marquee";
 import CinematicHero from "@/components/cinematic-hero";
 import MotionShowcase from "@/components/motion-showcase";
+import BendingMarquee from "@/components/bending-marquee";
 import { EnquiryCTA } from "@/components/enquiry-popup";
 import { usePathname } from "next/navigation";
 import { useExperienceMotion as useReducedMotion } from "@/hooks/use-experience-motion";
@@ -759,6 +760,7 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <GrowthInvitation configured={emailReady} />
         <Solutions />
         <ProjectShowcase />
+        <BendingMarquee />
         <MotionShowcase />
         <ClientStories />
         <Capabilities />

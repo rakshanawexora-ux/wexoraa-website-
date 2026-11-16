@@ -82,12 +82,8 @@ The user-requested UI UX Pro Max skill is vendored at `.agents/skills/ui-ux-pro-
 
 Stop the currently running server with Ctrl+C. `git pull origin main` updates source files; it does not rebuild an already-running production server. For a fresh production preview, run `npm run build` followed by `npm run start`. For development, restart with `npm run dev`. Check `git log -1 --oneline` to confirm the expected commit, then refresh the browser. No new dependency installation is required for the responsive sticky fix.
 
-## ScrollExpand and growth dialog
+## Original mask reveal and curved marquee
 
-The homepage studio scene uses the user-supplied React Bits `ScrollExpand` JavaScript/CSS source, adapted in `src/components/ScrollExpand.jsx` and `ScrollExpand.css`. There are no extra dependencies. Window scrolling expands and pins the existing studio media below the header; the track is reserved before hydration. Live reduced-motion disables the long pin and opens a static frame. Video stays manually controllable and pauses offscreen. The four-question checker opens in a native dialog from the compact green invitation; Escape, backdrop dismissal, focus return and body scroll locking are supported. Answers persist while the dialog is closed within the same page session.
+The studio uses an original circular scroll-mask reveal, replacing the earlier ScrollExpand. An original curved SVG brand marquee sits between portfolio and studio media. These are independently implemented Wexoraa effects, not licensed React Bits Pro components. No key or registry setup is required. See [motion behavior and source files](docs/motion-effects.md).
 
-Latest growth flow: the invitation follows the client logo marquee. The modal starts with contact details (with a skip option), then four business questions, followed by an animated count/ring score. Collected details stay in React memory and prefill the optional enquiry; they are not sent merely by viewing a result. The homepage process uses an accessible six-stage tabbed roadmap.
-
-## React Bits Pro requests
-
-Scroll Mask and Bending Marquee require the official Pro registry config, license secret and reachable registry. Neither has been installed in this environment yet; see [the prerequisites and exact commands](docs/react-bits-pro.md). The current ScrollExpand reveal remains in place. Never put `REACTBITS_LICENSE_KEY` in client code or use a `NEXT_PUBLIC_` prefix.
+The growth invitation follows the client logo marquee. Its native dialog includes contact details (with a skip option), four business questions, and an animated score. Answers persist when the modal closes; contact details are not submitted automatically. The process section uses the six-stage keyboard-accessible roadmap.

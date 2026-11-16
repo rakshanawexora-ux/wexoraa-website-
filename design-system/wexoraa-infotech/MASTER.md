@@ -81,9 +81,9 @@ The homepage now uses four capability questions (website, marketing, follow-up, 
 
 Replace the previous project carousel/sticky chapter with an asymmetric two-concept portfolio grid and two clearly labelled service tiles. Never present service tiles as completed client work. Testimonials retain real client names and pending quotes, with decorative pointer response. Service tabs switch on mouse hover while preserving click, touch and keyboard; do not steal keyboard focus. Blur/fade reveals keep content visible by default and stop under reduced motion. Use loading animation for route boundaries and the short result transition.
 
-## ScrollExpand and modal checker
+## Modal checker
 
-Latest user direction: show the short growth checker inside a native modal, launched from a compact invitation rather than a full questionnaire section. Preserve answers on close/reopen, trap focus natively, restore trigger focus, allow Escape/backdrop dismissal and lock background scrolling. Services and portfolio now precede the studio media. The React Bits ScrollExpand source supplied by the user is integrated as JavaScript + CSS, with header-aware native pinning, preallocated track height, live reduced-motion/static fallback, image/video support and explicit video playback. Do not replace it with a generic reveal animation.
+Show the short growth checker inside a native modal, launched from a compact invitation. Preserve answers on close/reopen, trap focus natively, restore trigger focus, allow Escape/backdrop dismissal and lock background scrolling. Services and portfolio precede the studio mask scene; the growth invitation remains immediately after the client strip. See `docs/motion-effects.md` for current independent studio and marquee implementations.
 
 ## Growth placement, contact step and roadmap
 
@@ -93,4 +93,4 @@ Place the growth invitation immediately after the client logo strip. Use a charc
 
 Use an inset white glass frame with a charcoal desktop navigation capsule, green active state and project CTA. Retain normal header flow and height so the scroll studio offset remains correct. The services disclosure uses three light category cards and all twelve real service links. On mobile use a rounded scrollable white panel, with click and Escape support; preserve keyboard focus visibility.
 
-Pro Scroll Mask and Bending Marquee are requested but pending license/official registry access. Do not substitute an invented component and call it React Bits Pro. Keep the existing media reveal until the actual replacement is available.
+The user subsequently authorized original equivalents without a Pro license. Use the independently built circular scroll-mask scene and curved SVG brand marquee. They replace ScrollExpand and do not use or claim to be React Bits Pro source. See `docs/motion-effects.md`. Keep native scrolling, manual video controls, offscreen pausing, hover/focus marquee pause, readable static reduced-motion states and unchanged client marks.

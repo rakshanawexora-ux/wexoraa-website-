@@ -1,17 +1,14 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-test("page scroll expands and releases the media; reduced motion removes the long pin", async ({
+test("original circle mask expands with native scroll and becomes static under reduced motion", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator(".scroll-expand")).toHaveAttribute(
-    "data-progress",
-    /./,
-  );
-  const root = page.locator(".scroll-expand");
-  const stage = root.locator(".scroll-expand__stage");
+  const root = page.locator(".mask-reveal"),
+    stage = root.locator(".mask-reveal-stage");
+  await expect(root).toHaveAttribute("data-static", "false");
   const start = await root.evaluate(
     (el) => el.getBoundingClientRect().top + scrollY,
   );
@@ -23,30 +20,30 @@ test("page scroll expands and releases the media; reduced motion removes the lon
     document.documentElement.style.scrollSnapType = "none";
     scrollTo(0, y);
   }, start - header);
-  await expect.poll(() => root.getAttribute("data-progress")).toBe("0.000");
-  const before = await root
-    .locator(".scroll-expand__frame")
-    .evaluate((el) => (el as HTMLElement).style.clipPath);
-  expect(before).toContain("19%");
-  await page.evaluate(
-    (y) => scrollTo(0, y),
-    start - header + (1000 - header) * 0.95,
+  await expect
+    .poll(async () => Number(await root.getAttribute("data-progress")) || 0)
+    .toBeLessThan(0.01);
+  await expect(root.locator(".mask-reveal-media")).toHaveCSS(
+    "clip-path",
+    /circle\(18%/,
   );
+  await page.evaluate((y) => scrollTo(0, y), start + 920);
   await expect
     .poll(async () => Number(await root.getAttribute("data-progress")))
-    .toBeGreaterThan(0.99);
+    .toBeGreaterThan(0.95);
   expect(Math.round((await stage.boundingBox())!.y)).toBe(Math.round(header));
-  await expect(root.locator(".scroll-expand__title")).toHaveCSS("opacity", "0");
+  await expect(root.locator(".mask-reveal-opening")).toHaveCSS("opacity", "0");
+  await expect(root.locator(".mask-reveal-copy")).toHaveCSS("opacity", "1");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(root).toHaveAttribute("data-static", "true");
   await expect(stage).toHaveCSS("position", "relative");
-  const heights = await root.evaluate((el) => ({
-    track: (el.querySelector(".scroll-expand__track") as HTMLElement)
-      .offsetHeight,
-    stage: (el.querySelector(".scroll-expand__stage") as HTMLElement)
-      .offsetHeight,
-  }));
-  expect(heights.track).toBe(heights.stage);
+  expect(
+    await root.evaluate(
+      (el) =>
+        (el as HTMLElement).offsetHeight ===
+        (el.querySelector(".mask-reveal-stage") as HTMLElement).offsetHeight,
+    ),
+  ).toBe(true);
 });
 test("growth dialog traps focus, restores trigger and preserves answers on reopen", async ({
   page,

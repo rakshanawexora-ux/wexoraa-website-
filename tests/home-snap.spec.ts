@@ -5,7 +5,7 @@ test("home settles near section edges while forms, other pages and reduced motio
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator(".scroll-expand")).toHaveAttribute(
+  await expect(page.locator(".mask-reveal")).toHaveAttribute(
     "data-progress",
     /./,
   );
