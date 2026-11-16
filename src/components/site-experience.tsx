@@ -2,192 +2,92 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
+// Pointer-only enhancements. Native scrolling does not measure or rewrite cards.
 export default function SiteExperience() {
   const path = usePathname();
   const reduced = useExperienceMotion();
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || !matchMedia("(hover: hover) and (pointer: fine)").matches)
+      return;
     const cards = Array.from(
       document.querySelectorAll<HTMLElement>(
         ".catalog-card,.engineering-card,.deliverable-card,.work-card,.process-page-list article,.client-story-card,.portfolio-card,.portfolio-note",
       ),
     );
-    cards.forEach((c) => c.classList.add("experience-card"));
-    let frame = 0;
-    let active: HTMLElement | null = null;
-    let action: HTMLElement | null = null;
-    const resetAction = () => {
-      action?.style.removeProperty("--action-x");
-      action?.style.removeProperty("--action-y");
-    };
-    const pointer = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") return;
-      const nextAction = (e.target as Element)?.closest<HTMLElement>(
-        ".button,.film-toggle,.service-enquire",
-      );
-      if (action !== nextAction) resetAction();
+    cards.forEach((card) => card.classList.add("experience-card"));
+    let frame = 0,
+      x = 0,
+      y = 0,
+      target: Element | null = null;
+    let active: HTMLElement | null = null,
+      action: HTMLElement | null = null;
+    function resetCard(card: HTMLElement | null) {
+      card?.style.removeProperty("--tilt-x");
+      card?.style.removeProperty("--tilt-y");
+    }
+    function resetAction(el: HTMLElement | null) {
+      el?.style.removeProperty("--action-x");
+      el?.style.removeProperty("--action-y");
+    }
+    const update = () => {
+      frame = 0;
+      const nextAction =
+        target?.closest<HTMLElement>(".button,.film-toggle,.service-enquire") ??
+        null;
+      const nextCard = target?.closest<HTMLElement>(".experience-card") ?? null;
+      // Read both bounds before changing any inline styles.
+      const actionBounds = nextAction?.getBoundingClientRect();
+      const cardBounds = nextCard?.getBoundingClientRect();
+      if (action !== nextAction) resetAction(action);
+      if (active !== nextCard) resetCard(active);
       action = nextAction;
-      if (action) {
-        const r = action.getBoundingClientRect();
+      active = nextCard;
+      if (action && actionBounds) {
         action.style.setProperty(
           "--action-x",
-          `${Math.max(-3, Math.min(3, (e.clientX - r.left - r.width / 2) * 0.035))}px`,
+          `${Math.max(-3, Math.min(3, (x - actionBounds.left - actionBounds.width / 2) * 0.035))}px`,
         );
         action.style.setProperty(
           "--action-y",
-          `${Math.max(-2, Math.min(2, (e.clientY - r.top - r.height / 2) * 0.06))}px`,
+          `${Math.max(-2, Math.min(2, (y - actionBounds.top - actionBounds.height / 2) * 0.06))}px`,
         );
         action.style.setProperty(
           "--action-glow",
-          `${((e.clientX - r.left) / r.width) * 100}%`,
+          `${((x - actionBounds.left) / actionBounds.width) * 100}%`,
         );
       }
-      const card = (e.target as Element)?.closest<HTMLElement>(
-        ".experience-card",
-      );
-      if (active && active !== card) {
-        active.style.setProperty("--tilt-x", "0deg");
-        active.style.setProperty("--tilt-y", "0deg");
+      if (active && cardBounds) {
+        const px = (x - cardBounds.left) / cardBounds.width,
+          py = (y - cardBounds.top) / cardBounds.height;
+        active.style.setProperty("--mouse-x", `${px * 100}%`);
+        active.style.setProperty("--mouse-y", `${py * 100}%`);
+        active.style.setProperty("--tilt-x", `${(py - 0.5) * -5}deg`);
+        active.style.setProperty("--tilt-y", `${(px - 0.5) * 5}deg`);
       }
-      active = card;
-      if (!card) return;
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-        card.style.setProperty("--mouse-x", `${x * 100}%`);
-        card.style.setProperty("--mouse-y", `${y * 100}%`);
-        card.style.setProperty("--tilt-x", `${(y - 0.5) * -5}deg`);
-        card.style.setProperty("--tilt-y", `${(x - 0.5) * 5}deg`);
-      });
+    };
+    const pointer = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      x = event.clientX;
+      y = event.clientY;
+      target = event.target instanceof Element ? event.target : null;
+      if (!frame) frame = requestAnimationFrame(update);
     };
     const leave = () => {
-      resetAction();
-      if (active) {
-        active.style.setProperty("--tilt-x", "0deg");
-        active.style.setProperty("--tilt-y", "0deg");
-      }
-    };
-    document.addEventListener("pointermove", pointer);
-    document.addEventListener("pointerleave", leave);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries)
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            el.animate([{ translate: "0 28px" }, { translate: "0 0" }], {
-              duration: 700,
-              easing: "cubic-bezier(.22,1,.36,1)",
-            });
-            observer.unobserve(el);
-          }
-      },
-      { threshold: 0.09 },
-    );
-    document
-      .querySelectorAll(
-        "main > section:not(.hero-cinematic):not(.page-hero):not(.mask-reveal):not(.bending-brand-strip), main .catalog-card, main .process-page-list article",
-      )
-      .forEach((el) => observer.observe(el));
-    const staggerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          const index = [...(el.parentElement?.children || [])].indexOf(el);
-          el.animate(
-            [
-              { translate: "0 20px", scale: ".985" },
-              { translate: "0 0", scale: "1" },
-            ],
-            {
-              duration: 650,
-              delay: Math.min(index * 75, 225),
-              easing: "cubic-bezier(.22,1,.36,1)",
-            },
-          );
-          staggerObserver.unobserve(el);
-        });
-      },
-      { threshold: 0.12 },
-    );
-    document
-      .querySelectorAll(".engineering-card,.solution-menu button,.work-title")
-      .forEach((el) => staggerObserver.observe(el));
-    const textObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.animate(
-              [
-                {
-                  opacity: 0.25,
-                  filter: "blur(7px)",
-                  transform: "translateY(18px)",
-                },
-                { opacity: 1, filter: "blur(0px)", transform: "translateY(0)" },
-              ],
-              { duration: 650, easing: "cubic-bezier(.22,1,.36,1)" },
-            );
-            textObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 },
-    );
-    document
-      .querySelectorAll(
-        "main section h2,main section > p,.showcase-heading-row,.client-stories-intro",
-      )
-      .forEach((el) => textObserver.observe(el));
-    let scrollFrame = 0;
-    const scroll = () => {
-      cancelAnimationFrame(scrollFrame);
-      scrollFrame = requestAnimationFrame(() => {
-        const total = document.documentElement.scrollHeight - innerHeight;
-        document.documentElement.style.setProperty(
-          "--site-progress",
-          `${total > 0 ? scrollY / total : 0}`,
-        );
-        document
-          .querySelectorAll<HTMLElement>(".project-image")
-          .forEach((el) => {
-            const r = el.getBoundingClientRect();
-            el.style.setProperty(
-              "--image-drift",
-              `${Math.max(-18, Math.min(18, (innerHeight / 2 - r.top - r.height / 2) * 0.045))}px`,
-            );
-          });
-        document
-          .querySelectorAll<HTMLElement>("[data-parallax]")
-          .forEach((el) => {
-            const r = el.getBoundingClientRect();
-            el.style.setProperty(
-              "--parallax-y",
-              `${Math.max(-55, Math.min(55, (innerHeight / 2 - r.top - r.height / 2) * 0.1))}px`,
-            );
-          });
-      });
-    };
-    window.addEventListener("scroll", scroll, { passive: true });
-    scroll();
-    return () => {
       cancelAnimationFrame(frame);
-      cancelAnimationFrame(scrollFrame);
-      observer.disconnect();
-      textObserver.disconnect();
-      staggerObserver.disconnect();
-      resetAction();
+      frame = 0;
+      resetCard(active);
+      resetAction(action);
+      active = null;
+      action = null;
+    };
+    document.addEventListener("pointermove", pointer, { passive: true });
+    document.addEventListener("pointerleave", leave);
+    return () => {
+      leave();
       document.removeEventListener("pointermove", pointer);
       document.removeEventListener("pointerleave", leave);
-      window.removeEventListener("scroll", scroll);
-      cards.forEach((c) => {
-        c.classList.remove("experience-card");
-        c.style.removeProperty("--tilt-x");
-        c.style.removeProperty("--tilt-y");
-      });
+      cards.forEach((card) => card.classList.remove("experience-card"));
     };
   }, [path, reduced]);
-  return <div className="site-progress scroll-progress" aria-hidden="true" />;
+  return null;
 }

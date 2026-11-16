@@ -48,27 +48,9 @@ function Reveal({
   children: React.ReactNode;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={false}
-      whileInView={
-        reduced
-          ? {}
-          : {
-              y: [24, 0],
-              opacity: [0.25, 1],
-              filter: ["blur(8px)", "blur(0px)"],
-            }
-      }
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
+
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);

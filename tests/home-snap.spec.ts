@@ -1,45 +1,41 @@
 import { test, expect } from "@playwright/test";
-test("home settles near section edges while forms, other pages and reduced motion keep free scrolling", async ({
+test("native scrolling stays free and content never uses scroll blur or fade", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
+  await page.getByRole("heading", { level: 1 }).waitFor();
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator(".mask-reveal")).toHaveAttribute(
-    "data-progress",
-    /./,
-  );
-  await expect(page.locator("html")).toHaveCSS(
-    "scroll-snap-type",
-    /^y(?: proximity)?$/,
-  );
-  const faq = page.locator(".home-faq");
-  const top = await faq.evaluate(
-    (el) => el.getBoundingClientRect().top + scrollY,
-  );
-  await page.evaluate((y) => {
-    document.documentElement.style.scrollBehavior = "auto";
-    scrollTo(0, y - 80);
-  }, top);
-  await expect
-    .poll(async () => Math.round((await faq.boundingBox())!.y))
-    .toBe(100);
+  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
+  await page.evaluate(() => scrollTo({ top: 1237, behavior: "instant" }));
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(1237);
+  for (const selector of [
+    "#solutions h2",
+    "#work h2",
+    ".portfolio-card",
+    "#process h2",
+    ".home-faq h2",
+  ]) {
+    const item = page.locator(selector).first();
+    await item.scrollIntoViewIfNeeded();
+    await expect(item).toHaveCSS("opacity", "1");
+    await expect(item).toHaveCSS("filter", "none");
+  }
+  expect(
+    await page.evaluate(() => ({
+      progress:
+        document.documentElement.style.getPropertyValue("--site-progress"),
+      drifts: Array.from(
+        document.querySelectorAll<HTMLElement>(".project-image"),
+      ).some((e) => e.style.getPropertyValue("--image-drift")),
+    })),
+  ).toEqual({ progress: "", drifts: false });
   await page.locator(".survey-start").click();
   await expect(
     page.getByRole("dialog", { name: "YOUR BUSINESS GROWTH CHECK" }),
   ).toBeVisible();
-  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
   await page.keyboard.press("Escape");
-  await expect(page.locator("html")).toHaveCSS(
-    "scroll-snap-type",
-    /^y(?: proximity)?$/,
-  );
+  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/services");
-  await expect(page.locator("html")).toHaveCSS("scroll-snap-type", "none");
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
 });

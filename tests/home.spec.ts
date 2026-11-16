@@ -88,7 +88,7 @@ test("cursor position changes hero depth; scroll and reduced motion stay support
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(visual).toHaveCSS("transform", "none");
   await expect(page.locator(".cursor-accent")).toHaveCSS("display", "none");
-  await expect(page.locator(".scroll-progress")).toHaveCSS("display", "none");
+  await expect(page.locator(".scroll-progress")).toHaveCount(0);
 });
 test("every published content route renders, unknown routes 404 and navigation uses real pages", async ({
   page,

@@ -1,12 +1,9 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
 import { projects } from "@/content/catalog";
 import ActionArrow from "./action-arrow";
-import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function ProjectShowcase() {
-  const reduced = useExperienceMotion();
   return (
     <section
       className="project-showcase section"
@@ -33,21 +30,9 @@ export default function ProjectShowcase() {
       </div>
       <div className="portfolio-grid">
         {projects.map((project, i) => (
-          <motion.article
+          <article
             key={project.slug}
             className={`portfolio-card portfolio-card-${i + 1}`}
-            initial={false}
-            whileInView={
-              reduced
-                ? {}
-                : {
-                    y: [35, 0],
-                    opacity: [0.3, 1],
-                    filter: ["blur(6px)", "blur(0px)"],
-                  }
-            }
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.7 }}
           >
             <Link
               href={`/work/${project.slug}`}
@@ -82,7 +67,7 @@ export default function ProjectShowcase() {
                 ))}
               </div>
             </div>
-          </motion.article>
+          </article>
         ))}
         <Link href="/services/ui-ux-design" className="portfolio-note">
           <span>THOUGHTFUL BY DESIGN</span>

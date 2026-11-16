@@ -67,10 +67,6 @@ Latest project behavior: desktop/tablet >=768px wide and >=500px high uses a 230
 
 Responsive sticky visibility: do not restrict to tall desktop-only windows. Enable the pinned scene at 768×500 and larger, with compact typography and stage sizing. Phones use native image-only sticky stacking; reduced motion stays static. Manual navigation reads the actual sticky top offset rather than assuming a fixed desktop header.
 
-## Native homepage snapping
-
-Use home-only `scroll-snap-type: y proximity` on suitable desktop/tablet viewports. Major sections snap to their starts using native header scroll padding. No mandatory stops or wheel interception. Suppress snapping for focused survey/project/client controls and open enquiry dialogs. Phone, reduced-motion and other routes retain free scrolling. Long sections must remain readable/traversable, and existing sticky project storytelling must keep working.
-
 ## Clean editorial redesign
 
 The user rejected W-cut containers and approved a white, rounded editorial direction. Use simple 16–28px rounded feature surfaces, a white hero with charcoal type and a green underline, and a separate interactive charcoal artwork panel. Keep Space Grotesk / DM Sans and the supplied brand palette. Service tabs use charcoal selection with white copy; the adjacent visual panel stays light. Preserve the native sticky project chapter, survey, reduced-motion behavior and enquiry flow. No decorative clipping paths on reading or interactive surfaces.
@@ -94,3 +90,7 @@ Place the growth invitation immediately after the client logo strip. Use a charc
 Use an inset white glass frame with a charcoal desktop navigation capsule, green active state and project CTA. Retain normal header flow and height so the scroll studio offset remains correct. The services disclosure uses three light category cards and all twelve real service links. On mobile use a rounded scrollable white panel, with click and Escape support; preserve keyboard focus visibility.
 
 The user subsequently authorized original equivalents without a Pro license. Use the independently built circular scroll-mask scene and curved SVG brand marquee. They replace ScrollExpand and do not use or claim to be React Bits Pro source. See `docs/motion-effects.md`. Keep native scrolling, manual video controls, offscreen pausing, hover/focus marquee pause, readable static reduced-motion states and unchanged client marks.
+
+## Scroll performance — latest user preference
+
+Remove all scroll-time text blur/fade and section/card entry animations. Keep reading content fully opaque and sharp. Use native free scrolling with no snap points or wheel interception; smooth behavior is for anchor navigation only. Do not restore global progress CSS writes, card/image parallax measurements or hero scroll transforms. Keep lightweight pointer hover feedback, coalescing bounds reads before writes in one frame. The studio circle uses static border-radius clipping plus outer/inverse inner scale transforms; its text never fades. Avoid live header backdrop filters and permanent layer promotion across all cards. Preserve the marquee's offscreen pause, score count-up and reduced-motion support.

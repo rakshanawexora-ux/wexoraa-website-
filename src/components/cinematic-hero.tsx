@@ -2,13 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import ActionArrow from "./action-arrow";
 import { EnquiryCTA } from "./enquiry-popup";
@@ -22,17 +16,10 @@ export default function CinematicHero() {
   const y = useMotionValue(0);
   const px = useSpring(x, { stiffness: 65, damping: 24 });
   const py = useSpring(y, { stiffness: 65, damping: 24 });
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const depthY = useTransform(
-    () => py.get() * 12 + scrollYProgress.get() * 140,
-  );
+  const depthY = useTransform(py, [-1, 1], [-12, 12]);
   const depthX = useTransform(px, [-1, 1], [-18, 18]);
   const fieldX = useTransform(px, [-1, 1], [-28, 28]);
-  const fieldY = useTransform(() => py.get() * 22 - scrollYProgress.get() * 90);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -65]);
+  const fieldY = useTransform(py, [-1, 1], [-18, 18]);
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(([entry]) =>
@@ -63,10 +50,7 @@ export default function CinematicHero() {
         <span>YOUR NEXT CHAPTER STARTS HERE</span>
         <span>COIMBATORE ↗ WORKING EVERYWHERE</span>
       </div>
-      <motion.div
-        className="cinematic-copy"
-        style={{ y: reduced ? 0 : titleY }}
-      >
+      <motion.div className="cinematic-copy">
         <h1>
           <span>Good design.</span>
           <span>Smart tech.</span>

@@ -8215,44 +8215,6 @@ html:has(.enquiry-dialog[open]) {
   }
 }
 
-/* Home-only proximity snapping: settle at section edges without trapping long content. */
-@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
-  html:has(.home-page) {
-    scroll-snap-type: y proximity;
-  }
-  .home-page
-    > :is(
-      .hero-cinematic,
-      .motion-showcase,
-      .problem,
-      .solutions,
-      .project-showcase,
-      .client-stories,
-      .engineering,
-      .process,
-      .partnership,
-      .home-faq
-    ) {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-  html:has(.home-page) .footer {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-  html:has(.home-page .survey-container:focus-within),
-  html:has(.home-page .quick-check:focus-within),
-  html:has(.home-page .project-showcase:focus-within),
-  html:has(.home-page):has(dialog[open]) {
-    scroll-snap-type: none;
-  }
-}
-@media (min-width: 768px) and (min-height: 500px) and (prefers-reduced-motion: no-preference) {
-  html:has(.home-page .client-marquee:focus-within) {
-    scroll-snap-type: none;
-  }
-}
-
 /* Clean editorial direction: white canvas, rounded visual surfaces. */
 .hero-cinematic.hero-media {
   background: white;
@@ -9246,23 +9208,6 @@ html:has(.enquiry-dialog[open]) {
 .quick-check.experience-card:hover {
   transform: none;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .solution-service-image {
-    animation: service-visual-in 0.45s var(--ease-standard) both;
-  }
-}
-@keyframes service-visual-in {
-  from {
-    opacity: 0.4;
-    filter: blur(6px);
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .experience-card:hover {
     transform: none;
@@ -9468,11 +9413,6 @@ html:has(.enquiry-dialog[open]) {
 }
 .solutions-layout > #solution-panel {
   padding: 24px;
-}
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  html:has(.home-page .mask-reveal[data-active="true"]) {
-    scroll-snap-type: none;
-  }
 }
 @media (max-width: 767px) {
   .growth-invitation {
@@ -9836,7 +9776,7 @@ html:has(.enquiry-dialog[open]) {
     animation: growth-pulse 3s ease-in-out infinite;
   }
   .roadmap-panel-copy {
-    animation: roadmap-in 0.35s ease both;
+    animation: none;
   }
 }
 @keyframes growth-pulse {
@@ -9845,16 +9785,7 @@ html:has(.enquiry-dialog[open]) {
     scale: 1.2;
   }
 }
-@keyframes roadmap-in {
-  from {
-    opacity: 0.4;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 @media (max-width: 900px) {
   .roadmap-panel {
     grid-template-columns: 1fr;
@@ -10554,5 +10485,85 @@ html:has(.enquiry-dialog[open]) {
   .mask-reveal-copy {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Native free scrolling: content stays clear and fully visible. */
+html {
+  scroll-snap-type: none;
+  scroll-behavior: smooth;
+}
+.experience-card {
+  will-change: auto;
+}
+.header.floating-header::before {
+  backdrop-filter: none;
+  background: #fffffff7;
+}
+.hero-cinematic .cinematic-card {
+  backdrop-filter: none;
+}
+.solution-service-image,
+.roadmap-panel-copy {
+  animation: none;
+}
+/* One GPU transform opens a static rounded mask; no animated clip-path paints. */
+.mask-reveal-media {
+  inset: auto;
+  left: 50%;
+  top: 52%;
+  translate: -50% -50%;
+  width: 150vmax;
+  height: 150vmax;
+  border-radius: 50%;
+  overflow: hidden;
+  contain: paint;
+  will-change: auto;
+}
+.mask-reveal-viewport {
+  position: absolute;
+  width: 100vw;
+  height: calc(100svh - var(--mask-header));
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  transform-origin: center;
+}
+.mask-reveal[data-visible="true"] .mask-reveal-media,
+.mask-reveal[data-visible="true"] .mask-reveal-viewport {
+  will-change: transform;
+}
+.mask-reveal-copy {
+  opacity: 1;
+  transform: none;
+}
+.mask-reveal-shade {
+  opacity: 0.7;
+}
+.mask-reveal > .mask-reveal-stage > .mask-scroll-hint {
+  left: 0;
+  right: 0;
+  justify-content: center;
+  color: white;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .mask-reveal-media {
+    left: 0;
+    top: 0;
+    translate: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .mask-reveal-viewport {
+    left: 0;
+    top: 0;
+    translate: none;
+    width: 100%;
+    height: 100%;
   }
 }
