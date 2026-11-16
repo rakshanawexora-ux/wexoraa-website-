@@ -27,9 +27,9 @@ export const routeSeo: Record<string, { title: string; description: string }> =
         "See how Wexoraa plans, designs, builds and launches your project. Clear scope, regular updates and your feedback at every stage, with support agreed upfront.",
     },
     "/work": {
-      title: "Brand & Digital Design Portfolio Concepts | Wexoraa",
+      title: "Website, Ecommerce & Creative Projects | Wexoraa",
       description:
-        "Explore Wexoraa studio concepts in brand design, websites and connected business systems. See the ideas, challenges and design thinking behind each concept.",
+        "Explore Wexoraa website, ecommerce, video production and social media projects, with supplied project artwork and website references.",
     },
     "/contact": {
       title: "Contact Wexoraa | Tell Us What Your Business Needs",

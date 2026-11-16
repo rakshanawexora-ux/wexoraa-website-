@@ -11685,3 +11685,8 @@ html {
 .work-story-meta p {margin-top:12px;font-size:14px;}
 @media(max-width:767px){.work-page{padding-top:25px}.work-intro{padding:35px 0}.work-filters{top:80px;gap:4px;padding:12px 0}.work-filters button{padding:12px;font-size:11px}.work-story{grid-template-columns:1fr;gap:22px;padding-bottom:45px;margin-bottom:35px}.work-story-media{position:relative;top:auto;aspect-ratio:1.1}.work-story-copy ul{margin-bottom:30px}.work-story-note{padding:24px}}
 @media(prefers-reduced-motion:reduce){.work-story-media{position:relative;top:auto}.work-story-media img,.work-view{transition:none;transform:none!important}}
+
+/* Supplied portfolio compositions retain every part of the uploaded artwork. */
+.supplied-work-media {aspect-ratio:4/3;background:var(--surface-container-low);}
+.supplied-work-media img {object-fit:contain;}
+.supplied-work-media .work-view {font-size:13px;padding:12px 18px;}

@@ -2,8 +2,8 @@ import { pageMetadata } from "@/lib/seo";
 import { Header, Footer } from "@/components/home";
 import WorkShowcase from "@/components/work-showcase";
 export const metadata = pageMetadata(
-  "Studio concepts and approach — Wexoraa",
-  "Explore illustrative brand and connected-system concepts, with clear context and no fabricated client results.",
+  "Website, Ecommerce & Creative Projects | Wexoraa",
+  "Explore Wexoraa website, ecommerce, video production and social media projects, with supplied project artwork and website references.",
   "/work",
 );
 export default function Page() {

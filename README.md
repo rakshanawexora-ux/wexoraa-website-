@@ -100,3 +100,7 @@ All marketing routes share the homepage’s white/charcoal/green design and a cl
 ## Page navigation scrolling
 
 Each marketing page has one normal-flow `.page-frame` root around its header, content and footer. Keep this wrapper: the current Next.js fragment scroll handler can otherwise scroll the separate footer into view after a page change. The root HTML declares `data-scroll-behavior="smooth"` so Next.js temporarily disables anchor smoothing during route changes. Section links retain native anchor scrolling; there is no global scroll reset listener.
+
+## Supplied Work portfolio
+
+The `/work` index uses `src/content/portfolio.ts`, transcribed from the supplied Wexoraa completed-projects document: eight website/ecommerce references and three creative entries. Matching uploaded compositions live in `public/work` as optimized WebP files. Edit each entry's `url` to update its external website; null URLs omit the visit button. Hita's public video URL is pending. VLASY retains the document's concept label. Older `/work/[slug]` studio explorations remain separate from these supplied project references.

@@ -1,64 +1,13 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { projects } from "@/content/catalog";
+import { portfolio } from "@/content/portfolio";
 const filters = [
   "All projects",
   "Website",
-  "Web app",
-  "Mobile app",
-  "Branding",
-];
-const concepts = [
-  {
-    title: "A better first impression, from shelf to screen.",
-    category: "Branding",
-    image: "/brand-art.webp",
-    slug: projects[0].slug,
-    description:
-      "A product brand concept that brings packaging, identity and an online store together.",
-    tags: ["Brand identity", "Packaging", "Ecommerce"],
-    detail:
-      "One visual language across the things customers see, hold and buy.",
-    tone: "cream",
-  },
-  {
-    title: "An online store that makes choosing feel simple.",
-    category: "Website",
-    image: "/brand-art.webp",
-    slug: projects[0].slug,
-    description:
-      "A website concept built around clear product information and an easier shopping journey.",
-    tags: ["UI/UX design", "Responsive website", "Storefront"],
-    detail:
-      "From discovering a product to understanding the details and finding the next step.",
-    tone: "green",
-  },
-  {
-    title: "Your team’s daily work, connected.",
-    category: "Web app",
-    image: "/hero-art.webp",
-    slug: projects[1].slug,
-    description:
-      "A business platform concept for keeping customer enquiries, tasks and team updates in one place.",
-    tags: ["Product design", "CRM", "Connected systems"],
-    detail:
-      "Less copying between tools. A clearer view of who needs to do what next.",
-    tone: "dark",
-  },
-  {
-    title: "Useful everyday tools, wherever work happens.",
-    category: "Mobile app",
-    image: "/hero-art.webp",
-    slug: projects[1].slug,
-    description:
-      "An illustrative mobile direction for checking updates and managing customer follow-ups on the move.",
-    tags: ["Mobile UI", "Prototyping", "Customer journeys"],
-    detail:
-      "Simple screens and clear actions, designed around the jobs people need to finish.",
-    tone: "green",
-  },
+  "Ecommerce",
+  "Video production",
+  "Social media",
 ];
 export default function WorkShowcase() {
   const [filter, setFilter] = useState("All projects");
@@ -75,37 +24,38 @@ export default function WorkShowcase() {
           </button>
         ))}
       </div>
-      <section className="work-stories" aria-label="Project concepts">
-        {concepts
+      <section className="work-stories" aria-label="Selected projects">
+        {portfolio
           .filter(
             (item) => filter === "All projects" || item.category === filter,
           )
           .map((item, i) => (
-            <article className="work-story" key={item.title}>
-              <Link
-                className={`work-story-media ${item.tone}`}
-                href={`/work/${item.slug}`}
-                aria-label={`Explore concept: ${item.title}`}
-              >
+            <article className="work-story" key={item.image}>
+              <div className="work-story-media supplied-work-media">
                 <Image
                   src={item.image}
-                  alt={`${item.category} concept placeholder artwork`}
+                  alt={`${item.title} — ${item.tags[0]} portfolio showcase`}
                   fill
                   sizes="(max-width:767px) 100vw,50vw"
                   priority={i === 0}
                 />
-                <span className="work-placeholder">
-                  CONCEPT / PLACEHOLDER IMAGE
-                </span>
-                <span className="work-view" aria-hidden="true">
-                  View concept ↗
-                </span>
-              </Link>
+                {item.url && (
+                  <a
+                    className="work-view"
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit website ↗
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
+              </div>
               <div className="work-story-copy">
-                <p className="eyebrow">{item.category} / STUDIO EXPLORATION</p>
-                <h2>
-                  <Link href={`/work/${item.slug}`}>{item.title}</Link>
-                </h2>
+                <p className="eyebrow">
+                  {item.category} / {item.status}
+                </p>
+                <h2>{item.title}</h2>
                 <p>{item.description}</p>
                 <ul>
                   {item.tags.map((tag) => (
@@ -113,12 +63,8 @@ export default function WorkShowcase() {
                   ))}
                 </ul>
                 <div className="work-story-note">
-                  <span>THE IDEA</span>
+                  <span>PROJECT OVERVIEW</span>
                   <h3>{item.detail}</h3>
-                  <p>
-                    Illustrative design direction. Original project imagery and
-                    client details will be added here later.
-                  </p>
                 </div>
                 <div className="work-story-meta">
                   <div>
@@ -127,7 +73,7 @@ export default function WorkShowcase() {
                   </div>
                   <div>
                     <span>STATUS</span>
-                    <p>Studio concept</p>
+                    <p>{item.status}</p>
                   </div>
                 </div>
               </div>
