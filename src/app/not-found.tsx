@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Header, Footer } from "@/components/home";
 export default function NotFound() {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="simple-page missing-page">
         <p className="eyebrow">404 / LET’S GET YOU BACK ON TRACK</p>
@@ -21,6 +21,6 @@ export default function NotFound() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

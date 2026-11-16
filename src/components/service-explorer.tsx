@@ -13,7 +13,7 @@ export default function ServiceExplorer() {
   const results = services.filter(
     (s) =>
       (group === "all" || s.group === group) &&
-      `${s.title} ${s.intro} ${s.problem}`
+      `${s.title} ${s.intro} ${s.problem} ${s.deliverables.join(" ")}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
@@ -37,7 +37,7 @@ export default function ServiceExplorer() {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Try website, CRM, automation…"
+            placeholder="Try packaging, Google ads, CRM…"
           />
           {query && (
             <button

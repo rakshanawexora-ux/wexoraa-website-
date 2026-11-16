@@ -27,8 +27,8 @@ Build before browser tests; they start the production server. Chromium defaults 
 ## Routes
 
 - `/`: full homepage, pointer-reactive depth/light visual, original SVG doodles, short 4-question business snapshot, optional contact details and asymmetric concept portfolio grid. The testimonial section is removed.
-- `/services`: What we do, with three illustrated service groups, a searchable 12-service directory and a simple working-together overview. Repeated enquiry buttons are removed from this page.
-- `/services/[slug]`: 12 service detail pages with problems, approach, deliverables, FAQ and enquiry links.
+- `/services`: What we do, with three illustrated service groups, a searchable 22-service directory and a simple working-together overview. Repeated enquiry buttons are removed from this page.
+- `/services/[slug]`: 22 service detail pages with problems, approach, deliverables, FAQ and enquiry links.
 - Legacy `/solutions` and `/solutions/build`, `/solutions/operate`, `/solutions/grow` permanently redirect to `/services` and its relevant section; they are absent from navigation and the sitemap.
 - `/work` and two `/work/[slug]` illustrative studio concepts. No commissioned client work or results are fabricated.
 - `/about`, `/process`, `/contact`, `/privacy`.
@@ -96,3 +96,7 @@ Page scrolling is native and free: no scroll snapping, blur or continuously scro
 ## Consistent page design and SEO
 
 All marketing routes share the homepage’s white/charcoal/green design and a clear “design, software and marketing—one team” promise. Main-route search snippets live in `src/content/page-seo.ts`; dynamic detail routes generate their own titles and descriptions. Canonical/social URLs still depend on `NEXT_PUBLIC_SITE_URL`; thank-you remains noindex. A single intersection observer provides subtle one-time content fades without blur or per-scroll layout work, and reduced motion stays static.
+
+## Page navigation scrolling
+
+Each marketing page has one normal-flow `.page-frame` root around its header, content and footer. Keep this wrapper: the current Next.js fragment scroll handler can otherwise scroll the separate footer into view after a page change. The root HTML declares `data-scroll-behavior="smooth"` so Next.js temporarily disables anchor smoothing during route changes. Section links retain native anchor scrolling; there is no global scroll reset listener.

@@ -19,7 +19,7 @@ export function PageShell({
   finalCTA?: boolean;
 }) {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="inner-page">
         <nav className="page-breadcrumb" aria-label="Breadcrumb">
@@ -73,6 +73,6 @@ export function PageShell({
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

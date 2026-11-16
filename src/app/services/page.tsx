@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PageShell } from "@/components/page-shell";
 import ServiceExplorer from "@/components/service-explorer";
 import SystemsIllustration from "@/components/systems-illustration";
 import { solutions } from "@/content/site";
+import { serviceFor } from "@/content/catalog";
 export const metadata = pageMetadata(
   "What We Do | Wexoraa",
   "One team for brand design, websites, apps, business systems and digital marketing. Find practical help for your next business challenge.",
@@ -59,7 +61,11 @@ export default function Page() {
                 <p>{area.detail}</p>
                 <ul>
                   {area.services.map((service) => (
-                    <li key={service}>{service}</li>
+                    <li key={service}>
+                      <Link href={`/services/${serviceFor(service)!.slug}`}>
+                        {service}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </div>

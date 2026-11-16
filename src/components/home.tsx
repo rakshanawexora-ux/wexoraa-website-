@@ -731,7 +731,7 @@ export function Footer() {
 
 export default function Home({ emailReady = false }: { emailReady?: boolean }) {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="home-page">
         <CinematicHero />
@@ -747,6 +747,6 @@ export default function Home({ emailReady = false }: { emailReady?: boolean }) {
         <HomeFaq />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

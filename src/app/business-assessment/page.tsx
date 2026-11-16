@@ -9,7 +9,7 @@ export const metadata = pageMetadata(
 );
 export default function Page() {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="assessment-page">
         <div className="assessment-heading">
@@ -27,6 +27,6 @@ export default function Page() {
         <Survey configured={emailConfigured()} />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ export const metadata = pageMetadata(
 );
 export default function Privacy() {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="simple-page privacy-page">
         <p className="eyebrow">PRIVACY & INFORMATION USE</p>
@@ -73,6 +73,6 @@ export default function Privacy() {
         </p>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

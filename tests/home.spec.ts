@@ -285,7 +285,9 @@ test("service explorer filters, searches and recovers from no results", async ({
 }) => {
   await page.setViewportSize({ width: 390, height: 950 });
   await page.goto("/services");
-  await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(
+    services.length,
+  );
   await page
     .getByRole("button", { name: "Business systems", exact: true })
     .last()
@@ -300,7 +302,9 @@ test("service explorer filters, searches and recovers from no results", async ({
     page.getByRole("heading", { name: "No exact match yet." }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Reset filters" }).click();
-  await expect(page.locator(".service-results .catalog-card")).toHaveCount(12);
+  await expect(page.locator(".service-results .catalog-card")).toHaveCount(
+    services.length,
+  );
   await page.evaluate(async () => {
     await new Promise(requestAnimationFrame);
     await Promise.all(

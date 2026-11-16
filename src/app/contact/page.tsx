@@ -15,7 +15,7 @@ export default async function Contact({
 }) {
   const query = await searchParams;
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main">
         <section className="section contact-layout">
@@ -61,6 +61,6 @@ export default async function Contact({
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

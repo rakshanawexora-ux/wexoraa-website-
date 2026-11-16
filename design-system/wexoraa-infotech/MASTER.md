@@ -32,7 +32,7 @@ The first broad design-system result proposed Web3 typography and a dark/red pal
 - Pointer tilt is bounded and omitted for coarse pointers/reduced motion. Essential actions also work by click/tap/keyboard.
 - Section entry uses translation, not faded body copy. State correctness does not wait for an animation end.
 - No global motion controller (user request). Respect browser reduced-motion preferences.
-- Header services disclosure contains all 12 direct service URLs, visibly grouped Design & development / Business systems / Digital marketing. Build/operate/grow remain stable route IDs, not unexplained visitor-facing labels. Keep the Services overview link separate, with a 44px disclosure button, keyboard access and Escape/focus restoration.
+- Header services disclosure contains all catalog service URLs, visibly grouped Design & development / Business systems / Digital marketing. Build/operate/grow remain stable route IDs, not unexplained visitor-facing labels. Keep the Services overview link separate, with a 44px disclosure button, keyboard access and Escape/focus restoration.
 - Use a fully white footer with a clear invitation heading, one standard enquiry CTA and clearly separated navigation columns.
 - Explicit film play/pause; no autoplay, no audio, no external embed.
 - No locked scroll, cursor removal, fake urgency, invented client proof or email-gated assessment results.
@@ -87,7 +87,7 @@ Place the growth invitation immediately after the client logo strip. Use a charc
 
 ## Floating studio navigation
 
-Use an inset white glass frame with a charcoal desktop navigation capsule, green active state and project CTA. Retain normal header flow and height so the scroll studio offset remains correct. The services disclosure uses three light category cards and all twelve real service links. On mobile use a rounded scrollable white panel, with click and Escape support; preserve keyboard focus visibility.
+Use an inset white glass frame with a charcoal desktop navigation capsule, green active state and project CTA. Retain normal header flow and height so the scroll studio offset remains correct. The services disclosure uses three light category cards and all catalog service links. On mobile use a rounded scrollable white panel, with click and Escape support; preserve keyboard focus visibility.
 
 The user subsequently authorized original equivalents without a Pro license. Use the independently built circular scroll-mask scene and curved SVG brand marquee. They replace ScrollExpand and do not use or claim to be React Bits Pro source. See `docs/motion-effects.md`. Keep native scrolling, manual video controls, offscreen pausing, hover/focus marquee pause, readable static reduced-motion states and unchanged client marks.
 
@@ -121,4 +121,13 @@ Latest user instruction removes the homepage testimonials/client-stories section
 
 ## What we do and removed Solutions pages
 
-Navigation/footer now label `/services` as “What we do”. Solutions pages are removed from menus and sitemap; legacy URLs permanently redirect to `/services` or the relevant `#build/#operate/#grow` overview. Update internal links directly to the destination. The what-we-do page uses three illustrated service groups, the searchable 12-service directory with useful deliverables, and a clear expectations section. It has no repeated card enquiry buttons, hero CTA pair or page-final CTA; shared header/footer contact remains available. Portfolio retains honest studio-concept labels and adds project context/tags. The requested wexoraa.in reference could not be viewed (proxy 403); do not claim an exact match.
+Navigation/footer now label `/services` as “What we do”. Solutions pages are removed from menus and sitemap; legacy URLs permanently redirect to `/services` or the relevant `#build/#operate/#grow` overview. Update internal links directly to the destination. The what-we-do page uses three illustrated service groups, the searchable 22-service directory with useful deliverables, and a clear expectations section. It has no repeated card enquiry buttons, hero CTA pair or page-final CTA; shared header/footer contact remains available. Portfolio retains honest studio-concept labels and adds project context/tags. The requested wexoraa.in reference could not be viewed (proxy 403); do not claim an exact match.
+
+
+## Expanded service coverage
+
+Use the central catalog for all service navigation and group lists: eight Design & development services, four Business systems services and ten Digital marketing services. Keep the familiar three groups; all 22 detail routes generate their own SEO metadata and sitemap entries. Include concrete deliverables in service search so terms such as packaging, newsletters, GA4 and YouTube are discoverable. The desktop disclosure scrolls within the viewport on short screens; mobile retains the existing single scrollable navigation panel. Do not add repeated enquiry CTAs.
+
+## Route scroll target
+
+Preserve a single normal-flow `.page-frame` root on each marketing page, including home, PageShell, contact, privacy, assessment, thank-you and 404. A fragment containing a sticky header, main and separate footer causes the current Next.js scroll handler to bring the footer into view on navigation. Declare smooth-scroll behavior on the HTML element for the framework’s route-scroll handling; retain native section anchors and avoid a global scroll-to-top effect.

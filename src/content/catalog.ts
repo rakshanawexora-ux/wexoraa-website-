@@ -79,6 +79,83 @@ export const services = [
       "Yes. A focused first release can validate the most important journeys before further investment. Scope is agreed before implementation.",
   },
   {
+    slug: "graphic-print-design",
+    title: "Graphic & print design",
+    group: "build",
+    intro: "Give your everyday business materials a clear, consistent look.",
+    problem:
+      "Your brochures, posters and business materials look like they come from different businesses.",
+    approach:
+      "We work with your brand to design practical materials, check the content with you and prepare files for your printer or digital channels.",
+    deliverables: [
+      "Business cards, stationery and company profiles",
+      "Brochures, flyers, posters and banners",
+      "Social graphics and campaign artwork",
+      "Print-ready files in agreed sizes and formats",
+    ],
+    question: "Can you design just one brochure or poster?",
+    answer:
+      "Yes. We can help with a single piece or a connected set of materials. Copy, photography and printing costs are agreed separately.",
+  },
+  {
+    slug: "packaging-label-design",
+    title: "Packaging & label design",
+    group: "build",
+    intro:
+      "Help your products look clear, recognisable and ready for the shelf.",
+    problem:
+      "Your product packaging does not explain what is inside or feel consistent with your brand.",
+    approach:
+      "We plan the information customers need, design the pack or label around your supplier’s template and review the artwork with you before handover.",
+    deliverables: [
+      "Product packaging and label layouts",
+      "Artwork for agreed product sizes and variants",
+      "Mockups to review the design before printing",
+      "Production files based on your printer’s specifications",
+    ],
+    question: "Do you also manufacture the packaging?",
+    answer:
+      "Our scope covers design and artwork. Your packaging supplier handles production; you approve product claims, required information and print proofs.",
+  },
+  {
+    slug: "presentation-pitch-deck-design",
+    title: "Presentations & pitch decks",
+    group: "build",
+    intro: "Turn a long presentation into a story people can follow.",
+    problem:
+      "Your sales presentation or pitch has useful information, but the main message gets lost.",
+    approach:
+      "We organise your supplied content, simplify the slides and design a deck your team can present and update confidently.",
+    deliverables: [
+      "A clear presentation structure",
+      "Sales decks, pitch decks and company presentations",
+      "Readable charts, diagrams and slide layouts",
+      "Editable templates in the agreed presentation tool",
+    ],
+    question: "Can our team edit the slides later?",
+    answer:
+      "Yes. We agree on the tool before starting and hand over editable slides. Financial figures, claims and other business information come from your team.",
+  },
+  {
+    slug: "motion-graphics-animation",
+    title: "Motion graphics & animation",
+    group: "build",
+    intro: "Explain your idea with movement that helps people understand it.",
+    problem:
+      "A static graphic is not enough to show how your product works or make your message memorable.",
+    approach:
+      "We agree on the message and style, share a storyboard and animate the approved idea in formats suited to your website, presentation or social channels.",
+    deliverables: [
+      "Logo animation and brand motion",
+      "2D explainers and product walkthroughs",
+      "Animated social posts and ad creatives",
+      "Agreed video formats, captions and export sizes",
+    ],
+    question: "Can you animate our existing brand assets?",
+    answer:
+      "Yes. We review your logo, illustrations and source files first. Scriptwriting, voiceover and licensed music are included only when agreed in the scope.",
+  },
+  {
     slug: "crm-lead-management",
     title: "CRM & lead management",
     group: "operate",
@@ -168,9 +245,9 @@ export const services = [
     approach:
       "We review your website and search presence, improve useful pages and business listings, and track the enquiries that come from search.",
     deliverables: [
-      "Search and digital-presence review",
-      "Practical improvements to your website and search pages",
-      "A content plan for the places customers find you",
+      "SEO audit, keyword research and competitor review",
+      "On-page SEO, technical fixes and content improvements",
+      "Off-page SEO and relevant outreach planning",
       "Simple reports and regular progress reviews",
     ],
     question: "Can you guarantee rankings?",
@@ -179,7 +256,7 @@ export const services = [
   },
   {
     slug: "performance-marketing",
-    title: "Digital ads & social media",
+    title: "Google, Meta & paid ads",
     group: "grow",
     intro:
       "Reach customers through Google ads, social media and useful campaigns.",
@@ -188,8 +265,8 @@ export const services = [
     approach:
       "We help you choose the audience, message and channels, create ads and social posts, and review the enquiries they bring in.",
     deliverables: [
-      "Google and social ad campaign planning",
-      "Social media planning, ad creative and landing pages",
+      "Google Search, Shopping and YouTube ad planning",
+      "Meta ads, retargeting and ecommerce campaign planning",
       "Enquiry tracking and campaign review",
       "Clear reports and ongoing improvements",
     ],
@@ -236,6 +313,123 @@ export const services = [
     question: "Will every visitor convert?",
     answer:
       "No. The goal is to help suitable visitors make an informed decision and remove avoidable friction, not pressure everyone into an enquiry.",
+  },
+  {
+    slug: "local-seo-business-profile",
+    title: "Local SEO & Google Business Profile",
+    group: "grow",
+    intro:
+      "Help nearby customers find your business and know how to reach you.",
+    problem:
+      "People searching in your area struggle to find accurate details about your business.",
+    approach:
+      "We review your local search presence, improve eligible business profiles and location pages, and help you keep your details and review responses useful.",
+    deliverables: [
+      "Google Business Profile setup or optimisation",
+      "Location pages and consistent business listings",
+      "A practical review-request and response process",
+      "Local search, calls and enquiry reporting",
+    ],
+    question: "Can you guarantee a place in the Google map pack?",
+    answer:
+      "No. Local results depend on relevance, distance and other factors. Profile verification and eligibility remain Google’s decision; we focus on accurate details and useful improvements.",
+  },
+  {
+    slug: "social-media-management",
+    title: "Social media management",
+    group: "grow",
+    intro:
+      "Keep your social pages active with content your customers care about.",
+    problem:
+      "Posting happens when there is spare time, and your pages do not clearly show what your business offers.",
+    approach:
+      "We choose relevant channels, plan a content calendar with you and create approved posts around your products, services and customer questions.",
+    deliverables: [
+      "Instagram, Facebook and LinkedIn content planning",
+      "Monthly calendars, captions and branded posts",
+      "Reels planning, scheduling and agreed community support",
+      "Simple reports and content reviews",
+    ],
+    question: "Do we need to be on every social platform?",
+    answer:
+      "No. We focus on the places your customers use. Platforms, posting frequency, filming and response hours are agreed before starting.",
+  },
+  {
+    slug: "content-copywriting",
+    title: "Content strategy & copywriting",
+    group: "grow",
+    intro: "Explain what you do in words your customers can understand.",
+    problem:
+      "Your website, posts and campaigns say a lot without making the value of your business clear.",
+    approach:
+      "We learn about your customers, organise the main messages and write useful content that answers their questions and gives them a clear next step.",
+    deliverables: [
+      "Content plans based on customer questions",
+      "Website and landing-page copy",
+      "SEO articles, blogs and product descriptions",
+      "Email, ad and social campaign copy",
+    ],
+    question: "Will the content sound like our business?",
+    answer:
+      "We agree on tone, examples and key messages with you. Your team reviews business facts and approves the content before it is published.",
+  },
+  {
+    slug: "email-whatsapp-marketing",
+    title: "Email & WhatsApp marketing",
+    group: "grow",
+    intro: "Stay in touch with customers who want to hear from your business.",
+    problem:
+      "You collect enquiries, but there is no consistent way to follow up or bring interested customers back.",
+    approach:
+      "We help you organise permission-based audiences, plan useful messages and set up agreed campaigns or follow-up sequences in suitable tools.",
+    deliverables: [
+      "Email newsletters and campaign templates",
+      "WhatsApp Business campaign planning",
+      "Welcome, follow-up and re-engagement sequences",
+      "Audience segments, opt-out flows and campaign reports",
+    ],
+    question: "Can you message a purchased contact list?",
+    answer:
+      "We work with contacts who have agreed to receive relevant messages. Platform rules, approved WhatsApp templates and sending limits apply; tool and message charges are agreed separately.",
+  },
+  {
+    slug: "influencer-ugc-campaigns",
+    title: "Influencer & UGC campaigns",
+    group: "grow",
+    intro:
+      "Work with creators who make sense for your audience and your brand.",
+    problem:
+      "You want creator-led content, but are unsure who to work with or how to organise the campaign.",
+    approach:
+      "We shortlist relevant creators, prepare a clear brief and coordinate agreed content, approvals and reporting around a realistic campaign plan.",
+    deliverables: [
+      "Creator research and shortlist",
+      "Influencer and user-generated content briefs",
+      "Content coordination and approval schedules",
+      "Usage-rights checklist and campaign reporting",
+    ],
+    question: "Are creator fees included?",
+    answer:
+      "Creator fees, product samples, travel and paid usage rights are agreed separately. Deliverables depend on the confirmed creator agreement; reach and sales are not guaranteed.",
+  },
+  {
+    slug: "analytics-tracking-reporting",
+    title: "Analytics & campaign reporting",
+    group: "grow",
+    intro: "Understand which channels bring useful visits and enquiries.",
+    problem:
+      "Reports show clicks and views, but you cannot clearly connect them to the actions your business cares about.",
+    approach:
+      "We agree on useful measures, review your tracking setup and connect supported enquiry events to a report your team can understand.",
+    deliverables: [
+      "GA4 and Google Tag Manager setup or review",
+      "Form, call-click and purchase event tracking",
+      "Campaign links and conversion measurement",
+      "Clear dashboards and regular reporting",
+    ],
+    question: "Will tracking capture every visitor and sale?",
+    answer:
+      "No. Consent choices, browser restrictions and platform limits affect what can be measured. We document gaps and avoid treating clicks or modelled data as confirmed sales.",
   },
 ];
 export const projects = [

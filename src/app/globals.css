@@ -11625,3 +11625,29 @@ html {
 .what-area-visual .systems-illustration-card p {
   display: none;
 }
+
+/* Expanded service menus remain reachable on shorter desktop screens. */
+@media (min-width: 901px) {
+  .header.floating-header .services-dropdown {
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}
+.what-area-copy li > a {
+  display: inline-block;
+  padding-block: 5px;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-decoration-color: var(--outline-variant);
+  text-underline-offset: 4px;
+}
+.what-area-copy li > a:hover {
+  text-decoration-color: var(--brand-charcoal);
+}
+.what-area-copy li > a:focus-visible {
+  outline: 2px solid var(--brand-charcoal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

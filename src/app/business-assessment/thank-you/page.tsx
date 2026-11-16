@@ -11,7 +11,7 @@ export const metadata = {
 };
 export default function Page() {
   return (
-    <>
+    <div className="page-frame">
       <Header />
       <main id="main" className="simple-page">
         <p className="eyebrow">THE NEXT STEP</p>
@@ -34,6 +34,6 @@ export default function Page() {
         </Link>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { services } from "../src/content/catalog";
-for (const width of [390, 1440]) {
+for (const width of [390, 1280, 1440]) {
   test(`service discovery and footer ${width}px`, async ({ page, request }) => {
-    await page.setViewportSize({ width, height: 950 });
+    await page.setViewportSize({ width, height: width === 1280 ? 600 : 950 });
     await page.goto("/");
     await expect(page.locator(".header-project svg").first()).toBeVisible();
     if (width < 901)
@@ -17,7 +17,17 @@ for (const width of [390, 1440]) {
       await expect(
         dropdown.getByRole("link", { name: service.title, exact: true }),
       ).toHaveAttribute("href", `/services/${service.slug}`);
-    expect(await dropdown.locator("section a").count()).toBe(12);
+    expect(await dropdown.locator("section a").count()).toBe(services.length);
+    const lastService = dropdown.getByRole("link", {
+      name: "Analytics & campaign reporting",
+      exact: true,
+    });
+    await lastService.focus();
+    const lastBox = (await lastService.boundingBox())!;
+    expect(lastBox.y).toBeGreaterThanOrEqual(0);
+    expect(lastBox.y + lastBox.height).toBeLessThanOrEqual(
+      page.viewportSize()!.height,
+    );
     const menuScan = await new AxeBuilder({ page })
       .include(".header")
       .withTags(["wcag2a", "wcag2aa"])

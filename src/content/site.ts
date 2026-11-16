@@ -1,3 +1,5 @@
+import { services } from "./catalog";
+
 export const solutions = [
   {
     id: "build",
@@ -9,12 +11,9 @@ export const solutions = [
     eyebrow: "DESIGN & DEVELOPMENT",
     description:
       "Give your business a brand, website or app that customers enjoy using.",
-    services: [
-      "Branding & graphic design",
-      "UI/UX design",
-      "Websites & online stores",
-      "Mobile apps & custom software",
-    ],
+    services: services
+      .filter((service) => service.group === "build")
+      .map((service) => service.title),
     detail:
       "Need a new logo, a better website, an online store or a mobile app? We help you plan it, design it and get it ready to launch.",
   },
@@ -28,12 +27,9 @@ export const solutions = [
     eyebrow: "BUSINESS SOFTWARE & AUTOMATION",
     description:
       "Spend less time on repetitive work and keep your team on the same page.",
-    services: [
-      "CRM & lead management",
-      "ERP & business software",
-      "Software integrations",
-      "AI & workflow automation",
-    ],
+    services: services
+      .filter((service) => service.group === "operate")
+      .map((service) => service.title),
     detail:
       "Track enquiries, manage daily operations and connect your tools. We build software and automations around how your team actually works.",
   },
@@ -48,12 +44,9 @@ export const solutions = [
     eyebrow: "DIGITAL MARKETING",
     description:
       "Help the right people find your business and turn more visits into enquiries.",
-    services: [
-      "SEO & online visibility",
-      "Digital ads & social media",
-      "Video & social media content",
-      "Website conversion improvements",
-    ],
+    services: services
+      .filter((service) => service.group === "grow")
+      .map((service) => service.title),
     detail:
       "From Google search and social media to paid ads, videos and better landing pages, we help you reach customers and understand what is working.",
   },
