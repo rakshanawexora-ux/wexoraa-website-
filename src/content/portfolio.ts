@@ -114,7 +114,7 @@ export const portfolio = [
     image: "/work/covai-home-tech-social.webp",
     description:
       "Service-focused social media creatives developed to communicate appliance repair offerings and improve local brand visibility through clear promotional visuals.",
-    detail: "Related website: https://covaihometech.in/",
+    detail: "",
     tags: ["SOCIAL MEDIA CREATIVE DESIGN"],
     url: null,
     status: "Creative project",
@@ -125,7 +125,7 @@ export const portfolio = [
     image: "/work/taerg-laundry-social.webp",
     description:
       "Luxury-oriented creative content highlighting specialist garment care, fabric treatment, premium finishing and convenient laundry services, presented in a refined editorial style.",
-    detail: "Related website: https://taerglaundry.com/",
+    detail: "",
     tags: ["PREMIUM SOCIAL MEDIA CREATIVES"],
     url: null,
     status: "Creative project",
