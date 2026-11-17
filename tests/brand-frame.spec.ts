@@ -1,6 +1,4 @@
-import { stubGoogleForm } from "./google-form-fixture";
 import { test, expect } from "@playwright/test";
-test.beforeEach(async ({ page }) => stubGoogleForm(page));
 test("rounded hero keeps discovery and enquiry accessible on desktop and mobile", async ({
   page,
 }) => {

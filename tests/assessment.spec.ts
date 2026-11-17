@@ -1,6 +1,4 @@
-import { stubGoogleForm } from "./google-form-fixture";
 import { test, expect } from "@playwright/test";
-test.beforeEach(async ({ page }) => stubGoogleForm(page));
 import AxeBuilder from "@axe-core/playwright";
 import {
   questions,
@@ -63,11 +61,8 @@ test("detailed assessment page, resume, score, revision and enquiry stays option
   ).toBeVisible();
   await survey.getByRole("button", { name: "Discuss my results" }).click();
   await expect(
-    survey.getByTitle("Wexoraa project enquiry Google Form"),
+    survey.getByRole("form", { name: "Discuss my assessment" }),
   ).toBeVisible();
-  await expect(survey.getByLabel("Enquiry summary to copy")).toHaveValue(
-    /Assessment score: 100\/100/,
-  );
   await survey.getByRole("button", { name: "Revise answers" }).click();
   await expect(survey.getByRole("radio").first()).toBeChecked();
 });

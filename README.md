@@ -1,10 +1,10 @@
 # Wexoraa Infotech
 
-A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and Google Forms enquiries.
+A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and custom Google Sheets enquiries.
 
 ## Active enquiry setup
 
-All four website enquiry entry points now use the owner's Google Form. See [Google Forms setup and verification](docs/GOOGLE_FORMS.md). Resend configuration and `/api/enquiry` below describe the retained legacy email implementation, not the currently displayed enquiry form. Scores and enquiry context have a copy-to-Project-Details option; automatic field prefilling is not configured.
+Original custom website forms save directly to an owner-deployed Google Apps Script Web App. No Google Form is embedded. See [Google Sheets setup](docs/GOOGLE_SHEETS.md). Configure `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL` and rebuild. The `/exec` URL is still pending; no live sheet save is claimed. Resend settings and `/api/enquiry` below refer to the retained legacy email handler. Scores and business context are sent with the custom form automatically after explicit submission.
 
 ## Run
 
@@ -26,7 +26,7 @@ npm run build
 npx playwright test
 ```
 
-Build before browser tests; they start the production server. Chromium defaults to `/usr/bin/chromium`; override PLAYWRIGHT_CHROMIUM_PATH elsewhere. Tests cover all content routes, responsive/accessibility checks, scoring, survey flows, cursor interaction, form failure/retry and mocked email-handler security/delivery acceptance. No real provider email has been sent.
+Build before browser tests; they start the production server. For the current Sheets submission tests, use the mocked endpoint build profile documented in docs/GOOGLE_SHEETS.md; never deploy the test URL. Chromium defaults to `/usr/bin/chromium`; override PLAYWRIGHT_CHROMIUM_PATH elsewhere. Tests cover all content routes, responsive/accessibility checks, scoring, survey flows, cursor interaction, form failure/retry and mocked email-handler security/delivery acceptance. No real provider email has been sent.
 
 ## Routes
 

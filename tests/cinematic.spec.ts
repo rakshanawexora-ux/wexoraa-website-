@@ -1,6 +1,4 @@
-import { stubGoogleForm } from "./google-form-fixture";
 import { test, expect } from "@playwright/test";
-test.beforeEach(async ({ page }) => stubGoogleForm(page));
 test("orbital hero pauses offscreen and respects reduced motion without blocking discovery", async ({
   page,
 }) => {

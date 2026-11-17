@@ -33,26 +33,28 @@ export default function Privacy() {
         </p>
         <h2>When you send an enquiry</h2>
         <p>
-          Our enquiry form is hosted by Google Forms. You enter your name,
-          email, phone, service and project details in that form and agree to
-          its contact permission before submitting. Loading the form does not
-          automatically send your business-check answers or contact details.
+          Our website form asks for your contact details, service and project
+          needs. If you send an enquiry from a business check, the summary and
+          self-reported score are included. Your answers are not sent
+          automatically when you view your score. You choose whether to submit
+          and agree to the privacy notice first.
         </p>
         <h2>Where your enquiry goes</h2>
         <p>
-          When you press Submit in Google Forms, Google records your response.
-          Wexoraa can manage responses in the private Google Sheet linked to
-          that form. Google may process data outside your country under its own
-          terms and privacy policy. Wexoraa still needs to confirm its privacy
-          contact and how long responses are retained.
+          When you press Send, the website sends your details to Wexoraa’s
+          Google Apps Script connection, which records them in its private
+          Google Sheet. Google may process information outside your country
+          under its own policies. There is no embedded Google Form, and no
+          automatic marketing subscription. Wexoraa still needs to confirm its
+          privacy contact and response-retention period.
         </p>
-        <h2>Sharing your business check</h2>
+        <h2>Duplicate and spam checks</h2>
         <p>
-          You can copy the summary shown on this website and paste it into
-          Project Details in Google Forms. This is optional and is not an
-          automatic transfer. Opening the embedded Google Form or its new-tab
-          link connects your browser to Google, which may process technical data
-          or use cookies under its own policies.
+          A request identifier helps avoid duplicate rows when a submission is
+          retried. Basic validation, a hidden spam field and temporary
+          per-address limits protect the response sheet. A temporary hashed
+          email identifier is used for rate limiting. The website does not save
+          your contact details in browser storage.
         </p>
         <h2>Your choices</h2>
         <p>

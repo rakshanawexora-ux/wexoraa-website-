@@ -1,5 +1,7 @@
 # Final website review — 17 November 2026
 
+> Enquiry setup update: custom website forms now save through an owner-deployed Apps Script Web App. Resend credentials are not needed for the active form. See [current setup](GOOGLE_SHEETS.md). The Web App URL and live save test are still pending.
+
 ## Implemented
 
 - Main pages and all 22 service detail pages have descriptive, distinct titles/descriptions and one main heading. Service detail metadata is generated from the central catalog.
