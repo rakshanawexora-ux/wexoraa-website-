@@ -1,4 +1,8 @@
 import { test, expect } from "@playwright/test";
+// Never let a default production build send test enquiries to the real sheet.
+test.beforeEach(async ({ page }) => {
+  await page.route("https://script.google.com/**", (route) => route.abort());
+});
 import AxeBuilder from "@axe-core/playwright";
 import { services, projects } from "../src/content/catalog";
 for (const width of [360, 390, 768, 1024, 1440])

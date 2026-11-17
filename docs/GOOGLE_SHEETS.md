@@ -24,7 +24,7 @@ No email notification is configured by this handler. Google Sheets notification 
 
 ## Current activation status
 
-The live Web App `/exec` URL has not yet been supplied, so local forms show the connection notice and cannot claim a saved response. The website does not silently fall back to email or the old Google Form. Script behavior is verified with local mocked services; actual Google delivery still requires the owner's deployment and a real end-to-end test.
+The owner supplied the deployed Web App URL, which is now the default in `src/lib/google-sheets.ts`. Hosting may override it using `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL`; an explicitly empty value disables sending. The cloud network blocks script.google.com, so live access, CORS and actual row persistence remain unverified. The website does not silently fall back to email or the old Google Form. Script behavior is verified with local mocked services; actual Google delivery still requires the owner's deployment and a real end-to-end test.
 
 ## Local verification
 
@@ -35,4 +35,4 @@ NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/wexoraa
 npx playwright test --workers=2
 ```
 
-The suite intercepts that specific test URL. Do not deploy this mock URL. Rebuild without it for an unconfigured preview, or with the actual owner-deployed URL for production. All 61 checks passed in the mocked profile. The production profile with no endpoint must show the connection notice and reject submission without an external request.
+The suite intercepts that specific test URL. Do not deploy this mock URL. Rebuild without it to use the owner-supplied default. Set an explicitly empty value for a disconnected preview. All 61 checks passed in the mocked profile. The production profile with no endpoint must show the connection notice and reject submission without an external request.

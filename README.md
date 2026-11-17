@@ -4,7 +4,7 @@ A Next.js App Router / TypeScript website with a brand-led Motion hero, connecte
 
 ## Active enquiry setup
 
-Original custom website forms save directly to an owner-deployed Google Apps Script Web App. No Google Form is embedded. See [Google Sheets setup](docs/GOOGLE_SHEETS.md). Configure `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL` and rebuild. The `/exec` URL is still pending; no live sheet save is claimed. Resend settings and `/api/enquiry` below refer to the retained legacy email handler. Scores and business context are sent with the custom form automatically after explicit submission.
+Original custom website forms save directly to an owner-deployed Google Apps Script Web App. No Google Form is embedded. See [Google Sheets setup](docs/GOOGLE_SHEETS.md). The owner-supplied `/exec` URL is configured as the default; hosting may override it with `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL`. Rebuild/redeploy to activate the change. Actual Google delivery still needs an owner test. Resend settings and `/api/enquiry` below refer to the retained legacy email handler. Scores and business context are sent with the custom form automatically after explicit submission.
 
 ## Run
 
