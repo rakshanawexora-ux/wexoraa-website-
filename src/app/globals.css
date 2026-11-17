@@ -11772,3 +11772,6 @@ html {
 
 /* Reference film is presented without a copy overlay. */
 .mask-reveal .mask-reveal-shade {opacity:.12;}
+
+/* Preserve the full text area of the cropped, wide-format business film. */
+.mask-reveal-viewport .business-film {object-fit:contain;background:#09251c;}

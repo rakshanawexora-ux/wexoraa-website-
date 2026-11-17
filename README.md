@@ -112,3 +112,5 @@ The website video section uses `public/motion/wexoraa-brand-20s.mp4` (20 seconds
 Latest video selection: the user chose the original uploaded reference again. The section now plays `public/motion/reference-showreel.mp4`, with its matching poster and no headline/description overlay. The generated Wexoraa 20-second film remains available as a separate asset.
 
 Latest playback behavior: the reference video starts muted automatically when its section enters the viewport and loops. It pauses offscreen, in a hidden browser tab or under reduced motion, and resumes automatically when eligible. The manual play/pause button is removed. Browsers that block playback keep the poster and show the existing failure notice.
+
+Latest film: the uploaded Wexoraa business motion video is served as `public/motion/wexoraa-business-film.mp4` (10 seconds, 1920×864, silent web copy). Its bottom 216px are cropped from the 1920×1080 source to exclude the bottom-right Gemini mark; the matching poster uses the same crop. The video uses contain framing to keep the remaining text visible, retaining in-view muted autoplay/loop and no manual control.

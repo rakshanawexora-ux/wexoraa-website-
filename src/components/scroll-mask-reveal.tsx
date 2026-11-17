@@ -92,14 +92,14 @@ export default function ScrollMaskReveal() {
           >
             <video
               ref={video}
-              className="brand-film"
-              src="/motion/reference-showreel.mp4"
-              poster="/motion/reference-showreel-poster.webp"
+              className="brand-film business-film"
+              src="/motion/wexoraa-business-film.mp4"
+              poster="/motion/business-film-poster.webp"
               muted
               loop
               playsInline
               preload="none"
-              aria-label="User-supplied motion design reference film"
+              aria-label="Wexoraa business motion graphics film"
               onPlay={() => setPlaying(true)}
               onPause={() => setPlaying(false)}
               onError={() => setError(true)}
