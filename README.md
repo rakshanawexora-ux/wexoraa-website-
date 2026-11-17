@@ -1,6 +1,10 @@
 # Wexoraa Infotech
 
-A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and email-only enquiries.
+A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and Google Forms enquiries.
+
+## Active enquiry setup
+
+All four website enquiry entry points now use the owner's Google Form. See [Google Forms setup and verification](docs/GOOGLE_FORMS.md). Resend configuration and `/api/enquiry` below describe the retained legacy email implementation, not the currently displayed enquiry form. Scores and enquiry context have a copy-to-Project-Details option; automatic field prefilling is not configured.
 
 ## Run
 

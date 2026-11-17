@@ -1,4 +1,6 @@
+import { stubGoogleForm } from "./google-form-fixture";
 import { test, expect } from "@playwright/test";
+test.beforeEach(async ({ page }) => stubGoogleForm(page));
 import AxeBuilder from "@axe-core/playwright";
 import { services } from "../src/content/catalog";
 for (const width of [390, 1280, 1440]) {

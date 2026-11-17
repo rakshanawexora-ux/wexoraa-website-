@@ -1,5 +1,7 @@
+import { stubGoogleForm } from "./google-form-fixture";
 import { fillBusinessDetails } from "./business-details";
 import { test, expect } from "@playwright/test";
+test.beforeEach(async ({ page }) => stubGoogleForm(page));
 import { quickScore } from "../src/content/quick-check";
 test("quick score excludes unknowns and needs two known answers", () => {
   expect(quickScore([2, 2, 2, 2])).toBe(100);
@@ -35,17 +37,16 @@ test("four questions, animated preparation, visible result and contact-only foll
     check.getByRole("img", { name: "Digital readiness 100 out of 100" }),
   ).toBeVisible();
   await expect(check.locator(".animated-score strong")).toHaveText("100");
-  await check.getByText("Edit contact details", { exact: true }).click();
-  await expect(check.getByLabel("Your name", { exact: true })).toHaveValue(
-    "Test Owner",
-  );
-  await expect(check.locator("textarea")).toHaveCount(0);
-  await expect(check.locator('input[name="message"]')).toHaveValue(
+  await expect(
+    check.getByTitle("Wexoraa project enquiry Google Form"),
+  ).toBeVisible();
+  const summary = check.getByLabel("Enquiry summary to copy");
+  await expect(summary).toHaveValue(/Test Owner/);
+  await expect(summary).toHaveValue(/Sample Studio/);
+  await expect(summary).toHaveValue(
     /We need more enquiries from local customers/,
   );
-  await expect(check.locator('input[name="company"]')).toHaveValue(
-    "Sample Studio",
-  );
+  await expect(summary).toHaveAttribute("readonly", "");
   await check.getByRole("button", { name: "Edit my answers" }).click();
   await expect(check.getByRole("radio").nth(2)).toBeChecked();
 });

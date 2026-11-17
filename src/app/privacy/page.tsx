@@ -33,29 +33,26 @@ export default function Privacy() {
         </p>
         <h2>When you send an enquiry</h2>
         <p>
-          We ask for your name, email, phone number and what you need help with.
-          A business snapshot can include the business details, problem and
-          answers you chose to share. The detailed assessment includes your
-          answers and calculated summary. You must agree to the privacy notice
-          before sending. These details are used to understand your enquiry and
-          reply to you, not to automatically subscribe you to marketing.
+          Our enquiry form is hosted by Google Forms. You enter your name,
+          email, phone, service and project details in that form and agree to
+          its contact permission before submitting. Loading the form does not
+          automatically send your business-check answers or contact details.
         </p>
         <h2>Where your enquiry goes</h2>
         <p>
-          When email sending is set up, your enquiry goes to the configured
-          Wexoraa inbox through Resend and the website host. Those providers may
-          process information outside your country. Enquiries may remain in
-          their systems and the inbox under the relevant retention policies.
-          This website does not have a separate lead database or backup. An
-          accepted email is not a guarantee that it reaches the inbox.
+          When you press Submit in Google Forms, Google records your response.
+          Wexoraa can manage responses in the private Google Sheet linked to
+          that form. Google may process data outside your country under its own
+          terms and privacy policy. Wexoraa still needs to confirm its privacy
+          contact and how long responses are retained.
         </p>
-        <h2>Spam checks and website records</h2>
+        <h2>Sharing your business check</h2>
         <p>
-          The website checks form entries and limits repeated requests to help
-          prevent spam. The enquiry handler does not log the contents of your
-          form. Temporary request identifiers are kept in server memory for
-          these checks and reset when the server restarts; they are not shared
-          between servers. The hosting provider may keep its own technical logs.
+          You can copy the summary shown on this website and paste it into
+          Project Details in Google Forms. This is optional and is not an
+          automatic transfer. Opening the embedded Google Form or its new-tab
+          link connects your browser to Google, which may process technical data
+          or use cookies under its own policies.
         </p>
         <h2>Your choices</h2>
         <p>

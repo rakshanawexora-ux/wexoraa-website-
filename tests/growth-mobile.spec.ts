@@ -1,4 +1,6 @@
+import { stubGoogleForm } from "./google-form-fixture";
 import { test, expect } from "@playwright/test";
+test.beforeEach(async ({ page }) => stubGoogleForm(page));
 import AxeBuilder from "@axe-core/playwright";
 import { fillBusinessDetails } from "./business-details";
 for (const width of [320, 360, 390, 430])
@@ -66,7 +68,9 @@ for (const width of [320, 360, 390, 430])
       bounds!.x + bounds!.width,
     );
     await page.setViewportSize({ width, height: 420 });
-    await dialog.getByLabel("Your name", { exact: true }).fill("Mobile Owner");
+    await expect(
+      dialog.getByTitle("Wexoraa project enquiry Google Form"),
+    ).toBeVisible();
     await fits();
     const close = dialog.getByRole("button", { name: "Close growth checker" });
     expect((await close.boundingBox())!.y).toBeGreaterThanOrEqual(0);
