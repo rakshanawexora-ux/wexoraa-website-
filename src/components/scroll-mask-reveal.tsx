@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { Play, Pause, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { useExperienceMotion } from "@/hooks/use-experience-motion";
 export default function ScrollMaskReveal() {
   const root = useRef<HTMLElement>(null);
@@ -32,26 +32,47 @@ export default function ScrollMaskReveal() {
     root.current.dataset.progress = value.toFixed(3);
   });
   useEffect(() => {
-    if (reduced) video.current?.pause();
     const el = root.current;
-    if (!el) return;
+    const film = video.current;
+    if (!el || !film) return;
+    let inView = false;
+    let disposed = false;
     el.dataset.progress = reduced ? "1.000" : progress.get().toFixed(3);
+    const syncPlayback = () => {
+      if (disposed || reduced || !inView || document.hidden) {
+        film.pause();
+        return;
+      }
+      film.muted = true;
+      void film
+        .play()
+        .then(() => {
+          if (!disposed) setError(false);
+        })
+        .catch((reason: unknown) => {
+          if (
+            !disposed &&
+            inView &&
+            !document.hidden &&
+            !(reason instanceof DOMException && reason.name === "AbortError")
+          )
+            setError(true);
+        });
+    };
     const observer = new IntersectionObserver(([entry]) => {
-      el.dataset.visible = String(entry.isIntersecting);
-      if (!entry.isIntersecting) video.current?.pause();
+      inView = entry.isIntersecting;
+      el.dataset.visible = String(inView);
+      syncPlayback();
     });
     observer.observe(el);
-    return () => observer.disconnect();
+    document.addEventListener("visibilitychange", syncPlayback);
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
+      film.pause();
+    };
   }, [reduced, progress]);
-  async function toggle() {
-    try {
-      if (video.current?.paused) await video.current.play();
-      else video.current?.pause();
-      setError(false);
-    } catch {
-      setError(true);
-    }
-  }
   return (
     <section
       ref={root}
@@ -99,17 +120,6 @@ export default function ScrollMaskReveal() {
             </div>
           </motion.div>
         </motion.div>
-        <div className="mask-reveal-meta">
-          <button
-            type="button"
-            className="film-toggle"
-            aria-label={playing ? "Pause studio film" : "Play studio film"}
-            onClick={toggle}
-          >
-            {playing ? <Pause size={16} /> : <Play size={16} />}
-            <span>{playing ? "Pause film" : "Play film"}</span>
-          </button>
-        </div>
         <span className="mask-scroll-hint">
           SCROLL TO EXPLORE <ArrowDown size={15} />
         </span>

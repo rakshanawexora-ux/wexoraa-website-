@@ -205,39 +205,26 @@ for (const route of [
     ).toEqual([]);
   });
 
-test("studio film plays, pauses and reacts to browser reduced motion", async ({
+test("studio film autoplays in view, pauses offscreen and respects reduced motion", async ({
   page,
 }) => {
   await page.goto("/");
   const video = page.locator(".brand-film");
-  await expect(
-    page.getByRole("button", { name: "Play studio film" }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Play studio film" }).click();
+  await expect(page.locator(".film-toggle")).toHaveCount(0);
+  await page.locator(".mask-reveal-stage").scrollIntoViewIfNeeded();
   await expect
-    .poll(() =>
-      video.evaluate((el) =>
-        el instanceof HTMLVideoElement ? el.currentTime : 0,
-      ),
-    )
+    .poll(() => video.evaluate((el) => (el as HTMLVideoElement).currentTime))
     .toBeGreaterThan(0.2);
-  await expect(
-    page.getByRole("button", { name: "Pause studio film" }),
-  ).toBeVisible();
+  await expect(video).toHaveJSProperty("muted", true);
+  await expect(video).toHaveJSProperty("loop", true);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect
-    .poll(() =>
-      video.evaluate((el) => el instanceof HTMLVideoElement && el.paused),
-    )
-    .toBe(true);
+  await expect(video).toHaveJSProperty("paused", true);
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.getByRole("button", { name: "Play studio film" }).click();
-  await page.getByRole("button", { name: "Pause studio film" }).click();
-  await expect
-    .poll(() =>
-      video.evaluate((el) => el instanceof HTMLVideoElement && el.paused),
-    )
-    .toBe(true);
+  await expect(video).toHaveJSProperty("paused", false);
+  await page.locator(".hero-cinematic").scrollIntoViewIfNeeded();
+  await expect(video).toHaveJSProperty("paused", true);
+  await page.locator(".mask-reveal-stage").scrollIntoViewIfNeeded();
+  await expect(video).toHaveJSProperty("paused", false);
 });
 test("inner page graphic changes selection and service card reacts to pointer movement", async ({
   page,

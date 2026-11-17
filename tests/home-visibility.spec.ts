@@ -15,7 +15,6 @@ test("homepage actions stay readable on light and dark surfaces when hovered", a
   for (const selector of [
     ".header-project",
     ".cinematic-enquiry",
-    ".film-toggle",
     ".survey-start",
     ".footer-invite-link",
   ]) {
