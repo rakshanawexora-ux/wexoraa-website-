@@ -17,7 +17,7 @@ export default function GrowthInvitation({
     el.showModal();
     document.body.style.overflow = "hidden";
     const frame = requestAnimationFrame(() =>
-      el.querySelector<HTMLElement>(".quick-check h3")?.focus(),
+      el.querySelector<HTMLElement>(".solution-check h3")?.focus(),
     );
     return () => {
       cancelAnimationFrame(frame);
@@ -41,9 +41,9 @@ export default function GrowthInvitation({
             <em>your business down?</em>
           </h2>
           <p>
-            Tell us about your business and the problem you’re facing. Take four
-            quick checks to see your digital-readiness score and where to
-            improve first.
+            Tell us about your business, daily challenges and digital presence.
+            Complete five guided steps for a readiness score and practical
+            ideas. Submit your enquiry at the end so we can help with your next step.
           </p>
           <button
             ref={trigger}

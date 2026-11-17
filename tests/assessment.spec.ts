@@ -1,123 +1,109 @@
-import { test, expect } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
+import { test, expect } from "./fixtures";
 import {
-  questions,
-  scoreAssessment,
-  type Answers,
-} from "../src/content/assessment";
-function answersAt(level: number): Answers {
-  return Object.fromEntries(
-    questions.map((q) => [q.id, [q.points ? q.options[level] : q.options[0]]]),
+  allCheckQuestions,
+  solutionReport,
+  toggleAnswer,
+  challengeQuestions,
+} from "../src/content/solution-check";
+import {
+  fillBusinessDetails,
+  completeChallenges,
+  completeDigital,
+  leadEndpoint,
+} from "./business-details";
+const strong = () =>
+  Object.fromEntries(
+    allCheckQuestions.map((q) => [
+      q.id,
+      [
+        q.id === "tracking"
+          ? q.options[2]
+          : ["handling", "manual", "website", "growth"].includes(q.id)
+            ? q.options.at(-1)!
+            : q.id === "online"
+              ? q.options[5]
+              : q.options[0],
+      ],
+    ]),
   );
-}
-test("transparent score boundaries, context invariance and unknown exclusions", () => {
-  expect(questions).toHaveLength(12);
-  expect(scoreAssessment(answersAt(0)).score).toBe(100);
-  expect(scoreAssessment(answersAt(3)).score).toBe(0);
-  const a = answersAt(1);
-  expect(scoreAssessment(a).score).toBe(67);
-  a.industry = [questions[0].options[3]];
-  a.stage = [questions[1].options[2]];
-  expect(scoreAssessment(a).score).toBe(67);
-  for (const q of questions.filter((q) => q.points).slice(0, 4))
-    a[q.id] = [q.options[4]];
-  expect(scoreAssessment(a).eligible).toBe(4);
-  expect(scoreAssessment(a).score).toBe(67);
-  a.automation = [questions.find((q) => q.id === "automation")!.options[4]];
-  expect(scoreAssessment(a).score).toBeNull();
-  delete a.timing;
-  expect(scoreAssessment(a).complete).toBe(false);
+test("readiness has transparent boundaries and excludes contact, industry, business age and app ownership", () => {
+  const a = strong();
+  expect(solutionReport(a).score).toBe(100);
+  const b = {
+    ...a,
+    businessType: ["Healthcare"],
+    businessAge: ["Just getting started"],
+    app: ["No"],
+  };
+  expect(solutionReport(b).score).toBe(100);
+  const weak = {
+    ...a,
+    tracking: [challengeQuestions[2].options[4]],
+    handling: challengeQuestions[1].options.slice(0, 3),
+    manual: challengeQuestions[3].options.slice(0, 3),
+    website: ["We don’t have a website yet"],
+    online: ["We don’t promote our business online"],
+    growth: [
+      "We’re not reaching the right audience",
+      "We’re not generating enough business enquiries",
+      "Our brand is not getting enough visibility",
+    ],
+  };
+  expect(solutionReport(weak).score).toBe(0);
+  expect(solutionReport({ ...a, app: [] }).score).toBeNull();
+  const q = challengeQuestions[3];
+  expect(toggleAnswer([q.options[0]], q.exclusive!, q)).toEqual([q.exclusive]);
+  expect(toggleAnswer([q.exclusive!], q.options[0], q)).toEqual([q.options[0]]);
 });
-test("detailed assessment page, resume, score, revision and enquiry stays optional", async ({
+test("detailed report is saved to the lead endpoint before the result appears", async ({
   page,
 }) => {
+  let calls = 0;
+  await page.route(leadEndpoint, async (r) => {
+    calls++;
+    const data = JSON.parse(
+      new URLSearchParams(r.request().postData()!).get("payload")!,
+    );
+    expect(data.source).toBe("Detailed assessment");
+    expect(data.role).toBe("Owner");
+    expect(data.businessType).toBe("Retail / Shopping");
+    expect(data.score).toBe(100);
+    expect(data.consent).toBe(true);
+    await r.fulfill({
+      headers: { "Access-Control-Allow-Origin": "*" },
+      json: { accepted: true, requestId: data.requestId },
+    });
+  });
   await page.goto("/business-assessment");
-  const survey = page.locator(".survey-container");
-  await survey.getByRole("radio").first().check();
-  await page.reload();
-  await expect(survey.getByRole("radio").first()).toBeChecked();
-  for (let i = 0; i < 12; i++) {
-    if (i === 10) {
-      await survey.getByRole("checkbox").first().check();
-    } else await survey.getByRole("radio").first().check();
-    await survey
-      .getByRole("button", {
-        name: i === 11 ? "Show my growth score" : "Continue",
-      })
-      .click();
-  }
-  await expect(
-    survey.getByRole("img", {
-      name: "Business growth-readiness score 100 out of 100",
-    }),
-  ).toBeVisible();
-  await expect(
-    survey.getByText("Strong foundations", { exact: true }),
-  ).toBeVisible();
-  await expect(page.getByLabel("Your name", { exact: true })).toHaveCount(0);
-  await survey.getByText("How is my score calculated?").click();
-  await expect(
-    survey.getByText("Each known capability answer", { exact: false }),
-  ).toBeVisible();
-  await survey.getByRole("button", { name: "Discuss my results" }).click();
-  await expect(
-    survey.getByRole("form", { name: "Discuss my assessment" }),
-  ).toBeVisible();
-  await expect(
-    survey.getByText("Online enquiries are not available yet.", {
-      exact: false,
-    }),
-  ).toBeVisible();
-  await survey.getByRole("button", { name: "Revise answers" }).click();
-  await expect(survey.getByRole("radio").first()).toBeChecked();
-});
-test("unknowns do not produce a misleading score; mobile survey is accessible", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 360, height: 950 });
-  await page.goto("/business-assessment");
-  for (let i = 0; i < 12; i++) {
-    if (i === 10)
-      await page
-        .getByRole("checkbox", { name: "Not sure yet", exact: true })
-        .check();
-    else if (i >= 2 && i <= 9)
-      await page
-        .getByRole("radio", { name: "Not sure / not applicable", exact: true })
-        .check();
-    else await page.getByRole("radio").first().check();
-    await page
-      .getByRole("button", {
-        name: i === 11 ? "Show my growth score" : "Continue",
-      })
-      .click();
-  }
-  await expect(
-    page.getByRole("img", {
-      name: "Insufficient known responses to calculate a score",
-    }),
-  ).toBeVisible();
-  await expect(
-    page.getByText("More context needed", { exact: true }),
-  ).toBeVisible();
-  const scan = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
-    .analyze();
-  expect(
-    scan.violations.map((v) => ({
-      id: v.id,
-      nodes: v.nodes.map((n) => n.target),
-    })),
-  ).toEqual([]);
+  await fillBusinessDetails(page);
+  await completeChallenges(page);
+  await completeDigital(page);
+  expect(calls).toBe(0);
+  await expect(page.locator(".solution-report")).toHaveCount(0);
+  await page.locator(".consent-label input").check();
   await page
-    .getByRole("button", { name: "Clear answers and start again" })
+    .getByRole("button", { name: "Get my business report", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "What kind of business do you run?" }),
+    page.getByRole("img", { name: "Digital readiness 100 out of 100" }),
   ).toBeVisible();
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  ).toBe(true);
+  expect(calls).toBe(1);
+  await expect(page.locator(".solution-saved")).toContainText("saved");
+  await page.getByText("How your score is calculated", { exact: true }).click();
+  await expect(page.getByText(/points earned ÷ 18/)).toBeVisible();
+});
+test("contact and answers are not persisted or sent on reload", async ({
+  page,
+}) => {
+  await page.goto("/business-assessment");
+  await page.getByLabel("Full name", { exact: true }).fill("Private Owner");
+  const storage = await page.evaluate(() =>
+    JSON.stringify({
+      local: { ...localStorage },
+      session: { ...sessionStorage },
+    }),
+  );
+  expect(storage).not.toContain("Private Owner");
+  await page.reload();
+  await expect(page.getByLabel("Full name", { exact: true })).toHaveValue("");
 });

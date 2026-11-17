@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import AxeBuilder from "@axe-core/playwright";
 test("growth invitation directly follows logos and roadmap supports touch and keyboard", async ({
   page,

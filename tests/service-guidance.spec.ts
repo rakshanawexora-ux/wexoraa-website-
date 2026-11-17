@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import { solutions } from "../src/content/site";
 import { services } from "../src/content/catalog";
 test("home explains each service group with a working illustration and relevant links", async ({

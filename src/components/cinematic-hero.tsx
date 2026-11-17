@@ -196,7 +196,7 @@ export default function CinematicHero() {
             01 / YOUR SCORE <ArrowUpRight size={17} />
           </span>
           <h2>Your next move.</h2>
-          <p>4 quick questions. Your business snapshot.</p>
+          <p>Five guided steps. Your business report.</p>
         </Link>
         <Link href="/services" className="cinematic-card">
           <span>

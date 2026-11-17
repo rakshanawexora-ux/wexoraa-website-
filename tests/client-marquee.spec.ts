@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import AxeBuilder from "@axe-core/playwright";
 test("client marks stay readable with controllable motion and a static reduced-motion layout", async ({
   page,

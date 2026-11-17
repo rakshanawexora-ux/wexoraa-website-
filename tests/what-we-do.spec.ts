@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import { services } from "../src/content/catalog";
 test("solutions redirect to what we do and the page keeps enquiry prompts minimal", async ({
   page,

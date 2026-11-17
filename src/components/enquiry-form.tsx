@@ -1,12 +1,15 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Check } from "lucide-react";
+import { useLeadSubmission } from "@/hooks/use-lead-submission";
+import { leadEndpoint } from "@/lib/lead-master";
 import type { Answers } from "@/content/assessment";
 export default function EnquiryForm({
   answers,
   interest = "",
-  configured = false,
+
   compact = false,
   summaryText,
   initialContact,
@@ -20,53 +23,30 @@ export default function EnquiryForm({
   businessName?: string;
   initialContact?: { name: string; email: string; phone: string };
 }) {
-  const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
-  const [error, setError] = useState("");
-  const requestId = useRef("");
-  const submittedAt = useRef("");
+  const { state, error, submit: save } = useLeadSubmission();
+  const configured = Boolean(leadEndpoint());
+  const pathname = usePathname();
   const feedback = useRef<HTMLDivElement>(null);
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (state === "loading") return;
     const form = new FormData(e.currentTarget);
-    if (!requestId.current) requestId.current = crypto.randomUUID();
-    if (!submittedAt.current) submittedAt.current = new Date().toISOString();
-    setState("loading");
-    setError("");
-    try {
-      const response = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: String(form.get("name")),
-          company: String(form.get("company")),
-          email: String(form.get("email")),
-          phone: String(form.get("phone")),
-          website: String(form.get("website") || ""),
-          interest: String(form.get("interest")),
-          message: String(form.get("message")),
-          preferred: String(form.get("preferred")),
-          consent: form.get("consent") === "on",
-          companyUrl: String(form.get("companyUrl") || ""),
-          requestId: requestId.current,
-          submittedAt: submittedAt.current,
-          ...(answers ? { answers } : {}),
-        }),
-      });
-      const result = await response.json();
-      if (!response.ok || !result.accepted)
-        throw new Error(
-          result.error || "We could not confirm acceptance. Please retry.",
-        );
-      setState("success");
-      requestAnimationFrame(() => feedback.current?.focus());
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Please try again.");
-      setState("error");
-      requestAnimationFrame(() => feedback.current?.focus());
-    }
+    const saved = await save({
+      name: String(form.get("name") || ""),
+      company: String(form.get("company") || ""),
+      role: "",
+      email: String(form.get("email") || ""),
+      phone: String(form.get("phone") || ""),
+      preferred: String(form.get("preferred") || "Phone"),
+      source: compact ? "Enquiry popup" : "Contact page",
+      interest: String(form.get("interest") || "Project enquiry"),
+      problem: String(form.get("message") || ""),
+      score: null,
+      answers: { Website: String(form.get("website") || ""), Page: pathname },
+      consent: form.get("consent") === "on",
+      companyUrl: String(form.get("companyUrl") || ""),
+    });
+    requestAnimationFrame(() => feedback.current?.focus());
+    return saved;
   }
   const contactFields = (
     <div className="form-grid">
@@ -151,10 +131,10 @@ export default function EnquiryForm({
     return (
       <div className="send-success" ref={feedback} tabIndex={-1} role="status">
         <Check />
-        <h3>Thanks. Your enquiry is on its way.</h3>
+        <h3>Thanks. Your enquiry has been saved.</h3>
         <p>
-          Your enquiry has been accepted. We can use the details you shared to
-          get back to you about your project.
+          Your details have been recorded in our private lead sheet. We can
+          contact you about the next step using your preferred method.
         </p>
         <Link
           className="button text-link"
@@ -173,7 +153,7 @@ export default function EnquiryForm({
       {!configured && (
         <div className="form-availability">
           Online enquiries are not available yet. You can fill in your details,
-          but sending will be available once setup is complete.
+          but sending will be available once the lead sheet is connected.
         </div>
       )}
       {initialContact?.name &&
@@ -238,7 +218,7 @@ export default function EnquiryForm({
       </label>
       {answers && (
         <p className="form-note">
-          Your 12 answers and calculated summary will be included. No contact
+          Your shared answers and summary will be included. No contact
           information is saved in your browser.
         </p>
       )}

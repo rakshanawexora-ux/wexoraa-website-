@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import { POST } from "../src/app/api/enquiry/route";
 import { questions } from "../src/content/assessment";
 import { enquirySchema } from "../src/lib/enquiry";

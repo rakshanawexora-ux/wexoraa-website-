@@ -22,45 +22,17 @@ export default function Privacy() {
           long enquiry emails are kept before online lead collection goes live.
         </p>
         <h2>Your business check</h2>
-        <p>
-          The short homepage check keeps your business details and contact
-          information in page memory while you use it. It does not save them in
-          browser storage or send them automatically. The separate 12-question
-          assessment saves your selected answers in the current browser tab so
-          you can return to them. Use “Clear answers and start again” to remove
-          those saved answers. Neither score is a prediction of sales or a
-          professional business audit.
-        </p>
+        <p>The five-step check asks for contact details, business context, daily challenges and digital presence. Answers and contacts stay in page memory while you complete the check. They are not saved to browser storage or sent when you move between steps. Nothing is submitted until you agree to contact permission and send the final step.</p>
         <h2>When you send an enquiry</h2>
-        <p>
-          We ask for your name, email, phone number and what you need help with.
-          A business snapshot can include the business details, problem and
-          answers you chose to share. The detailed assessment includes your
-          answers and calculated summary. You must agree to the privacy notice
-          before sending. These details are used to understand your enquiry and
-          reply to you, not to automatically subscribe you to marketing.
-        </p>
+        <p>Website enquiries and completed business checks are sent through Wexoraa’s Google Apps Script connection to its private Lead Master spreadsheet. A check includes contact details, business answers, the problem you describe, a self-reported readiness score and suggested services. Simple enquiries have no score. The score is a planning guide, not a professional audit, benchmark or prediction of sales.</p>
         <h2>Where your enquiry goes</h2>
-        <p>
-          When email sending is set up, your enquiry goes to the configured
-          Wexoraa inbox through Resend and the website host. Those providers may
-          process information outside your country. Enquiries may remain in
-          their systems and the inbox under the relevant retention policies.
-          This website does not have a separate lead database or backup. An
-          accepted email is not a guarantee that it reaches the inbox.
-        </p>
-        <h2>Spam checks and website records</h2>
-        <p>
-          The website checks form entries and limits repeated requests to help
-          prevent spam. The enquiry handler does not log the contents of your
-          form. Temporary request identifiers are kept in server memory for
-          these checks and reset when the server restarts; they are not shared
-          between servers. The hosting provider may keep its own technical logs.
-        </p>
+        <p>Google processes submitted details and stores them in the private response spreadsheet. It may process information outside your country under its policies. Wexoraa uses the enquiry to discuss your requirements, not to automatically subscribe you to marketing. Its authorised team can add call status, follow-up dates and notes to manage your enquiry. Wexoraa still needs to confirm its privacy contact and retention period.</p>
+        <h2>Save confirmation</h2>
+        <p>The website only shows a saved result after the connection confirms the submission. Failed attempts keep your entries in page memory for retry. A request identifier is reused for an unchanged retry to help prevent duplicate records. The connection includes basic validation and spam checks; there is no embedded Google Form.</p>
         <h2>Your choices</h2>
         <p>
-          You can see a score without sharing contact details, change your
-          answers and decide whether to send an enquiry. To ask about access,
+          You can change your answers or close the check before submitting. A
+          saved report is shown after you share the final enquiry with consent. To ask about access,
           corrections or deletion of a submitted enquiry, use the approved
           contact options on our Contact page. Please avoid putting sensitive
           personal information in your message.

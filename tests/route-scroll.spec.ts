@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 for (const width of [390, 1440]) {
   test(`page navigation starts at the top and preserves section links at ${width}px`, async ({

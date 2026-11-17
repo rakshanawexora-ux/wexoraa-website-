@@ -37,9 +37,9 @@ export const routeSeo: Record<string, { title: string; description: string }> =
         "Talk to Wexoraa about your website, app, business software or digital marketing. Share your challenge and we’ll help you work out a practical next step.",
     },
     "/business-assessment": {
-      title: "Free Business Digital Readiness Check | Wexoraa",
+      title: "Business Readiness Check & Practical Next Steps | Wexoraa",
       description:
-        "See where your website, marketing and daily systems could improve. Answer 12 practical questions for a digital-readiness score and suggested next steps.",
+        "Find practical improvements to your website, marketing and daily systems. Complete five guided steps and submit your enquiry for a self-reported readiness report.",
     },
     "/privacy": {
       title: "Privacy Notice | Your Details & Enquiries | Wexoraa",

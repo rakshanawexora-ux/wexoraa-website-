@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 test("native scrolling stays free and lightweight content fades never use blur", async ({
   page,
 }) => {

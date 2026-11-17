@@ -2,6 +2,10 @@
 
 A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and email-only enquiries.
 
+## Current Lead Master integration
+
+The five-step business checker follows the supplied outline and shares the 19-column Lead Master connection with custom contact/popup forms. See `docs/LEAD_MASTER_LOCAL_PLAN.md` for the exact schema, scoring and pending owner verification. The active custom forms do not use the legacy email API described below, and do not embed Google Forms. Public endpoint override: `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL` (use the NEW Lead Master deployment). The owner authorised a Git push for live verification. Actual Google Sheet persistence still needs a real-browser test.
+
 ## Run
 
 Node 24 / npm 11 are tested. In your checkout:

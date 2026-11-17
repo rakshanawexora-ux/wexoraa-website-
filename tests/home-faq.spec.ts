@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import AxeBuilder from "@axe-core/playwright";
 import { homeFaqs } from "../src/content/faqs";
 test("services open on mouse hover and remain keyboard/touch accessible; FAQ answers match schema", async ({

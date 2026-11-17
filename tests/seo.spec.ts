@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import sitemap from "../src/app/sitemap";
 import robots from "../src/app/robots";
 import {

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 for (const width of [390, 1440])
   test(`inner pages share the homepage design at ${width}px`, async ({
     page,

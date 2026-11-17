@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 test("rounded hero keeps discovery and enquiry accessible on desktop and mobile", async ({
   page,
 }) => {

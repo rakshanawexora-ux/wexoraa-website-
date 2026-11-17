@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { leadEndpoint } from "./business-details";
+import { test, expect } from "./fixtures";
 import AxeBuilder from "@axe-core/playwright";
 import { services, projects } from "../src/content/catalog";
 for (const width of [360, 390, 768, 1024, 1440])
@@ -142,8 +143,9 @@ test("contact form keeps values after failure and confirms only accepted request
     .getByLabel("Tell us about your project")
     .fill("We need a clearer mobile website and enquiry journey.");
   await page.getByRole("checkbox").check();
-  await page.route("**/api/enquiry", (r) =>
+  await page.route(leadEndpoint, (r) =>
     r.fulfill({
+      headers: { "Access-Control-Allow-Origin": "*" },
       status: 502,
       json: { error: "Temporary email service failure. Please retry." },
     }),
@@ -156,14 +158,24 @@ test("contact form keeps values after failure and confirms only accepted request
     "Test Visitor",
   );
   await expect(
-    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
+    page.getByRole("heading", { name: "Thanks. Your enquiry has been saved." }),
   ).toHaveCount(0);
-  await page.route("**/api/enquiry", (r) =>
-    r.fulfill({ status: 200, json: { accepted: true } }),
+  await page.route(leadEndpoint, (r) =>
+    r.fulfill({
+      headers: { "Access-Control-Allow-Origin": "*" },
+      status: 200,
+      json: {
+        accepted: true,
+        requestId: JSON.parse(
+          new URLSearchParams(r.request().postData() || "").get("payload") ||
+            "{}",
+        ).requestId,
+      },
+    }),
   );
   await page.getByRole("button", { name: "Try sending again" }).click();
   await expect(
-    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
+    page.getByRole("heading", { name: "Thanks. Your enquiry has been saved." }),
   ).toBeVisible();
 });
 for (const route of [
@@ -353,15 +365,19 @@ test("simple service enquiry popup is accessible and restores focus", async ({
   await expect(dialog).not.toBeVisible();
   await expect(cta).toBeFocused();
   await cta.click();
-  await page.route("**/api/enquiry", async (route) => {
-    const payload = route.request().postDataJSON();
+  await page.route(leadEndpoint, async (route) => {
+    const payload = JSON.parse(
+      new URLSearchParams(route.request().postData() || "").get("payload") ||
+        "{}",
+    );
     expect(payload.company).toBe("");
     expect(payload.interest).toBeTruthy();
     expect(payload.consent).toBe(true);
     await route.fulfill({
+      headers: { "Access-Control-Allow-Origin": "*" },
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({ accepted: true }),
+      body: JSON.stringify({ accepted: true, requestId: payload.requestId }),
     });
   });
   await dialog.locator('input[name="name"]').fill("Test Person");
@@ -374,7 +390,7 @@ test("simple service enquiry popup is accessible and restores focus", async ({
   await dialog.getByRole("button", { name: "Send enquiry" }).click();
   await expect(
     dialog.getByRole("heading", {
-      name: "Thanks. Your enquiry is on its way.",
+      name: "Thanks. Your enquiry has been saved.",
     }),
   ).toBeVisible();
   await page.keyboard.press("Escape");

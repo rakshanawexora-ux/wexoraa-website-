@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import AxeBuilder from "@axe-core/playwright";
 import { services } from "../src/content/catalog";
 for (const width of [390, 1280, 1440]) {

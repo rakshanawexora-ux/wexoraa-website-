@@ -4,7 +4,7 @@ import { Header, Footer } from "@/components/home";
 import { emailConfigured } from "@/lib/enquiry";
 export const metadata = pageMetadata(
   "Check your business growth readiness — Wexoraa",
-  "Understand your digital foundations with 12 questions, a transparent score and practical opportunities. No email required to view your results.",
+  "Share your business details and challenges in five guided steps. Get a self-reported readiness score and practical next steps after submitting your enquiry.",
   "/business-assessment",
 );
 export default function Page() {
@@ -18,10 +18,10 @@ export default function Page() {
           </p>
           <h1>Where could your business work better?</h1>
           <p>
-            Answer 12 simple questions about your website, marketing and daily
-            work. Get a growth-readiness score and practical next steps, with no
-            email needed. This checks your digital setup; it does not predict
-            sales.
+            Five guided steps about your business, daily work and digital
+            presence. Submit your enquiry to save your report and see a
+            self-reported readiness score with practical next steps. This is not
+            a sales forecast.
           </p>
         </div>
         <Survey configured={emailConfigured()} />

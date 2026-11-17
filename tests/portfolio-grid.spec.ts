@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 for (const width of [390, 800, 1440])
   test(`portfolio grid stays readable and navigable at ${width}px`, async ({
     page,

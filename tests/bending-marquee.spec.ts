@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 test("curved text moves only in view, pauses on hover/focus, and respects reduced motion", async ({
   page,
 }) => {

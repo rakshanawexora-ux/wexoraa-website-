@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 test("orbital hero pauses offscreen and respects reduced motion without blocking discovery", async ({
   page,
 }) => {
