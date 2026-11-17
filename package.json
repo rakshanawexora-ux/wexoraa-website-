@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start --hostname 0.0.0.0",
+    "start": "node scripts/start-production.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postbuild": "node scripts/prepare-standalone.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
