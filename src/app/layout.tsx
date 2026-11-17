@@ -19,11 +19,17 @@ const body = localFont({
   variable: "--font-body",
   display: "swap",
 });
-export const metadata: Metadata = pageMetadata(
-  "Wexoraa Infotech — Design, Technology & Growth in Coimbatore",
-  "Connected branding, websites, software, CRM, automation and digital growth for businesses in Coimbatore and Tamil Nadu.",
-  "/",
-);
+export const metadata: Metadata = {
+  ...pageMetadata(
+    "Wexoraa Infotech — Design, Technology & Growth in Coimbatore",
+    "Connected branding, websites, software, CRM, automation and digital growth for businesses in Coimbatore and Tamil Nadu.",
+    "/",
+  ),
+  icons: { icon: "/icon.svg" },
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
+};
 
 export default function RootLayout({
   children,

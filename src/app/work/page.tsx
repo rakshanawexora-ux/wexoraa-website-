@@ -19,8 +19,8 @@ export default function Page() {
             Explore our projects<span>.</span>
           </h1>
           <p>
-            A few ideas for better brands, useful websites and simpler ways to
-            work. These are studio concepts with placeholder imagery.
+            Websites, online stores and creative work for businesses with different
+            goals. Explore the projects and the work behind them.
           </p>
         </section>
         <WorkShowcase />

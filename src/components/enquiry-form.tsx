@@ -75,6 +75,7 @@ export default function EnquiryForm({
         <input
           defaultValue={initialContact?.name}
           name="name"
+          placeholder="Your full name"
           autoComplete="name"
           required
           minLength={2}
@@ -99,6 +100,7 @@ export default function EnquiryForm({
         <input
           defaultValue={initialContact?.email}
           name="email"
+          placeholder="you@company.com"
           type="email"
           autoComplete="email"
           required
@@ -119,7 +121,9 @@ export default function EnquiryForm({
       </label>
       {!compact && (
         <label>
-          Website <small>(optional)</small>
+          <span>
+            Website <small>(optional)</small>
+          </span>
           <input
             name="website"
             type="url"

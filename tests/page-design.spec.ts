@@ -12,13 +12,23 @@ for (const width of [390, 1440])
       "/work/considered-brand-experience",
     ]) {
       await page.goto(route);
-      await expect(page.locator(".page-team-promise")).toContainText(
-        "One team",
-      );
-      await expect(page.locator(".page-hero")).toHaveCSS(
-        "background-color",
-        "rgb(255, 255, 255)",
-      );
+      if (route === "/work") {
+        await expect(page.getByRole("heading", { level: 1 })).toContainText(
+          "Explore our projects",
+        );
+        await expect(
+          page.getByRole("group", { name: "Filter projects" }),
+        ).toBeVisible();
+        await expect(page.locator(".work-story")).toHaveCount(11);
+      } else {
+        await expect(page.locator(".page-team-promise")).toContainText(
+          "One team",
+        );
+        await expect(page.locator(".page-hero")).toHaveCSS(
+          "background-color",
+          "rgb(255, 255, 255)",
+        );
+      }
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,

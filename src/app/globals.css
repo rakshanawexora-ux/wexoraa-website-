@@ -11775,3 +11775,21 @@ html {
 
 /* Preserve the full text area of the cropped, wide-format business film. */
 .mask-reveal-viewport .business-film {object-fit:contain;background:#09251c;}
+
+/* A clear, comfortable enquiry surface shared by contact and modal forms. */
+.contact-form-card {position:relative;background:linear-gradient(145deg,#f5f8f0,#fff 45%);padding:36px;border:1px solid #22262920;box-shadow:0 16px 48px #22262906;}
+.contact-form-card>.eyebrow {font-size:10px;letter-spacing:.12em;margin-bottom:20px;}
+.contact-form-card>h2 {font-size:clamp(26px,3vw,38px);letter-spacing:-.04em;line-height:1.15;margin-bottom:14px;}
+.contact-form-intro {color:var(--brand-slate);font-size:14px;line-height:1.8;margin-bottom:30px;max-width:440px;}
+.enquiry-form .form-grid {gap:20px 18px;}
+.enquiry-form label:not(.consent-label) {font-size:13px;font-weight:500;gap:9px;}
+.enquiry-form input:not([type="checkbox"]):not([type="hidden"]),.enquiry-form textarea,.enquiry-form select {background:white;border:1px solid #6b6e7073;border-radius:12px;padding:15px 16px;font-size:16px;font-weight:400;min-height:52px;transition:border-color .15s,box-shadow .15s;}
+.enquiry-form input::placeholder,.enquiry-form textarea::placeholder {color:#6b6e70;opacity:1;}
+.enquiry-form input:focus-visible,.enquiry-form textarea:focus-visible,.enquiry-form select:focus-visible {outline:2px solid var(--brand-charcoal);outline-offset:2px;border-color:var(--brand-charcoal);box-shadow:0 0 0 5px #86c23218;}
+.enquiry-form textarea {min-height:130px;line-height:1.7;}
+.enquiry-form .consent-label {padding:16px;border-radius:12px;background:#f5f8f0;border:1px solid var(--outline-variant);}
+.enquiry-form .consent-label input {accent-color:var(--brand-charcoal);}
+.enquiry-form>.button {justify-content:space-between;width:100%;border-radius:12px;min-height:52px;}
+.enquiry-form .form-error {border-left:3px solid var(--brand-charcoal);border-radius:8px;padding:14px;background:#f5f6f4;}
+.compact-enquiry {gap:18px;}
+@media(max-width:640px){.contact-form-card{padding:24px 20px}.enquiry-form .form-grid{gap:18px}.enquiry-form textarea{min-height:115px}}

@@ -29,7 +29,9 @@ export default async function Contact({
               with a conversation.
             </h1>
             <p>
-              A better website, less manual work or more enquiries—tell us what would make a difference to your business. You’ll speak with one team for design, technology and marketing.
+              A better website, less manual work or more enquiries—tell us what
+              would make a difference to your business. You’ll speak with one
+              team for design, technology and marketing.
             </p>
             <div className="contact-expectations">
               <h2>What happens next?</h2>
@@ -48,7 +50,14 @@ export default async function Contact({
             </Link>
           </div>
           <div className="contact-form-card">
-            <h2>Tell us about your project.</h2>
+            <p className="eyebrow">
+              <span /> A SIMPLE FIRST STEP
+            </p>
+            <h2>Tell us what you have in mind.</h2>
+            <p className="contact-form-intro">
+              A few details about you and what you need. We’ll take the
+              conversation from there.
+            </p>
             <EnquiryForm
               configured={emailConfigured()}
               interest={

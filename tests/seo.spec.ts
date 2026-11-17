@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import sitemap from "../src/app/sitemap";
+import robots from "../src/app/robots";
 import {
   pageMetadata,
   organizationSchema,
@@ -12,12 +14,25 @@ test("SEO uses configured domain and safely excludes unconfigured domains", () =
       pageMetadata("Services", "Description", "/services").alternates,
     ).toBeUndefined();
     expect(organizationSchema()).toBeNull();
+    expect(sitemap()).toEqual([]);
+    expect(robots().rules).toEqual({ userAgent: "*", disallow: "/" });
     process.env.NEXT_PUBLIC_SITE_URL = "https://wexoraa.test";
     const metadata = pageMetadata("Services", "Description", "/services");
     expect(metadata.alternates?.canonical).toBe(
       "https://wexoraa.test/services",
     );
     expect(organizationSchema()).toBeTruthy();
+    const urls = sitemap().map((entry) => entry.url);
+    expect(urls).toHaveLength(32);
+    expect(urls.every((url) => url.startsWith("https://wexoraa.test/"))).toBe(
+      true,
+    );
+    expect(
+      urls.some(
+        (url) => url.includes("/solutions") || url.includes("thank-you"),
+      ),
+    ).toBe(false);
+    expect(robots().sitemap).toBe("https://wexoraa.test/sitemap.xml");
     expect(
       serviceSchema("Web development", "Description", "web-development"),
     ).toBeTruthy();
