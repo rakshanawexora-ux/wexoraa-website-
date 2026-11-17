@@ -1,10 +1,6 @@
 # Wexoraa Infotech
 
-A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and custom Google Sheets enquiries.
-
-## Active enquiry setup
-
-Original custom website forms save directly to an owner-deployed Google Apps Script Web App. No Google Form is embedded. See [Google Sheets setup](docs/GOOGLE_SHEETS.md). The owner-supplied `/exec` URL is configured as the default; hosting may override it with `NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL`. Rebuild/redeploy to activate the change. Actual Google delivery still needs an owner test. Resend settings and `/api/enquiry` below refer to the retained legacy email handler. Scores and business context are sent with the custom form automatically after explicit submission.
+A Next.js App Router / TypeScript website with a brand-led Motion hero, connected service pages, 4-question homepage snapshot, detailed assessment and email-only enquiries.
 
 ## Run
 
@@ -26,7 +22,7 @@ npm run build
 npx playwright test
 ```
 
-Build before browser tests; they start the production server. For the current Sheets submission tests, use the mocked endpoint build profile documented in docs/GOOGLE_SHEETS.md; never deploy the test URL. Chromium defaults to `/usr/bin/chromium`; override PLAYWRIGHT_CHROMIUM_PATH elsewhere. Tests cover all content routes, responsive/accessibility checks, scoring, survey flows, cursor interaction, form failure/retry and mocked email-handler security/delivery acceptance. No real provider email has been sent.
+Build before browser tests; they start the production server. Chromium defaults to `/usr/bin/chromium`; override PLAYWRIGHT_CHROMIUM_PATH elsewhere. Tests cover all content routes, responsive/accessibility checks, scoring, survey flows, cursor interaction, form failure/retry and mocked email-handler security/delivery acceptance. No real provider email has been sent.
 
 ## Routes
 

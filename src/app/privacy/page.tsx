@@ -33,28 +33,29 @@ export default function Privacy() {
         </p>
         <h2>When you send an enquiry</h2>
         <p>
-          Our website form asks for your contact details, service and project
-          needs. If you send an enquiry from a business check, the summary and
-          self-reported score are included. Your answers are not sent
-          automatically when you view your score. You choose whether to submit
-          and agree to the privacy notice first.
+          We ask for your name, email, phone number and what you need help with.
+          A business snapshot can include the business details, problem and
+          answers you chose to share. The detailed assessment includes your
+          answers and calculated summary. You must agree to the privacy notice
+          before sending. These details are used to understand your enquiry and
+          reply to you, not to automatically subscribe you to marketing.
         </p>
         <h2>Where your enquiry goes</h2>
         <p>
-          When you press Send, the website sends your details to Wexoraa’s
-          Google Apps Script connection, which records them in its private
-          Google Sheet. Google may process information outside your country
-          under its own policies. There is no embedded Google Form, and no
-          automatic marketing subscription. Wexoraa still needs to confirm its
-          privacy contact and response-retention period.
+          When email sending is set up, your enquiry goes to the configured
+          Wexoraa inbox through Resend and the website host. Those providers may
+          process information outside your country. Enquiries may remain in
+          their systems and the inbox under the relevant retention policies.
+          This website does not have a separate lead database or backup. An
+          accepted email is not a guarantee that it reaches the inbox.
         </p>
-        <h2>Duplicate and spam checks</h2>
+        <h2>Spam checks and website records</h2>
         <p>
-          A request identifier helps avoid duplicate rows when a submission is
-          retried. Basic validation, a hidden spam field and temporary
-          per-address limits protect the response sheet. A temporary hashed
-          email identifier is used for rate limiting. The website does not save
-          your contact details in browser storage.
+          The website checks form entries and limits repeated requests to help
+          prevent spam. The enquiry handler does not log the contents of your
+          form. Temporary request identifiers are kept in server memory for
+          these checks and reset when the server restarts; they are not shared
+          between servers. The hosting provider may keep its own technical logs.
         </p>
         <h2>Your choices</h2>
         <p>

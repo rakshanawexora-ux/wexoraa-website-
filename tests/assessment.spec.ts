@@ -63,6 +63,11 @@ test("detailed assessment page, resume, score, revision and enquiry stays option
   await expect(
     survey.getByRole("form", { name: "Discuss my assessment" }),
   ).toBeVisible();
+  await expect(
+    survey.getByText("Online enquiries are not available yet.", {
+      exact: false,
+    }),
+  ).toBeVisible();
   await survey.getByRole("button", { name: "Revise answers" }).click();
   await expect(survey.getByRole("radio").first()).toBeChecked();
 });

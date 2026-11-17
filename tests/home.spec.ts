@@ -1,8 +1,4 @@
 import { test, expect } from "@playwright/test";
-// Never let a default production build send test enquiries to the real sheet.
-test.beforeEach(async ({ page }) => {
-  await page.route("https://script.google.com/**", (route) => route.abort());
-});
 import AxeBuilder from "@axe-core/playwright";
 import { services, projects } from "../src/content/catalog";
 for (const width of [360, 390, 768, 1024, 1440])
@@ -146,14 +142,11 @@ test("contact form keeps values after failure and confirms only accepted request
     .getByLabel("Tell us about your project")
     .fill("We need a clearer mobile website and enquiry journey.");
   await page.getByRole("checkbox").check();
-  await page.route(
-    "https://script.google.com/macros/s/wexoraa-test/exec",
-    (r) =>
-      r.fulfill({
-        headers: { "Access-Control-Allow-Origin": "*" },
-        status: 502,
-        json: { error: "Temporary email service failure. Please retry." },
-      }),
+  await page.route("**/api/enquiry", (r) =>
+    r.fulfill({
+      status: 502,
+      json: { error: "Temporary email service failure. Please retry." },
+    }),
   );
   await page.getByRole("button", { name: "Send enquiry" }).click();
   await expect(page.getByRole("status")).toContainText(
@@ -163,20 +156,14 @@ test("contact form keeps values after failure and confirms only accepted request
     "Test Visitor",
   );
   await expect(
-    page.getByRole("heading", { name: "Thanks. Your enquiry has been saved." }),
+    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
   ).toHaveCount(0);
-  await page.route(
-    "https://script.google.com/macros/s/wexoraa-test/exec",
-    (r) =>
-      r.fulfill({
-        headers: { "Access-Control-Allow-Origin": "*" },
-        status: 200,
-        json: { accepted: true },
-      }),
+  await page.route("**/api/enquiry", (r) =>
+    r.fulfill({ status: 200, json: { accepted: true } }),
   );
   await page.getByRole("button", { name: "Try sending again" }).click();
   await expect(
-    page.getByRole("heading", { name: "Thanks. Your enquiry has been saved." }),
+    page.getByRole("heading", { name: "Thanks. Your enquiry is on its way." }),
   ).toBeVisible();
 });
 for (const route of [
@@ -366,24 +353,17 @@ test("simple service enquiry popup is accessible and restores focus", async ({
   await expect(dialog).not.toBeVisible();
   await expect(cta).toBeFocused();
   await cta.click();
-  await page.route(
-    "https://script.google.com/macros/s/wexoraa-test/exec",
-    async (route) => {
-      const payload = JSON.parse(
-        new URLSearchParams(route.request().postData() || "").get("payload") ||
-          "{}",
-      );
-      expect(payload.company).toBe("");
-      expect(payload.interest).toBeTruthy();
-      expect(payload.consent).toBe(true);
-      await route.fulfill({
-        headers: { "Access-Control-Allow-Origin": "*" },
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({ accepted: true }),
-      });
-    },
-  );
+  await page.route("**/api/enquiry", async (route) => {
+    const payload = route.request().postDataJSON();
+    expect(payload.company).toBe("");
+    expect(payload.interest).toBeTruthy();
+    expect(payload.consent).toBe(true);
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ accepted: true }),
+    });
+  });
   await dialog.locator('input[name="name"]').fill("Test Person");
   await dialog.locator('input[name="email"]').fill("person@example.com");
   await dialog.locator('input[name="phone"]').fill("9876543210");
@@ -394,7 +374,7 @@ test("simple service enquiry popup is accessible and restores focus", async ({
   await dialog.getByRole("button", { name: "Send enquiry" }).click();
   await expect(
     dialog.getByRole("heading", {
-      name: "Thanks. Your enquiry has been saved.",
+      name: "Thanks. Your enquiry is on its way.",
     }),
   ).toBeVisible();
   await page.keyboard.press("Escape");

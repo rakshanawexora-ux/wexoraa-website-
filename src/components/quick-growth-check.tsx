@@ -400,7 +400,6 @@ export default function QuickGrowthCheck({
               businessName={business.company}
               interest="Quick business growth snapshot"
               summaryText={summary}
-              score={score}
               initialContact={contact}
             />
           </div>

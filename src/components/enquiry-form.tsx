@@ -2,14 +2,11 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { scoreAssessment } from "@/content/assessment";
-import { sheetsEndpoint } from "@/lib/google-sheets";
 import type { Answers } from "@/content/assessment";
 export default function EnquiryForm({
   answers,
   interest = "",
-  score,
+  configured = false,
   compact = false,
   summaryText,
   initialContact,
@@ -18,7 +15,6 @@ export default function EnquiryForm({
   answers?: Answers;
   interest?: string;
   configured?: boolean;
-  score?: number | null;
   compact?: boolean;
   summaryText?: string;
   businessName?: string;
@@ -28,9 +24,6 @@ export default function EnquiryForm({
     "idle",
   );
   const [error, setError] = useState("");
-  const pathname = usePathname();
-  const configured = Boolean(sheetsEndpoint());
-  const payloadFingerprint = useRef("");
   const requestId = useRef("");
   const submittedAt = useRef("");
   const feedback = useRef<HTMLDivElement>(null);
@@ -43,57 +36,29 @@ export default function EnquiryForm({
     setState("loading");
     setError("");
     try {
-      const endpoint = sheetsEndpoint();
-      if (!endpoint)
-        throw new Error(
-          "Enquiry storage is not connected yet. Please try again after setup is complete.",
-        );
-      const payload = {
-        name: String(form.get("name") || ""),
-        company: String(form.get("company") || ""),
-        email: String(form.get("email") || ""),
-        phone: String(form.get("phone") || ""),
-        website: String(form.get("website") || ""),
-        interest: String(form.get("interest") || ""),
-        message: String(form.get("message") || ""),
-        preferred: String(form.get("preferred") || "Email"),
-        consent: form.get("consent") === "on",
-        companyUrl: String(form.get("companyUrl") || ""),
-        source: answers
-          ? "Detailed assessment"
-          : summaryText
-            ? "Home growth checker"
-            : compact
-              ? "Enquiry popup"
-              : "Contact page",
-        page: pathname,
-        score: answers ? scoreAssessment(answers).score : (score ?? null),
-        ...(answers ? { answers } : {}),
-      };
-      const fingerprint = JSON.stringify(payload);
-      if (payloadFingerprint.current !== fingerprint) {
-        requestId.current = crypto.randomUUID();
-        submittedAt.current = new Date().toISOString();
-        payloadFingerprint.current = fingerprint;
-      }
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/enquiry", {
         method: "POST",
-        credentials: "omit",
-        redirect: "follow",
-        body: new URLSearchParams({
-          payload: JSON.stringify({
-            ...payload,
-            requestId: requestId.current,
-            submittedAt: submittedAt.current,
-          }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(form.get("name")),
+          company: String(form.get("company")),
+          email: String(form.get("email")),
+          phone: String(form.get("phone")),
+          website: String(form.get("website") || ""),
+          interest: String(form.get("interest")),
+          message: String(form.get("message")),
+          preferred: String(form.get("preferred")),
+          consent: form.get("consent") === "on",
+          companyUrl: String(form.get("companyUrl") || ""),
+          requestId: requestId.current,
+          submittedAt: submittedAt.current,
+          ...(answers ? { answers } : {}),
         }),
-        signal: AbortSignal.timeout(30000),
       });
       const result = await response.json();
       if (!response.ok || !result.accepted)
         throw new Error(
-          result.error ||
-            "We could not confirm that your enquiry was saved. Please retry.",
+          result.error || "We could not confirm acceptance. Please retry.",
         );
       setState("success");
       requestAnimationFrame(() => feedback.current?.focus());
@@ -186,10 +151,10 @@ export default function EnquiryForm({
     return (
       <div className="send-success" ref={feedback} tabIndex={-1} role="status">
         <Check />
-        <h3>Thanks. Your enquiry has been saved.</h3>
+        <h3>Thanks. Your enquiry is on its way.</h3>
         <p>
-          Your details have been recorded. We can use them to get back to you
-          about your project.
+          Your enquiry has been accepted. We can use the details you shared to
+          get back to you about your project.
         </p>
         <Link
           className="button text-link"
@@ -208,7 +173,7 @@ export default function EnquiryForm({
       {!configured && (
         <div className="form-availability">
           Online enquiries are not available yet. You can fill in your details,
-          but sending will be available once the response sheet is connected.
+          but sending will be available once setup is complete.
         </div>
       )}
       {initialContact?.name &&
